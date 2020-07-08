@@ -1,0 +1,9 @@
+flashtext==2.7
+Unidecode==1.1.1
+nltk==3.4.5
+json5==0.8.5
+jsonschema==3.0.2
+spacy
+intervaltree
+pandas
+psycopg2-binary
