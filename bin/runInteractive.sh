@@ -40,6 +40,6 @@ printlnred $0
 printlnred $base
 
 docker run -it --rm  \
- --network pymedext-network -v $base/..:/home/data pymedext-core bash
+ --network pymedext-network -v $base/..:/home/data pymedext-core:v0.0.1 bash
 
 printlnred "interacif mode is over"
