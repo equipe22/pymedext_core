@@ -18,14 +18,19 @@ ENV sources="{'romedi':'','rxnorm':'-s'}"
 WORKDIR /home
 RUN mkdir src data
 COPY src src/
-RUN pip3 install -r /home/src/pymedext/requirements.txt
+RUN apt-get update
+RUN apt-get -y install g++ gcc git
+# RUN pip3 install -r /home/src/pymedext/requirements.txt
 
+RUN apt-get update && apt-get install -y --allow-unauthenticated procps
+COPY config/.git-credentials /home/
+RUN git config --global credential.helper store --file /home/.git-credentials
+RUN pip3 install git+https://github.com/equipe22/pymedext_core.git
 # RUN pip3 install SPARQLWrapper
 # ADD ressources/ /home/src/ressources/
 # COPY lower_output.RRF src/
 WORKDIR /home/data
-COPY bin/installstopword.py .
-RUN python3 installstopword.py
+# COPY bin/installstopword.py .
+# RUN python3 installstopword.py
 
-RUN apt-get update && apt-get install -y --allow-unauthenticated procps
 CMD ["python3", "/home/src/omop_prod_norm_graph.py ","--inputFolder","$input"]
