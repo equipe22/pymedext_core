@@ -50,10 +50,26 @@
 
 
 <div class="viewcode-block" id="Connector"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.connector.Connector">[docs]</a><span class="k">class</span> <span class="nc">Connector</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TODO : make this an abstract class for other connector</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="DatabaseConnector"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.connector.DatabaseConnector">[docs]</a><span class="k">class</span> <span class="nc">DatabaseConnector</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; Abstract class specialize in database connection</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">DB_host</span><span class="p">,</span> <span class="n">DB_name</span><span class="p">,</span> <span class="n">DB_port</span><span class="p">,</span> <span class="n">DB_user</span><span class="p">,</span> <span class="n">DB_password</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;initialize some basic variable to connect into a database</span>
+
+<span class="sd">        :param DB_host: host name</span>
+<span class="sd">        :param DB_name:  database name</span>
+<span class="sd">        :param DB_port: connection port</span>
+<span class="sd">        :param DB_user:  user name</span>
+<span class="sd">        :param DB_password: user password</span>
+<span class="sd">        :returns: abstract databse connector</span>
+<span class="sd">        :rtype: DatabaseConnect</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">DB_host</span> <span class="o">=</span>  <span class="n">DB_host</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">DB_name</span> <span class="o">=</span> <span class="n">DB_name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">DB_port</span> <span class="o">=</span> <span class="n">DB_port</span>
@@ -61,23 +77,52 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">DB_password</span> <span class="o">=</span> <span class="n">DB_password</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Initialize Database Connection&quot;</span><span class="p">)</span>
 <div class="viewcode-block" id="DatabaseConnector.startConnection"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.connector.DatabaseConnector.startConnection">[docs]</a>    <span class="k">def</span> <span class="nf">startConnection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Abstract function where each DatabaseConnector should implement the</span>
+<span class="sd">        Database connection</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div></div>
 
 
 <div class="viewcode-block" id="APIConnector"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.connector.APIConnector">[docs]</a><span class="k">class</span> <span class="nc">APIConnector</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; Abstact connector to an API</span>
+<span class="sd">    TODO : discuss with @Alice how to implement it for Doccano</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="cxORacleConnector"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.connector.cxORacleConnector">[docs]</a><span class="k">class</span> <span class="nc">cxORacleConnector</span><span class="p">:</span>
+<div class="viewcode-block" id="cxORacleConnector"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.connector.cxORacleConnector">[docs]</a><span class="k">class</span> <span class="nc">cxORacleConnector</span><span class="p">(</span><span class="n">DatabaseConnector</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Abstact connector to an Oracle database using cxOracle</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="PostGresConnector"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.connector.PostGresConnector">[docs]</a><span class="k">class</span> <span class="nc">PostGresConnector</span><span class="p">(</span><span class="n">DatabaseConnector</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Abstract Connector to a Postgres Database</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">DB_host</span><span class="p">,</span> <span class="n">DB_name</span><span class="p">,</span> <span class="n">DB_port</span><span class="p">,</span> <span class="n">DB_user</span><span class="p">,</span> <span class="n">DB_password</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize a postGre connector</span>
+
+
+<span class="sd">        :param DB_host: host name</span>
+<span class="sd">        :param DB_name:  database name</span>
+<span class="sd">        :param DB_port: connection port</span>
+<span class="sd">        :param DB_user:  user name</span>
+<span class="sd">        :param DB_password: user password</span>
+<span class="sd">        :returns: A PostregesConnector</span>
+<span class="sd">        :rtype: POstGresConnector</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span> <span class="n">DB_host</span><span class="p">,</span> <span class="n">DB_name</span><span class="p">,</span> <span class="n">DB_port</span><span class="p">,</span> <span class="n">DB_user</span><span class="p">,</span> <span class="n">DB_password</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Initialize Database Connection&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cur</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">conn</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">startConnection</span><span class="p">()</span>
 <div class="viewcode-block" id="PostGresConnector.startConnection"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.connector.PostGresConnector.startConnection">[docs]</a>    <span class="k">def</span> <span class="nf">startConnection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the connection to the POstGresConnector</span>
+<span class="sd">        :returns: 0</span>
+<span class="sd">        :rtype: 0</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">conn</span> <span class="o">=</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
             <span class="n">host</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">DB_host</span><span class="p">,</span>
             <span class="n">database</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">DB_name</span><span class="p">,</span>
@@ -91,6 +136,10 @@
 
 
 <div class="viewcode-block" id="SSHConnector"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.connector.SSHConnector">[docs]</a><span class="k">class</span> <span class="nc">SSHConnector</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TODO: implement a connection to a server with</span>
+<span class="sd">    paramiko, should also extend Connector @David?</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">pass</span></div>
 
 

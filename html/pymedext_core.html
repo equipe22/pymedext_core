@@ -123,7 +123,7 @@
 <span id="pymedext-core-annotators-module"></span><h2>pymedext_core.annotators module<a class="headerlink" href="#module-pymedext_core.annotators" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pymedext_core.annotators.Annotation">
-<em class="property">class </em><code class="descclassname">pymedext_core.annotators.</code><code class="descname">Annotation</code><span class="sig-paren">(</span><em>type</em>, <em>value</em>, <em>source</em>, <em>source_ID</em>, <em>span=None</em>, <em>attributes=None</em>, <em>isEntity=False</em>, <em>ID='14719416-ca8c-11ea-b282-e454e863ec7d'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/annotators.html#Annotation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.annotators.Annotation" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pymedext_core.annotators.</code><code class="descname">Annotation</code><span class="sig-paren">(</span><em>type</em>, <em>value</em>, <em>source</em>, <em>source_ID</em>, <em>span=None</em>, <em>attributes=None</em>, <em>isEntity=False</em>, <em>ID='8d337b00-ca9e-11ea-b282-e454e863ec7d'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/annotators.html#Annotation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.annotators.Annotation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>Based object which contains Annotation</p>
 <dl class="method">
@@ -208,22 +208,28 @@ TODO: rename selectAll
 <dt id="pymedext_core.connector.APIConnector">
 <em class="property">class </em><code class="descclassname">pymedext_core.connector.</code><code class="descname">APIConnector</code><a class="reference internal" href="_modules/pymedext_core/connector.html#APIConnector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.connector.APIConnector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Abstact connector to an API
+TODO : discuss with &#64;Alice how to implement it for Doccano</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="pymedext_core.connector.Connector">
 <em class="property">class </em><code class="descclassname">pymedext_core.connector.</code><code class="descname">Connector</code><a class="reference internal" href="_modules/pymedext_core/connector.html#Connector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.connector.Connector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>TODO : make this an abstract class for other connector</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="pymedext_core.connector.DatabaseConnector">
 <em class="property">class </em><code class="descclassname">pymedext_core.connector.</code><code class="descname">DatabaseConnector</code><span class="sig-paren">(</span><em>DB_host</em>, <em>DB_name</em>, <em>DB_port</em>, <em>DB_user</em>, <em>DB_password</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/connector.html#DatabaseConnector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.connector.DatabaseConnector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Abstract class specialize in database connection</p>
 <dl class="method">
 <dt id="pymedext_core.connector.DatabaseConnector.startConnection">
 <code class="descname">startConnection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/connector.html#DatabaseConnector.startConnection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.connector.DatabaseConnector.startConnection" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Abstract function where each DatabaseConnector should implement the
+Database connection</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -231,10 +237,14 @@ TODO: rename selectAll
 <dt id="pymedext_core.connector.PostGresConnector">
 <em class="property">class </em><code class="descclassname">pymedext_core.connector.</code><code class="descname">PostGresConnector</code><span class="sig-paren">(</span><em>DB_host</em>, <em>DB_name</em>, <em>DB_port</em>, <em>DB_user</em>, <em>DB_password</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/connector.html#PostGresConnector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.connector.PostGresConnector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#pymedext_core.connector.DatabaseConnector" title="pymedext_core.connector.DatabaseConnector"><code class="xref py py-class docutils literal"><span class="pre">pymedext_core.connector.DatabaseConnector</span></code></a></p>
+<p>Abstract Connector to a Postgres Database</p>
 <dl class="method">
 <dt id="pymedext_core.connector.PostGresConnector.startConnection">
 <code class="descname">startConnection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/connector.html#PostGresConnector.startConnection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.connector.PostGresConnector.startConnection" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Initialize the connection to the POstGresConnector
+:returns: 0
+:rtype: 0</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -242,12 +252,15 @@ TODO: rename selectAll
 <dt id="pymedext_core.connector.SSHConnector">
 <em class="property">class </em><code class="descclassname">pymedext_core.connector.</code><code class="descname">SSHConnector</code><a class="reference internal" href="_modules/pymedext_core/connector.html#SSHConnector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.connector.SSHConnector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>TODO: implement a connection to a server with
+paramiko, should also extend Connector &#64;David?</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="pymedext_core.connector.cxORacleConnector">
-<em class="property">class </em><code class="descclassname">pymedext_core.connector.</code><code class="descname">cxORacleConnector</code><a class="reference internal" href="_modules/pymedext_core/connector.html#cxORacleConnector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.connector.cxORacleConnector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<em class="property">class </em><code class="descclassname">pymedext_core.connector.</code><code class="descname">cxORacleConnector</code><span class="sig-paren">(</span><em>DB_host</em>, <em>DB_name</em>, <em>DB_port</em>, <em>DB_user</em>, <em>DB_password</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/connector.html#cxORacleConnector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.connector.cxORacleConnector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pymedext_core.connector.DatabaseConnector" title="pymedext_core.connector.DatabaseConnector"><code class="xref py py-class docutils literal"><span class="pre">pymedext_core.connector.DatabaseConnector</span></code></a></p>
+<p>Abstact connector to an Oracle database using cxOracle</p>
 </dd></dl>
 
 </div>
