@@ -123,21 +123,32 @@
 <span id="pymedext-core-annotators-module"></span><h2>pymedext_core.annotators module<a class="headerlink" href="#module-pymedext_core.annotators" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pymedext_core.annotators.Annotation">
-<em class="property">class </em><code class="descclassname">pymedext_core.annotators.</code><code class="descname">Annotation</code><span class="sig-paren">(</span><em>type</em>, <em>value</em>, <em>source</em>, <em>source_ID</em>, <em>span=None</em>, <em>attributes=None</em>, <em>isEntity=False</em>, <em>ID='81cbcfc2-ca87-11ea-b282-e454e863ec7d'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/annotators.html#Annotation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.annotators.Annotation" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pymedext_core.annotators.</code><code class="descname">Annotation</code><span class="sig-paren">(</span><em>type</em>, <em>value</em>, <em>source</em>, <em>source_ID</em>, <em>span=None</em>, <em>attributes=None</em>, <em>isEntity=False</em>, <em>ID='14719416-ca8c-11ea-b282-e454e863ec7d'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/annotators.html#Annotation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.annotators.Annotation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<p>TODO: get_first_key_input   return the annotation of Document.annotations[0], should be called getRawText
-TODO: get_all_key_input     return the annotations oF Documents.annotations which have the same type of key_input list (rename as selectall)
-TODO: get_key_input return the annotations oF Documents.annotations which have the same type of the i th key_input element  (rename as select)
-TODO: annotate_function     each annotator should implement this functionand return a list of annotations object</p>
+<p>Based object which contains Annotation</p>
 <dl class="method">
 <dt id="pymedext_core.annotators.Annotation.to_dict">
 <code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/annotators.html#Annotation.to_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.annotators.Annotation.to_dict" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Transform Annotation to a dict object
+:returns: dict
+:rtype: dict</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="pymedext_core.annotators.Annotation.to_json">
 <code class="descname">to_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/annotators.html#Annotation.to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.annotators.Annotation.to_json" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Tranform Annotation  to json</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">json</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">json</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
@@ -145,20 +156,48 @@ TODO: annotate_function     each annotator should implement this functionand ret
 <dt id="pymedext_core.annotators.Annotator">
 <em class="property">class </em><code class="descclassname">pymedext_core.annotators.</code><code class="descname">Annotator</code><span class="sig-paren">(</span><em>key_input</em>, <em>key_output</em>, <em>ID</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/annotators.html#Annotator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.annotators.Annotator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Abstract class of each Annotator. Furthermore each Annotator must returns a list of Annotation
+TODO: get_all_key_input     return the annotations oF Documents.annotations which have the same type of key_input list (rename as selectall)
+TODO: get_key_input return the annotations oF Documents.annotations which have the same type of the i th key_input element  (rename as select)
+TODO: annotate_function     each annotator should implement this functionand return a list of annotations object</p>
+<dl class="method">
+<dt id="pymedext_core.annotators.Annotator.annotate_function">
+<code class="descname">annotate_function</code><span class="sig-paren">(</span><em>_input</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/annotators.html#Annotator.annotate_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.annotators.Annotator.annotate_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>main annotation function
+each ANnotator must implement this function
+:param _input: a list of Annotation typet
+:returns: a list of annotations. they will be added to Document.annotations
+:rtype:a list of annotations</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="pymedext_core.annotators.Annotator.get_all_key_input">
 <code class="descname">get_all_key_input</code><span class="sig-paren">(</span><em>_input</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/annotators.html#Annotator.get_all_key_input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.annotators.Annotator.get_all_key_input" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>returns all key input for the Annotors
+TODO: rename selectAll
+:param _input: return all annotations of a specific types from the Documents
+:returns: a list of annotations
+:rtype: a list of annotation</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="pymedext_core.annotators.Annotator.get_first_key_input">
 <code class="descname">get_first_key_input</code><span class="sig-paren">(</span><em>_input</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/annotators.html#Annotator.get_first_key_input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.annotators.Annotator.get_first_key_input" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>return the annotation type [0],
+:param _input: list of annotations input for the Annotor
+:returns: a list of annotations
+:rtype: a list of annotations</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="pymedext_core.annotators.Annotator.get_key_input">
 <code class="descname">get_key_input</code><span class="sig-paren">(</span><em>_input</em>, <em>i</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/annotators.html#Annotator.get_key_input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.annotators.Annotator.get_key_input" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>return a specific annotations type from key_input
+:param _input: key_input list
+:param i: the indice of the list to selecy
+:returns:a list of annotations
+:rtype:a list of annotation</p>
+</dd></dl>
 
 </dd></dl>
 
