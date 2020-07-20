@@ -11,6 +11,12 @@ logger = logging.getLogger(__name__)
 
 
 class Annotation:
+    """
+    TODO: get_first_key_input	return the annotation of Document.annotations[0], should be called getRawText
+    TODO: get_all_key_input	return the annotations oF Documents.annotations which have the same type of key_input list (rename as selectall)
+    TODO: get_key_input	return the annotations oF Documents.annotations which have the same type of the i th key_input element  (rename as select)
+    TODO: annotate_function	each annotator should implement this functionand return a list of annotations object
+    """
     
     def __init__(self, type, value, source, source_ID, span = None, attributes = None, isEntity=False, ID = str(uuid.uuid1())):
         self.value = value
