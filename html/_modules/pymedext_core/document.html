@@ -1,0 +1,212 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>pymedext_core.document &#8212; pymedext_core 0.0.1 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for pymedext_core.document</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">uuid</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">.annotators</span> <span class="kn">import</span> <span class="n">Annotator</span><span class="p">,</span> <span class="n">Annotation</span>
+        
+<div class="viewcode-block" id="Document"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.document.Document">[docs]</a><span class="k">class</span> <span class="nc">Document</span><span class="p">:</span> 
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw_text</span><span class="p">,</span> <span class="n">ID</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pathToconfig</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">documentDate</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;create a Document object</span>
+
+<span class="sd">        :param raw_text: raw_text of the doc. if raw_text = load</span>
+<span class="sd">        will load a json PyMedExt and transform it back to a Document object</span>
+<span class="sd">        :param ID: The document name</span>
+<span class="sd">        :param source: not use yet but could be the input source name I2B2, omop hegp ...</span>
+<span class="sd">        :param pathToconfig: in case of raw_text = load path to PyMedExt file</span>
+<span class="sd">        (could be use directly to filter)</span>
+<span class="sd">        :returns: Document</span>
+<span class="sd">        :rtype: Document</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">source_ID</span> <span class="o">=</span> <span class="n">ID</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">documentDate</span> <span class="o">=</span> <span class="n">documentDate</span>
+        <span class="k">if</span> <span class="n">raw_text</span> <span class="o">!=</span> <span class="s2">&quot;load&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span> <span class="o">=</span> <span class="p">[</span><span class="n">Annotation</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;raw_text&quot;</span><span class="p">,</span>
+                                           <span class="n">value</span><span class="o">=</span><span class="n">raw_text</span><span class="p">,</span>
+                                           <span class="n">source_ID</span><span class="o">=</span><span class="n">ID</span><span class="p">,</span>
+                                           <span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span>
+                                           <span class="n">span</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">raw_text</span><span class="p">)))]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ID</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid1</span><span class="p">())</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ID</span><span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span><span class="o">=</span><span class="p">[]</span>
+            <span class="k">for</span> <span class="n">thisPath</span> <span class="ow">in</span> <span class="n">pathToconfig</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">loadFromData</span><span class="p">(</span><span class="n">thisPath</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Document.loadFromData"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.document.Document.loadFromData">[docs]</a>    <span class="k">def</span> <span class="nf">loadFromData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathToconfig</span><span class="p">):</span>
+         <span class="sd">&quot;&quot;&quot;Transform json Pymedext to Document object</span>
+
+<span class="sd">         :param pathToconfig: list of path to json files,</span>
+<span class="sd">         :returns: none</span>
+<span class="sd">         :rtype: none</span>
+
+<span class="sd">         &quot;&quot;&quot;</span>
+         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">pathToconfig</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+             <span class="n">mesannotations</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+         <span class="k">for</span> <span class="n">annot</span> <span class="ow">in</span> <span class="n">mesannotations</span><span class="p">[</span><span class="s2">&quot;annotations&quot;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="s2">&quot;empty&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">annot</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="s2">&quot;raw_text&quot;</span> <span class="ow">in</span> <span class="n">annot</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ID</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">ID</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">Annotation</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">],</span>
+                                                         <span class="n">value</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">],</span>
+                                                         <span class="n">source_ID</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;source_ID&quot;</span><span class="p">],</span>
+                                                         <span class="n">ID</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span>
+                                                         <span class="n">source</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">],</span>
+                                                         <span class="n">span</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;span&quot;</span><span class="p">]))</span>
+                <span class="k">else</span><span class="p">:</span>
+                     <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Annotation</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">],</span>
+                                                        <span class="n">value</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">],</span>
+                                                        <span class="n">source_ID</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;source_ID&quot;</span><span class="p">],</span>
+                                                        <span class="n">ID</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span>
+                                                        <span class="n">source</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">],</span>
+                                                        <span class="n">span</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;span&quot;</span><span class="p">],</span>
+                                                        <span class="n">attributes</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;attributes&quot;</span><span class="p">],</span>
+                                                        <span class="n">isEntity</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;isEntity&quot;</span><span class="p">]))</span></div>
+
+
+<div class="viewcode-block" id="Document.annotate"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.document.Document.annotate">[docs]</a>    <span class="k">def</span> <span class="nf">annotate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">annotator</span><span class="p">):</span> 
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">annotator</span><span class="p">)</span> <span class="o">==</span> <span class="n">Annotator</span><span class="p">:</span>
+            <span class="n">annotator</span> <span class="o">=</span> <span class="p">[</span><span class="n">annotator</span><span class="p">]</span>
+            
+        <span class="k">for</span> <span class="n">ann</span> <span class="ow">in</span> <span class="n">annotator</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_annotate</span><span class="p">(</span><span class="n">ann</span><span class="p">)</span></div>
+        
+    <span class="k">def</span> <span class="nf">_annotate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">annotator</span><span class="p">):</span>
+        <span class="n">new_annotations</span> <span class="o">=</span> <span class="n">annotator</span><span class="o">.</span><span class="n">annotate_function</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="c1">#print(new_annotations)</span>
+        <span class="k">if</span> <span class="n">new_annotations</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">new_annotations</span><span class="p">]</span>
+        <span class="c1">#setattr(self, annotator.key_output ,annotator.annotate_function(self))</span>
+        
+<div class="viewcode-block" id="Document.to_json"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.document.Document.to_json">[docs]</a>    <span class="k">def</span> <span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span></div>
+    
+<div class="viewcode-block" id="Document.to_dict"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.document.Document.to_dict">[docs]</a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;transform Document to json PyMedExt</span>
+<span class="sd">        Need to add the Document Date if available,</span>
+<span class="sd">        the processing date, the annotators used</span>
+
+<span class="sd">        :returns: json PyMedExt</span>
+<span class="sd">        :rtype: dict</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;annotations&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span><span class="p">],</span>
+                <span class="s1">&#39;ID&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span>
+                <span class="s1">&#39;source_ID&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_ID</span> 
+               <span class="p">}</span></div>
+
+<div class="viewcode-block" id="Document.writeJson"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.document.Document.writeJson">[docs]</a>    <span class="k">def</span> <span class="nf">writeJson</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathToOutput</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Transform Document to json PyMedExt</span>
+
+<span class="sd">        :param pathToOutput: path to result file</span>
+<span class="sd">        :returns: none</span>
+<span class="sd">        :rtype: none</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">pathToOutput</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span> <span class="n">f</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Document.get_annotations"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.document.Document.get_annotations">[docs]</a>    <span class="k">def</span> <span class="nf">get_annotations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_type</span><span class="p">,</span> <span class="n">source_id</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">target_id</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span> 
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">anno</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">source_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> 
+                <span class="k">if</span> <span class="n">anno</span><span class="o">.</span><span class="n">source_ID</span> <span class="o">!=</span> <span class="n">source_id</span><span class="p">:</span>
+                    <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">target_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">anno</span><span class="o">.</span><span class="n">target_ID</span> <span class="o">!=</span> <span class="n">target_id</span><span class="p">:</span>
+                    <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">anno</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">_type</span><span class="p">:</span>
+                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">anno</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+    
+<div class="viewcode-block" id="Document.raw_text"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.document.Document.raw_text">[docs]</a>    <span class="k">def</span> <span class="nf">raw_text</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">annot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_annotations</span><span class="p">(</span><span class="s1">&#39;raw_text&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">annot</span><span class="o">.</span><span class="n">value</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Antoine Neuraz, William Digan, Ivan Lerner, Alice Rogier, David Baudoin, Anita Burgun, Nicolas Garcelon, Bastien Rance.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

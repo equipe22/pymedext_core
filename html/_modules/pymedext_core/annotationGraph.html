@@ -1,0 +1,202 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>pymedext_core.annotationGraph &#8212; pymedext_core 0.0.1 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for pymedext_core.annotationGraph</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+
+<span class="c1"># TODO add id to the init function</span>
+<span class="c1">#</span>
+<div class="viewcode-block" id="AnnotationGraph"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.annotationGraph.AnnotationGraph">[docs]</a><span class="k">class</span> <span class="nc">AnnotationGraph</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">span</span><span class="p">,</span>  <span class="n">attributes</span><span class="p">,</span>  <span class="n">isEntity</span><span class="p">,</span><span class="n">ngram</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ngram</span> <span class="o">=</span> <span class="n">ngram</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="nb">type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">span</span> <span class="o">=</span> <span class="n">span</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span> <span class="o">=</span> <span class="n">attributes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">isEntity</span><span class="o">=</span><span class="n">isEntity</span>
+
+<div class="viewcode-block" id="AnnotationGraph.to_dict"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.annotationGraph.AnnotationGraph.to_dict">[docs]</a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span>
+               <span class="s1">&#39;value&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+               <span class="s1">&#39;span&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">span</span><span class="p">,</span>
+               <span class="s1">&#39;ngram&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">ngram</span><span class="p">,</span>
+               <span class="s1">&#39;isEntity&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">isEntity</span><span class="p">,</span>
+               <span class="s1">&#39;attributes&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">}</span></div>
+        
+<div class="viewcode-block" id="AnnotationGraph.addProperty"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.annotationGraph.AnnotationGraph.addProperty">[docs]</a>    <span class="k">def</span> <span class="nf">addProperty</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;properties&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="c1"># thisProperty = {&quot;type&quot; : neighbor.type, &quot;value&quot;:neighbor.value }</span>
+                <span class="n">thisProperty</span> <span class="o">=</span> <span class="n">neighbor</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">[</span><span class="s2">&quot;properties&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">thisProperty</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># thisProperty = {&quot;type&quot; : neighbor.type, &quot;value&quot;:neighbor.value }</span>
+                <span class="n">thisProperty</span> <span class="o">=</span> <span class="n">neighbor</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">[</span><span class="s2">&quot;properties&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thisProperty</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># thisProperty = {&quot;type&quot; : neighbor.type, &quot;value&quot;:neighbor.value }</span>
+            <span class="n">thisProperty</span> <span class="o">=</span> <span class="n">neighbor</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">[</span><span class="s2">&quot;properties&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">thisProperty</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="AnnotationGraph.getParent"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.annotationGraph.AnnotationGraph.getParent">[docs]</a>    <span class="k">def</span> <span class="nf">getParent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fromType</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">fromType</span> <span class="p">:</span>
+                <span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">getParent</span><span class="p">(</span><span class="n">fromType</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AnnotationGraph.setParent"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.annotationGraph.AnnotationGraph.setParent">[docs]</a>    <span class="k">def</span> <span class="nf">setParent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span></div>
+
+<div class="viewcode-block" id="AnnotationGraph.setRoot"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.annotationGraph.AnnotationGraph.setRoot">[docs]</a>    <span class="k">def</span> <span class="nf">setRoot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">root</span></div>
+
+<div class="viewcode-block" id="AnnotationGraph.getNgram"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.annotationGraph.AnnotationGraph.getNgram">[docs]</a>    <span class="k">def</span> <span class="nf">getNgram</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="bp">self</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span></div>
+
+<div class="viewcode-block" id="AnnotationGraph.addChild"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.annotationGraph.AnnotationGraph.addChild">[docs]</a>    <span class="k">def</span> <span class="nf">addChild</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">child</span><span class="p">):</span>
+        <span class="n">child</span><span class="o">.</span><span class="n">setParent</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">children</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">[</span><span class="n">child</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AnnotationGraph.getSpan"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.annotationGraph.AnnotationGraph.getSpan">[docs]</a>    <span class="k">def</span> <span class="nf">getSpan</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">span</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AnnotationGraph.getChildrenSpan"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.annotationGraph.AnnotationGraph.getChildrenSpan">[docs]</a>    <span class="k">def</span> <span class="nf">getChildrenSpan</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">childrenSpans</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">children</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+                <span class="n">childrenSpans</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">getSpan</span><span class="p">())</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">childrenSpans</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AnnotationGraph.getAttributes"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.annotationGraph.AnnotationGraph.getAttributes">[docs]</a>    <span class="k">def</span> <span class="nf">getAttributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">parents</span><span class="o">.</span><span class="n">getAttributes</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="AnnotationGraph.getEntitiesChildren"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.annotationGraph.AnnotationGraph.getEntitiesChildren">[docs]</a>    <span class="k">def</span> <span class="nf">getEntitiesChildren</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">listChildren</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">children</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">children</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">isEntity</span><span class="p">:</span>
+                        <span class="n">listChildren</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">listChildren</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">getEntitiesChildren</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isEntity</span><span class="p">:</span>
+                <span class="n">listChildren</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">listChildren</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AnnotationGraph.getParentsProperties"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.annotationGraph.AnnotationGraph.getParentsProperties">[docs]</a>    <span class="k">def</span> <span class="nf">getParentsProperties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filterType</span><span class="o">=</span> <span class="p">[</span><span class="s2">&quot;drwh_sentences&quot;</span><span class="p">,</span> <span class="s2">&quot;drwh_syntagms&quot;</span><span class="p">]):</span>
+        <span class="n">properties</span> <span class="o">=</span><span class="p">[]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># print( &quot; go see parents&quot; )</span>
+            <span class="c1"># print(properties)</span>
+            <span class="n">properties</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">getParentsProperties</span><span class="p">(</span><span class="n">filterType</span><span class="p">))</span>
+            <span class="n">properties</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getProperties</span><span class="p">(</span><span class="n">filterType</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># print(self.type)</span>
+            <span class="c1"># print(self.attributes)</span>
+            <span class="c1"># print(self.span)</span>
+            <span class="c1"># print(properties)</span>
+            <span class="n">properties</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getProperties</span><span class="p">(</span><span class="n">filterType</span><span class="p">))</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">properties</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AnnotationGraph.getProperties"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.annotationGraph.AnnotationGraph.getProperties">[docs]</a>    <span class="k">def</span> <span class="nf">getProperties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filterType</span><span class="p">)</span> <span class="p">:</span>
+        <span class="n">properties</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="n">filterType</span><span class="p">:</span>
+            <span class="n">properties</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">properties</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Antoine Neuraz, William Digan, Ivan Lerner, Alice Rogier, David Baudoin, Anita Burgun, Nicolas Garcelon, Bastien Rance.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

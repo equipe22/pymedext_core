@@ -1,0 +1,78 @@
+pymedext\_core package
+======================
+
+Submodules
+----------
+
+pymedext\_core\.annotationGraph module
+--------------------------------------
+
+.. automodule:: pymedext_core.annotationGraph
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pymedext\_core\.annotators module
+---------------------------------
+
+.. automodule:: pymedext_core.annotators
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pymedext\_core\.connector module
+--------------------------------
+
+.. automodule:: pymedext_core.connector
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pymedext\_core\.datasource module
+---------------------------------
+
+.. automodule:: pymedext_core.datasource
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pymedext\_core\.document module
+-------------------------------
+
+.. automodule:: pymedext_core.document
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pymedext\_core\.normalize module
+--------------------------------
+
+.. automodule:: pymedext_core.normalize
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pymedext\_core\.omopload module
+-------------------------------
+
+.. automodule:: pymedext_core.omopload
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pymedext\_core\.pymedext module
+-------------------------------
+
+.. automodule:: pymedext_core.pymedext
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: pymedext_core
+    :members:
+    :undoc-members:
+    :show-inheritance:
