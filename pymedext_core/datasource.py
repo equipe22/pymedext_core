@@ -57,26 +57,55 @@ class StringIteratorIO(io.TextIOBase):
 
 
 class Source:
+    """Abstract Class to extend to implement a specific source connector.
+    see Omop Source example
+    """
     # def __new__(self,Document):
     #     self.Document=Document
     #
     # Document save as
     @staticmethod
     def saveToSource():
+        """Generic method to save data to a specific source
+        :returns:
+        :rtype:
+
+        """
         pass
 
     #Document load from and return a Document
     @staticmethod
     def loadFromSource():
+        """Generic method to download Data from a source
+        :returns:
+        :rtype:
+
+        """
         pass
 
 
 class OmopSource(Source,PostGresConnector):
+    """
+    Connection to a POstgres Ommop source
+    """
     def __init__(self, DB_host, DB_name, DB_port, DB_user, DB_password):
+        """Initialize a connection to a PostresConnector DB using super() constructor
+
+        :param DB_host: 
+        :param DB_name: 
+        :param DB_port: 
+        :param DB_user: 
+        :param DB_password: 
+        :returns: 
+        :rtype: 
+
+        """
         super().__init__( DB_host, DB_name, DB_port, DB_user, DB_password)
         logger.info("Initialize Omop connection")
 
     def __insert_execute_values_iterator_person(self, dict_person_local: Iterator[Dict[str, Any]]) -> None:
+        """ Insert values to an Omop Person table  """
+
         with self.conn.cursor() as cursor:
             psycopg2.extras.execute_values(cursor, """
                 INSERT INTO person VALUES %s;

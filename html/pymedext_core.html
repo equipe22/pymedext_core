@@ -123,7 +123,7 @@
 <span id="pymedext-core-annotators-module"></span><h2>pymedext_core.annotators module<a class="headerlink" href="#module-pymedext_core.annotators" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pymedext_core.annotators.Annotation">
-<em class="property">class </em><code class="descclassname">pymedext_core.annotators.</code><code class="descname">Annotation</code><span class="sig-paren">(</span><em>type</em>, <em>value</em>, <em>source</em>, <em>source_ID</em>, <em>span=None</em>, <em>attributes=None</em>, <em>isEntity=False</em>, <em>ID='8d337b00-ca9e-11ea-b282-e454e863ec7d'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/annotators.html#Annotation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.annotators.Annotation" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pymedext_core.annotators.</code><code class="descname">Annotation</code><span class="sig-paren">(</span><em>type</em>, <em>value</em>, <em>source</em>, <em>source_ID</em>, <em>span=None</em>, <em>attributes=None</em>, <em>isEntity=False</em>, <em>ID='51ca9f9c-caa0-11ea-b282-e454e863ec7d'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/annotators.html#Annotation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.annotators.Annotation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>Based object which contains Annotation</p>
 <dl class="method">
@@ -270,6 +270,7 @@ paramiko, should also extend Connector &#64;David?</p>
 <dt id="pymedext_core.datasource.OmopSource">
 <em class="property">class </em><code class="descclassname">pymedext_core.datasource.</code><code class="descname">OmopSource</code><span class="sig-paren">(</span><em>DB_host</em>, <em>DB_name</em>, <em>DB_port</em>, <em>DB_user</em>, <em>DB_password</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/datasource.html#OmopSource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.datasource.OmopSource" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#pymedext_core.datasource.Source" title="pymedext_core.datasource.Source"><code class="xref py py-class docutils literal"><span class="pre">pymedext_core.datasource.Source</span></code></a>, <a class="reference internal" href="#pymedext_core.connector.PostGresConnector" title="pymedext_core.connector.PostGresConnector"><code class="xref py py-class docutils literal"><span class="pre">pymedext_core.connector.PostGresConnector</span></code></a></p>
+<p>Connection to a POstgres Ommop source</p>
 <dl class="method">
 <dt id="pymedext_core.datasource.OmopSource.getLastNotenlpid">
 <code class="descname">getLastNotenlpid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/datasource.html#OmopSource.getLastNotenlpid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.datasource.OmopSource.getLastNotenlpid" title="Permalink to this definition">¶</a></dt>
@@ -286,15 +287,23 @@ paramiko, should also extend Connector &#64;David?</p>
 <dt id="pymedext_core.datasource.Source">
 <em class="property">class </em><code class="descclassname">pymedext_core.datasource.</code><code class="descname">Source</code><a class="reference internal" href="_modules/pymedext_core/datasource.html#Source"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.datasource.Source" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Abstract Class to extend to implement a specific source connector.
+see Omop Source example</p>
 <dl class="staticmethod">
 <dt id="pymedext_core.datasource.Source.loadFromSource">
 <em class="property">static </em><code class="descname">loadFromSource</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/datasource.html#Source.loadFromSource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.datasource.Source.loadFromSource" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Generic method to download Data from a source
+:returns:
+:rtype:</p>
+</dd></dl>
 
 <dl class="staticmethod">
 <dt id="pymedext_core.datasource.Source.saveToSource">
 <em class="property">static </em><code class="descname">saveToSource</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/datasource.html#Source.saveToSource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.datasource.Source.saveToSource" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Generic method to save data to a specific source
+:returns:
+:rtype:</p>
+</dd></dl>
 
 </dd></dl>
 

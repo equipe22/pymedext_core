@@ -100,26 +100,55 @@
 
 
 <div class="viewcode-block" id="Source"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.datasource.Source">[docs]</a><span class="k">class</span> <span class="nc">Source</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Abstract Class to extend to implement a specific source connector.</span>
+<span class="sd">    see Omop Source example</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># def __new__(self,Document):</span>
     <span class="c1">#     self.Document=Document</span>
     <span class="c1">#</span>
     <span class="c1"># Document save as</span>
 <div class="viewcode-block" id="Source.saveToSource"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.datasource.Source.saveToSource">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">saveToSource</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Generic method to save data to a specific source</span>
+<span class="sd">        :returns:</span>
+<span class="sd">        :rtype:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
     <span class="c1">#Document load from and return a Document</span>
 <div class="viewcode-block" id="Source.loadFromSource"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.datasource.Source.loadFromSource">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">loadFromSource</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Generic method to download Data from a source</span>
+<span class="sd">        :returns:</span>
+<span class="sd">        :rtype:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div></div>
 
 
 <div class="viewcode-block" id="OmopSource"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.datasource.OmopSource">[docs]</a><span class="k">class</span> <span class="nc">OmopSource</span><span class="p">(</span><span class="n">Source</span><span class="p">,</span><span class="n">PostGresConnector</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Connection to a POstgres Ommop source</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">DB_host</span><span class="p">,</span> <span class="n">DB_name</span><span class="p">,</span> <span class="n">DB_port</span><span class="p">,</span> <span class="n">DB_user</span><span class="p">,</span> <span class="n">DB_password</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize a connection to a PostresConnector DB using super() constructor</span>
+
+<span class="sd">        :param DB_host: </span>
+<span class="sd">        :param DB_name: </span>
+<span class="sd">        :param DB_port: </span>
+<span class="sd">        :param DB_user: </span>
+<span class="sd">        :param DB_password: </span>
+<span class="sd">        :returns: </span>
+<span class="sd">        :rtype: </span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span> <span class="n">DB_host</span><span class="p">,</span> <span class="n">DB_name</span><span class="p">,</span> <span class="n">DB_port</span><span class="p">,</span> <span class="n">DB_user</span><span class="p">,</span> <span class="n">DB_password</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Initialize Omop connection&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__insert_execute_values_iterator_person</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dict_person_local</span><span class="p">:</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Insert values to an Omop Person table  &quot;&quot;&quot;</span>
+
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
             <span class="n">psycopg2</span><span class="o">.</span><span class="n">extras</span><span class="o">.</span><span class="n">execute_values</span><span class="p">(</span><span class="n">cursor</span><span class="p">,</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">                INSERT INTO person VALUES </span><span class="si">%s</span><span class="s2">;</span>
