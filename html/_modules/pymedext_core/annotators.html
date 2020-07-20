@@ -54,6 +54,12 @@
 
 
 <div class="viewcode-block" id="Annotation"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.annotators.Annotation">[docs]</a><span class="k">class</span> <span class="nc">Annotation</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TODO: get_first_key_input	return the annotation of Document.annotations[0], should be called getRawText</span>
+<span class="sd">    TODO: get_all_key_input	return the annotations oF Documents.annotations which have the same type of key_input list (rename as selectall)</span>
+<span class="sd">    TODO: get_key_input	return the annotations oF Documents.annotations which have the same type of the i th key_input element  (rename as select)</span>
+<span class="sd">    TODO: annotate_function	each annotator should implement this functionand return a list of annotations object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">source_ID</span><span class="p">,</span> <span class="n">span</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">attributes</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">isEntity</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ID</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid1</span><span class="p">())):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>

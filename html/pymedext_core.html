@@ -123,8 +123,12 @@
 <span id="pymedext-core-annotators-module"></span><h2>pymedext_core.annotators module<a class="headerlink" href="#module-pymedext_core.annotators" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pymedext_core.annotators.Annotation">
-<em class="property">class </em><code class="descclassname">pymedext_core.annotators.</code><code class="descname">Annotation</code><span class="sig-paren">(</span><em>type</em>, <em>value</em>, <em>source</em>, <em>source_ID</em>, <em>span=None</em>, <em>attributes=None</em>, <em>isEntity=False</em>, <em>ID='4c569b00-ca74-11ea-b282-e454e863ec7d'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/annotators.html#Annotation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.annotators.Annotation" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pymedext_core.annotators.</code><code class="descname">Annotation</code><span class="sig-paren">(</span><em>type</em>, <em>value</em>, <em>source</em>, <em>source_ID</em>, <em>span=None</em>, <em>attributes=None</em>, <em>isEntity=False</em>, <em>ID='81cbcfc2-ca87-11ea-b282-e454e863ec7d'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/annotators.html#Annotation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.annotators.Annotation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>TODO: get_first_key_input   return the annotation of Document.annotations[0], should be called getRawText
+TODO: get_all_key_input     return the annotations oF Documents.annotations which have the same type of key_input list (rename as selectall)
+TODO: get_key_input return the annotations oF Documents.annotations which have the same type of the i th key_input element  (rename as select)
+TODO: annotate_function     each annotator should implement this functionand return a list of annotations object</p>
 <dl class="method">
 <dt id="pymedext_core.annotators.Annotation.to_dict">
 <code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/annotators.html#Annotation.to_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.annotators.Annotation.to_dict" title="Permalink to this definition">¶</a></dt>
@@ -270,29 +274,64 @@
 <dt id="pymedext_core.document.Document">
 <em class="property">class </em><code class="descclassname">pymedext_core.document.</code><code class="descname">Document</code><span class="sig-paren">(</span><em>raw_text</em>, <em>ID</em>, <em>source=None</em>, <em>pathToconfig=None</em>, <em>documentDate=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/document.html#Document"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.document.Document" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Document is the main class of pymedext. It is use to load file and annotate them with annotators</p>
 <dl class="method">
 <dt id="pymedext_core.document.Document.annotate">
 <code class="descname">annotate</code><span class="sig-paren">(</span><em>annotator</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/document.html#Document.annotate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.document.Document.annotate" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Main function to annotate Document</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>annotator</strong> – annotators list</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">run _annotate which add annotations to Document</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#pymedext_core.document.Document" title="pymedext_core.document.Document">Document</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="pymedext_core.document.Document.get_annotations">
 <code class="descname">get_annotations</code><span class="sig-paren">(</span><em>_type</em>, <em>source_id=None</em>, <em>target_id=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/document.html#Document.get_annotations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.document.Document.get_annotations" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>returns an annotations of a specific type from source. Can  filter from
+type, source_id or target_id</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>_type</strong> – annotation type</li>
+<li><strong>source_id</strong> – annotation source id</li>
+<li><strong>target_id</strong> – annotation target id</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a list of annotations</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list of annotations</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="pymedext_core.document.Document.loadFromData">
 <code class="descname">loadFromData</code><span class="sig-paren">(</span><em>pathToconfig</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/document.html#Document.loadFromData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.document.Document.loadFromData" title="Permalink to this definition">¶</a></dt>
-<dd><p>Transform json Pymedext to Document object</p>
+<dd><p>Transform json Pymedext to Document</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pathToconfig</strong> – list of path to json files,</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">none</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">add annotations to Document</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">none</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#pymedext_core.document.Document" title="pymedext_core.document.Document">Document</a></td>
 </tr>
 </tbody>
 </table>
@@ -301,13 +340,24 @@
 <dl class="method">
 <dt id="pymedext_core.document.Document.raw_text">
 <code class="descname">raw_text</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/document.html#Document.raw_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.document.Document.raw_text" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>return the Document raw_text</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">raw_text</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="pymedext_core.document.Document.to_dict">
 <code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/document.html#Document.to_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.document.Document.to_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>transform Document to json PyMedExt
-Need to add the Document Date if available,
+<dd><p>transform Document to dict PyMedExt
+TODO: Need to add the Document Date if available,
 the processing date, the annotators used</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -324,7 +374,18 @@ the processing date, the annotators used</p>
 <dl class="method">
 <dt id="pymedext_core.document.Document.to_json">
 <code class="descname">to_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/document.html#Document.to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.document.Document.to_json" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>transform annotations to a json</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">transform annotation to json</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">json</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="pymedext_core.document.Document.writeJson">
