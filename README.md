@@ -15,17 +15,23 @@ build                          Build dinstance
 help                           Display available commands in Makefile
 
 ```
+# How to used
+
+1) create a file config/.git-credentials based on the config/.git-credentials_template 
+ http:user:pass@github.com
+2) run make build. If you are under proxy modify the bin/build.sh script.
+3) 
 
 # TODO
 ## Alice
 - implement a generic APIConnector with the request function
-- add the whole api of Doccano as a Source in an other file called DoccanoSource
-- Extend datatransform to perform the data wrangling for Doccano 
+- add the whole api of Doccano as a Source in an other file called DoccanoSource.py
+- Extend datatransform to perform the data wrangling for Doccanotransform.py 
 
 ## David
 - implement a generic sshConnector with paramiko
-- implement a SourceBrat which open an ssh Connector to a brat Server
-- implement datatransform to perform data wrangling for brat 
+- implement a BratSource.py which open an ssh Connector to a brat Server
+- implement datatransform to perform data wrangling for brattransform.py 
 
 
 # otherthings to do
