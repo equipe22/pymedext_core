@@ -12,7 +12,11 @@ pymedext core to extend in order to add new annotators.
 
 make help
 build                          Build dinstance
+demo                           start a demo pymdext container to run it
 help                           Display available commands in Makefile
+install                        local install of pymedext packages
+uninstall                      uninstall local pymedext packages
+
 
 ```
 # How to used
@@ -20,7 +24,10 @@ help                           Display available commands in Makefile
 1) create a file config/.git-credentials based on the config/.git-credentials_template 
  http:user:pass@github.com
 2) run make build. If you are under proxy modify the bin/build.sh script.
-3) 
+3) execute bash bin/runInteractive.sh to test it in a docker container 
+
+# Documentation (in progress)
+ firefox html/modules.html
 
 # TODO
 ## Alice
