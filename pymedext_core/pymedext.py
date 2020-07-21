@@ -5,4 +5,4 @@ from .document import Document
 from .normalize import *
 from .omopload import *
 from .connector import *
-from .datasource import *
+from .omopsource import *
