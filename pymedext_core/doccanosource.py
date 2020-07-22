@@ -1,25 +1,6 @@
 from source import Source
 from connector import *
 
-class OmopSource(Source,PostGresConnector):
-    """
-    Connection to a POstgres Ommop source
-    """
-    def __init__(self, DB_host, DB_name, DB_port, DB_user, DB_password):
-        """Initialize a connection to a PostresConnector DB using super() constructor
-
-        :param DB_host:
-        :param DB_name:
-        :param DB_port:
-        :param DB_user:
-        :param DB_password:
-        :returns:
-        :rtype:
-
-        """
-        super().__init__( DB_host, DB_name, DB_port, DB_user, DB_password)
-        logger.info("Initialize Omop connection")
-
 class DoccanoSource(Source,APIConnector):
     """
     Connection to DoccanoClient
