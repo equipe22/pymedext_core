@@ -342,3 +342,211 @@ class DoccanoSource(Source,APIConnector):
                 offset=offset
             )
         )
+
+
+###########################################
+###########################################
+########################################### Méthodes construites
+
+    def create_project(self,
+                       name: str,
+                       description: str,
+                       project_type: str,
+                       guidelines: str) -> requests.models.Response:
+        """
+        Créee un projet
+        :param name:
+        :param description:
+        :param project_type:
+        :return:
+        """
+        mapping = {'SequenceLabeling': 'SequenceLabelingProject',
+                   'DocumentClassification': 'TextClassificationProject',
+                   'Seq2seq': 'Seq2seqProject'}
+        data = {
+            'name': name,
+            'project_type': project_type,
+            'description': description,
+            'guideline': guidelines,
+            'resourcetype': mapping[project_type]
+        }
+        return self.post(
+            'v1/projects',
+            data=data
+        )
+
+    def create_label(self,
+                     project_id: str,
+                     label_name: str,
+                     color: str,
+                     prefix : str,
+                     suffix : str) -> requests.models.Response:
+        """
+        Créé un label
+        :param self:
+        :param project_id:
+        :param label_name:
+        :return:
+        """
+
+        if color is None :
+            r = lambda: random.randint(0, 255)
+            color = '#%02X%02X%02X' % (r(), r(), r())
+        elif color == "rouge":
+            color = "#E84B3C"
+        elif color == "vert":
+            color = "#2ECC70"
+        elif color == "orange":
+            color = "#F39C19"
+        elif color == "violet":
+            color = "#8E43AD"
+        elif color == "jaune":
+            color = "#F2C511"
+        elif color == "bleu":
+            color = "#3398DB"
+        else :
+            r = lambda: random.randint(0, 255)
+            color = '#%02X%02X%02X' % (r(), r(), r())
+
+
+        data = {
+            'text': label_name,
+            'background_color': color,
+            'prefix_key': prefix,
+            'suffix_key': suffix
+        }
+
+        return self.post(
+            'v1/projects/{project_id}/labels'.format(
+                project_id=project_id),
+            data=data
+        )
+
+
+
+    def set_rolemapping_list(self,
+            project_id: str,
+            user_id: str,
+            role_id: str,
+            username: str,
+            rolename: str
+    ) -> requests.models.Response:
+        """
+        """
+
+        data = {
+            #'id':rolemapping_id,
+            'user': user_id,
+            'role': role_id,
+            'username': username,
+            'rolename': rolename
+        }
+
+
+        return self.post(
+            'v1/projects/{project_id}/roles'.format(
+                project_id=project_id
+            ),
+            data=data
+        )
+
+
+    def get_user_id(self,
+                    username: str
+                    ) :
+        user_list = self.get_user_list().json()
+
+        i=0
+        el = user_list[i]
+
+        while el['username'] != username and i < len(user_list) :
+            el = user_list[i]
+            i += 1
+
+        if el['username'] == username :
+            return el['id']
+        else :
+            return "No such a username (" + username +  ") exists."
+
+
+    def get_project_id(self,
+                       project_name :str
+                       ):
+        project_list = self.get_project_list().json()
+
+        i=0
+        el=project_list[i]
+
+        while el['name'] != project_name and i < len(project_list) :
+            el = project_list[i]
+            i +=1
+
+        if el['name'] == project_name :
+            return el['id']
+        else :
+            return "No such a project name (" + project_name +  ") exists."
+
+
+
+    def get_label_id(self,
+                     project_id: int,
+                     label_name: str
+                     ):
+
+        labels_list = self.get_label_list(project_id).json()
+        i=0
+        el=labels_list[i]
+
+        while el['text'] != label_name and i < len(labels_list):
+            el = labels_list[i]
+            i += 1
+
+        if el['text'] == label_name :
+            return el['id']
+        else :
+            return "No such a label name (" + label_name + ") exists in project " + str(project_id) + "."
+
+
+    def find_project_id(self,
+                        regex : str,
+                        date : str,
+                        time : str):
+        list_of_matches = []
+        list_project_names = [dict_project['name'] for dict_project in self.get_project_list().json()]
+        for name in list_project_names :
+            if re.search(regex, name) is not None:
+                list_of_matches.append(self.get_project_id(name))
+
+        if len(list_of_matches) > 0 :
+            if len(list_of_matches) > 1 :
+                if date is None:
+                    print("Several projects exist with this regex expression (" + regex + "). Please enter the date and/or the time to select the good one.")
+                else :
+                    list_of_matches_with_date = []
+                    for id in list_of_matches :
+                        if re.search(str(date), self.get_project_detail(id).json()['name']) is not None :
+                            list_of_matches_with_date.append(id)
+                    if len(list_of_matches_with_date) > 0 :
+                        if len(list_of_matches_with_date) > 1 :
+                            if time is None :
+                                print("Several projects exist with this regexp expression (" + regex + ") and this date (" + str(date) +"). Please enter the time to select the good one.")
+                            else :
+                                list_of_matches_with_date_and_time=[]
+                                for id in list_of_matches_with_date:
+                                    if re.search(time, self.get_document_detail(id).json()['name']) is not None :
+                                        list_of_matches_with_date_and_time.append(id)
+                                if len(list_of_matches_with_date_and_time) > 0 :
+                                    if len(list_of_matches_with_date_and_time) > 1 :
+                                        return "Several projects (", list_of_matches_with_date_and_time, ") with exactly the same name"
+                                    else :
+                                        return list_of_matches_with_date_and_time[0]
+                                else :
+                                    return "No project found."
+                        else :
+                            return list_of_matches_with_date[0]
+                    else :
+                        return "No project found."
+            else :
+                return list_of_matches[0]
+        else :
+            return "No project found."
