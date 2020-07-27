@@ -6,12 +6,13 @@ class Document:
     """
     Document is the main class of pymedext. It is use to load file and annotate them with annotators
     """
-    def __init__(self, raw_text, ID, source=None, pathToconfig=None, documentDate = None):
+    def __init__(self, raw_text, ID, attributes=None, source=None, pathToconfig=None, documentDate = None):
         """create a Document object
 
         :param raw_text: raw_text of the doc. if raw_text = load
         will load a json PyMedExt and transform it back to a Document object
         :param ID: The document name
+        :param attributes: Dict of attributes related to the document (e.g., person_id). 
         :param source: not use yet but could be the source name I2B2, OMOP HEGP...
         :param pathToconfig: in case of (raw_text = load), it is a list which contains path to each PyMedExt file
         (could be use directly to filter)
@@ -21,6 +22,8 @@ class Document:
         """
         self.source_ID = ID
         self.documentDate = documentDate
+        self.attributes = attributes
+        
         if raw_text != "load":
             self.annotations = [Annotation(type="raw_text",
                                            value=raw_text,
@@ -34,6 +37,8 @@ class Document:
             self.annotations=[]
             for thisPath in pathToconfig:
                 self.loadFromData(thisPath)
+                
+    
 
     def loadFromData(self, pathToconfig):
          """Transform json Pymedext to Document
@@ -114,7 +119,9 @@ class Document:
         """
         return {'annotations' : [x.to_dict() for x in self.annotations],
                 'ID':self.ID,
-                'source_ID': self.source_ID 
+                'source_ID': self.source_ID,
+                'attributes': self.attributes, 
+                'documentDate':self.documentDate
                }
 
     def writeJson(self, pathToOutput):

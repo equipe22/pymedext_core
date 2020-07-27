@@ -15,7 +15,7 @@ class Annotation:
     Based object which contains Annotation
     """
     
-    def __init__(self, type, value, source, source_ID, span = None, attributes = None, isEntity=False, ID = str(uuid.uuid1())):
+    def __init__(self, type, value, source, source_ID, span = None, attributes = None, isEntity=False, ID = None):
         """Intialize an Annotation object
 
         :param type: annotation type define by the user (linked to the Annotator)
@@ -36,7 +36,10 @@ class Annotation:
         self.span = span
         self.source_ID = source_ID
         self.attributes = attributes
-        self.ID = ID
+        if ID is None:
+            self.ID = str(uuid.uuid1())
+        else:
+            self.ID = ID
         self.isEntity = isEntity
 
     def to_json(self):
