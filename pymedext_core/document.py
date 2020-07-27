@@ -1,6 +1,6 @@
 import uuid
 import json
-from .annotators import Annotator, Annotation
+from annotators import Annotator, Annotation
         
 class Document:
     """
@@ -67,6 +67,7 @@ class Document:
                                                         isEntity=annot["isEntity"]))
 
 
+
     def annotate(self, annotator): 
         """Main function to annotate Document
 
@@ -128,27 +129,39 @@ class Document:
         with open(pathToOutput, 'w', encoding='utf-8') as f:
             json.dump(self.to_dict(), f, ensure_ascii=False, indent=4)
 
-    def get_annotations(self, _type, source_id = None, target_id = None):
-        """returns an annotations of a specific type from source. Can  filter from
-        type, source_id or target_id
-
-        :param _type: annotation type
-        :param source_id: annotation source id
-        :param target_id: annotation target id
-        :returns: a list of annotations
-        :rtype: list of annotations
-
+    def get_annotations(self, _type, source_id=None, target_id=None, attributes=None, value=None, span=None):
         """
+        returns an annotations of a specific type from source. Can  filter from
+        type, source_id or target_id, span, source_id, attributes and value.
+        :param _type:
+        :param source_id:
+        :param target_id:
+        :param attributes:
+        :param value:
+        :param span:
+        :return:
+        """
+
         res = []
         for anno in self.annotations:
-            if source_id is not None: 
+            if source_id is not None:
                 if anno.source_ID != source_id:
                     continue
             if target_id is not None:
-                if anno.target_ID != target_id:
+                if anno.ID != target_id:
+                    continue
+            if attributes is not None:
+                if anno.attributes != attributes:
+                    continue
+            if value is not None:
+                if anno.value != value:
+                    continue
+            if span is not None:
+                if anno.span != span:
                     continue
             if anno.type == _type:
                 res.append(anno)
+
         return res
     
     def raw_text(self):

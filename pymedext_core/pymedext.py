@@ -6,3 +6,8 @@ from .normalize import *
 from .omopload import *
 from .connector import *
 from .omopsource import *
+
+from .doccanodocument import *
+from .doccanotransform import *
+from .doccanoannotator import *
+from .doccanosource import *
