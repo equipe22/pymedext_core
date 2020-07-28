@@ -1,4 +1,4 @@
-from source import Source
+from .source import Source
 from .connector import *
 
 class DoccanoSource(Source,APIConnector):
