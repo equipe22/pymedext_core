@@ -46,7 +46,11 @@ class Document:
          with open(pathToconfig) as f:
              mesannotations=json.load(f)
          for annot in mesannotations["annotations"]:
+            #print("annot[value]", annot["value"])
+            #print("type(annot[value])", type(annot["value"]))
             if "empty" not in annot["value"]:
+                #print("empty not in annot[value]")
+
                 if "raw_text" in annot["type"]:
                     if self.ID == None:
                         self.ID=annot["id"]
