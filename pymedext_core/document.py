@@ -1,6 +1,6 @@
 import uuid
 import json
-from annotators import Annotator, Annotation
+from .annotators import Annotator, Annotation
         
 class Document:
     """
