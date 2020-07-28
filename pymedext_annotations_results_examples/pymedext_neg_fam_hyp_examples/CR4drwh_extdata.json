@@ -1,0 +1,48 @@
+{
+    "annotations": [
+        {
+            "type": "raw_text",
+            "value": "empty",
+            "span": [
+                0,
+                5
+            ],
+            "source": null,
+            "source_ID": "CR4drwh",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6a829996-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_cleantext",
+            "value": "8 Mars 2019. NIP : 3333333333. Cher collègue,. Le patient présente un diabète de type II.. Le scaneur a montré une tumeur bénigne de la peau ainsi qu'une vascularite de Churg et Strauss.. Résultats anormaux non précisés de radiologie et d'autres examens de l'appareil musculo-squelettique. Il pourrait s'agir d'un vitiligo ordinaire. Pas d'anomalies congénitales graves. Pas de eucémie à LGL-Natural Killer. Drainage pancreatique comme motif de realisation d'une catheterisme retrograde des voies biliaires et pancreatiques. Pas de toux mais une dysplasie thoracomélique. A condition que cancer. Son neveux a eu la même maladie.. ",
+            "span": [
+                0,
+                630
+            ],
+            "source": "DRWH_CleanTxt.v1",
+            "source_ID": "6a829996-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6a829998-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "extracted_data",
+            "value": "cancer",
+            "span": [
+                600,
+                606
+            ],
+            "source": "Extract_Data.v1",
+            "source_ID": "6a829998-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": true,
+            "attributes": {
+                "context": "racomélique. A condition que cancer. Son neveux a eu la même mal",
+                "concepts": "Cancer"
+            },
+            "id": "6a829999-80a3-11ea-a7f6-180f76073bf2"
+        }
+    ],
+    "ID": "6a829997-80a3-11ea-a7f6-180f76073bf2",
+    "source_ID": "CR4drwh"
+}

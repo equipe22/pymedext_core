@@ -1,0 +1,96 @@
+{
+    "annotations": [
+        {
+            "type": "raw_text",
+            "value": "empty",
+            "span": [
+                0,
+                5
+            ],
+            "source": null,
+            "source_ID": "CR2drwh",
+            "isEntity": false,
+            "attributes": null,
+            "id": "68d9ff44-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_cleantext",
+            "value": "8 Mars 2019. NIP : 2222222222. Cher collègue,. Le patient présente un diabète de type II.. Le scaneur a montré un Ionogramme sanguin SAI normal ainsi qu'un mélanome malin cutané stade I.. Lymphome diffus mixte à petites et grandes cellules ,lymphome angiocentrique ,  ,Work Formul ,  stade II vitiligo ordinaire. Biopsie de la surrénale normale. Échec de l'épreuve du travail test. Lymphome immunoblastique à grandes cellules   réfract ; type anaplas à grandes cellules T ou nulles . Rachitisme hypophosphatémique. Rachitisme hypophosphatémique. Il ne présente aucun symptôme liés au COVID. Il pourrait être opéré dans les jours à venir. Sa mère a eu un cancer du sein. Antécédants familiaux : petit frère trisomique.. Son neveux est diabétique. Pas d'anomalies congénitales. Il sera vu par mon confrère prochainement. Possible syndrome de Chrug et Strauss. Il pourrait avoir une maladie non curable. Il n'aura pas de goutte.. ",
+            "span": [
+                0,
+                927
+            ],
+            "source": "DRWH_CleanTxt.v1",
+            "source_ID": "68d9ff44-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "68d9ff46-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "extracted_data",
+            "value": "cancer",
+            "span": [
+                677,
+                683
+            ],
+            "source": "Extract_Data.v1",
+            "source_ID": "68d9ff46-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": true,
+            "attributes": {
+                "context": "rs à venir. Sa mère a eu un cancer du sein. Antécédants famili",
+                "concepts": "Cancer"
+            },
+            "id": "68d9ff47-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "extracted_data",
+            "value": "Lymphome",
+            "span": [
+                194,
+                202
+            ],
+            "source": "Extract_Data.v1",
+            "source_ID": "68d9ff46-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": true,
+            "attributes": {
+                "context": "anome malin cutané stade I.. Lymphome diffus mixte à petites et gr",
+                "concepts": "Lymphome"
+            },
+            "id": "68d9ff48-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "extracted_data",
+            "value": "lymphome",
+            "span": [
+                248,
+                256
+            ],
+            "source": "Extract_Data.v1",
+            "source_ID": "68d9ff46-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": true,
+            "attributes": {
+                "context": "andes cellules ,lymphome angiocentrique ,  ,Work Formu",
+                "concepts": "Lymphome"
+            },
+            "id": "68d9ff49-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "extracted_data",
+            "value": "Lymphome",
+            "span": [
+                392,
+                400
+            ],
+            "source": "Extract_Data.v1",
+            "source_ID": "68d9ff46-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": true,
+            "attributes": {
+                "context": "e l'épreuve du travail test. Lymphome immunoblastique à grandes ce",
+                "concepts": "Lymphome"
+            },
+            "id": "68d9ff4a-80a3-11ea-a7f6-180f76073bf2"
+        }
+    ],
+    "ID": "68d9ff45-80a3-11ea-a7f6-180f76073bf2",
+    "source_ID": "CR2drwh"
+}

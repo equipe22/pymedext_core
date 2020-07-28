@@ -1,0 +1,643 @@
+{
+    "annotations": [
+        {
+            "type": "raw_text",
+            "value": "empty",
+            "span": [
+                0,
+                5
+            ],
+            "source": null,
+            "source_ID": "CR2drwh",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c440e-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": "8 Mars 2019",
+            "span": [
+                0,
+                11
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "735c440e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4410-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " NIP : 2222222222",
+            "span": [
+                12,
+                29
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "735c440e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4411-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Cher collègue,",
+            "span": [
+                30,
+                46
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "735c440e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4412-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Le patient présente un diabète de type II",
+            "span": [
+                47,
+                91
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "735c440e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4413-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Le scaneur a montré un Ionogramme sanguin SAI normal ainsi qu'un mélanome malin cutané stade I",
+            "span": [
+                93,
+                191
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "735c440e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4414-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Lymphome diffus mixte à petites et grandes cellules ,lymphome angiocentrique ",
+            "span": [
+                193,
+                272
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "735c440e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4415-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": "Work Formul ",
+            "span": [
+                276,
+                288
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "735c440e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4416-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": "ade II vitiligo ordinaire",
+            "span": [
+                293,
+                318
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "735c440e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4417-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Biopsie de la surrénale normale",
+            "span": [
+                319,
+                352
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "735c440e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4418-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Échec de l'épreuve du travail test",
+            "span": [
+                353,
+                390
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "735c440e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4419-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Lymphome immunoblastique à grandes cellules   réfract ",
+            "span": [
+                391,
+                448
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "735c440e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c441a-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " type anaplas à grandes cellules T ou nulles ",
+            "span": [
+                449,
+                495
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "735c440e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c441b-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Rachitisme hypophosphatémique",
+            "span": [
+                496,
+                527
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "735c440e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c441c-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Rachitisme hypophosphatémique",
+            "span": [
+                528,
+                559
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "735c440e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c441d-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Il ne présente aucun symptôme liés au COVID",
+            "span": [
+                560,
+                607
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "735c440e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c441e-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Il pourrait être opéré dans les jours à venir",
+            "span": [
+                608,
+                658
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "735c440e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c441f-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Sa mère a eu un cancer du sein",
+            "span": [
+                659,
+                691
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "735c440e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4420-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Antécédants familiaux : petit frère trisomique",
+            "span": [
+                692,
+                742
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "735c440e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4421-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Son neveux est diabétique",
+            "span": [
+                744,
+                771
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "735c440e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4422-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Pas d'anomalies congénitales",
+            "span": [
+                772,
+                802
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "735c440e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4423-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Il sera vu par mon confrère prochainement",
+            "span": [
+                803,
+                846
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "735c440e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4424-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Possible syndrome de Chrug et Strauss",
+            "span": [
+                847,
+                885
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "735c440e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4425-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Il pourrait avoir une maladie non curable",
+            "span": [
+                886,
+                928
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "735c440e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4426-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Il n'aura pas de goutte",
+            "span": [
+                929,
+                953
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "735c440e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4427-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                0,
+                11
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "735c4410-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4428-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                12,
+                29
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "735c4411-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4429-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                30,
+                46
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "735c4412-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c442a-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                47,
+                91
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "735c4413-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c442b-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "negatif",
+            "span": [
+                93,
+                191
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "735c4414-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c442c-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                193,
+                272
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "735c4415-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c442d-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                276,
+                288
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "735c4416-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c442e-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                293,
+                318
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "735c4417-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c442f-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "negatif",
+            "span": [
+                319,
+                352
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "735c4418-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4430-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                353,
+                390
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "735c4419-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4431-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                391,
+                448
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "735c441a-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4432-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                449,
+                495
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "735c441b-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4433-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                496,
+                527
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "735c441c-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4434-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                528,
+                559
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "735c441d-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4435-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "negatif",
+            "span": [
+                560,
+                607
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "735c441e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4436-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                608,
+                658
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "735c441f-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4437-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                659,
+                691
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "735c4420-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4438-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                692,
+                742
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "735c4421-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c4439-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                744,
+                771
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "735c4422-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c443a-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "negatif",
+            "span": [
+                772,
+                802
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "735c4423-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c443b-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                803,
+                846
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "735c4424-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c443c-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                847,
+                885
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "735c4425-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c443d-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                886,
+                928
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "735c4426-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c443e-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "negatif",
+            "span": [
+                929,
+                953
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "735c4427-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "735c443f-80a3-11ea-a7f6-180f76073bf2"
+        }
+    ],
+    "ID": "735c440f-80a3-11ea-a7f6-180f76073bf2",
+    "source_ID": "CR2drwh"
+}

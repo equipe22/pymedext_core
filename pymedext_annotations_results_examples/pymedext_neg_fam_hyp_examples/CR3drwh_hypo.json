@@ -1,0 +1,383 @@
+{
+    "annotations": [
+        {
+            "type": "raw_text",
+            "value": "empty",
+            "span": [
+                0,
+                5
+            ],
+            "source": null,
+            "source_ID": "CR3drwh",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da7a-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": "8 Mars 2019",
+            "span": [
+                0,
+                11
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "7043da7a-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da7c-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " NIP : 3333333333",
+            "span": [
+                12,
+                29
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "7043da7a-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da7d-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Cher collègue,",
+            "span": [
+                30,
+                46
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "7043da7a-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da7e-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Le patient présente un diabète de type II",
+            "span": [
+                47,
+                91
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "7043da7a-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da7f-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Le scaneur a montré une tumeur bénigne de la peau ainsi qu'une vascularite de Churg et Strauss",
+            "span": [
+                93,
+                190
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "7043da7a-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da80-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Résultats anormaux non précisés de radiologie et d'autres examens de l'appareil musculo-squelettique vitiligo ordinaire",
+            "span": [
+                192,
+                315
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "7043da7a-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da81-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Testostérone sérique anormale",
+            "span": [
+                316,
+                348
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "7043da7a-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da82-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Anomalies congénitales graves",
+            "span": [
+                349,
+                380
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "7043da7a-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da83-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Leucémie à LGL-Natural Killer",
+            "span": [
+                381,
+                413
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "7043da7a-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da84-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Son père a le SIDA",
+            "span": [
+                414,
+                434
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "7043da7a-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da85-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Son neveux a eu un cancer de la prostate",
+            "span": [
+                435,
+                476
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "7043da7a-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da86-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Sa mère est ashmatique",
+            "span": [
+                477,
+                501
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "7043da7a-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da87-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Il aurait pris trop d'efferalgants",
+            "span": [
+                502,
+                537
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "7043da7a-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da88-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Il sera suivi pour troubles post-traumatiques",
+            "span": [
+                539,
+                585
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "7043da7a-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da89-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                0,
+                11
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "7043da7c-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da8a-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                12,
+                29
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "7043da7d-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da8b-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                30,
+                46
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "7043da7e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da8c-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                47,
+                91
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "7043da7f-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da8d-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                93,
+                190
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "7043da80-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da8e-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                192,
+                315
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "7043da81-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da8f-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                316,
+                348
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "7043da82-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da90-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                349,
+                380
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "7043da83-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da91-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                381,
+                413
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "7043da84-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da92-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                414,
+                434
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "7043da85-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da93-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                435,
+                476
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "7043da86-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da94-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                477,
+                501
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "7043da87-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da95-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                502,
+                537
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "7043da88-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da96-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                539,
+                585
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "7043da89-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "7043da97-80a3-11ea-a7f6-180f76073bf2"
+        }
+    ],
+    "ID": "7043da7b-80a3-11ea-a7f6-180f76073bf2",
+    "source_ID": "CR3drwh"
+}

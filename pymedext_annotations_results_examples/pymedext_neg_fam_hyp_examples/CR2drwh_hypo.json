@@ -1,0 +1,591 @@
+{
+    "annotations": [
+        {
+            "type": "raw_text",
+            "value": "empty",
+            "span": [
+                0,
+                5
+            ],
+            "source": null,
+            "source_ID": "CR2drwh",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc4fe8-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": "8 Mars 2019",
+            "span": [
+                0,
+                11
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "72cc4fe8-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc4fea-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " NIP : 2222222222",
+            "span": [
+                12,
+                29
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "72cc4fe8-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc4feb-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Cher collègue,",
+            "span": [
+                30,
+                46
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "72cc4fe8-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc4fec-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Le patient présente un diabète de type II",
+            "span": [
+                47,
+                91
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "72cc4fe8-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc4fed-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Le scaneur a montré un Ionogramme sanguin SAI normal ainsi qu'un mélanome malin cutané stade I",
+            "span": [
+                93,
+                191
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "72cc4fe8-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc4fee-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Lymphome diffus mixte à petites et grandes cellules ,lymphome angiocentrique ,  ,Work Formul ,  stade II vitiligo ordinaire",
+            "span": [
+                193,
+                318
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "72cc4fe8-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc4fef-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Biopsie de la surrénale normale",
+            "span": [
+                319,
+                352
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "72cc4fe8-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc4ff0-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Échec de l'épreuve du travail test",
+            "span": [
+                353,
+                390
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "72cc4fe8-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc4ff1-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Lymphome immunoblastique à grandes cellules   réfract ",
+            "span": [
+                391,
+                448
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "72cc4fe8-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc4ff2-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " type anaplas à grandes cellules T ou nulles ",
+            "span": [
+                449,
+                495
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "72cc4fe8-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc4ff3-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Rachitisme hypophosphatémique",
+            "span": [
+                496,
+                527
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "72cc4fe8-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc4ff4-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Rachitisme hypophosphatémique",
+            "span": [
+                528,
+                559
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "72cc4fe8-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc4ff5-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Il ne présente aucun symptôme liés au COVID",
+            "span": [
+                560,
+                607
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "72cc4fe8-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc4ff6-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Il pourrait être opéré dans les jours à venir",
+            "span": [
+                608,
+                658
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "72cc4fe8-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc4ff7-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Sa mère a eu un cancer du sein",
+            "span": [
+                659,
+                691
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "72cc4fe8-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc4ff8-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Antécédants familiaux : petit frère trisomique",
+            "span": [
+                692,
+                742
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "72cc4fe8-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc4ff9-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Son neveux est diabétique",
+            "span": [
+                744,
+                771
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "72cc4fe8-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc4ffa-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Pas d'anomalies congénitales",
+            "span": [
+                772,
+                802
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "72cc4fe8-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc4ffb-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Il sera vu par mon confrère prochainement",
+            "span": [
+                803,
+                846
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "72cc4fe8-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc4ffc-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Possible syndrome de Chrug et Strauss",
+            "span": [
+                847,
+                885
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "72cc4fe8-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc4ffd-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Il pourrait avoir une maladie non curable",
+            "span": [
+                886,
+                928
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "72cc4fe8-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc4ffe-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Il n'aura pas de goutte",
+            "span": [
+                929,
+                953
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "72cc4fe8-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc4fff-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                0,
+                11
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "72cc4fea-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc5000-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                12,
+                29
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "72cc4feb-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc5001-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                30,
+                46
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "72cc4fec-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc5002-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                47,
+                91
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "72cc4fed-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc5003-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                93,
+                191
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "72cc4fee-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc5004-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                193,
+                318
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "72cc4fef-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc5005-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                319,
+                352
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "72cc4ff0-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc5006-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                353,
+                390
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "72cc4ff1-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc5007-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                391,
+                448
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "72cc4ff2-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc5008-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                449,
+                495
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "72cc4ff3-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc5009-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                496,
+                527
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "72cc4ff4-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc500a-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                528,
+                559
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "72cc4ff5-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc500b-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                560,
+                607
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "72cc4ff6-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc500c-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "non realise",
+            "span": [
+                608,
+                658
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "72cc4ff7-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc500d-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                659,
+                691
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "72cc4ff8-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc500e-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                692,
+                742
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "72cc4ff9-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc500f-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                744,
+                771
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "72cc4ffa-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc5010-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                772,
+                802
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "72cc4ffb-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc5011-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                803,
+                846
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "72cc4ffc-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc5012-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                847,
+                885
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "72cc4ffd-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc5013-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "non realise",
+            "span": [
+                886,
+                928
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "72cc4ffe-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc5014-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "hypothesis",
+            "value": "realise",
+            "span": [
+                929,
+                953
+            ],
+            "source": "Hypothesis.v1",
+            "source_ID": "72cc4fff-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "72cc5015-80a3-11ea-a7f6-180f76073bf2"
+        }
+    ],
+    "ID": "72cc4fe9-80a3-11ea-a7f6-180f76073bf2",
+    "source_ID": "CR2drwh"
+}

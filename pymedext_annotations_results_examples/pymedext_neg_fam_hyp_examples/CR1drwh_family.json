@@ -1,0 +1,513 @@
+{
+    "annotations": [
+        {
+            "type": "raw_text",
+            "value": "empty",
+            "span": [
+                0,
+                5
+            ],
+            "source": null,
+            "source_ID": "CR1drwh",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd2814e-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": "8 Mars 2019",
+            "span": [
+                0,
+                11
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "6bd2814e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd28150-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " NIP : 1111111111",
+            "span": [
+                12,
+                29
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "6bd2814e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd28151-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Cher collègue,",
+            "span": [
+                30,
+                46
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "6bd2814e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd28152-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Le patient présente un diabète de type II",
+            "span": [
+                47,
+                91
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "6bd2814e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd28153-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Le scaneur a montré une tumeur bénigne de la peau ainsi qu'une vascularite de Churg et Strauss",
+            "span": [
+                93,
+                190
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "6bd2814e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd28154-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Lymphome diffus mixte à petites et grandes cellules ,lymphome angiocentrique ,  ,Work Formul ,  stade II vitiligo ordinaire",
+            "span": [
+                192,
+                317
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "6bd2814e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd28155-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Biopsie de la surrénale normale",
+            "span": [
+                318,
+                351
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "6bd2814e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd28156-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Biopsie de la surrénale normale",
+            "span": [
+                352,
+                385
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "6bd2814e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd28157-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Syndrome du conflit de cheville test",
+            "span": [
+                386,
+                423
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "6bd2814e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd28158-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Lymphome immunoblastique à grandes cellules   réfract ",
+            "span": [
+                424,
+                481
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "6bd2814e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd28159-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " type anaplas à grandes cellules T ou nulles ",
+            "span": [
+                482,
+                528
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "6bd2814e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd2815a-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Pas de mal de tête, mais des vomissements",
+            "span": [
+                529,
+                572
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "6bd2814e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd2815b-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Il pourrait être atteint du COVID ",
+            "span": [
+                573,
+                609
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "6bd2814e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd2815c-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Il a peut-être une inflammation",
+            "span": [
+                610,
+                643
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "6bd2814e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd2815d-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Il aura des examens de selles lundi",
+            "span": [
+                644,
+                680
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "6bd2814e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd2815e-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Il n'a pas de diarhées",
+            "span": [
+                681,
+                705
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "6bd2814e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd2815f-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Antécédents familiaux : mère schizophrène, père diabétique",
+            "span": [
+                706,
+                771
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "6bd2814e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd28160-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Son frère a la mucovicidose",
+            "span": [
+                772,
+                801
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "6bd2814e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd28161-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Son neveux a été hospitalisé pour trouble",
+            "span": [
+                802,
+                847
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "6bd2814e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd28162-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_family",
+            "value": "patient",
+            "span": [
+                0,
+                11
+            ],
+            "source": "DRWH_family.v1",
+            "source_ID": "6bd28150-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd28163-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_family",
+            "value": "patient",
+            "span": [
+                12,
+                29
+            ],
+            "source": "DRWH_family.v1",
+            "source_ID": "6bd28151-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd28164-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_family",
+            "value": "patient",
+            "span": [
+                30,
+                46
+            ],
+            "source": "DRWH_family.v1",
+            "source_ID": "6bd28152-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd28165-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_family",
+            "value": "patient",
+            "span": [
+                47,
+                91
+            ],
+            "source": "DRWH_family.v1",
+            "source_ID": "6bd28153-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd28166-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_family",
+            "value": "patient",
+            "span": [
+                93,
+                190
+            ],
+            "source": "DRWH_family.v1",
+            "source_ID": "6bd28154-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd28167-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_family",
+            "value": "patient",
+            "span": [
+                192,
+                317
+            ],
+            "source": "DRWH_family.v1",
+            "source_ID": "6bd28155-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd28168-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_family",
+            "value": "patient",
+            "span": [
+                318,
+                351
+            ],
+            "source": "DRWH_family.v1",
+            "source_ID": "6bd28156-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd28169-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_family",
+            "value": "patient",
+            "span": [
+                352,
+                385
+            ],
+            "source": "DRWH_family.v1",
+            "source_ID": "6bd28157-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd2816a-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_family",
+            "value": "patient",
+            "span": [
+                386,
+                423
+            ],
+            "source": "DRWH_family.v1",
+            "source_ID": "6bd28158-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd2816b-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_family",
+            "value": "patient",
+            "span": [
+                424,
+                481
+            ],
+            "source": "DRWH_family.v1",
+            "source_ID": "6bd28159-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd2816c-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_family",
+            "value": "patient",
+            "span": [
+                482,
+                528
+            ],
+            "source": "DRWH_family.v1",
+            "source_ID": "6bd2815a-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd2816d-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_family",
+            "value": "patient",
+            "span": [
+                529,
+                572
+            ],
+            "source": "DRWH_family.v1",
+            "source_ID": "6bd2815b-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd2816e-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_family",
+            "value": "patient",
+            "span": [
+                573,
+                609
+            ],
+            "source": "DRWH_family.v1",
+            "source_ID": "6bd2815c-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd2816f-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_family",
+            "value": "patient",
+            "span": [
+                610,
+                643
+            ],
+            "source": "DRWH_family.v1",
+            "source_ID": "6bd2815d-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd28170-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_family",
+            "value": "patient",
+            "span": [
+                644,
+                680
+            ],
+            "source": "DRWH_family.v1",
+            "source_ID": "6bd2815e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd28171-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_family",
+            "value": "patient",
+            "span": [
+                681,
+                705
+            ],
+            "source": "DRWH_family.v1",
+            "source_ID": "6bd2815f-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd28172-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_family",
+            "value": "patient",
+            "span": [
+                706,
+                771
+            ],
+            "source": "DRWH_family.v1",
+            "source_ID": "6bd28160-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd28173-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_family",
+            "value": "patient",
+            "span": [
+                772,
+                801
+            ],
+            "source": "DRWH_family.v1",
+            "source_ID": "6bd28161-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd28174-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_family",
+            "value": "famille",
+            "span": [
+                802,
+                847
+            ],
+            "source": "DRWH_family.v1",
+            "source_ID": "6bd28162-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6bd28175-80a3-11ea-a7f6-180f76073bf2"
+        }
+    ],
+    "ID": "6bd2814f-80a3-11ea-a7f6-180f76073bf2",
+    "source_ID": "CR1drwh"
+}

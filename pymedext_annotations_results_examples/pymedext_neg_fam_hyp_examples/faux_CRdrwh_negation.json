@@ -1,0 +1,331 @@
+{
+    "annotations": [
+        {
+            "type": "raw_text",
+            "value": "empty",
+            "span": [
+                0,
+                5
+            ],
+            "source": null,
+            "source_ID": "faux_CRdrwh",
+            "isEntity": false,
+            "attributes": null,
+            "id": "74633e84-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": "8 Mars 2019",
+            "span": [
+                0,
+                11
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "74633e84-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "74633e86-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " NIP : 7766776767",
+            "span": [
+                12,
+                29
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "74633e84-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "74633e87-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Cher collègue,",
+            "span": [
+                30,
+                46
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "74633e84-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "74633e88-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Le patient présente un diabète de type II",
+            "span": [
+                47,
+                91
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "74633e84-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "74633e89-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Le scaneur a montré une tumeur bénigne de la peau ainsi qu'une vascularite de Churg et Strauss",
+            "span": [
+                93,
+                190
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "74633e84-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "74633e8a-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Lymphome diffus mixte à petites et grandes cellules ,lymphome angiocentrique ",
+            "span": [
+                192,
+                271
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "74633e84-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "74633e8b-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": "Work Formul ",
+            "span": [
+                275,
+                287
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "74633e84-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "74633e8c-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": "ade II vitiligo ordinaire",
+            "span": [
+                292,
+                317
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "74633e84-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "74633e8d-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Biopsie de la surrénale",
+            "span": [
+                318,
+                343
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "74633e84-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "74633e8e-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Syndrome du conflit de cheville test",
+            "span": [
+                344,
+                381
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "74633e84-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "74633e8f-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Lymphome immunoblastique à grandes cellules   réfract ",
+            "span": [
+                382,
+                439
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "74633e84-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "74633e90-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " type anaplas à grandes cellules T ou nulles ",
+            "span": [
+                440,
+                486
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "74633e84-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "74633e91-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                0,
+                11
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "74633e86-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "74633e92-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                12,
+                29
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "74633e87-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "74633e93-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                30,
+                46
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "74633e88-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "74633e94-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                47,
+                91
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "74633e89-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "74633e95-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                93,
+                190
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "74633e8a-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "74633e96-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                192,
+                271
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "74633e8b-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "74633e97-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                275,
+                287
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "74633e8c-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "74633e98-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                292,
+                317
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "74633e8d-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "74633e99-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                318,
+                343
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "74633e8e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "74633e9a-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                344,
+                381
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "74633e8f-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "74633e9b-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                382,
+                439
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "74633e90-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "74633e9c-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                440,
+                486
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "74633e91-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "74633e9d-80a3-11ea-a7f6-180f76073bf2"
+        }
+    ],
+    "ID": "74633e85-80a3-11ea-a7f6-180f76073bf2",
+    "source_ID": "faux_CRdrwh"
+}
