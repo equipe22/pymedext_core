@@ -1,18 +1,18 @@
 import uuid
 import json
 import os
-from .doccanoannotator import AnnotationDoccano
+from doccanoannotator import DoccanoAnnotation
 
 
 class DoccanoDocument:
     def __init__(self):
-        self.annotationsDoccano = []
+        self.doccanoAnnotation = []
 
     def toJsonDoccano(self):
         return json.dump(self.toDictDoccano())
 
     def toDictDoccano(self):
-        return [x.to_dict() for x in self.annotationsDoccano]
+        return [x.to_dict() for x in self.doccanoAnnotation]
 
     def writeJsonDoccano(self, pathToOutput):
         with open(pathToOutput, 'w', encoding='utf-8') as f:
