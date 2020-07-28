@@ -2,14 +2,14 @@ import uuid
 import json
 import os
 
-from document import Document
+from .document import Document
 
-from doccanodocument import DoccanoDocument
+from .doccanodocument import DoccanoDocument
 
-from annotators import Annotator, Annotation
-from doccanoannotator import DoccanoAnnotation
+from .annotators import Annotator, Annotation
+from .doccanoannotator import DoccanoAnnotation
 
-from datatransform import DataTransform
+from .datatransform import DataTransform
 
 
 class Doccano(DataTransform):

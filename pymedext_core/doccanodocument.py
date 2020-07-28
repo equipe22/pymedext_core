@@ -1,7 +1,7 @@
 import uuid
 import json
 import os
-from doccanoannotator import DoccanoAnnotation
+from .doccanoannotator import DoccanoAnnotation
 
 
 class DoccanoDocument:

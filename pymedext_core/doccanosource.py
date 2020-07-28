@@ -1,5 +1,5 @@
 from source import Source
-from connector import *
+from .connector import *
 
 class DoccanoSource(Source,APIConnector):
     """
