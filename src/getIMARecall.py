@@ -1,10 +1,10 @@
-from document import Document
+# from document import Document
+from pymedext_core import pymedext # contains Document and other pymed connector object
+# from doccanodocument import DoccanoDocument
 
-from doccanodocument import DoccanoDocument
-
-from doccanotransform import Doccano
-from doccanoannotator import *
-from doccanosource import *
+# from doccanotransform import Doccano
+# from doccanoannotator import *
+# from doccanosource import *
 
 
 import os, sys, csv
@@ -54,12 +54,12 @@ if args.projectName is None :
 else :
     doccano_rappel_file_name = str(args.projectName) + "_" + timestr + "_" + doccano_rappel_file_name
 
-thisDoccanoDocRappel = DoccanoDocument()
+thisDoccanoDocRappel = pymedext.DoccanoDocument()
 
 for doc in listAnnotedDoc :
 
-    docFromJsonRappel = Document(raw_text="load", ID=None, documentDate = None, pathToconfig=[folderName + doc])
-    dictToDoccanoRappel = Doccano.toDoccanoImaRappel(Document=docFromJsonRappel, dict_regexp_type=dict_regexp, value="NULL", span=[0,0])
-    thisDoccanoRappel = Doccano.DoccanoEvalRappel(DoccanoDocument=thisDoccanoDocRappel, dict_doccano=dictToDoccanoRappel, path_to_doc=folderName + doc)
+    docFromJsonRappel = pymedext.Document(raw_text="load", ID=None, documentDate = None, pathToconfig=[folderName + doc])
+    dictToDoccanoRappel = pymedext.Doccano.toDoccanoImaRappel(Document=docFromJsonRappel, dict_regexp_type=dict_regexp, value="NULL", span=[0,0])
+    thisDoccanoRappel = pymedext.Doccano.DoccanoEvalRappel(DoccanoDocument=thisDoccanoDocRappel, dict_doccano=dictToDoccanoRappel, path_to_doc=folderName + doc)
 
 thisDoccanoDocRappel.writeJsonDoccano(doccano_rappel_file_name + ".jsonl")
