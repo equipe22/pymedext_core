@@ -135,29 +135,44 @@ class Document:
         with open(pathToOutput, 'w', encoding='utf-8') as f:
             json.dump(self.to_dict(), f, ensure_ascii=False, indent=4)
 
-    def get_annotations(self, _type, source_id = None, target_id = None):
-        """returns an annotations of a specific type from source. Can  filter from
-        type, source_id or target_id
-
+     def get_annotations(self, _type, source_id=None, target_id=None, attributes=None, value=None, span=None):
+        """
+        returns an annotations of a specific type from source. Can  filter from
+        type, source_id or target_id, span, source_id, attributes and value.
         :param _type: annotation type
         :param source_id: annotation source id
         :param target_id: annotation target id
-        :returns: a list of annotations
-        :rtype: list of annotations
-
+        :param attributes:
+        :param value:
+        :param span:
+        :return:
         """
         res = []
         for anno in self.annotations:
-            if source_id is not None: 
-                if anno.source_ID != source_id:
+            if source_id is not None:
+                if anno.source_ID == source_id:
                     continue
+                    res.append(annot)
             if target_id is not None:
-                if anno.target_ID != target_id:
+                if anno.ID == target_id:
                     continue
+                    res.append(annot)
+            if attributes is not None:
+                if anno.attributes == attributes:
+                    continue
+                    res.append(annot)
+            if value is not None:
+                if anno.value == value:
+                    continue
+                    res.append(annot)
+            if span is not None:
+                if anno.span == span:
+                    continue
+                    res.append(annot)
             if anno.type == _type:
                 res.append(anno)
         return res
-    
+           
     def raw_text(self):
         """return the Document raw_text
 
@@ -167,3 +182,12 @@ class Document:
         """
         annot = self.get_annotations('raw_text')[0]
         return annot.value
+
+    def getGraph(self):
+        """return the graph associated with the raw_text
+        :returns:
+        :rtype:
+
+        """
+        annot = self.get_annotations('raw_text')[0]
+        return annot
