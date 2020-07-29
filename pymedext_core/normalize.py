@@ -10,6 +10,14 @@ logger = logging.getLogger(__name__)
 class normalize:
 
     def __setSentencesAndRawText(Document,rootNode):
+        """Build an intervalTree of Annotations from a Document
+
+        :param Document: a Document
+        :param rootNode: type to filter Document
+        :returns: tree,sentencepose,raw_textpos,annotGraph
+        :rtype: intervalTree,dict,dict,dict
+
+        """
         __raw_textpos=dict()
         __sentencepos=dict()
         __tree=IntervalTree()
@@ -30,6 +38,19 @@ class normalize:
     #filtrer les fonctions en fonction du syntagmes
     #
     def __buildTree(Document,__tree, __sentencepos, __raw_textpos, annotsGraph, otherSegments, rootNode):
+        """Build tree from Document
+
+        :param Document:
+        :param __tree:
+        :param __sentencepos:
+        :param __raw_textpos:
+        :param annotsGraph:
+        :param otherSegments:
+        :param rootNode:
+        :returns:
+        :rtype:
+
+        """
         for thisAnnotation in Document.annotations:
             start = thisAnnotation.span[0]
             end   = thisAnnotation.span[1]
@@ -45,6 +66,17 @@ class normalize:
 
     #filterEntities stay until i resolve the entity declaration issue
     def __buildGraph(Document, __tree, __sentencepos, thisGraph,filterEntities):
+        """Build Graph from intervaltree and Doc
+
+        :param Document:
+        :param __tree:
+        :param __sentencepos:
+        :param thisGraph:
+        :param filterEntities:
+        :returns:
+        :rtype:
+
+        """
         lenentities=[]
         grousentences=[]
         typeliste=[]
@@ -76,6 +108,18 @@ class normalize:
 
     @staticmethod
     def uri(Document,otherSegments=["drwh_family","hypothesis"],rootNode="drwh_sentences", filterEntities=['drugs_fast', 'cui']):
+        """uri Normalization
+
+        :param Document:
+        :param otherSegments:
+        :param "hypothesis"]:
+        :param rootNode:
+        :param filterEntities:
+        :param 'cui']:
+        :returns:
+        :rtype:
+
+        """
         # __raw_textpos=dict()
         # normalize.__sentencepos=dict()
         # normalize.__tree=IntervalTree()
