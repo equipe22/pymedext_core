@@ -28,10 +28,10 @@ pymedext\_core\.connector module
     :undoc-members:
     :show-inheritance:
 
-pymedext\_core\.datasource module
----------------------------------
+pymedext\_core\.datatransform module
+------------------------------------
 
-.. automodule:: pymedext_core.datasource
+.. automodule:: pymedext_core.datatransform
     :members:
     :undoc-members:
     :show-inheritance:
@@ -60,10 +60,26 @@ pymedext\_core\.omopload module
     :undoc-members:
     :show-inheritance:
 
+pymedext\_core\.omopsource module
+---------------------------------
+
+.. automodule:: pymedext_core.omopsource
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 pymedext\_core\.pymedext module
 -------------------------------
 
 .. automodule:: pymedext_core.pymedext
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pymedext\_core\.source module
+-----------------------------
+
+.. automodule:: pymedext_core.source
     :members:
     :undoc-members:
     :show-inheritance:

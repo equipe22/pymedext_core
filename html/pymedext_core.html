@@ -1,44 +1,177 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pymedext_core package &#8212; pymedext_core 0.0.1 documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pymedext_core package &mdash; pymedext_core 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'./',
+              VERSION:'0.0.1',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/js/versions.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/msmb.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
    
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
-  </head>
-  <body>
-  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
           
 
-          <div class="body" role="main">
+          
+            <a href="index.html" class="icon icon-home"> pymedext_core
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">pymedext_core package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-pymedext_core.annotationGraph">pymedext_core.annotationGraph module</a></li>
+<li><a class="reference internal" href="#module-pymedext_core.annotators">pymedext_core.annotators module</a></li>
+<li><a class="reference internal" href="#module-pymedext_core.connector">pymedext_core.connector module</a></li>
+<li><a class="reference internal" href="#module-pymedext_core.datatransform">pymedext_core.datatransform module</a></li>
+<li><a class="reference internal" href="#module-pymedext_core.document">pymedext_core.document module</a></li>
+<li><a class="reference internal" href="#module-pymedext_core.normalize">pymedext_core.normalize module</a></li>
+<li><a class="reference internal" href="#module-pymedext_core.omopload">pymedext_core.omopload module</a></li>
+<li><a class="reference internal" href="#module-pymedext_core.omopsource">pymedext_core.omopsource module</a></li>
+<li><a class="reference internal" href="#module-pymedext_core.pymedext">pymedext_core.pymedext module</a></li>
+<li><a class="reference internal" href="#module-pymedext_core.source">pymedext_core.source module</a></li>
+<li><a class="reference internal" href="#module-pymedext_core">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pymedext_core</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>pymedext_core package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/pymedext_core.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="pymedext-core-package">
 <h1>pymedext_core package<a class="headerlink" href="#pymedext-core-package" title="Permalink to this headline">¶</a></h1>
@@ -123,7 +256,7 @@
 <span id="pymedext-core-annotators-module"></span><h2>pymedext_core.annotators module<a class="headerlink" href="#module-pymedext_core.annotators" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pymedext_core.annotators.Annotation">
-<em class="property">class </em><code class="descclassname">pymedext_core.annotators.</code><code class="descname">Annotation</code><span class="sig-paren">(</span><em>type</em>, <em>value</em>, <em>source</em>, <em>source_ID</em>, <em>span=None</em>, <em>attributes=None</em>, <em>isEntity=False</em>, <em>ID='51ca9f9c-caa0-11ea-b282-e454e863ec7d'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/annotators.html#Annotation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.annotators.Annotation" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pymedext_core.annotators.</code><code class="descname">Annotation</code><span class="sig-paren">(</span><em>type</em>, <em>value</em>, <em>source</em>, <em>source_ID</em>, <em>span=None</em>, <em>attributes=None</em>, <em>isEntity=False</em>, <em>ID='8fa22688-d0e4-11ea-864b-e454e863ec7d'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/annotators.html#Annotation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.annotators.Annotation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>Based object which contains Annotation</p>
 <dl class="method">
@@ -264,69 +397,23 @@ paramiko, should also extend Connector &#64;David?</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-pymedext_core.datasource">
-<span id="pymedext-core-datasource-module"></span><h2>pymedext_core.datasource module<a class="headerlink" href="#module-pymedext_core.datasource" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pymedext_core.datatransform">
+<span id="pymedext-core-datatransform-module"></span><h2>pymedext_core.datatransform module<a class="headerlink" href="#module-pymedext_core.datatransform" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="pymedext_core.datasource.OmopSource">
-<em class="property">class </em><code class="descclassname">pymedext_core.datasource.</code><code class="descname">OmopSource</code><span class="sig-paren">(</span><em>DB_host</em>, <em>DB_name</em>, <em>DB_port</em>, <em>DB_user</em>, <em>DB_password</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/datasource.html#OmopSource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.datasource.OmopSource" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#pymedext_core.datasource.Source" title="pymedext_core.datasource.Source"><code class="xref py py-class docutils literal"><span class="pre">pymedext_core.datasource.Source</span></code></a>, <a class="reference internal" href="#pymedext_core.connector.PostGresConnector" title="pymedext_core.connector.PostGresConnector"><code class="xref py py-class docutils literal"><span class="pre">pymedext_core.connector.PostGresConnector</span></code></a></p>
-<p>Connection to a POstgres Ommop source</p>
-<dl class="method">
-<dt id="pymedext_core.datasource.OmopSource.getLastNotenlpid">
-<code class="descname">getLastNotenlpid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/datasource.html#OmopSource.getLastNotenlpid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.datasource.OmopSource.getLastNotenlpid" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="pymedext_core.datasource.OmopSource.saveToSource">
-<code class="descname">saveToSource</code><span class="sig-paren">(</span><em>table_person</em>, <em>table_note</em>, <em>table_note_nlp</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/datasource.html#OmopSource.saveToSource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.datasource.OmopSource.saveToSource" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="pymedext_core.datasource.Source">
-<em class="property">class </em><code class="descclassname">pymedext_core.datasource.</code><code class="descname">Source</code><a class="reference internal" href="_modules/pymedext_core/datasource.html#Source"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.datasource.Source" title="Permalink to this definition">¶</a></dt>
+<dt id="pymedext_core.datatransform.DataTransform">
+<em class="property">class </em><code class="descclassname">pymedext_core.datatransform.</code><code class="descname">DataTransform</code><a class="reference internal" href="_modules/pymedext_core/datatransform.html#DataTransform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.datatransform.DataTransform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<p>Abstract Class to extend to implement a specific source connector.
-see Omop Source example</p>
 <dl class="staticmethod">
-<dt id="pymedext_core.datasource.Source.loadFromSource">
-<em class="property">static </em><code class="descname">loadFromSource</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/datasource.html#Source.loadFromSource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.datasource.Source.loadFromSource" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generic method to download Data from a source
-:returns:
-:rtype:</p>
-</dd></dl>
+<dt id="pymedext_core.datatransform.DataTransform.load">
+<em class="property">static </em><code class="descname">load</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/datatransform.html#DataTransform.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.datatransform.DataTransform.load" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="staticmethod">
-<dt id="pymedext_core.datasource.Source.saveToSource">
-<em class="property">static </em><code class="descname">saveToSource</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/datasource.html#Source.saveToSource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.datasource.Source.saveToSource" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generic method to save data to a specific source
-:returns:
-:rtype:</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="pymedext_core.datasource.StringIteratorIO">
-<em class="property">class </em><code class="descclassname">pymedext_core.datasource.</code><code class="descname">StringIteratorIO</code><span class="sig-paren">(</span><em>iter: typing.Iterator[str]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/datasource.html#StringIteratorIO"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.datasource.StringIteratorIO" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">io.TextIOBase</span></code></p>
-<dl class="method">
-<dt id="pymedext_core.datasource.StringIteratorIO.read">
-<code class="descname">read</code><span class="sig-paren">(</span><em>n: typing.Union[int</em>, <em>NoneType] = None</em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/pymedext_core/datasource.html#StringIteratorIO.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.datasource.StringIteratorIO.read" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="pymedext_core.datasource.StringIteratorIO.readable">
-<code class="descname">readable</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="_modules/pymedext_core/datasource.html#StringIteratorIO.readable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.datasource.StringIteratorIO.readable" title="Permalink to this definition">¶</a></dt>
+<dt id="pymedext_core.datatransform.DataTransform.save">
+<em class="property">static </em><code class="descname">save</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/datatransform.html#DataTransform.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.datatransform.DataTransform.save" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
-
-<dl class="function">
-<dt id="pymedext_core.datasource.clean_csv_value">
-<code class="descclassname">pymedext_core.datasource.</code><code class="descname">clean_csv_value</code><span class="sig-paren">(</span><em>value: typing.Union[typing.Any, NoneType]</em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/pymedext_core/datasource.html#clean_csv_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.datasource.clean_csv_value" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 </div>
 <div class="section" id="module-pymedext_core.document">
@@ -486,25 +573,9 @@ the processing date, the annotators used</p>
 <div class="section" id="module-pymedext_core.omopload">
 <span id="pymedext-core-omopload-module"></span><h2>pymedext_core.omopload module<a class="headerlink" href="#module-pymedext_core.omopload" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="pymedext_core.omopload.DataTransform">
-<em class="property">class </em><code class="descclassname">pymedext_core.omopload.</code><code class="descname">DataTransform</code><a class="reference internal" href="_modules/pymedext_core/omopload.html#DataTransform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.omopload.DataTransform" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<dl class="staticmethod">
-<dt id="pymedext_core.omopload.DataTransform.load">
-<em class="property">static </em><code class="descname">load</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/omopload.html#DataTransform.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.omopload.DataTransform.load" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="staticmethod">
-<dt id="pymedext_core.omopload.DataTransform.save">
-<em class="property">static </em><code class="descname">save</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/omopload.html#DataTransform.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.omopload.DataTransform.save" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
 <dt id="pymedext_core.omopload.omop">
 <em class="property">class </em><code class="descclassname">pymedext_core.omopload.</code><code class="descname">omop</code><a class="reference internal" href="_modules/pymedext_core/omopload.html#omop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.omopload.omop" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#pymedext_core.omopload.DataTransform" title="pymedext_core.omopload.DataTransform"><code class="xref py py-class docutils literal"><span class="pre">pymedext_core.omopload.DataTransform</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#pymedext_core.datatransform.DataTransform" title="pymedext_core.datatransform.DataTransform"><code class="xref py py-class docutils literal"><span class="pre">pymedext_core.datatransform.DataTransform</span></code></a></p>
 <dl class="method">
 <dt id="pymedext_core.omopload.omop.buildNoteNlP">
 <code class="descname">buildNoteNlP</code><span class="sig-paren">(</span><em>thisRoot</em>, <em>dict_note</em>, <em>note_id</em>, <em>note_nlp_id</em>, <em>nlp_workflow</em>, <em>thisTime</em>, <em>filterType</em>, <em>dataframe=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/omopload.html#omop.buildNoteNlP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.omopload.omop.buildNoteNlP" title="Permalink to this definition">¶</a></dt>
@@ -533,8 +604,76 @@ the processing date, the annotators used</p>
 </dd></dl>
 
 </div>
+<div class="section" id="module-pymedext_core.omopsource">
+<span id="pymedext-core-omopsource-module"></span><h2>pymedext_core.omopsource module<a class="headerlink" href="#module-pymedext_core.omopsource" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pymedext_core.omopsource.OmopSource">
+<em class="property">class </em><code class="descclassname">pymedext_core.omopsource.</code><code class="descname">OmopSource</code><span class="sig-paren">(</span><em>DB_host</em>, <em>DB_name</em>, <em>DB_port</em>, <em>DB_user</em>, <em>DB_password</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/omopsource.html#OmopSource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.omopsource.OmopSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pymedext_core.source.Source" title="pymedext_core.source.Source"><code class="xref py py-class docutils literal"><span class="pre">pymedext_core.source.Source</span></code></a>, <a class="reference internal" href="#pymedext_core.connector.PostGresConnector" title="pymedext_core.connector.PostGresConnector"><code class="xref py py-class docutils literal"><span class="pre">pymedext_core.connector.PostGresConnector</span></code></a></p>
+<p>Connection to a POstgres Ommop source</p>
+<dl class="method">
+<dt id="pymedext_core.omopsource.OmopSource.getLastNotenlpid">
+<code class="descname">getLastNotenlpid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/omopsource.html#OmopSource.getLastNotenlpid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.omopsource.OmopSource.getLastNotenlpid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pymedext_core.omopsource.OmopSource.saveToSource">
+<code class="descname">saveToSource</code><span class="sig-paren">(</span><em>table_person</em>, <em>table_note</em>, <em>table_note_nlp</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/omopsource.html#OmopSource.saveToSource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.omopsource.OmopSource.saveToSource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pymedext_core.omopsource.StringIteratorIO">
+<em class="property">class </em><code class="descclassname">pymedext_core.omopsource.</code><code class="descname">StringIteratorIO</code><span class="sig-paren">(</span><em>iter: typing.Iterator[str]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/omopsource.html#StringIteratorIO"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.omopsource.StringIteratorIO" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">io.TextIOBase</span></code></p>
+<dl class="method">
+<dt id="pymedext_core.omopsource.StringIteratorIO.read">
+<code class="descname">read</code><span class="sig-paren">(</span><em>n: typing.Union[int</em>, <em>NoneType] = None</em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/pymedext_core/omopsource.html#StringIteratorIO.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.omopsource.StringIteratorIO.read" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pymedext_core.omopsource.StringIteratorIO.readable">
+<code class="descname">readable</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="_modules/pymedext_core/omopsource.html#StringIteratorIO.readable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.omopsource.StringIteratorIO.readable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="pymedext_core.omopsource.clean_csv_value">
+<code class="descclassname">pymedext_core.omopsource.</code><code class="descname">clean_csv_value</code><span class="sig-paren">(</span><em>value: typing.Union[typing.Any, NoneType]</em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/pymedext_core/omopsource.html#clean_csv_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.omopsource.clean_csv_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
 <div class="section" id="module-pymedext_core.pymedext">
 <span id="pymedext-core-pymedext-module"></span><h2>pymedext_core.pymedext module<a class="headerlink" href="#module-pymedext_core.pymedext" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pymedext_core.source">
+<span id="pymedext-core-source-module"></span><h2>pymedext_core.source module<a class="headerlink" href="#module-pymedext_core.source" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pymedext_core.source.Source">
+<em class="property">class </em><code class="descclassname">pymedext_core.source.</code><code class="descname">Source</code><a class="reference internal" href="_modules/pymedext_core/source.html#Source"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.source.Source" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Abstract Class to extend to implement a specific source connector.
+see Omop Source example</p>
+<dl class="staticmethod">
+<dt id="pymedext_core.source.Source.loadFromSource">
+<em class="property">static </em><code class="descname">loadFromSource</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/source.html#Source.loadFromSource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.source.Source.loadFromSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic method to download Data from a source
+:returns:
+:rtype:</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="pymedext_core.source.Source.saveToSource">
+<em class="property">static </em><code class="descname">saveToSource</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedext_core/source.html#Source.saveToSource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedext_core.source.Source.saveToSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic method to save data to a specific source
+:returns:
+:rtype:</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="module-pymedext_core">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pymedext_core" title="Permalink to this headline">¶</a></h2>
@@ -542,46 +681,59 @@ the processing date, the annotators used</p>
 </div>
 
 
+           </div>
+           
           </div>
-          
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Antoine Neuraz, William Digan, Ivan Lerner, Alice Rogier, David Baudoin, Anita Burgun, Nicolas Garcelon, Bastien Rance
+
+    </p>
+  </div> 
+
+</footer>
+
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2020, Antoine Neuraz, William Digan, Ivan Lerner, Alice Rogier, David Baudoin, Anita Burgun, Nicolas Garcelon, Bastien Rance.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
-      |
-      <a href="_sources/pymedext_core.rst.txt"
-          rel="nofollow">Page source</a>
-    </div>
 
-    
+    </section>
 
+  </div>
+  <script>
+    var versions_json_url = ''
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        0.0.1
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
     
-  </body>
+   
+
+</body>
 </html>
