@@ -1,10 +1,4 @@
-from document import Document
-
-from doccanodocument import DoccanoDocument
-
-from doccanotransform import Doccano
-from doccanoannotator import *
-from doccanosource import *
+from pymedext_core import pymedext
 
 import os, sys, csv
 import argparse
@@ -130,7 +124,7 @@ else :
     if args.rappel :
         doccano_rappel_file_name = str(args.projectName) + "_" + timestr + "_" + doccano_rappel_file_name
 
-thisDoccanoDoc = DoccanoDocument()
+thisDoccanoDoc = pymedext.DoccanoDocument()
 
 
 #### Tirage aléatoire de N documents dans chaque classe
@@ -140,9 +134,9 @@ if typeEval == "classes" :
     if annotation == "neg" :
         while count_Neg < numbEval or count_No_Neg < numbEval :
 
-            docFromJson = Document(raw_text="load", ID=None, documentDate = None, pathToconfig=[folderName + listAnnotedDoc[counter_doc]])
-            dictToDoccano = Doccano.toDoccanoDrWH(docFromJson,type="drwh_negation", segment="drwh_syntagms")
-            listDoccanoEval = Doccano.DoccanoEvalClass(thisDoccanoDoc, dict_doccano=dictToDoccano, dictClasses=dictClasses,
+            docFromJson = pymedext.Document(raw_text="load", ID=None, documentDate = None, pathToconfig=[folderName + listAnnotedDoc[counter_doc]])
+            dictToDoccano = pymedext.Doccano.toDoccanoDrWH(docFromJson,type="drwh_negation", segment="drwh_syntagms")
+            listDoccanoEval = pymedext.Doccano.DoccanoEvalClass(thisDoccanoDoc, dict_doccano=dictToDoccano, dictClasses=dictClasses,
                                                    number_eval=numbEval, path_to_doc=folderName + listAnnotedDoc[counter_doc])
             dictClasses = listDoccanoEval[1]
 
@@ -157,9 +151,9 @@ if typeEval == "classes" :
 
     if annotation == "fam":
         while count_Neg < numbEval or count_No_Neg < numbEval:
-            docFromJson = Document(raw_text="load", ID=None, documentDate = None, pathToconfig=[folderName + listAnnotedDoc[counter_doc]])
-            dictToDoccano = Doccano.toDoccanoDrWH(docFromJson, type="drwh_family", segment="drwh_sentences")
-            listDoccanoEval = Doccano.DoccanoEvalClass(thisDoccanoDoc, dict_doccano=dictToDoccano, dictClasses=dictClasses,
+            docFromJson = pymedext.Document(raw_text="load", ID=None, documentDate = None, pathToconfig=[folderName + listAnnotedDoc[counter_doc]])
+            dictToDoccano = pymedext.Doccano.toDoccanoDrWH(docFromJson, type="drwh_family", segment="drwh_sentences")
+            listDoccanoEval = pymedext.Doccano.DoccanoEvalClass(thisDoccanoDoc, dict_doccano=dictToDoccano, dictClasses=dictClasses,
                                                    number_eval=numbEval, path_to_doc=folderName + listAnnotedDoc[counter_doc])
             dictClasses = listDoccanoEval[1]
 
@@ -173,9 +167,9 @@ if typeEval == "classes" :
 
     if annotation == "hyp":
         while count_Neg < numbEval or count_No_Neg < numbEval:
-            docFromJson = Document(raw_text="load", ID=None, documentDate = None, pathToconfig=[folderName + listAnnotedDoc[counter_doc]])
-            dictToDoccano = Doccano.toDoccanoDrWH(docFromJson, type="hypothesis", segment="drwh_sentences")
-            listDoccanoEval = Doccano.DoccanoEvalClass(thisDoccanoDoc, dict_doccano=dictToDoccano, dictClasses=dictClasses,
+            docFromJson = pymedext.Document(raw_text="load", ID=None, documentDate = None, pathToconfig=[folderName + listAnnotedDoc[counter_doc]])
+            dictToDoccano = pymedext.Doccano.toDoccanoDrWH(docFromJson, type="hypothesis", segment="drwh_sentences")
+            listDoccanoEval = pymedext.Doccano.DoccanoEvalClass(thisDoccanoDoc, dict_doccano=dictToDoccano, dictClasses=dictClasses,
                                                    number_eval=numbEval, path_to_doc=folderName + listAnnotedDoc[counter_doc])
             dictClasses = listDoccanoEval[1]
 
@@ -217,7 +211,7 @@ if typeEval == "N":
                 counter_doc = 0
 
 
-                thisDoccanoDocRappel = DoccanoDocument()
+                thisDoccanoDocRappel = pymedext.DoccanoDocument()
 
 
                 while count_already_annoted  < numbEval :
@@ -228,10 +222,10 @@ if typeEval == "N":
                             print("0 file found with " + regexp + " .")
                         break
 
-                    docFromJson = Document(raw_text="load", ID=None, documentDate = None, pathToconfig=[folderName + listAnnotedDoc[counter_doc]])
+                    docFromJson = pymedext.Document(raw_text="load", ID=None, documentDate = None, pathToconfig=[folderName + listAnnotedDoc[counter_doc]])
                     #print("file", folderName + listAnnotedDoc[counter_doc])
-                    dictToDoccano = Doccano.toDoccanoImaPrecision(docFromJson, type=dict_regexp[regexp], attribute = regexp)
-                    listDoccanoEval = Doccano.DoccanoEvalN(thisDoccanoDocRappel,dict_doccano=dictToDoccano, number_annoted=count_already_annoted, number_eval=numbEval, path_to_doc=folderName + listAnnotedDoc[counter_doc])
+                    dictToDoccano = pymedext.Doccano.toDoccanoImaPrecision(docFromJson, type=dict_regexp[regexp], attribute = regexp)
+                    listDoccanoEval = pymedext.Doccano.DoccanoEvalN(thisDoccanoDocRappel,dict_doccano=dictToDoccano, number_annoted=count_already_annoted, number_eval=numbEval, path_to_doc=folderName + listAnnotedDoc[counter_doc])
                     count_already_annoted = listDoccanoEval[1]
                     thisDoccanoDocRappel = listDoccanoEval[0]
                     counter_doc += 1
@@ -243,13 +237,13 @@ if typeEval == "N":
 
                 ### Rappel pour un set d'items
 
-                thisDoccanoDocRappel = DoccanoDocument()
+                thisDoccanoDocRappel = pymedext.DoccanoDocument()
 
                 for doc in listAnnotedDoc :
 
-                    docFromJsonRappel = Document(raw_text="load", ID=None, documentDate = None, pathToconfig=[folderName + doc])
-                    dictToDoccanoRappel = Doccano.toDoccanoImaRappel(docFromJsonRappel, dict_regexp_type=dict_regexp, value="NULL", span=[0,0])
-                    thisDoccanoRappel=Doccano.DoccanoEvalRappel(thisDoccanoDocRappel, dict_doccano=dictToDoccanoRappel, path_to_doc=folderName + doc)
+                    docFromJsonRappel = pymedext.Document(raw_text="load", ID=None, documentDate = None, pathToconfig=[folderName + doc])
+                    dictToDoccanoRappel = pymedext.Doccano.toDoccanoImaRappel(docFromJsonRappel, dict_regexp_type=dict_regexp, value="NULL", span=[0,0])
+                    thisDoccanoRappel = pymedext.Doccano.DoccanoEvalRappel(thisDoccanoDocRappel, dict_doccano=dictToDoccanoRappel, path_to_doc=folderName + doc)
 
                 thisDoccanoDocRappel.writeJsonDoccano(doccano_rappel_file_name + ".jsonl")
 
@@ -272,10 +266,10 @@ if typeEval == "N":
                     break
 
 
-                docFromJson = Document(raw_text="load", ID=None, documentDate = None, pathToconfig=[folderName + listAnnotedDoc[counter_doc]])
-                dictToDoccano = Doccano.toDoccanoImaPrecision(docFromJson, type=regexp_type,
+                docFromJson = pymedext.Document(raw_text="load", ID=None, documentDate = None, pathToconfig=[folderName + listAnnotedDoc[counter_doc]])
+                dictToDoccano = pymedext.Doccano.toDoccanoImaPrecision(docFromJson, type=regexp_type,
                                                     attribute=regexp)
-                listDoccanoEval = Doccano.DoccanoEvalN(thisDoccanoDoc, dict_doccano=dictToDoccano,
+                listDoccanoEval = pymedext.Doccano.DoccanoEvalN(thisDoccanoDoc, dict_doccano=dictToDoccano,
                                                         number_annoted=count_already_annoted, number_eval=numbEval, path_to_doc=folderName + listAnnotedDoc[counter_doc])
                 count_already_annoted = listDoccanoEval[1]
                 thisDoccanoDoc = listDoccanoEval[0]
@@ -289,11 +283,11 @@ if typeEval == "N":
     if annotation == "neg":
         while count_Neg < numbEval :
 
-            docFromJson = Document(raw_text="load", ID=None, documentDate = None, pathToconfig=[folderName + listAnnotedDoc[counter_doc]])
-            dictToDoccano = Doccano.toDoccanoDrWH(docFromJson, type="drwh_negation",
+            docFromJson = pymedext.Document(raw_text="load", ID=None, documentDate = None, pathToconfig=[folderName + listAnnotedDoc[counter_doc]])
+            dictToDoccano = pymedext.Doccano.toDoccanoDrWH(docFromJson, type="drwh_negation",
                                                 segment="drwh_syntagms")
 
-            listDoccanoEval = Doccano.DoccanoEvalN(thisDoccanoDoc, dict_doccano=dictToDoccano,
+            listDoccanoEval = pymedext.Doccano.DoccanoEvalN(thisDoccanoDoc, dict_doccano=dictToDoccano,
                                                     number_annoted=count_Neg, number_eval=numbEval, path_to_doc=folderName + listAnnotedDoc[counter_doc])
             count_Neg = listDoccanoEval[1]
             thisDoccanoDoc = listDoccanoEval[0]
@@ -303,10 +297,10 @@ if typeEval == "N":
 
     if annotation == "fam":
         while count_Neg < numbEval :
-            docFromJson = Document(raw_text="load", ID=None, documentDate = None, pathToconfig=[folderName + listAnnotedDoc[counter_doc]])
-            dictToDoccano = Doccano.toDoccanoDrWH(docFromJson, type="drwh_family",
+            docFromJson = pymedext.Document(raw_text="load", ID=None, documentDate = None, pathToconfig=[folderName + listAnnotedDoc[counter_doc]])
+            dictToDoccano = pymedext.Doccano.toDoccanoDrWH(docFromJson, type="drwh_family",
                                                 segment="drwh_sentences")
-            listDoccanoEval = Doccano.DoccanoEvalN(thisDoccanoDoc, dict_doccano=dictToDoccano,
+            listDoccanoEval = pymedext.Doccano.DoccanoEvalN(thisDoccanoDoc, dict_doccano=dictToDoccano,
                                                     number_annoted=count_Neg, number_eval=numbEval, path_to_doc=folderName + listAnnotedDoc[counter_doc])
             count_Neg = listDoccanoEval[1]
             thisDoccanoDoc = listDoccanoEval[0]
@@ -316,10 +310,10 @@ if typeEval == "N":
 
     if annotation == "hyp":
         while count_Neg < numbEval:
-            docFromJson = Document(raw_text="load", ID=None, documentDate = None, pathToconfig=[folderName + listAnnotedDoc[counter_doc]])
-            dictToDoccano = Doccano.toDoccanoDrWH(docFromJson, type="hypothesis",
+            docFromJson = pymedext.Document(raw_text="load", ID=None, documentDate = None, pathToconfig=[folderName + listAnnotedDoc[counter_doc]])
+            dictToDoccano = pymedext.Doccano.toDoccanoDrWH(docFromJson, type="hypothesis",
                                                 segment="drwh_sentences")
-            listDoccanoEval = Doccano.DoccanoEvalN(thisDoccanoDoc, dict_doccano=dictToDoccano,
+            listDoccanoEval = pymedext.Doccano.DoccanoEvalN(thisDoccanoDoc, dict_doccano=dictToDoccano,
                                                     number_annoted=count_Neg, number_eval=numbEval, path_to_doc=folderName + listAnnotedDoc[counter_doc])
             count_Neg = listDoccanoEval[1]
             thisDoccanoDoc = listDoccanoEval[0]

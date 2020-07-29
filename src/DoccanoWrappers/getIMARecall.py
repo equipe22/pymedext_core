@@ -1,11 +1,4 @@
-# from document import Document
 from pymedext_core import pymedext # contains Document and other pymed connector object
-# from doccanodocument import DoccanoDocument
-
-# from doccanotransform import Doccano
-# from doccanoannotator import *
-# from doccanosource import *
-
 
 import os, sys, csv
 import argparse
