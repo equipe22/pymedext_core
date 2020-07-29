@@ -2,7 +2,7 @@
 
 from .document import Document
 from intervaltree import Interval,IntervalTree
-from .annotationGraph import AnnotationGraph
+# from .annotationGraph import AnnotationGraph
 import logging
 logger = logging.getLogger(__name__)
 
