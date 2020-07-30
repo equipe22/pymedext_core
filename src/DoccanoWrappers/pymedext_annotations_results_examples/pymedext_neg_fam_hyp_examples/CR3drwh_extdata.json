@@ -1,0 +1,64 @@
+{
+    "annotations": [
+        {
+            "type": "raw_text",
+            "value": "empty",
+            "span": [
+                0,
+                5
+            ],
+            "source": null,
+            "source_ID": "CR3drwh",
+            "isEntity": false,
+            "attributes": null,
+            "id": "68910938-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_cleantext",
+            "value": "8 Mars 2019. NIP : 3333333333. Cher collègue,. Le patient présente un diabète de type II.. Le scaneur a montré une tumeur bénigne de la peau ainsi qu'une vascularite de Churg et Strauss.. Résultats anormaux non précisés de radiologie et d'autres examens de l'appareil musculo-squelettique vitiligo ordinaire. Testostérone sérique anormale. Anomalies congénitales graves. Leucémie à LGL-Natural Killer. Son père a le SIDA. Son neveux a eu un cancer de la prostate. Sa mère est ashmatique. Il aurait pris trop d'efferalgants.. Il sera suivi pour troubles post-traumatiques.. . ",
+            "span": [
+                0,
+                575
+            ],
+            "source": "DRWH_CleanTxt.v1",
+            "source_ID": "68910938-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6891093a-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "extracted_data",
+            "value": "cancer",
+            "span": [
+                455,
+                461
+            ],
+            "source": "Extract_Data.v1",
+            "source_ID": "6891093a-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": true,
+            "attributes": {
+                "context": "a le SIDA. Son neveux a eu un cancer de la prostate. Sa mère est ",
+                "concepts": "Cancer"
+            },
+            "id": "6891093b-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "extracted_data",
+            "value": " SIDA.",
+            "span": [
+                429,
+                435
+            ],
+            "source": "Extract_Data.v1",
+            "source_ID": "6891093a-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": true,
+            "attributes": {
+                "context": "Natural Killer. Son père a le SIDA. Son neveux a eu un cancer de ",
+                "concepts": "VIH - SIDA - Séropositif"
+            },
+            "id": "6891093c-80a3-11ea-a7f6-180f76073bf2"
+        }
+    ],
+    "ID": "68910939-80a3-11ea-a7f6-180f76073bf2",
+    "source_ID": "CR3drwh"
+}

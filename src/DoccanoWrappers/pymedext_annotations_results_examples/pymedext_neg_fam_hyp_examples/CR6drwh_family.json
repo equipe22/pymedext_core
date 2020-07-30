@@ -1,0 +1,149 @@
+{
+    "annotations": [
+        {
+            "type": "raw_text",
+            "value": "empty",
+            "span": [
+                0,
+                5
+            ],
+            "source": null,
+            "source_ID": "CR6drwh",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6d715b7e-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": "Il n'a pas le covid",
+            "span": [
+                0,
+                19
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "6d715b7e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6d715b80-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Il a en revance des vomissements liés à problème à l'oreille/",
+            "span": [
+                21,
+                87
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "6d715b7e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6d715b81-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " IL sera sous antileptiques dès demain",
+            "span": [
+                88,
+                127
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "6d715b7e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6d715b82-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Possible vascularite",
+            "span": [
+                129,
+                150
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "6d715b7e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6d715b83-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_sentences",
+            "value": " Son neveux a un lupus",
+            "span": [
+                152,
+                174
+            ],
+            "source": "DRWH_sentence.v1",
+            "source_ID": "6d715b7e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6d715b84-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_family",
+            "value": "patient",
+            "span": [
+                0,
+                19
+            ],
+            "source": "DRWH_family.v1",
+            "source_ID": "6d715b80-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6d715b85-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_family",
+            "value": "patient",
+            "span": [
+                21,
+                87
+            ],
+            "source": "DRWH_family.v1",
+            "source_ID": "6d715b81-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6d715b86-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_family",
+            "value": "patient",
+            "span": [
+                88,
+                127
+            ],
+            "source": "DRWH_family.v1",
+            "source_ID": "6d715b82-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6d715b87-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_family",
+            "value": "patient",
+            "span": [
+                129,
+                150
+            ],
+            "source": "DRWH_family.v1",
+            "source_ID": "6d715b83-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6d715b88-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_family",
+            "value": "famille",
+            "span": [
+                152,
+                174
+            ],
+            "source": "DRWH_family.v1",
+            "source_ID": "6d715b84-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6d715b89-80a3-11ea-a7f6-180f76073bf2"
+        }
+    ],
+    "ID": "6d715b7f-80a3-11ea-a7f6-180f76073bf2",
+    "source_ID": "CR6drwh"
+}

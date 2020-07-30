@@ -1,0 +1,383 @@
+{
+    "annotations": [
+        {
+            "type": "raw_text",
+            "value": "empty",
+            "span": [
+                0,
+                5
+            ],
+            "source": null,
+            "source_ID": "CR3drwh",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce2316-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": "8 Mars 2019",
+            "span": [
+                0,
+                11
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "6fce2316-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce2318-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " NIP : 3333333333",
+            "span": [
+                12,
+                29
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "6fce2316-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce2319-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Cher collègue,",
+            "span": [
+                30,
+                46
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "6fce2316-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce231a-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Le patient présente un diabète de type II",
+            "span": [
+                47,
+                91
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "6fce2316-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce231b-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Le scaneur a montré une tumeur bénigne de la peau ainsi qu'une vascularite de Churg et Strauss",
+            "span": [
+                93,
+                190
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "6fce2316-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce231c-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Résultats anormaux non précisés de radiologie et d'autres examens de l'appareil musculo-squelettique vitiligo ordinaire",
+            "span": [
+                192,
+                315
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "6fce2316-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce231d-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Testostérone sérique anormale",
+            "span": [
+                316,
+                348
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "6fce2316-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce231e-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Anomalies congénitales graves",
+            "span": [
+                349,
+                380
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "6fce2316-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce231f-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Leucémie à LGL-Natural Killer",
+            "span": [
+                381,
+                413
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "6fce2316-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce2320-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Son père a le SIDA",
+            "span": [
+                414,
+                434
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "6fce2316-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce2321-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Son neveux a eu un cancer de la prostate",
+            "span": [
+                435,
+                476
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "6fce2316-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce2322-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Sa mère est ashmatique",
+            "span": [
+                477,
+                501
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "6fce2316-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce2323-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Il aurait pris trop d'efferalgants",
+            "span": [
+                502,
+                537
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "6fce2316-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce2324-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_syntagms",
+            "value": " Il sera suivi pour troubles post-traumatiques",
+            "span": [
+                539,
+                585
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "6fce2316-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce2325-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                0,
+                11
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "6fce2318-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce2326-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                12,
+                29
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "6fce2319-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce2327-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                30,
+                46
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "6fce231a-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce2328-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                47,
+                91
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "6fce231b-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce2329-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                93,
+                190
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "6fce231c-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce232a-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                192,
+                315
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "6fce231d-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce232b-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                316,
+                348
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "6fce231e-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce232c-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                349,
+                380
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "6fce231f-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce232d-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                381,
+                413
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "6fce2320-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce232e-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                414,
+                434
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "6fce2321-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce232f-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                435,
+                476
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "6fce2322-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce2330-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                477,
+                501
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "6fce2323-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce2331-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                502,
+                537
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "6fce2324-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce2332-80a3-11ea-a7f6-180f76073bf2"
+        },
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                539,
+                585
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "6fce2325-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "6fce2333-80a3-11ea-a7f6-180f76073bf2"
+        }
+    ],
+    "ID": "6fce2317-80a3-11ea-a7f6-180f76073bf2",
+    "source_ID": "CR3drwh"
+}

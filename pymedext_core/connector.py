@@ -3,6 +3,18 @@
 import logging
 import psycopg2
 
+###
+import os
+import requests
+from urllib.parse import urljoin
+import random
+import re
+proxies = {
+  "http": None,
+  "https": None,
+}
+###
+
 logger = logging.getLogger(__name__)
 
 
@@ -41,11 +53,115 @@ class DatabaseConnector:
         pass
 
 
-class APIConnector:
+#### Alice
+#### Pour les API copy de la classe Router dont hérite la classe DoccanoClient dans doccanp_api_client
+#### Cette classe définit les méthodes post et get
+#### À voir si ce sera commun à toutes les API...
+# ------------------------------------------------------------------------
+# ROUTER
+# ------------------------------------------------------------------------
+class _Router:
+    """
+    Provides generic `get` and `post` methods. Implemented by DoccanoClient.
+    """
+
+    def get(
+            self,
+            endpoint: str,
+    ) -> requests.models.Response:
+        """
+        Args:
+            endpoint (str): An API endpoint to query.
+
+        Returns:
+            requests.models.Response: The request response.
+        """
+        request_url = urljoin(self.baseurl, endpoint)
+        return self.session.get(request_url)
+
+    def post(
+            self,
+            endpoint: str,
+            data: dict = {},
+            files: dict = {},
+    ) -> requests.models.Response:
+        """
+        """
+        request_url = urljoin(self.baseurl, endpoint)
+        return self.session.post(request_url, data=data, files=files)
+
+    def build_url_parameter(
+            self,
+            url_parameter: dict
+    ) -> str:
+        """
+        Format url_parameters.
+
+        Args:
+            url_parameter (dict): Every value must be a list.
+
+        Returns:
+            A URL parameter string. Ex: `?key1=u1&key1=u2&key2=v1&...`
+        """
+        return ''.join(['?', '&'.join(
+            ['&'.join(['='.join([tup[0], str(value)]) for value in tup[1]]) for tup in url_parameter.items()])])
+
+
+# ------------------------------------------------------------------------
+# CLIENT
+# ------------------------------------------------------------------------
+
+class APIConnector(_Router):
     """ Abstact connector to an API
     TODO : discuss with @Alice how to implement it for Doccano
+
+    Pour l'instant copy de la classe DoccanoClient dans doccano_api_client.py :
+
+    TODO: investigate alternatives to plaintext login
+
+    Args:
+        baseurl (str): The baseurl of a Doccano instance.
+        username (str): The Doccano username to use for the client session.
+        password (str): The respective username's password.
+
+    Returns:
+        An authorized client instance.
     """
-    pass
+    def __init__(self, baseurl: str, username: str, password: str):
+        self.baseurl = baseurl if baseurl[-1] == '/' else baseurl+'/'
+        self.session = requests.Session()
+        self._login(username, password)
+
+    def _login(
+        self,
+        username: str,
+        password: str
+    ) -> requests.models.Response:
+        """
+        Authorizes the DoccanoClient instance.
+
+        Args:
+
+
+        Returns:
+            requests.models.Response: The authorization request response.
+        """
+        url = 'v1/auth-token'
+        auth = {'username': username, 'password': password}
+        response = self.post(url, auth)
+        print(response)
+        token = response.json()['token']
+        self.session.headers.update(
+            {
+                'Authorization': 'Token {token}'.format(token=token),
+                'Accept': 'application/json'
+            }
+        )
+        return response
+
+
+#####
+#### Alice
 
 class cxORacleConnector(DatabaseConnector):
     """ Abstact connector to an Oracle database using cxOracle
