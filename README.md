@@ -46,4 +46,21 @@ uninstall                      uninstall local pymedext packages
 - implement Fhir wrangling by extending datatransform
 - implment Fhir source by extending source
 
-demo 
+demo
+
+# BIOC
+
+input data from article:
+https://www.ncbi.nlm.nih.gov/research/bionlp/APIs/BioC-PMC/
+
+example of file in json:
+ https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_json/17299597/unicode 
+ 
+ 
+ http://bioc.sourceforge.net/
+ 
+ 
+ https://pypi.org/project/bioc/
+ 
+ 
+https://www.ncbi.nlm.nih.gov/research/pubtator/api.html
