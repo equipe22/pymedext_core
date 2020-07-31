@@ -15,7 +15,7 @@ class Annotation:
     Based object which contains Annotation
     """
     
-    def __init__(self, type, value, source, source_ID, span = None, attributes = None, isEntity=False, ID = None):
+    def __init__(self, type, value, source, source_ID, span = None, attributes = None, isEntity=False, ID = None, ngram = None):
         """Intialize an Annotation object
 
         :param type: annotation type define by the user (linked to the Annotator)
@@ -42,7 +42,7 @@ class Annotation:
             self.ID = ID
         self.isEntity = isEntity
         #add graph properties
-        self.ngram = None # should be called raw_value?
+        self.ngram = ngram # should be called raw_value?
         self.parent = None
         self.children = None
         self.root = None
@@ -63,13 +63,14 @@ class Annotation:
 
         """
         return {'type':self.type,
-               'value':self.value,
-               'span':self.span,
-               'source':self.source,
-               'source_ID': self.source_ID,
-               'isEntity': self.isEntity,
-               'attributes': self.attributes,
-               'id':self.ID}
+                'value':self.value,
+                'ngram':self.ngram,
+                'span':self.span,
+                'source':self.source,
+                'source_ID': self.source_ID,
+                'isEntity': self.isEntity,
+                'attributes': self.attributes,
+                'id':self.ID}
 
     def getAttributes(self):
         """get Attributes from current and parents Node
@@ -87,7 +88,16 @@ class Annotation:
         :rtype: string
 
         """
-        return(self.root.value[self.span[0]:self.span[1]])
+        return(self.ngram)
+
+     def setNgram(self):
+        """get nGram from root
+
+        :returns: raw ngram
+        :rtype: string
+
+        """
+        self.ngram = self.root.value[self.span[0]:self.span[1]]
 
     def getSpan(self):
         """return current Annotation span
