@@ -63,7 +63,7 @@ class BioC(DataTransform):
             collection = bioc.load(fp)
         return(collection)
 
-     def __load_collection_json(bioc_json):
+    def __load_collection_json(bioc_json):
         with open(bioc_json, 'r') as fp:
             collection = bioc.biocjson.load(fp)
         return(collection)
