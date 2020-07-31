@@ -38,8 +38,6 @@ class Document:
             self.annotations=[]
             for thisPath in pathToconfig:
                 self.loadFromData(thisPath)
-                
-    
 
     def loadFromData(self, pathToconfig):
          """Transform json Pymedext to Document
@@ -136,7 +134,7 @@ class Document:
         with open(pathToOutput, 'w', encoding='utf-8') as f:
             json.dump(self.to_dict(), f, ensure_ascii=False, indent=4)
 
-     def get_annotations(self, _type, source_id=None, target_id=None, attributes=None, value=None, span=None):
+    def get_annotations(self, _type, source_id=None, target_id=None, attributes=None, value=None, span=None):
         """
         returns an annotations of a specific type from source. Can  filter from
         type, source_id or target_id, span, source_id, attributes and value.
