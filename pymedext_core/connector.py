@@ -62,6 +62,8 @@ class DatabaseConnector:
 # ------------------------------------------------------------------------
 class _Router:
     """
+    Largely inspired of https://github.com/doccano/doccano-client.git work
+
     Provides generic `get` and `post` methods. Implemented by DoccanoClient.
     """
 
@@ -112,8 +114,8 @@ class _Router:
 # ------------------------------------------------------------------------
 
 class APIConnector(_Router):
-    """ Abstact connector to an API
-    TODO : discuss with @Alice how to implement it for Doccano
+    """
+    Largely inspired of https://github.com/doccano/doccano-client.git work
 
     Pour l'instant copy de la classe DoccanoClient dans doccano_api_client.py :
 
