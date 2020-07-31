@@ -10,7 +10,7 @@ class BioC(DataTransform):
     def load_collection(bioc_input,format =0):
         #Generalize load and add as an argument type 0 default is an xml, 1 a json bioc collection
         collection = None
-        if format = 0:
+        if format == 0:
             collection = BioC.__load_collection_xml(bioc_input)
         else :
             collection = BioC.__load_collection_json(bioc_input)
