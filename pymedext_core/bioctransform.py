@@ -7,10 +7,13 @@ from .annotators import Annotation
 import uuid
 
 class BioC(DataTransform):
-    def load_collection(bioc_xml):
+    def load_collection(bioc_input,format =0):
         #Generalize load and add as an argument type 0 default is an xml, 1 a json bioc collection
-        with open(bioc_xml, 'r') as fp:
-            collection = bioc.load(fp)
+        collection = None
+        if format = 0:
+            collection = BioC.__load_collection_xml(bioc_input)
+        else :
+            collection = BioC.__load_collection_json(bioc_input)
         annotations_list=[]
         raw_text = ""
         raw_text_ID=str(uuid.uuid1())
@@ -54,3 +57,13 @@ class BioC(DataTransform):
         # collection.infons
         thisDocument.annotations.extend(annotations_list)
         return(thisDocument)
+
+    def __load_collection_xml(bioc_xml):
+        with open(bioc_xml, 'r') as fp:
+            collection = bioc.load(fp)
+        return(collection)
+
+     def __load_collection_json(bioc_json):
+        with open(bioc_json, 'r') as fp:
+            collection = bioc.biocjson.load(fp)
+        return(collection)
