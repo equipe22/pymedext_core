@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import bioc
+from bioc import biocjson
 from .datatransform import DataTransform
 from .document import Document
 from .annotators import Annotation
@@ -65,5 +66,5 @@ class BioC(DataTransform):
 
     def __load_collection_json(bioc_json):
         with open(bioc_json, 'r') as fp:
-            collection = bioc.biocjson.load(fp)
+            collection = biocjson.load(fp)
         return(collection)
