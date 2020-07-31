@@ -6,7 +6,7 @@ from .document import Document
 from .annotators import Annotation
 import uuid
 
-class Bioc(DataTransform):
+class BioC(DataTransform):
     def load_collection(bioc_xml):
         #Generalize load and add as an argument type 0 default is an xml, 1 a json bioc collection
         with open(bioc_xml, 'r') as fp:
