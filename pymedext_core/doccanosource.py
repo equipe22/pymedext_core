@@ -4,41 +4,39 @@ from .connector import *
 class DoccanoSource(Source,APIConnector):
     """
     Connection to DoccanoClient
+
+    This code is largely inspired of https://github.com/doccano/doccano-client.git work
+
     """
 
     def __init__(self, baseurl, username, password):
-        """
+        """Initialize a Doccano Client
 
-        :param baseurl:
-        :param username:
-        :param password:
+        :param baseurl: the entrypoinr of the url
+        :param username: a username
+        :param password: a password
         """
         super().__init__(baseurl, username, password)
 
     def get_me(self) -> requests.models.Response:
+        """Gets this account information.
+        :return: requests.models.Response: The request response.
         """
-        Gets this account information.
 
-        Returns:
-            requests.models.Response: The request response.
-        """
         return self.get('v1/me')
 
     def get_features(self) -> requests.models.Response:
-        """
-        Gets features.
+        """Gets features.
 
-        Returns:
-            requests.models.Response: The request response.
+        :return: requests.models.Response: The request response.
         """
+
         return self.get('v1/features')
 
     def get_project_list(self) -> requests.models.Response:
-        """
-        Gets projects list.
+        """Gets projects list.
 
-        Returns:
-            requests.models.Response: The request response.
+        :return:requests.models.Response: The request response.
         """
         return self.get('v1/projects')
 
@@ -46,7 +44,7 @@ class DoccanoSource(Source,APIConnector):
         """
         Gets user list.
 
-        Returns:
+        :return:
             requests.models.Response: The request response.
         """
         return self.get('v1/users')
@@ -55,7 +53,7 @@ class DoccanoSource(Source,APIConnector):
         """
         Gets available Doccano user roles.
 
-        Returns:
+        :return:
             requests.models.Response: The request response.
         """
         return self.get('v1/roles')
@@ -70,7 +68,7 @@ class DoccanoSource(Source,APIConnector):
         Args:
             project_id (int): A project ID to query.
 
-        Returns:
+        :return:
             requests.models.Response: The request response.
         """
         return self.get(
@@ -89,7 +87,7 @@ class DoccanoSource(Source,APIConnector):
         Args:
             project_id (int): A project ID to query.
 
-        Returns:
+        :return:
             requests.models.Response: The request response.
         """
         return self.get(
@@ -108,7 +106,7 @@ class DoccanoSource(Source,APIConnector):
         Args:
             project_id (int): A project ID to query.
 
-        Returns:
+        :return:
             requests.models.Response: The request response.
         """
         return self.get(
@@ -129,7 +127,7 @@ class DoccanoSource(Source,APIConnector):
             project_id (int): A project ID to query.
             label_id (int): A label ID to query.
 
-        Returns:
+        :return:
             requests.models.Response: The request response.
         """
         return self.get(
@@ -151,7 +149,7 @@ class DoccanoSource(Source,APIConnector):
             project_id (int):
             url_parameters (dict): `limit` and `offset`
 
-        Returns:
+        :return:
             requests.models.Response: The request response.
         """
         return self.get(
@@ -173,7 +171,7 @@ class DoccanoSource(Source,APIConnector):
             project_id (int): A project ID to query.
             doc_id (int): A document ID to query.
 
-        Returns:
+        :return:
             requests.models.Response: The request response.
         """
         return self.get(
@@ -195,7 +193,7 @@ class DoccanoSource(Source,APIConnector):
             project_id (int): A project ID to query.
             doc_id (int): A document ID to query.
 
-        Returns:
+        :return:
             requests.models.Response: The request response.
         """
         return self.get(
@@ -278,7 +276,7 @@ class DoccanoSource(Source,APIConnector):
             file_name (str): The name of the file.
             file_path (str): The parent path of the file. Defaults to `./`.
 
-        Returns:
+        :return:
             requests.models.Response: The request response.
         """
         files = {
@@ -344,9 +342,7 @@ class DoccanoSource(Source,APIConnector):
         )
 
 
-###########################################
-###########################################
-########################################### Méthodes construites
+### Other mehods :
 
     def create_project(self,
                        name: str,
@@ -354,10 +350,10 @@ class DoccanoSource(Source,APIConnector):
                        project_type: str,
                        guidelines: str) -> requests.models.Response:
         """
-        Créee un projet
-        :param name:
-        :param description:
-        :param project_type:
+        Creats a project
+        :param name: name of the project
+        :param description: description of the project
+        :param project_type: type of project ("SequenceLabeling", "DocumentClassification" or "Seq2seq"
         :return:
         """
         mapping = {'SequenceLabeling': 'SequenceLabelingProject',
@@ -382,10 +378,10 @@ class DoccanoSource(Source,APIConnector):
                      prefix : str,
                      suffix : str) -> requests.models.Response:
         """
-        Créé un label
-        :param self:
-        :param project_id:
-        :param label_name:
+        Adds a label to an existing project
+        :param self: DoccanoClient
+        :param project_id: the project id
+        :param label_name: the text of the label
         :return:
         """
 
@@ -432,6 +428,14 @@ class DoccanoSource(Source,APIConnector):
             rolename: str
     ) -> requests.models.Response:
         """
+        Set users roles
+        :param self: DoccanoClient
+        :param project_id:
+        :param user_id:
+        :param role_id:
+        :param username:
+        :param rolename:
+        :return: requests.models.Response: The request response.
         """
 
         data = {
@@ -454,6 +458,12 @@ class DoccanoSource(Source,APIConnector):
     def get_user_id(self,
                     username: str
                     ) :
+        """
+        Get the user id with the username
+        :param self:
+        :param username:
+        :return: the userid
+        """
         user_list = self.get_user_list().json()
 
         i=0
@@ -472,6 +482,12 @@ class DoccanoSource(Source,APIConnector):
     def get_project_id(self,
                        project_name :str
                        ):
+        """
+        Get the project id with the project name
+        :param self:
+        :param project_name:
+        :return: the project id
+        """
         project_list = self.get_project_list().json()
 
         i=0
@@ -492,6 +508,12 @@ class DoccanoSource(Source,APIConnector):
                      project_id: int,
                      label_name: str
                      ):
+        """
+        Get the label id with the label name
+        :param project_id: id of the project
+        :param label_name: text of the label
+        :return: id of the label
+        """
 
         labels_list = self.get_label_list(project_id).json()
         i=0
@@ -511,6 +533,12 @@ class DoccanoSource(Source,APIConnector):
                         regex : str,
                         date : str,
                         time : str):
+        """Finds project id with a item (specific to scanner-covid project). If item is not enough to find the project id, date and time can be used.
+        :param regex: item of interest
+        :param date: date of the project
+        :param time: time of the project
+        :return: a project id
+        """
         list_of_matches = []
         list_project_names = [dict_project['name'] for dict_project in self.get_project_list().json()]
         for name in list_project_names :
