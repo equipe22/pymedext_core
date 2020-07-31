@@ -13,6 +13,13 @@ from .datatransform import DataTransform
 
 
 class Doccano(DataTransform):
+    """
+    This class defines a set of transformation methods to build a DoccanoDocument with several pymedext Document objects.
+    A doccanoDocument contains N doccanoAnnotations, that the user want to evaluate in Doccano interface.
+
+    Here the transoformation methods are specific to scanner report extractions, and DrWH negation, hypothesis and family context detections.
+    Other transformation methods could be defined according to what the user want to evaluate.
+    """
 
     # def load(DoccanoDocument):
     #     return Document
@@ -46,11 +53,40 @@ class Doccano(DataTransform):
 
 
     def toDoccanoImaPrecision(Document, type, attribute=None):
-        """
+        """Specific method for scanner extractor evaluation
+        Selects the value extracted of the desired item in the pymedext Document.
+        Returns a dict with the context as key, and the value extracted as value.
 
-        :param type:
-        :param attribute:
-        :return:
+        Ex : Extract of a pymedextDocument  :
+        "
+        ...
+
+        {
+            "type": "motif",
+            "value": "non évocateur",
+            "span": [
+                2026,
+                2039
+            ],
+            "source": "annotator_section_img",
+            "source_ID": "eae2fd1e-8096-11ea-9260-e470b8d2ff7c",
+            "isEntity": false,
+            "attributes": "ISCOVID",
+            "id": "eae2fd1c-8096-11ea-b180-e470b8d2ff7c"
+        }
+        ...
+        "
+
+        An extract of pymedextDocument.toDoccanoImaPrecision(type="motif", attribute="ISCOVID") return will be :
+
+        {...,<raw_text[2026,2039]> : "non évocateur",...}
+
+        where raw_text[2026,2039] is the context of the extraction, a short extract of the report text around the extraction.
+
+        :param type: the type of the item ("rubrique" or "motif")
+        :param attribute: item of interest (ex : "ISCOVID")
+        :return: a dict with litteral context as key and value extracted as value
+        :rtype: dict
         """
 
         ## Les regexp sont dans attributes
@@ -80,11 +116,13 @@ class Doccano(DataTransform):
 
 
     def toDoccanoImaRappel(Document, dict_regexp_type, value, span):
-        """
+        """Specific method for scanner extractor evaluation
+        Founds the absent item in a pymedext Document.
 
-        :param dict_regexp_type:
-        :param value:
-        :return:
+        :param dict_regexp_type: a dict of with the item as key (ex: "ISCOVID") and their type as value ("motif" or "rubrique")
+        :param value: "Null"
+        :return: A dict with the report text as key and a list of absent item as value
+        :rtype: dict
         """
 
         doccano_dict = {}
@@ -104,6 +142,13 @@ class Doccano(DataTransform):
         return doccano_dict
 
     def toDoccanoPb(Document, path_to_doc, regexp):
+        """Specific method for scanner extractor evaluation
+        A specific format to display documents that were annoted with label "problem" in Doccano
+
+        :param path_to_doc: the path to the doc that was annoted with problem label in Doccano
+        :param regexp: the item of interest
+        :return: a dict with the text report as key and the regex as value
+        """
 
         doccano_dict_pb = {}
         path_to_doc = os.path.abspath(path_to_doc)
@@ -116,6 +161,52 @@ class Doccano(DataTransform):
 
 
     def toDoccanoDrWH(Document, type, segment):
+        """Specific method for DrWH evaluation
+        Selects the drwh annotation and their value and creat a dict with syntagm/sentence as key and class value of the syntagm/sentence as value.
+
+        Ex : Extract of a pymedextDocument
+
+        "
+        ...
+        {
+            "type": "drwh_syntagms",
+            "value": " Le patient présente un diabète de type II",
+            "span": [
+                47,
+                91
+            ],
+            "source": "DRWH_syntagms.v1",
+            "source_ID": "74633e84-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "74633e89-80a3-11ea-a7f6-180f76073bf2"
+        }
+        ...
+
+        {
+            "type": "drwh_negation",
+            "value": "non negatif",
+            "span": [
+                47,
+                91
+            ],
+            "source": "DRWH_negation.v1",
+            "source_ID": "74633e89-80a3-11ea-a7f6-180f76073bf2",
+            "isEntity": false,
+            "attributes": null,
+            "id": "74633e95-80a3-11ea-a7f6-180f76073bf2"
+        }
+        ...
+
+        An extract of pymedextDocument.toDoccanoDrWH(type=dwh_negation, segment=dwh_syntagm) return will be:
+
+        {...,"Le patient présente un diabète de type II"="non negatif"...,}
+
+        :param type: dwh type of class ("dwh_negation" or "dwh_hypothesis" or "dwh_family")
+        :param segment: syntagm or sentence ("dwh_sentence" or "dwh_syntagm")
+        :return: a dict with syntagm or sentence as key and class as value
+        :rtype: dict
+        """
 
         objects_list = Document.get_annotations(_type=type)
         dict_source_ID = {}
@@ -137,9 +228,10 @@ class Doccano(DataTransform):
 
 
     def docForDoccano(dict_doccano):
-        """
-        Creats a DoccanoDoc object with dict in input
-        :return: Doccano Object
+        """Creats a DoccanoDoc object with dict in input
+
+        :return: DoccanoDocument object
+        :rtype : DoccanoDocument
         """
         thisDoccanoDoc = DoccanoDocument
         thisDoccanoDoc.annotationsDoccano = []
@@ -153,9 +245,12 @@ class Doccano(DataTransform):
 
 
     def DoccanoEvalRappel(DoccanoDocument, dict_doccano, path_to_doc):
-        """
-        Creats a DoccanoDoc object with dict in input
-        :return: Doccano Object
+        """Adds DoccanoAnnotation objects to a DoccanoDocument object, with a dict created with toDoccanoImaRappel
+
+        :param dict_doccano: a dict created with toDoccanoImaRappel method
+        :param path_to_doc: the path of the pymedext doc that was used to create dict_doccano
+        :return: DoccanoDocument object
+        :rtype: DoccanoDocument
         """
 
         path_to_doc = os.path.abspath(path_to_doc)
@@ -171,12 +266,13 @@ class Doccano(DataTransform):
 
     def DoccanoEvalN(DoccanoDocument, dict_doccano, number_annoted, number_eval, path_to_doc):
         """
-        Adds doccano annotations to DoccaDocument until a specified number of evaluations.
-        :param dict_doccano:A doccano dict that will be filled until it reachs the desired number of annotations.
-        {"text": "Great price.", "labels": ["positive"], "meta": {"wikiPageID": 3}}
+        Adds DoccanoAnnotation objects to DoccaDocument until a specified number of evaluations.
+
+        :param dict_doccano: A doccano dict that will be filled until it reachs the desired number of annotations.
         :param number_annoted: the number of evaluations desired.
         :param number_eval: the current number of annotation.
-        :return:
+        :return: A list with the modified DoccanoDocument object, and the number of annotations
+        :rtype: list
         """
 
         for text in dict_doccano:
@@ -190,12 +286,13 @@ class Doccano(DataTransform):
         return [DoccanoDocument, number_annoted]
 
     def DoccanoEvalClass(DoccanoDocument, dict_doccano, dictClasses, number_eval, path_to_doc):
-        """
-        Adds doccano annotations to DoccanoDocument object until a specified number of evaluations for both classes.
+        """Adds doccano annotations to DoccanoDocument object until a specified number of evaluations for both classes.
+
         :param dict_doccano: A doccano dict that will be filled until the two classes reach the desired number of annotations
         :param dictClasses: A dict of doccano classes (ex : negatif vs non negatif) with their current occurences.
         :param number_eval: the number of evaluations desired
         :return: A list with the modified Doccano Object, and a dict of annotations classes, with their number
+        :rtype: list
         """
 
         for text in dict_doccano:
