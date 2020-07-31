@@ -6,7 +6,12 @@ import time
 import random
 
 """
+Wrapper that can :
+-create DoccanoDocument files for evaluate scanner-covid item extractor precision, ready to be sent to Doccano
+-create DoccanoDocument files for evaluate scanner-covid item extractor recall, ready to be sent to Doccano
+-create DoccanoDocument files for evaluate DrWH annotations, ready to be sent to Doccano
 
+Depending of the option parameters. See README for more details.
 """
 
 

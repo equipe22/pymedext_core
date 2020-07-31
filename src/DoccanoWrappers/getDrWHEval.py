@@ -5,9 +5,11 @@ import argparse
 import time
 import random
 
-"""
 
 """
+Wrapper that creats DoccanoDocument files for evaluate DrWH annotations, ready to be sent to Doccano
+"""
+
 
 
 def list_files(directory, extension):
