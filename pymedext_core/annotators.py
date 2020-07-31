@@ -90,11 +90,11 @@ class Annotation:
         """
         return(self.ngram)
 
-     def setNgram(self):
-        """get nGram from root
+    def setNgram(self):
+        """set nGram from root
 
-        :returns: raw ngram
-        :rtype: string
+        :returns: None
+        :rtype: None
 
         """
         self.ngram = self.root.value[self.span[0]:self.span[1]]
