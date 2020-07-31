@@ -23,6 +23,7 @@ class Document:
         self.source_ID = ID
         self.documentDate = documentDate
         self.attributes = attributes
+        self.source = source
         
         if raw_text != "load":
             self.annotations = [Annotation(type="raw_text",
