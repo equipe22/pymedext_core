@@ -47,6 +47,16 @@ uninstall                      uninstall local pymedext packages
 - implment Fhir source by extending source
 
 demo
+# Example
+- text to pymedext
+- bioc to pymedext
+- fhir to pymedext
+- brat to pymedext
+- pymedext to omop
+- fhir to omop
+- fhir to bioc
+- brat to omop
+- pymedext to doccano
 
 # BIOC
 
@@ -64,3 +74,24 @@ example of file in json:
  
  
 https://www.ncbi.nlm.nih.gov/research/pubtator/api.html
+
+
+
+# FHIR
+
+
+https://github.com/smart-on-fhir/client-py
+
+
+https://github.com/smart-on-fhir/sample-patients
+
+
+https://docs.smarthealthit.org/client-py/
+
+
+https://github.com/smart-on-fhir/fhir-parser
+
+
+https://github.com/smart-on-fhir/client-py/blob/master/fhirclient/models/documentmanifest.py
+
+---
