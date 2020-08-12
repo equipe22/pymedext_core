@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 import base64
 import xml.etree.ElementTree as ET
-tree = ET.parse('patient-2169591.fhir-bundle.xml')
+# tree = ET.parse('patient-2169591.fhir-bundle.xml')
+tree = ET.parse('patient-99912345.fhir-bundle.xml')
 root = tree.getroot()
 
 for entry in root:
