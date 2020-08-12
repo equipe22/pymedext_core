@@ -42,7 +42,11 @@ def export(thisDoc,output,otype,rawFileName):
   
 def main(itype, otype, output , inp):
     """Simple program that greets NAME for a total of COUNT times."""
-    click.echo("go in main function")
+    click.echo("go in main function %s!" % inp)
+    click.echo("go in main function %s!" % itype)
+    click.echo("go in main function %s!" % otype)
+    click.echo("go in main function %s!" % output)
+
     print(inp)
     print(itype)
     print(output)
