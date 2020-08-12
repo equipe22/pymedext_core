@@ -26,7 +26,7 @@ setup(name='pymedext_core',
       zip_safe=False,
       entry_points={
             'console_scripts': [
-                'pymedext = pymedext_core:pymedext_cmdline:main'
+                'pymedext=pymedext_core.pymedext_cmdline:main'
             ]
         },
 
