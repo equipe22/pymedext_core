@@ -24,26 +24,26 @@ from pymedext_core import pymedext
 #     for x in range(count):
 #         click.echo('main %s!' % name)
 
-def loadFile(inputfile,rawFileName):
-     if itype=="txt":
+def loadFile(inputfile,rawFileName,itype):
+    if itype=="txt":
         thisFile=open(inputfile,"r").read()
-        thisDoc=Document(raw_text=thisFile, ID=rawFileName)
+        thisDoc=pymedext.Document(raw_text=thisFile, ID=rawFileName)
         return(thisDoc)
-     else:
-         return(Document(raw_text="thisFile", ID=rawFileName))
+    else:
+        return(pymedext.Document(raw_text="thisFile", ID=rawFileName))
 
 def export(thisDoc,output,otype,rawFileName):
-     if otype=="pymedext":
-         if output=="input":
-             thisDoc.writeJson(rawfileName+".json")
+    if otype=="pymedext":
+        if output=="input":
+            thisDoc.writeJson(rawFileName+".json")
         else:
-             thisDoc.writeJson(output+".json")
+            thisDoc.writeJson(output+".json")
     return(0)
   
 def main(i,output,itype,otype):
     """Simple program that greets NAME for a total of COUNT times."""
     rawFileName=i.split("/")[-1].replace(itype,"")
-    thisDoc = loadFile(i,rawFileName)
+    thisDoc = loadFile(i,rawFileName,itype)
     export(thisDoc,output,otype,rawFileName)
 
 
