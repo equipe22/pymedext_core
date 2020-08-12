@@ -13,15 +13,16 @@ import logging
 logger = logging.getLogger(__name__)
 
 class brat(DataTransform):
-    def save(dic_pymedext, bratFilePath_ann):
+    def save(dic_pymedext, bratFilePath_ann, exclusion=["raw_text"]):
         f_brat = open(bratFilePath_ann, 'w')
         instance_brat = 0
         for annotation in dic_pymedext.annotations:
-            bratline = 'T' + str(instance_brat) + '	' + annotation.type + ' ' + str(annotation.span[0]) \
-                       + ' ' + str(annotation.span[1]) + '	' + str(annotation.value)
-            instance_brat += 1
-            f_brat.write(bratline)
-            f_brat.write('\n')
+            if annotation.type not in exclusion:
+                bratline = 'T' + str(instance_brat) + '	' + annotation.type + ' ' + str(annotation.span[0]) \
+                           + ' ' + str(annotation.span[1]) + '	' + str(annotation.value)
+                instance_brat += 1
+                f_brat.write(bratline)
+                f_brat.write('\n')
         f_brat.close()
 
     # def update(dic_pymedext, bratFilePath_ann):
