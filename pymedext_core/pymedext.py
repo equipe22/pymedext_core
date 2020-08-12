@@ -7,3 +7,4 @@ from .omopload import *
 from .connector import *
 from .omopsource import *
 from .bioctransform import BioC
+from .fhirtransform import FHIR
