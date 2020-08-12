@@ -46,3 +46,53 @@ uninstall                      uninstall local pymedext packages
 - implement Bioc output by extending datatransform
 - implement Fhir wrangling by extending datatransform
 - implment Fhir source by extending source
+
+demo
+# Example
+- text to pymedext
+- bioc to pymedext
+- fhir to pymedext
+- brat to pymedext
+- pymedext to omop
+- fhir to omop
+- fhir to bioc
+- brat to omop
+- pymedext to doccano
+
+# BIOC
+
+input data from article:
+https://www.ncbi.nlm.nih.gov/research/bionlp/APIs/BioC-PMC/
+
+example of file in json:
+ https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_json/17299597/unicode 
+ 
+ 
+ http://bioc.sourceforge.net/
+ 
+ 
+ https://pypi.org/project/bioc/
+ 
+ 
+https://www.ncbi.nlm.nih.gov/research/pubtator/api.html
+
+
+
+# FHIR
+
+
+https://github.com/smart-on-fhir/client-py
+
+
+https://github.com/smart-on-fhir/sample-patients
+
+
+https://docs.smarthealthit.org/client-py/
+
+
+https://github.com/smart-on-fhir/fhir-parser
+
+
+https://github.com/smart-on-fhir/client-py/blob/master/fhirclient/models/documentmanifest.py
+
+---

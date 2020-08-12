@@ -2,7 +2,7 @@
 
 from .document import Document
 from intervaltree import Interval,IntervalTree
-from .annotationGraph import AnnotationGraph
+# from .annotationGraph import AnnotationGraph
 import logging
 logger = logging.getLogger(__name__)
 
@@ -10,6 +10,14 @@ logger = logging.getLogger(__name__)
 class normalize:
 
     def __setSentencesAndRawText(Document,rootNode):
+        """Build an intervalTree of Annotations from a Document
+
+        :param Document: a Document
+        :param rootNode: type to filter Document
+        :returns: tree,sentencepose,raw_textpos,annotGraph
+        :rtype: intervalTree,dict,dict,dict
+
+        """
         __raw_textpos=dict()
         __sentencepos=dict()
         __tree=IntervalTree()
@@ -25,16 +33,24 @@ class normalize:
                     __tree[thisAnnotation.span[0]:thisAnnotation.span[1]]={
                         "annotation":[{"type":thisAnnotation.type,"value":thisAnnotation}]}
                     __sentencepos[thisSpan]=thisAnnotation.ID
-                    thisNode = AnnotationGraph(thisAnnotation.value,
-                                               thisAnnotation.type,
-                                               thisAnnotation.span,
-                                               thisAnnotation.attributes,
-                                               thisAnnotation.isEntity)
-                    annotsGraph[thisSpan]=[thisNode]
+                    annotsGraph[thisSpan]=[thisAnnotation]
         return(__tree,__sentencepos,__raw_textpos,annotsGraph)
     #filtrer les fonctions en fonction du syntagmes
     #
     def __buildTree(Document,__tree, __sentencepos, __raw_textpos, annotsGraph, otherSegments, rootNode):
+        """Build tree from Document
+
+        :param Document:
+        :param __tree:
+        :param __sentencepos:
+        :param __raw_textpos:
+        :param annotsGraph:
+        :param otherSegments:
+        :param rootNode:
+        :returns:
+        :rtype:
+
+        """
         for thisAnnotation in Document.annotations:
             start = thisAnnotation.span[0]
             end   = thisAnnotation.span[1]
@@ -50,14 +66,20 @@ class normalize:
 
     #filterEntities stay until i resolve the entity declaration issue
     def __buildGraph(Document, __tree, __sentencepos, thisGraph,filterEntities):
+        """Build Graph from intervaltree and Doc
+
+        :param Document:
+        :param __tree:
+        :param __sentencepos:
+        :param thisGraph:
+        :param filterEntities:
+        :returns:
+        :rtype:
+
+        """
         lenentities=[]
         grousentences=[]
         typeliste=[]
-        thisRoot = AnnotationGraph(Document.annotations[0].value,
-                                           Document.annotations[0].type,
-                                           Document.annotations[0].span,
-                                           Document.annotations[0].attributes,
-                                           Document.annotations[0].isEntity)
         if len(__sentencepos.keys()) >0:
             for thisAnnotation in __sentencepos.keys():
                 thisSpan = thisAnnotation.split("_")
@@ -65,52 +87,43 @@ class normalize:
                 end   = int(thisSpan[1])
                 thisMatch=__tree.overlap(start,end)
                 entities=[]
-                # #TEST
-                # if len(thisGraph[thisAnnotation]) ==1:
-                #     grousentences.append(True)
-                #     thisGraph[thisAnnotation][0].setRoot(thisRoot)
-                # else:
-                #     grousentences.append(False)
                 for interval in thisMatch:
                     for annot in interval.data["annotation"]:
                         # print(annot["value"].to_dict())
-                        thisNode = AnnotationGraph(annot["value"].value,
-                                                   annot["value"].type,
-                                                   annot["value"].span,
-                                                   annot["value"].attributes,
-                                                   annot["value"].isEntity)
-                        thisNode.setRoot(thisRoot)
-                        # if thisNode.type in ['drugs_fast', 'cui']:
-                        #     print(thisNode.isEntity)
-                        #     thisNode.isEntity=True
-                        # # typeliste.append(annot["value"].type)
+                        annot["value"].setRoot(Document.annotations[0])
                         if annot["value"].span[0] == start and annot["value"].span[1] == end:
                             # print("add properties")
-                            thisGraph[thisAnnotation][0].addProperty(thisNode)
-                        elif thisNode.isEntity == True and annot["value"].span[0] > start and  annot["value"].span[1] < end:
-                            thisGraph[thisAnnotation][0].addChild(thisNode)
-                # print(len(entities))
+                            thisGraph[thisAnnotation][0].addProperty(annot["value"])
+                        elif annot["value"].isEntity == True and annot["value"].span[0] > start and  annot["value"].span[1] < end:
+                            thisGraph[thisAnnotation][0].addChild(annot["value"])
                 # lenentities.append(len(entities))
-                thisRoot.addChild(thisGraph[thisAnnotation][0])
+                Document.annotations[0].addChild(thisGraph[thisAnnotation][0])
         else:
             for interval in __tree:
                 for annot in interval.data["annotation"]:
                     # print(annot["value"].to_dict())
-                    thisNode = AnnotationGraph(annot["value"].value,
-                                               annot["value"].type,
-                                               annot["value"].span,
-                                               annot["value"].attributes,
-                                               annot["value"].isEntity)
-                    thisNode.setRoot(thisRoot)
-                    thisRoot.addChild(thisNode)
-        return(thisRoot)
+                    annot.setRoot(Document.annotations[0])
+                    Document.annotations[0].addChild(annot)
+        return(Document)
 
     @staticmethod
     def uri(Document,otherSegments=["drwh_family","hypothesis"],rootNode="drwh_sentences", filterEntities=['drugs_fast', 'cui']):
+        """uri Normalization
+
+        :param Document:
+        :param otherSegments:
+        :param "hypothesis"]:
+        :param rootNode:
+        :param filterEntities:
+        :param 'cui']:
+        :returns:
+        :rtype:
+
+        """
         # __raw_textpos=dict()
         # normalize.__sentencepos=dict()
         # normalize.__tree=IntervalTree()
         __tree, __sentencepos, __raw_textpos, thisGraph=normalize.__setSentencesAndRawText(Document,rootNode)
         Document, __tree, __sentencepos = normalize.__buildTree(Document,__tree, __sentencepos, __raw_textpos,thisGraph, otherSegments, rootNode)
-        thisRoot = normalize.__buildGraph(Document, __tree, __sentencepos, thisGraph,filterEntities)
-        return(Document,__tree, __sentencepos, thisRoot)
+        Document = normalize.__buildGraph(Document, __tree, __sentencepos, thisGraph,filterEntities)
+        return(Document,__tree, __sentencepos)

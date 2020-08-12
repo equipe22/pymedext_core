@@ -44,6 +44,14 @@ pymedext\_core\.document module
     :undoc-members:
     :show-inheritance:
 
+pymedext\_core\.document\_alice module
+--------------------------------------
+
+.. automodule:: pymedext_core.document_alice
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 pymedext\_core\.normalize module
 --------------------------------
 

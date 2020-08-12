@@ -23,6 +23,7 @@ class Document:
         self.source_ID = ID
         self.documentDate = documentDate
         self.attributes = attributes
+        self.source = source
         
         if raw_text != "load":
             self.annotations = [Annotation(type="raw_text",
@@ -37,8 +38,6 @@ class Document:
             self.annotations=[]
             for thisPath in pathToconfig:
                 self.loadFromData(thisPath)
-                
-    
 
     def loadFromData(self, pathToconfig):
          """Transform json Pymedext to Document
@@ -144,9 +143,9 @@ class Document:
         """
         returns an annotations of a specific type from source. Can  filter from
         type, source_id or target_id, span, source_id, attributes and value.
-        :param _type:
-        :param source_id:
-        :param target_id:
+        :param _type: annotation type
+        :param source_id: annotation source id
+        :param target_id: annotation target id
         :param attributes:
         :param value:
         :param span:
@@ -156,25 +155,24 @@ class Document:
         res = []
         for anno in self.annotations:
             if source_id is not None:
-                if anno.source_ID != source_id:
-                    continue
+                if anno.source_ID == source_id:
+                    res.append(anno)
             if target_id is not None:
-                if anno.ID != target_id:
-                    continue
+                if anno.ID == target_id:
+                    res.append(anno)
             if attributes is not None:
-                if anno.attributes != attributes:
-                    continue
+                if anno.attributes == attributes:
+                    res.append(anno)
             if value is not None:
-                if anno.value != value:
-                    continue
+                if anno.value == value:
+                    res.append(anno)
             if span is not None:
-                if anno.span != span:
-                    continue
+                if anno.span == span:
+                    res.append(anno)
             if anno.type == _type:
                 res.append(anno)
-
         return res
-    
+           
     def raw_text(self):
         """return the Document raw_text
 
@@ -184,3 +182,12 @@ class Document:
         """
         annot = self.get_annotations('raw_text')[0]
         return annot.value
+
+    def getGraph(self):
+        """return the graph associated with the raw_text
+        :returns:
+        :rtype:
+
+        """
+        annot = self.get_annotations('raw_text')[0]
+        return annot

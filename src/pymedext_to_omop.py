@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from pymedext import pymedext
+from pymedext_core import pymedext
 from intervaltree import Interval,IntervalTree
 import argparse
 import json
@@ -31,7 +31,7 @@ if not mypath.endswith("/"):
 logger.info("###2")
 allFiles = [mypath+f for f in listdir(mypath) if isfile(join(mypath, f))]
 demoDoc=pymedext.Document(raw_text="load",ID="patientID", pathToconfig= allFiles)
-demoDoc, __tree, __sentencepos, thisRoot =pymedext.normalize.uri(demoDoc)
+demoDoc, __tree, __sentencepos =pymedext.normalize.uri(demoDoc)
 info_pat = [1234,1234,1,str(datetime.now().strftime("%Y-%m-%d"))]
 logger.info(info_pat)
 dict_note={
@@ -44,7 +44,8 @@ note_id =int(info_pat[2])#
 thisTime = datetime.strptime(info_pat[-1], '%Y-%m-%d')
 note_nlp_id = 1#"nlp_id"
 logger.info("############")
-annotations, dict_table_note, dict_table_person = pymedext.omop.buildNoteNlP(thisRoot, dict_note, note_id,note_nlp_id, nlp_workflow,thisTime,  filterType,True)
+annotations, dict_table_note, dict_table_person = pymedext.omop.buildNoteNlP(demoDoc.annotations[0], dict_note, note_id,note_nlp_id, nlp_workflow,thisTime,  filterType,True)
 logger.info(annotations)
 logger.info(dict_table_note)
 logger.info(dict_table_person)
+annotations.to_csv("demo.csv")

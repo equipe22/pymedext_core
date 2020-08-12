@@ -15,7 +15,7 @@ class Annotation:
     Based object which contains Annotation
     """
     
-    def __init__(self, type, value, source, source_ID, span = None, attributes = None, isEntity=False, ID = None):
+    def __init__(self, type, value, source, source_ID, span = None, attributes = None, isEntity=False, ID = None, ngram = None):
         """Intialize an Annotation object
 
         :param type: annotation type define by the user (linked to the Annotator)
@@ -41,6 +41,11 @@ class Annotation:
         else:
             self.ID = ID
         self.isEntity = isEntity
+        #add graph properties
+        self.ngram = ngram # should be called raw_value?
+        self.parent = None
+        self.children = None
+        self.root = None
 
     def to_json(self):
         """Tranform Annotation  to json
@@ -58,13 +63,206 @@ class Annotation:
 
         """
         return {'type':self.type,
-               'value':self.value,
-               'span':self.span,
-               'source':self.source,
-               'source_ID': self.source_ID,
-               'isEntity': self.isEntity,
-               'attributes': self.attributes,
-               'id':self.ID}
+                'value':self.value,
+                'ngram':self.ngram,
+                'span':self.span,
+                'source':self.source,
+                'source_ID': self.source_ID,
+                'isEntity': self.isEntity,
+                'attributes': self.attributes,
+                'id':self.ID}
+
+    def getAttributes(self):
+        """get Attributes from current and parents Node
+
+        :returns: attributes
+        :rtype: a dict
+
+        """
+        return(self.attributes+self.parents.getAttributes())
+
+    def getNgram(self):
+        """get nGram from root
+
+        :returns: raw ngram
+        :rtype: string
+
+        """
+        return(self.ngram)
+
+    def setNgram(self):
+        """set nGram from root
+
+        :returns: None
+        :rtype: None
+
+        """
+        self.ngram = self.root.value[self.span[0]:self.span[1]]
+
+    def getSpan(self):
+        """return current Annotation span
+
+        :returns: span(start,end)
+        :rtype: tuple
+
+        """
+        return(self.span)
+
+    def getChildrenSpan(self):
+        """from current node  get all children span
+
+        :returns: tuple of span
+        :rtype: list of tuple
+
+        """
+        childrenSpans = []
+        if self.children != None:
+            for child in self.children:
+                childrenSpans.append(child.getSpan())
+        return(childrenSpans)
+
+    def getEntitiesChildren(self):
+        """From current Node, return all children which are
+        entities
+
+        :returns: children list
+        :rtype: list
+
+        """
+        listChildren=[]
+        if self.children != None:
+            for child in self.children:
+                if child.children == None:
+                    if child.isEntity:
+                        listChildren.append(child)
+                else:
+                    listChildren.extend(child.getEntitiesChildren())
+        else:
+            if self.isEntity:
+                listChildren.append(self)
+        return(listChildren)
+
+    def getProperties(self, filterType):
+        """return current node Properties if the Annotation is from a given type
+
+        :param filterType: list of Annotations type
+        :returns:  properties
+        :rtype:list of dictionnary
+
+        """
+        properties=[]
+        if self.type in filterType:
+            properties.append(self.to_dict())
+        return(properties)
+
+    def getParentsProperties(self, filterType):
+        """ return parent properties of current annotations if
+        it's belong to a specific type
+
+        :param filterType: list of Annotations types
+        :returns: list  of current and parents Annotation properties
+        :rtype: list of dict
+
+        """
+        properties = []
+        if self.parent != None:
+            # print( " go see parents" )
+            # print(properties)
+            properties.extend(self.parent.getParentsProperties(filterType))
+            properties.extend(self.getProperties(filterType))
+        else:
+            # print(self.type)
+            # print(self.attributes)
+            # print(self.span)
+            # print(properties)
+            properties.extend(self.getProperties(filterType))
+        return(properties)
+
+    def setParent(self, parent):
+        """set Parent to current Annotation
+
+        :param parent: Annotation
+        :returns: None
+        :rtype: None
+
+        """
+        self.parent = parent
+
+    def setRoot(self, root):
+        """set Root to current Annotation
+
+        :param root: Annotation
+        :returns: None
+        :rtype: None
+
+        """
+        self.root = root
+
+    def addChild(self, child):
+        """Add a child to current Annotation
+
+        :param child: An annotation to set as child of current node
+        :returns: None
+        :rtype: None
+
+        """
+        child.setParent(self)
+        if self.children == None:
+            self.children = [child]
+        else:
+            self.children.append(child)
+
+
+    def addProperty(self, neighbor):
+        """add property of a neighbor who need to have the same span to
+        the current Annotation
+
+        :param neighbor: the Annotation neighbor to add the same property
+        :returns: None
+        :rtype: None
+
+        """
+        if self.attributes is not None:
+            if "properties" not in self.attributes.keys():
+                # thisProperty = {"type" : neighbor.type, "value":neighbor.value }
+                thisProperty = neighbor.to_dict()
+                self.attributes["properties"] = [thisProperty]
+            else:
+                # thisProperty = {"type" : neighbor.type, "value":neighbor.value }
+                thisProperty = neighbor.to_dict()
+                self.attributes["properties"].append(thisProperty)
+        else:
+            # thisProperty = {"type" : neighbor.type, "value":neighbor.value }
+            thisProperty = neighbor.to_dict()
+            self.attributes = dict()
+            self.attributes["properties"] = [thisProperty]
+
+
+
+
+    def getParent(self, fromType):
+        """return parent of the current Annottion
+        of a specific type
+
+        :param fromType: specific type to found
+        :returns: Annotation of a specific type
+        :rtype: Annotation
+
+        """
+        if self.parent != None:
+            if self.parent.type == fromType :
+                return(self.parent)
+            else:
+                self.parent.getParent(fromType)
+        else:
+            return(None)
+
+
+
+
+
+
+
 
 class Annotator:
     """
