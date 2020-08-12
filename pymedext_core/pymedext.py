@@ -6,3 +6,4 @@ from .normalize import *
 from .omopload import *
 from .connector import *
 from .omopsource import *
+from .brattransform import brat
