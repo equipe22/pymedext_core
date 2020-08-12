@@ -12,8 +12,8 @@ from pymedext_core import pymedext
 @click.option('--output',default="input",
               help='enter the outputfile name.')
 
-@click.option('--itype',default='txt', type=click.Choice(['txt', 'pymedext','bioc','fhir','brat'], help="input type"))
-@click.option('--otype',default='pymedext', type=click.Choice(['omop','pymedext','bioc','fhir','brat'], help = "output type"))
+@click.option('--itype',default='txt', type=click.Choice(['txt', 'pymedext','bioc','fhir','brat']), help="input type")
+@click.option('--otype',default='pymedext', type=click.Choice(['omop','pymedext','bioc','fhir','brat']), help = "output type")
 
 @click.option('--name', prompt='Your name',
               help='The person to greet.')
