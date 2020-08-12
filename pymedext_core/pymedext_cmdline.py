@@ -4,7 +4,7 @@ import click
 from pymedext_core import pymedext
 
 @click.command()
-@click.option('--count', default=1, help='Number of greetings.')
+# @click.option('--count', default=1, help='Number of greetings.')
 
 @click.option('--i', prompt='input file',
               help='The input file name.')
@@ -15,9 +15,9 @@ from pymedext_core import pymedext
 @click.option('--itype',default='txt', type=click.Choice(['txt', 'pymedext','bioc','fhir','brat']), help="input type")
 @click.option('--otype',default='pymedext', type=click.Choice(['omop','pymedext','bioc','fhir','brat']), help = "output type")
 
-@click.option('--name', prompt='Your name',
-              help='The person to greet.')
-@click.option('--count', default=1, help='Number of greetings.')
+# @click.option('--name', prompt='Your name',
+              # help='The person to greet.')
+# @click.option('--count', default=1, help='Number of greetings.')
 
 # def main(count, name):
 #     """Simple program that greets NAME for a total of COUNT times."""
@@ -42,6 +42,7 @@ def export(thisDoc,output,otype,rawFileName):
   
 def main(i,output,itype,otype):
     """Simple program that greets NAME for a total of COUNT times."""
+    click.echo("go in main function")
     rawFileName=i.split("/")[-1].replace(itype,"")
     thisDoc = loadFile(i,rawFileName,itype)
     export(thisDoc,output,otype,rawFileName)
