@@ -69,7 +69,7 @@ class FHIR(DataTransform):
         fhir_dict= dict()
         for data in fhir_list:
             if "Binary" in data.keys():
-                print(data["Binary"]["contentType"])
+                logger.debug(data["Binary"]["contentType"])
                 tmpKey= data["Binary"]["id"]["value"]
                 if data["Binary"]["contentType"]["value"] in ["text/plain"] : #'image/jpeg'; 'application/pdf';'application/dicom'
                     if tmpKey in fhir_dict.keys():
