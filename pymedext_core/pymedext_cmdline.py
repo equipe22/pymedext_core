@@ -5,15 +5,15 @@ from pymedext_core import pymedext
 
 @click.command()
 # @click.option('--count', default=1, help='Number of greetings.')
-
-@click.option('--i', prompt='input file',
-              help='The input file name.')
-
+@click.option('--itype',default='txt', type=click.Choice(['txt', 'pymedext','bioc','fhir','brat']), help="input type")
+@click.option('--otype',default='pymedext', type=click.Choice(['omop','pymedext','bioc','fhir','brat']), help = "output type")
 @click.option('--output',default="input",
               help='enter the outputfile name.')
 
-@click.option('--itype',default='txt', type=click.Choice(['txt', 'pymedext','bioc','fhir','brat']), help="input type")
-@click.option('--otype',default='pymedext', type=click.Choice(['omop','pymedext','bioc','fhir','brat']), help = "output type")
+@click.option('--inp', prompt='input file',
+              help='The input file name.')
+
+
 
 # @click.option('--name', prompt='Your name',
               # help='The person to greet.')
@@ -40,15 +40,15 @@ def export(thisDoc,output,otype,rawFileName):
             thisDoc.writeJson(output+".json")
     return(0)
   
-def main():
+def main(itype, otype, output , inp):
     """Simple program that greets NAME for a total of COUNT times."""
     click.echo("go in main function")
-    print(i)
+    print(inp)
     print(itype)
     print(output)
     print(otype)
-    rawFileName=i.split("/")[-1].replace(itype,"")
-    thisDoc = loadFile(i,rawFileName,itype)
+    rawFileName=inp.split("/")[-1].replace(itype,"")
+    thisDoc = loadFile(inp,rawFileName,itype)
     export(thisDoc,output,otype,rawFileName)
 
 
