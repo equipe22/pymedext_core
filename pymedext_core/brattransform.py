@@ -13,7 +13,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 class brat(DataTransform):
-    def save(dic_pymedext, bratFilePath_ann, exclusion=["raw_text"]):
+    def savetobrat(dic_pymedext, bratFilePath_ann, exclusion=["raw_text"]):
         f_brat = open(bratFilePath_ann, 'w')
         instance_brat = 0
         for annotation in dic_pymedext.annotations:
