@@ -40,9 +40,13 @@ def export(thisDoc,output,otype,rawFileName):
             thisDoc.writeJson(output+".json")
     return(0)
   
-def main(i,output,itype,otype):
+def main():
     """Simple program that greets NAME for a total of COUNT times."""
     click.echo("go in main function")
+    print(i)
+    print(itype)
+    print(output)
+    print(otype)
     rawFileName=i.split("/")[-1].replace(itype,"")
     thisDoc = loadFile(i,rawFileName,itype)
     export(thisDoc,output,otype,rawFileName)
