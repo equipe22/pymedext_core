@@ -209,12 +209,30 @@ class PostGresConnector(DatabaseConnector):
         self.cur = self.conn.cursor()
         return(0)
 
-
+#######################                         DAVID                                           ########################
 class SSHConnector:
     """
     TODO: implement a connection to a server with
     paramiko, should also extend Connector @David?
     """
-    pass
+
+    def __init__(self, scp_host, scp_user, scp_password):
+        import paramiko
+
+        self.scp_host = scp_host
+        self.scp_user = scp_user
+        self.scp_password = scp_password
+        self.sshConnection = paramiko.SSHClient()
+        self.sshConnection.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+    def transfert_brat_file(self, brat_file, scp_repertory):
+        from scp import SCPClient
+
+        self.sshConnection.connect(self.scp_host, username=self.scp_user,
+                              password=self.scp_password)
+        scp_cursor = SCPClient(self.sshConnection.get_transport())
+        if scp_repertory[-1] != '/':
+            scp_repertory = scp_repertory +'/'
+        scp_cursor.put(brat_file, scp_repertory + brat_file)
 
 
