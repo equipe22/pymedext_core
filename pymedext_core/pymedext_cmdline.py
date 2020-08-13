@@ -41,18 +41,9 @@ def export(thisDoc,output,otype,rawFileName):
             thisDoc.writeJson(output+".json")
     return(0)
   
-def main(args):
+def main():
     """Simple program that greets NAME for a total of COUNT times."""
-    print(args.inp)
-    print(args.itype)
-    print(args.output)
-    print(args.otype)
-    # rawFileName=inp.split("/")[-1].replace(itype,"")
-    # thisDoc = loadFile(inp,rawFileName,itype)
-    # export(thisDoc,output,otype,rawFileName)
 
-
-if __name__ == '__main__':
     README = '''example:
 
      python test.py -i template/test.py
@@ -75,4 +66,14 @@ if __name__ == '__main__':
     parser.add_argument('-v','--version', action='version', version='%(prog)s 0.1')
     args = parser.parse_args()
 
-    main(args)
+    print(args.inp)
+    print(args.itype)
+    print(args.output)
+    print(args.otype)
+    # rawFileName=inp.split("/")[-1].replace(itype,"")
+    # thisDoc = loadFile(inp,rawFileName,itype)
+    # export(thisDoc,output,otype,rawFileName)
+
+
+if __name__ == '__main__':
+    main()
