@@ -34,17 +34,21 @@ def loadFile(inputfile,rawFileName,itype):
         thisDoc=pymedext.BioC.load_collection(inputfile)
         return(thisDoc)
     elif itype=="biocjson":
-        thisDoc= pymedext.BioC.load_collection(pathTofile_json,1)
+        thisDoc= pymedext.BioC.load_collection(inputfile,1)
         return(thisDoc)
+    elif itype=="fhir":
+        thisDoc= pymedext.FHIR.load_xml(inputfile)
+        return(thisDoc)
+
     else:
         return(pymedext.Document(raw_text="thisFile", ID=rawFileName))
 
-def export(thisDoc,output,otype,rawFileName):
+def export(thisDoc,otype,rawFileName):
     if otype=="pymedext":
-        if output=="input":
-            thisDoc.writeJson(rawFileName+".json")
-        else:
-            thisDoc.writeJson(output+".json")
+        thisDoc.writeJson(rawFileName+".json")
+    if otype=="brat":
+        pymedext.brat.save(thisDoc,rawFileName+".ann",["raw_text","drwh_cleantext"])
+
     return(0)
   
 def main():
@@ -66,7 +70,7 @@ def main():
     parser.add_argument('-o', '--output', default="input",  help='enter the output file name', type=str)
 
     parser.add_argument('--itype',default='txt', choices=['txt', 'pymedext','biocxml','biocjson','fhir','brat'], help="input type")
-    parser.add_argument('--otype',default='pymedext', choices=['omop','pymedext','bioc','fhir','brat'], help = "output type")
+    parser.add_argument('--otype',default='pymedext', choices=['omop','pymedext','bioc','brat'], help = "output type")
     #parser.add_argument('-i', '--inputFile', help='path to input folder', type=str)
     # parser.add_argument('-s', '--source', help='if set, switch to english rxnorm sources, if not french  romedi source' ,action="store_true" )
     parser.add_argument('-v','--version', action='version', version='%(prog)s 0.1')
@@ -79,10 +83,16 @@ def main():
     rawFileName="".join(args.inputFile.split("/")[-1].split(".")[:-1])
     thisDoc = loadFile(args.inputFile,rawFileName,args.itype)
     if type(thisDoc) is not list:
-        export(thisDoc,args.output,args.otype,rawFileName)
+        if args.output=="input":
+            export(thisDoc,args.otype,rawFileName)
+        else:
+            export(thisDoc,args.otype,rawFileName)
     else:
         for data in range(len(thisDoc)):
-            export(thisDoc[data],args.output,args.otype,rawFileName+str(data+1))
+            if args.output=="input":
+                export(thisDoc[data],args.otype,rawFileName+"_"+str(data+1)+"_"+thisDoc[data].ID.replace("/","_"))
+            else:
+                export(thisDoc[data],args.otype,args.output+"_"+str(data+1)+"_"+thisDoc[data].ID.replace("/","_"))
 
 
 if __name__ == '__main__':
