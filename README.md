@@ -49,15 +49,17 @@ uninstall                      uninstall local pymedext packages
 
 demo
 # Example
-- text to pymedext
-- bioc to pymedext
-- fhir to pymedext
-- brat to pymedext
-- pymedext to omop
-- fhir to omop
-- fhir to bioc
-- brat to omop
-- pymedext to doccano
+- no annotaion
+  - text to pymedext (done)
+  - bioc to pymedext (done)
+  - fhir to pymedext (done)
+  - brat to pymedext (done)
+- require annotation
+  - pymedext to omop
+  - fhir to omop
+  - fhir to bioc
+  - brat to omop
+  - pymedext to doccano
 
 # BIOC
 
