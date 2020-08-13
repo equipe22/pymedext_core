@@ -66,13 +66,13 @@ def main():
     parser.add_argument('-v','--version', action='version', version='%(prog)s 0.1')
     args = parser.parse_args()
 
-    print(args.inp)
+    print(args.inputFile)
     print(args.itype)
     print(args.output)
     print(args.otype)
-    # rawFileName=inp.split("/")[-1].replace(itype,"")
-    # thisDoc = loadFile(inp,rawFileName,itype)
-    # export(thisDoc,output,otype,rawFileName)
+    rawFileName=args.inputFile.split("/")[-1].replace(args.itype,"")
+    thisDoc = loadFile(args.inputFile,rawFileName,args.itype)
+    export(thisDoc,args.output,args.otype,rawFileName)
 
 
 if __name__ == '__main__':
