@@ -49,7 +49,7 @@ uninstall                      uninstall local pymedext packages
 
 demo
 # Example
-- no annotaion
+- no annotation
   - text to pymedext (done)
   - bioc to pymedext (done)
   - fhir to pymedext (done)
