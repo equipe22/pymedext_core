@@ -30,6 +30,12 @@ def loadFile(inputfile,rawFileName,itype):
         thisFile=open(inputfile,"r").read()
         thisDoc=pymedext.Document(raw_text=thisFile, ID=rawFileName)
         return(thisDoc)
+   elif itype=="biocxml":
+        thisDoc=pymedext.BioC.load_collection(inputfile)
+        return(thisDoc)
+   elif itype=="biocjson":
+        thisDoc= pymedext.BioC.load_collection(pathTofile_json,1)
+        return(thisDoc)
     else:
         return(pymedext.Document(raw_text="thisFile", ID=rawFileName))
 
@@ -59,7 +65,7 @@ def main():
     parser.add_argument('-i', '--inputFile', help='path to input folder', type=str)
     parser.add_argument('-o', '--output', default="input",  help='enter the output file name', type=str)
 
-    parser.add_argument('--itype',default='txt', choices=['txt', 'pymedext','bioc','fhir','brat'], help="input type")
+    parser.add_argument('--itype',default='txt', choices=['txt', 'pymedext','biocxml','biocjson','fhir','brat'], help="input type")
     parser.add_argument('--otype',default='pymedext', choices=['omop','pymedext','bioc','fhir','brat'], help = "output type")
     #parser.add_argument('-i', '--inputFile', help='path to input folder', type=str)
     # parser.add_argument('-s', '--source', help='if set, switch to english rxnorm sources, if not french  romedi source' ,action="store_true" )
@@ -70,9 +76,13 @@ def main():
     print(args.itype)
     print(args.output)
     print(args.otype)
-    rawFileName=args.inputFile.split("/")[-1].replace(args.itype,"")
+    rawFileName="".join(args.inputFile.split("/")[-1].split(".")[:-1])
     thisDoc = loadFile(args.inputFile,rawFileName,args.itype)
-    export(thisDoc,args.output,args.otype,rawFileName)
+    if type(thisDoc) is not list:
+        export(thisDoc,args.output,args.otype,rawFileName)
+    else:
+        for data in range(len(thisDoc)):
+            export(thisDoc[data],args.output,args.otype,rawFileName+str(data+1))
 
 
 if __name__ == '__main__':
