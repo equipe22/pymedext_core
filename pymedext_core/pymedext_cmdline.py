@@ -2,6 +2,12 @@
 
 from pymedext_core import pymedext
 import argparse
+from os import listdir
+from os.path import isfile, join
+import logging
+logger = logging.getLogger(__name__)
+logging.basicConfig(format='%(asctime)s -- %(name)s - %(levelname)s : %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.INFO)
+
 
 # @click.command()
 # # @click.option('--count', default=1, help='Number of greetings.')
@@ -25,7 +31,7 @@ import argparse
 #     for x in range(count):
 #         click.echo('main %s!' % name)
 
-def loadFile(inputfile,rawFileName,itype):
+def loadFile(inputfile,folder, rawFileName,itype):
     if itype=="txt":
         thisFile=open(inputfile,"r").read()
         thisDoc=pymedext.Document(raw_text=thisFile, ID=rawFileName)
@@ -39,9 +45,16 @@ def loadFile(inputfile,rawFileName,itype):
     elif itype=="fhir":
         thisDoc= pymedext.FHIR.load_xml(inputfile)
         return(thisDoc)
-
+    elif itype=="pymedext":
+        mypath = inputfile
+        if not mypath.endswith("/"):
+            mypath = mypath+"/"
+        allFiles = [mypath+f for f in listdir(mypath) if isfile(join(mypath, f))]
+        thisDoc= pymedext.Document(raw_text="load",ID=rawFileName,pathToconfig=allFiles)
+        return(thisDoc)
     else:
-        return(pymedext.Document(raw_text="thisFile", ID=rawFileName))
+        logger.info("you do not provide a good input format")
+        exit(0)
 
 def export(thisDoc,otype,rawFileName):
     if otype=="pymedext":
@@ -68,20 +81,19 @@ def main():
     # parser.add_argument("-i","--inputFolder", help="input annotationsFiles")
     parser.add_argument('-i', '--inputFile', help='path to input folder', type=str)
     parser.add_argument('-o', '--output', default="input",  help='enter the output file name', type=str)
-
     parser.add_argument('--itype',default='txt', choices=['txt', 'pymedext','biocxml','biocjson','fhir','brat'], help="input type")
     parser.add_argument('--otype',default='pymedext', choices=['omop','pymedext','bioc','brat'], help = "output type")
+    parser.add_argument('-f', '--folder', help='if set, the input is consider to be a folder of json pymedext',action="store_true" )
     #parser.add_argument('-i', '--inputFile', help='path to input folder', type=str)
     # parser.add_argument('-s', '--source', help='if set, switch to english rxnorm sources, if not french  romedi source' ,action="store_true" )
     parser.add_argument('-v','--version', action='version', version='%(prog)s 0.1')
     args = parser.parse_args()
-
     print(args.inputFile)
     print(args.itype)
     print(args.output)
     print(args.otype)
     rawFileName="".join(args.inputFile.split("/")[-1].split(".")[:-1])
-    thisDoc = loadFile(args.inputFile,rawFileName,args.itype)
+    thisDoc = loadFile(args.inputFile,args.folder, rawFileName,args.itype)
     if type(thisDoc) is not list:
         if args.output=="input":
             export(thisDoc,args.otype,rawFileName)
