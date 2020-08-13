@@ -30,10 +30,10 @@ def loadFile(inputfile,rawFileName,itype):
         thisFile=open(inputfile,"r").read()
         thisDoc=pymedext.Document(raw_text=thisFile, ID=rawFileName)
         return(thisDoc)
-   elif itype=="biocxml":
+    elif itype=="biocxml":
         thisDoc=pymedext.BioC.load_collection(inputfile)
         return(thisDoc)
-   elif itype=="biocjson":
+    elif itype=="biocjson":
         thisDoc= pymedext.BioC.load_collection(pathTofile_json,1)
         return(thisDoc)
     else:
