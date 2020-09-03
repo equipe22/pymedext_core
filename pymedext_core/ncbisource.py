@@ -2,7 +2,6 @@
 
 from .source import Source
 from .connector import *
-import io
 import json
 import sys
 import logging
