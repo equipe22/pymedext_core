@@ -12,3 +12,4 @@ from .doccanosource import DoccanoSource
 from .brattransform import brat
 from .bioctransform import BioC
 from .fhirtransform import FHIR
+from .ncbisource import PubTatorSource
