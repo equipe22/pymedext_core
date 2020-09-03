@@ -2,10 +2,9 @@
 
 from .document import Document
 #from .datawrangling import *
-from .normalize import *
-from .omopload import *
-from .connector import *
-from .omopsource import *
+from .normalize import normalize
+from .omoptransform import omop
+from .omopsource import OmopSource
 from .doccanodocument import DoccanoDocument
 from .doccanotransform import Doccano
 from .doccanoannotator import DoccanoAnnotation
