@@ -23,7 +23,7 @@ class PubTatorSource(Source, SimpleAPIConnector):
         super().__init__( host)
         logger.info("Initialize APi connection")
 
-    def getPubTatorAnnotations(pmid_list,Bioconcept=""):
+    def getPubTatorAnnotations(self, pmid_list, Bioconcept=""):
         # load pmids
         json_pmid = {"pmids": [pmid.strip() for pmid in pmid_list]}
 
