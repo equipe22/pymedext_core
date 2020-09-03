@@ -83,7 +83,7 @@ class BioC(DataTransform):
                         annotations_list.append(
                            Annotation(type=thisrelation.infons["type"],
                                       value=identifier,
-                                      ngram =thisrelation.text,
+                                      ngram ="Null",
                                       source_ID=passageID,
                                       ID=annotationID,
                                       source=thisType,
