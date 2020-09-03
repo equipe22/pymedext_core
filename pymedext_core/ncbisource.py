@@ -2,6 +2,7 @@
 
 from .source import Source
 from .connector import *
+from .bioctransform import BioC
 import json
 import sys
 import logging
@@ -34,9 +35,8 @@ class PubTatorSource(Source, SimpleAPIConnector):
             json_pmid["concepts"]=Bioconcept.split(",")
 
         # request
-        r = self.session.post(self.host+"biocxml", json_pmid = json_pmid)
+        r = self.session.post(self.host+"biocxml", json = json_pmid)
         if r.status_code != 200 :
             return ("[Error]: HTTP code "+ str(r.status_code))
         else:
-            return(r.text.encode("utf-8"))
-
+            return(BioC.load_collection(r.text.encode("utf-8")))
