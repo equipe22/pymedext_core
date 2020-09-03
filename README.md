@@ -4,6 +4,20 @@ Based on the work of Antoine Neuraz !
 
 pymedext core to extend in order to add new annotators.
 
+# Dataset
+
+based on the QUAERO dataset
+
+``` tex
+Névéol A, Grouin C, Leixa J, Rosset S, Zweigenbaum P. The QUAERO French Medical Corpus: A Ressource for Medical Entity Recognition and Normalization. Fourth Workshop on Building and Evaluating Ressources for Health and Biomedical Text Processing - BioTxtM2014. 2014:24-30 
+
+wget https://quaerofrenchmed.limsi.fr/QUAERO_FrenchMed_BioC.zip
+
+wget https://quaerofrenchmed.limsi.fr/QUAERO_FrenchMed_brat.zip
+
+```
+
+
 # Annotator class
  need to implement the annotator class to expends pymedext
 
@@ -43,11 +57,15 @@ uninstall                      uninstall local pymedext packages
 
 
 # otherthings to do
-- implement Bioc output by extending datatransform
-- implement Fhir wrangling by extending datatransform
-- implment Fhir source by extending source
+- Pymedext to BIOC and specify which annotation are passage
+- brat to pymedext
+- add omop as (csv) output and furthermore to a db ( i think this should be done in pymedext)
+- same thing for brat
+- same thing for doccano (add them to the commandline
+- implement Bioc output by extending datatransform (done)
+- implement Fhir wrangling by extending datatransform (done)
+- implment Fhir source by extending source (not done)
 
-demo
 # Example
 - no annotation
   - text to pymedext (done)
