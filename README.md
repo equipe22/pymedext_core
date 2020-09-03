@@ -6,7 +6,6 @@ Based on the work of Antoine Neuraz !
 pymedext_core contains basic data wrangling function to transform 
 input data format txt, pymedext,biocxml,biocjson,fhir,brat
 into another one pymedext,biocxml,biocjson,omop,brat.
-
 pymedext core to extend in order to add new annotators.
 
 # Dataset
@@ -45,41 +44,119 @@ uninstall                      uninstall local pymedext packages
 # Documentation (in progress)
  firefox html/modules.html
 
-# Example 
+# Examples
 
-# TODO
-- implement a generic sshConnector with paramiko
-- implement a BratSource.py which open an ssh Connector to a brat Server
+## pymedext command line
 
-# DONE
-- implement a generic APIConnector with the request function
-- add the whole api of Doccano as a Source in an other file called DoccanoSource.py
-- Extend datatransform to perform the data wrangling for Doccanotransform.py 
-- implement datatransform to perform data wrangling for brattransform.py 
+``` bash
+pymedext -h
+usage: pymedext [-h] [-i INPUTFILE] [-o OUTPUT]
+                [--itype {txt,pymedext,biocxml,biocjson,fhir,brat}]
+                [--otype {omop,pymedext,bioc,brat}] [-f] [-be BRATEXCLUDE]
+                [-v]
 
-# otherthings to do
-- Pymedext to BIOC and specify which annotation are passage
-- brat to pymedext
-- add omop as (csv) output and furthermore to a db ( i think this should be done in pymedext)
-- same thing for brat
-- same thing for doccano (add them to the commandline
-- implement Bioc output by extending datatransform (done)
-- implement Fhir wrangling by extending datatransform (done)
-- implment Fhir source by extending source (not done)
+optional arguments:
+  -h, --help            show this help message and exit
+  -i INPUTFILE, --inputFile INPUTFILE
+                        path to input folder
+  -o OUTPUT, --output OUTPUT
+                        enter the output file name
+  --itype {txt,pymedext,biocxml,biocjson,fhir,brat}
+                        input type
+  --otype {omop,pymedext,bioc,brat}
+                        output type
+  -f, --folder          if set, the input is consider to be a folder of json
+                        pymedext
+  -be BRATEXCLUDE, --bratexclude BRATEXCLUDE
+                        list of annotations to exclude from brat
+  -v, --version         show program's version number and exit
 
-# Example
-- no annotation
-  - text to pymedext (done)
-  - bioc to pymedext (done)
-  - fhir to pymedext (done)
-  - brat to pymedext (done)
-- require annotation
+
+```
+
+### text to pymedext 
+
+``` bash
+
+    pymedext -i demo.txt --itype txt -otype pymedext
+```
+
+
+### fhir to pymedext 
+
+``` bash
+
+    pymedext -i patient-2169591.fhir-bundle.xml  --itype fhir -otype pymedext
+    pymedext -i patient-99912345.fhir-bundle.xml  --itype fhir -otype pymedext
+
+```
+
+
+### bioc to pymedext 
+
+``` bash
+    cd data
+    wget https://quaerofrenchmed.limsi.fr/QUAERO_FrenchMed_BioC.zip
+    unzip QUAERO_FrenchMed_BioC.zip
+    pymedext -i 7382743.xml --itype biocxml -otype pymedext
+    pymedext -i biocformat.json --itype biocjson -otype pymedext
+    pymedext -i QUAERO_BioC/corpus/train/MEDLINE_train_bioc --itype biocjson -otype pymedext
+    pymedext -i QUAERO_BioC/corpus/train/EMEA_train_bioc --itype biocjson -otype pymedext
+    #pymedext to bioc, need to be able to construct collection
+    
+    
+
+```
+
+
+### brat to pymedext (no example) 
+
+``` bash
+ no example
+ brat to bioc
+
+```
+### require annotation
+It will be done on pymedext_public
   - pymedext to omop
   - fhir to omop
   - fhir to bioc
   - brat to omop
   - pymedext to doccano
 
+
+## call PubTator
+
+``` python
+from pymedext_core import pymedext
+pub = pymedext.PubTatorSource()
+doc = pub.GetPubTatorAnnotations(["27940449","28058064","28078498"])
+
+
+```
+
+
+# TODO
+
+- implement a BratSource.py which open an ssh Connector to a brat Server
+- Pymedext to BIOC and specify which annotation are passage
+- brat to pymedext
+- implement Fhir source by extending source 
+- It will be done on pymedext_public
+  - pymedext to omop
+  - fhir to omop
+  - fhir to bioc
+  - brat to omop
+  - pymedext to doccano
+  - add omop as (csv) output and furthermore to a db 
+  
+# DONE
+- implement a generic APIConnector with the request function
+- add the whole api of Doccano as a Source in an other file called DoccanoSource.py
+- Extend datatransform to perform the data wrangling for Doccanotransform.py 
+- implement datatransform to perform data wrangling for brattransform.py 
+- implement Bioc output by extending datatransform (done)
+- implement Fhir wrangling by extending datatransform (done)
 
 # BIOC
 input data from article:
@@ -93,8 +170,6 @@ http://bioc.sourceforge.net/
 https://pypi.org/project/bioc/
  
 https://www.ncbi.nlm.nih.gov/research/pubtator/api.html
-
-
 
 # FHIR
 
