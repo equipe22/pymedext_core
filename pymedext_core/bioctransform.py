@@ -53,7 +53,7 @@ class BioC(DataTransform):
                         identifier =None
                         if "identifier" in thisAnnotation.infons.keys() :
                             identifier=thisAnnotation.infons["identifier"]
-                        else:
+                        elif "Identifier" in thisAnnotation.infons.keys() :
                             identifier=thisAnnotation.infons["Identifier"]
                         thisAttributes = {value:thisAnnotation.infons[value]
                                           for value in thisAnnotation.infons  if value not in ["type","identifier","Identifier"] }
@@ -74,7 +74,7 @@ class BioC(DataTransform):
                         identifier =None
                         if "identifier" in thisrelation.infons.keys() :
                             identifier=thisrelation.infons["identifier"]
-                        else:
+                        elif "Identifier" in thisrelation.infons.keys():
                             identifier=thisrelation.infons["Identifier"]
                         thisAttributes = {value:thisrelation.infons[value]
                                           for value in thisrelation.infons  if value not in ["type","identifier","Identifier"] }
