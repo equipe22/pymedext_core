@@ -8,13 +8,13 @@ from .annotators import Annotation
 import uuid
 
 class BioC(DataTransform):
-    def load_collection(bioc_input,format =0):
+    def load_collection(bioc_input,format =0, isFile = True):
         #Generalize load and add as an argument type 0 default is an xml, 1 a json bioc collection
         collection = None
         if format == 0:
-            collection = BioC.__load_collection_xml(bioc_input)
+            collection = BioC.__load_collection_xml(bioc_input, isFile)
         else :
-            collection = BioC.__load_collection_json(bioc_input)
+            collection = BioC.__load_collection_json(bioc_input, isFile)
         annotations_list=[]
         raw_text = ""
         raw_text_ID=str(uuid.uuid1())
@@ -103,12 +103,21 @@ class BioC(DataTransform):
             documents_collection.append(thisDocument)
         return(documents_collection)
 
-    def __load_collection_xml(bioc_xml):
-        with open(bioc_xml, 'r') as fp:
-            collection = bioc.load(fp)
-        return(collection)
+    def __load_collection_xml(bioc_xml, isFile=True):
+        if isFile :
+            with open(bioc_xml, 'r') as fp:
+                collection = bioc.load(fp)
+            return(collection)
+        else:
+            collection = bioc.loads(fp)
+            return(collection)
 
-    def __load_collection_json(bioc_json):
-        with open(bioc_json, 'r') as fp:
-            collection = biocjson.load(fp)
-        return(collection)
+
+    def __load_collection_json(bioc_json, isFile=True):
+        if isFile:
+            with open(bioc_json, 'r') as fp:
+                collection = biocjson.load(fp)
+            return(collection)
+        else:
+            collection = biocjson.loads(fp)
+            return(collection)

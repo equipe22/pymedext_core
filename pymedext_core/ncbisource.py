@@ -39,4 +39,4 @@ class PubTatorSource(Source, SimpleAPIConnector):
         if r.status_code != 200 :
             return ("[Error]: HTTP code "+ str(r.status_code))
         else:
-            return(BioC.load_collection(r.text.encode("utf-8")))
+            return(BioC.load_collection(r.text.encode("utf-8"),isFile=False))
