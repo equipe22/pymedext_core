@@ -109,7 +109,7 @@ class BioC(DataTransform):
                 collection = bioc.load(fp)
             return(collection)
         else:
-            collection = bioc.loads(fp)
+            collection = bioc.loads(bioc_xml)
             return(collection)
 
 
@@ -119,5 +119,5 @@ class BioC(DataTransform):
                 collection = biocjson.load(fp)
             return(collection)
         else:
-            collection = biocjson.loads(fp)
+            collection = biocjson.loads(bioc_json)
             return(collection)
