@@ -47,6 +47,7 @@ class BioC(DataTransform):
                                               span=(passage.offset,passage.offset+len(passage.text)))
                         )
 
+                relations_annot_dict=dict()
                 if passage.annotations:
                     for thisAnnotation in passage.annotations:
                         annotationID= str(uuid.uuid1())
@@ -57,6 +58,8 @@ class BioC(DataTransform):
                             identifier=thisAnnotation.infons["Identifier"]
                         thisAttributes = {value:thisAnnotation.infons[value]
                                           for value in thisAnnotation.infons  if value not in ["type","identifier","Identifier"] }
+                        thisAttributes["id"]=thisAnnotation.id
+                        relations_annot_dict[thisAnnotation.id]=(thisAnnotation.locations[0].offset,thisAnnotation.locations[0].offset+ thisAnnotation.locations[0].length)
                         thisType = str(type(thisAnnotation)).replace(">","").replace("<","").replace("class ","").replace("bioc.bioc.","").replace("'","")
                         annotations_list.append(
                            Annotation(type=thisAnnotation.infons["type"],
@@ -80,16 +83,17 @@ class BioC(DataTransform):
                                           for value in thisrelation.infons  if value not in ["type","identifier","Identifier"] }
                         thisAttributes["id"]=thisrelation.id
                         thisType = str(type(thisrelation)).replace(">","").replace("<","").replace("class ","").replace("bioc.bioc.","").replace("'","")
-                        annotations_list.append(
-                           Annotation(type=thisrelation.infons["type"],
-                                      value=identifier,
-                                      ngram ="Null",
-                                      source_ID=passageID,
-                                      ID=annotationID,
-                                      source=thisType,
-                                      span=(thisrelation.locations[0].offset,thisrelation.locations[0].offset+ thisrelation.locations[0].length),
-                                      attributes=thisAttributes)
-                            )
+                        for refNode in thisrelation.nodes:
+                            annotations_list.append(
+                               Annotation(type=thisrelation.infons["type"],
+                                          value=identifier,
+                                          ngram ="Null",
+                                          source_ID=passageID,
+                                          ID=annotationID,
+                                          source=thisType,
+                                          span= relations_annot_dict[refNode.refid],
+                                          attributes=thisAttributes)
+                                )
 
             thisDocument = Document(raw_text =raw_text,ID =raw_text_ID, source = collection.source, documentDate = collection.date)
             # attributes=collection.key,collection.standalone,
