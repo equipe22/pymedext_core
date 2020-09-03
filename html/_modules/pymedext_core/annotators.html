@@ -172,7 +172,7 @@
 <span class="sd">    Based object which contains Annotation</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">source_ID</span><span class="p">,</span> <span class="n">span</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">attributes</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">isEntity</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ID</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">source_ID</span><span class="p">,</span> <span class="n">span</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">attributes</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">isEntity</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ID</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ngram</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Intialize an Annotation object</span>
 
 <span class="sd">        :param type: annotation type define by the user (linked to the Annotator)</span>
@@ -199,7 +199,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">ID</span> <span class="o">=</span> <span class="n">ID</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">isEntity</span> <span class="o">=</span> <span class="n">isEntity</span>
         <span class="c1">#add graph properties</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ngram</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># should be called raw_value?</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ngram</span> <span class="o">=</span> <span class="n">ngram</span> <span class="c1"># should be called raw_value?</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="kc">None</span>
@@ -220,13 +220,14 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span>
-               <span class="s1">&#39;value&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
-               <span class="s1">&#39;span&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">span</span><span class="p">,</span>
-               <span class="s1">&#39;source&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">,</span>
-               <span class="s1">&#39;source_ID&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_ID</span><span class="p">,</span>
-               <span class="s1">&#39;isEntity&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">isEntity</span><span class="p">,</span>
-               <span class="s1">&#39;attributes&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">,</span>
-               <span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">ID</span><span class="p">}</span></div>
+                <span class="s1">&#39;value&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                <span class="s1">&#39;ngram&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">ngram</span><span class="p">,</span>
+                <span class="s1">&#39;span&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">span</span><span class="p">,</span>
+                <span class="s1">&#39;source&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">,</span>
+                <span class="s1">&#39;source_ID&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_ID</span><span class="p">,</span>
+                <span class="s1">&#39;isEntity&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">isEntity</span><span class="p">,</span>
+                <span class="s1">&#39;attributes&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">,</span>
+                <span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">ID</span><span class="p">}</span></div>
 
 <div class="viewcode-block" id="Annotation.getAttributes"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.annotators.Annotation.getAttributes">[docs]</a>    <span class="k">def</span> <span class="nf">getAttributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;get Attributes from current and parents Node</span>
@@ -244,7 +245,16 @@
 <span class="sd">        :rtype: string</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="bp">self</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span></div>
+        <span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ngram</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Annotation.setNgram"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.annotators.Annotation.setNgram">[docs]</a>    <span class="k">def</span> <span class="nf">setNgram</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;set nGram from root</span>
+
+<span class="sd">        :returns: None</span>
+<span class="sd">        :rtype: None</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ngram</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="bp">self</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span></div>
 
 <div class="viewcode-block" id="Annotation.getSpan"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.annotators.Annotation.getSpan">[docs]</a>    <span class="k">def</span> <span class="nf">getSpan</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;return current Annotation span</span>

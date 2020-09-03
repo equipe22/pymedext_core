@@ -4,18 +4,26 @@ pymedext\_core package
 Submodules
 ----------
 
-pymedext\_core\.annotationGraph module
---------------------------------------
-
-.. automodule:: pymedext_core.annotationGraph
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 pymedext\_core\.annotators module
 ---------------------------------
 
 .. automodule:: pymedext_core.annotators
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pymedext\_core\.bioctransform module
+------------------------------------
+
+.. automodule:: pymedext_core.bioctransform
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pymedext\_core\.brattransform module
+------------------------------------
+
+.. automodule:: pymedext_core.brattransform
     :members:
     :undoc-members:
     :show-inheritance:
@@ -36,6 +44,38 @@ pymedext\_core\.datatransform module
     :undoc-members:
     :show-inheritance:
 
+pymedext\_core\.doccanoannotator module
+---------------------------------------
+
+.. automodule:: pymedext_core.doccanoannotator
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pymedext\_core\.doccanodocument module
+--------------------------------------
+
+.. automodule:: pymedext_core.doccanodocument
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pymedext\_core\.doccanosource module
+------------------------------------
+
+.. automodule:: pymedext_core.doccanosource
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pymedext\_core\.doccanotransform module
+---------------------------------------
+
+.. automodule:: pymedext_core.doccanotransform
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 pymedext\_core\.document module
 -------------------------------
 
@@ -44,10 +84,10 @@ pymedext\_core\.document module
     :undoc-members:
     :show-inheritance:
 
-pymedext\_core\.document\_alice module
---------------------------------------
+pymedext\_core\.fhirtransform module
+------------------------------------
 
-.. automodule:: pymedext_core.document_alice
+.. automodule:: pymedext_core.fhirtransform
     :members:
     :undoc-members:
     :show-inheritance:
@@ -60,14 +100,6 @@ pymedext\_core\.normalize module
     :undoc-members:
     :show-inheritance:
 
-pymedext\_core\.omopload module
--------------------------------
-
-.. automodule:: pymedext_core.omopload
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 pymedext\_core\.omopsource module
 ---------------------------------
 
@@ -76,10 +108,26 @@ pymedext\_core\.omopsource module
     :undoc-members:
     :show-inheritance:
 
+pymedext\_core\.omoptransform module
+------------------------------------
+
+.. automodule:: pymedext_core.omoptransform
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 pymedext\_core\.pymedext module
 -------------------------------
 
 .. automodule:: pymedext_core.pymedext
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pymedext\_core\.pymedext\_cmdline module
+----------------------------------------
+
+.. automodule:: pymedext_core.pymedext_cmdline
     :members:
     :undoc-members:
     :show-inheritance:
