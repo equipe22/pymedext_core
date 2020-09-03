@@ -215,6 +215,28 @@ class PostGresConnector(DatabaseConnector):
         self.cur = self.conn.cursor()
         return(0)
 
+class SimpleAPIConnector:
+    """
+    TODO: implement a connection to a server with
+    paramiko, should also extend Connector @David?
+    """
+
+    def __init__(self, host):
+
+        self.host = host
+        self.session = None
+        self.startConnection()
+
+
+    def startConnection(self):
+        """Initialize  a requests object
+        :returns: 0
+        :rtype: 0
+
+        """
+        self.session =  requests.Session()
+        return(0)
+
 #######################                         DAVID                                           ########################
 class SSHConnector:
     """
