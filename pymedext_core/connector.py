@@ -9,6 +9,12 @@ import requests
 from urllib.parse import urljoin
 import random
 import re
+from scp import SCPClient
+
+import paramiko
+
+
+
 proxies = {
   "http": None,
   "https": None,
@@ -217,7 +223,6 @@ class SSHConnector:
     """
 
     def __init__(self, scp_host, scp_user, scp_password):
-        import paramiko
 
         self.scp_host = scp_host
         self.scp_user = scp_user
@@ -226,8 +231,6 @@ class SSHConnector:
         self.sshConnection.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
     def transfert_brat_file(self, brat_file, scp_repertory):
-        from scp import SCPClient
-
         self.sshConnection.connect(self.scp_host, username=self.scp_user,
                               password=self.scp_password)
         scp_cursor = SCPClient(self.sshConnection.get_transport())
