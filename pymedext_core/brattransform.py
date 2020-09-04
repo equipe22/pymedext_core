@@ -14,6 +14,9 @@ logger = logging.getLogger(__name__)
 import uuid
 from .brat_parser import read_file_annotations
 from .annotators import Annotation
+from .document import Document
+
+
 class brat(DataTransform):
     def savetobrat(dic_pymedext, bratFilePath_ann, exclusion=["raw_text"]):
         f_brat = open(bratFilePath_ann, 'w')
@@ -28,6 +31,7 @@ class brat(DataTransform):
         f_brat.close()
 
     def load_from_brat(ann_file):
+
         entities, relations, attributes, groups=read_file_annotations(ann_file)
         annotations_list=[]
         raw_text = open(ann_file.replace(".ann",".txt"), 'r').read()
@@ -44,6 +48,8 @@ class brat(DataTransform):
                                       source="BratFile",
                                       span=(span[0],span[1])
                             )
+                    )
+
         thisDocument = Document(raw_text =raw_text,ID =raw_text_ID, source = ann_file)
         thisDocument.annotations.extend(annotations_list)
         return(thisDocument)
