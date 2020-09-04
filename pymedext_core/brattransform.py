@@ -46,7 +46,8 @@ class brat(DataTransform):
                                       source_ID=raw_text_ID,
                                       ID=thisID,
                                       source="BratFile",
-                                      span=(span[0],span[1])
+                                       span=(span[0],span[1]),
+                                       isEntity=True
                             )
                     )
 
