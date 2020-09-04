@@ -1,8 +1,6 @@
 
 # Description pymedext_core
 
-Based on the work of Antoine Neuraz !
-
 pymedext_core contains basic data wrangling function to transform 
 input data format txt, pymedext,biocxml,biocjson,fhir,brat
 into another one pymedext,biocxml,biocjson,omop,brat.
