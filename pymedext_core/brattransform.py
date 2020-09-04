@@ -32,7 +32,7 @@ class brat(DataTransform):
 
     def load_from_brat(ann_file):
 
-        entities, relations, attributes, groups=read_file_annotations(ann_file)
+        entities, relations, attributes=read_file_annotations(ann_file)
         annotations_list=[]
         raw_text = open(ann_file.replace(".ann",".txt"), 'r').read()
         raw_text_ID=str(uuid.uuid1())
