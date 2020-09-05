@@ -15,10 +15,10 @@ reqs = ["flashtext==2.7","Unidecode==1.1.1",
         "paramiko", "dataclasses","smart_open"]
 
 
-setup(name='pymedext_core',
+setup(name='pymedextcore',
       version='0.2',
       description='pymedext core toolkit for clinical NLP',
-      packages=['pymedext_core'],
+      packages=['pymedextcore'],
       install_requires=reqs,
       author='Antoine Neuraz, William Digan, Ivan Lerner, Alice Rogier, David Baudoin, Anita Burgun, Nicolas Garcelon, Bastien Rance ',
       author_email='william.digan@aphp.fr',
@@ -27,7 +27,7 @@ setup(name='pymedext_core',
       zip_safe=False,
       entry_points={
             'console_scripts': [
-                'pymedext=pymedext_core.pymedext_cmdline:main'
+                'pymedext=pymedextcore.pymedext_cmdline:main'
             ]
         },
 

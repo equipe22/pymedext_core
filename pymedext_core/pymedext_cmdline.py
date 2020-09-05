@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from pymedext_core import pymedext
+from pymedextcore import pymedext
 import argparse
 from os import listdir
 from os.path import isfile, join

@@ -1,4 +1,4 @@
-from pymedext_core import pymedext
+from pymedextcore import pymedext
 
 import sys
 import os

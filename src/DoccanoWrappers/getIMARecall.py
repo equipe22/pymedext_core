@@ -1,4 +1,4 @@
-from pymedext_core import pymedext # contains Document and other pymed connector object
+from pymedextcore import pymedext # contains Document and other pymed connector object
 
 import os, sys, csv
 import argparse

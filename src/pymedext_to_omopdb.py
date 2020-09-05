@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from pymedext_core import pymedext
+from pymedextcore import pymedext
 from intervaltree import Interval,IntervalTree
 import argparse
 import json
