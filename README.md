@@ -6,45 +6,51 @@ input data format txt, pymedext,biocxml,biocjson,fhir,brat
 into another one pymedext,biocxml,biocjson,omop,brat.
 pymedext core to extend in order to add new annotators.
 
-# Dataset
+# Install
 
-based on the QUAERO dataset
-
-``` tex
-Névéol A, Grouin C, Leixa J, Rosset S, Zweigenbaum P. The QUAERO French Medical Corpus: A Ressource for Medical Entity Recognition and Normalization. Fourth Workshop on Building and Evaluating Ressources for Health and Biomedical Text Processing - BioTxtM2014. 2014:24-30 
-
-wget https://quaerofrenchmed.limsi.fr/QUAERO_FrenchMed_BioC.zip
-
-wget https://quaerofrenchmed.limsi.fr/QUAERO_FrenchMed_brat.zip
-
-```
-
-# Makefile
-
+## package 
+### pip install
 ```bash
 
-make help
-build                          Build dinstance
-demo                           start a demo pymdext container to run it
-help                           Display available commands in Makefile
-install                        local install of pymedext packages
-uninstall                      uninstall local pymedext packages
+pip3 install git+https://github.com/equipe22/pymedext_core.git
 
 
 ```
-# How to used
 
-1) create a file config/.git-credentials based on the config/.git-credentials_template 
+### make
+```bash
+
+#local install of pymedext packages
+make install 
+
+
+```
+
+## docker image
+first create a file config/.git-credentials based on the config/.git-credentials_template 
  http:user:pass@github.com
-2) run make build. If you are under proxy modify the bin/build.sh script.
-3) execute bash bin/runInteractive.sh to test it in a docker container 
 
-# Documentation (in progress)
- firefox html/modules.html
+## docker command line
+```bash
+
+docker build -t pymedext-core:v0.0.2 .
+
+
+```
+
+### make
+```bash
+
+#build docker instance
+make build 
+
+```
 
 # Examples
 
-## pymedext command line
+## library pymedext Usage
+
+## pymedext commandline
 
 ``` bash
 pymedext -h
@@ -121,6 +127,47 @@ It will be done on pymedext_public
   - fhir to bioc
   - brat to omop
   - pymedext to doccano
+
+
+
+# Dataset
+
+based on the QUAERO dataset
+
+``` tex
+Névéol A, Grouin C, Leixa J, Rosset S, Zweigenbaum P. 
+The QUAERO French Medical Corpus: A Ressource for Medical Entity
+Recognition and Normalization. Fourth Workshop on Building and
+Evaluating Ressources for Health and Biomedical Text Processing 
+- BioTxtM2014. 2014:24-30 
+
+wget https://quaerofrenchmed.limsi.fr/QUAERO_FrenchMed_BioC.zip
+
+wget https://quaerofrenchmed.limsi.fr/QUAERO_FrenchMed_brat.zip
+
+```
+
+# Makefile
+
+```bash
+
+make help
+build                          Build dinstance
+demo                           start a demo pymdext container to run it
+help                           Display available commands in Makefile
+install                        local install of pymedext packages
+uninstall                      uninstall local pymedext packages
+
+
+```
+# How to used
+
+3) execute bash bin/runInteractive.sh to test it in a docker container 
+
+# Documentation (in progress)
+ firefox html/modules.html
+
+# Examples
 
 
 ## call PubTator
