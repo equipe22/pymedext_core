@@ -48,7 +48,86 @@ make build
 
 # Examples
 
+## Datasets
+
+all dataset used are on located on the data folder
+
+### PubTator (biocxml)
+We have implemented Pubtator as a resource for pymedext
+
+### QUAERO french corpus (biocxml)
+based on the QUAERO dataset
+
+``` tex
+Névéol A, Grouin C, Leixa J, Rosset S, Zweigenbaum P. 
+The QUAERO French Medical Corpus: A Ressource for Medical Entity
+Recognition and Normalization. Fourth Workshop on Building and
+Evaluating Ressources for Health and Biomedical Text Processing 
+- BioTxtM2014. 2014:24-30 
+
+```
+download the dataset
+
+``` bash
+cd data
+wget https://quaerofrenchmed.limsi.fr/QUAERO_FrenchMed_BioC.zip
+#wget https://quaerofrenchmed.limsi.fr/QUAERO_FrenchMed_brat.zip
+
+unzip QUAERO_FrenchMed_BioC.zip
+
+```
+
+
+### CellFinder corpus
+ Mariana Neves, Alexander Damaschun, Andreas Kurtz, Ulf Leser. Annotating and evaluating text for stem cell research. Third Workshop on Building and Evaluation Resources for Biomedical Text Mining (BioTxtM 2012) at Language Resources and Evaluation (LREC) 2012. [workshop] [paper] 
+https://www.informatik.hu-berlin.de/de/forschung/gebiete/wbi/resources/cellfinder
+
+``` bash
+cd data
+wget https://www.informatik.hu-berlin.de/de/forschung/gebiete/wbi/resources/cellfinder/cellfinder1_brat.tar.gz
+mkidr cellfinder
+mv cellfinder1_brat.tar.gz cellfinder
+tar -zxf cellfinder1_brat.tar.gz
+
+```
+
+### FHIR examples
+
+data are generated from 
+
+https://github.com/smart-on-fhir/sample-patients
+
 ## library pymedext Usage
+
+### Get Data from PubTator
+``` python
+from pymedextcore import pymedext
+pub = pymedext.PubTatorSource()
+docs = pub.GetPubTatorAnnotations(["27940449","28058064","28078498"])
+
+
+```
+
+
+### text to pymedext 
+
+``` python
+
+    pymedext -i demo.txt --itype txt -otype pymedext
+```
+
+
+### fhir to pymedext 
+
+``` python
+
+    pymedext -i patient-2169591.fhir-bundle.xml  --itype fhir -otype pymedext
+    pymedext -i patient-99912345.fhir-bundle.xml  --itype fhir -otype pymedext
+
+```
+
+
+### bioc to pymedext 
 
 ## pymedext commandline
 
@@ -130,22 +209,6 @@ It will be done on pymedext_public
 
 
 
-# Dataset
-
-based on the QUAERO dataset
-
-``` tex
-Névéol A, Grouin C, Leixa J, Rosset S, Zweigenbaum P. 
-The QUAERO French Medical Corpus: A Ressource for Medical Entity
-Recognition and Normalization. Fourth Workshop on Building and
-Evaluating Ressources for Health and Biomedical Text Processing 
-- BioTxtM2014. 2014:24-30 
-
-wget https://quaerofrenchmed.limsi.fr/QUAERO_FrenchMed_BioC.zip
-
-wget https://quaerofrenchmed.limsi.fr/QUAERO_FrenchMed_brat.zip
-
-```
 
 # Makefile
 
@@ -167,18 +230,7 @@ uninstall                      uninstall local pymedext packages
 # Documentation (in progress)
  firefox html/modules.html
 
-# Examples
 
-
-## call PubTator
-
-``` python
-from pymedext_core import pymedext
-pub = pymedext.PubTatorSource()
-doc = pub.GetPubTatorAnnotations(["27940449","28058064","28078498"])
-
-
-```
 
 
 # TODO
@@ -229,3 +281,5 @@ https://github.com/smart-on-fhir/fhir-parser
 https://github.com/smart-on-fhir/client-py/blob/master/fhirclient/models/documentmanifest.py
 
 ---
+# BRAT format
+https://brat.nlplab.org/standoff.html
