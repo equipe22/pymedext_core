@@ -69,7 +69,7 @@ class BioC(DataTransform):
                                       ID=annotationID,
                                       source=thisType,
                                       span=(thisAnnotation.locations[0].offset,thisAnnotation.locations[0].offset+ thisAnnotation.locations[0].length),
-                                      attributes =thisAttributes)
+                                      attributes =thisAttributes, isEntity=True)
                             )
                 if passage.relations:
                     for thisrelation in passage.relations:
