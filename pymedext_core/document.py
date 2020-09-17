@@ -6,7 +6,7 @@ class Document:
     """
     Document is the main class of pymedext. It is use to load file and annotate them with annotators
     """
-    def __init__(self, raw_text, ID, attributes=None, source=None, pathToconfig=None, documentDate = None):
+    def __init__(self, raw_text, ID=None, attributes=None, source=None, pathToconfig=None, documentDate = None):
         """create a Document object
 
         :param raw_text: raw_text of the doc. if raw_text = load
