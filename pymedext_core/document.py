@@ -20,7 +20,6 @@ class Document:
         :rtype: Document
 
         """
-        self.source_ID = ID
         self.documentDate = documentDate
         self.attributes = attributes
         self.source = source
@@ -32,10 +31,12 @@ class Document:
                                            source=source,
                                            span=(0, len(raw_text)))]
             self.ID = str(uuid.uuid1())
+            self.source_ID = ID
 
         else:
             self.ID= None
             self.annotations=[]
+            self.source_ID = None
             for thisPath in pathToconfig:
                 self.loadFromData(thisPath)
 
@@ -58,6 +59,11 @@ class Document:
                 if "raw_text" in annot["type"]:
                     if self.ID == None:
                         self.ID=annot["id"]
+                    if self.source_ID == None:
+                        self.source_ID=annot["source_ID"]
+                    if self.source == None:
+                        self.source=annot["source"]
+
                     self.annotations.insert(0,Annotation(type=annot["type"],
                                                          value=annot["value"],
                                                          source_ID=annot["source_ID"],
