@@ -29,7 +29,7 @@ class BioC(DataTransform):
                                   for value in passage.infons  if value not in ["section_type"] }
                     annotations_list.append(
                         Annotation(type=passage.infons["section_type"],
-                                              value=raw_text,
+                                              value=passage.text,
                                               ngram = passage.text,
                                               source_ID=raw_text_ID,
                                               ID=passageID,
@@ -39,7 +39,7 @@ class BioC(DataTransform):
                 else:
                      annotations_list.append(
                         Annotation(type="BioCPassage",
-                                              value=raw_text,
+                                              value=passage.text,
                                               ngram = passage.text,
                                               source_ID=raw_text_ID,
                                               ID=passageID,
