@@ -78,8 +78,8 @@ class Document:
                                                         source=annot["source"],
                                                         span=annot["span"],
                                                         attributes=annot["attributes"],
-                                                        isEntity=annot["isEntity"]))
-
+                                                        isEntity=annot["isEntity"],
+                                                        ngram=annot["ngram"]))
 
 
     def annotate(self, annotator): 
