@@ -103,7 +103,7 @@ https://github.com/smart-on-fhir/sample-patients
 ``` python
 from pymedextcore import pymedext
 pub = pymedext.PubTatorSource()
-docs = pub.GetPubTatorAnnotations(["27940449","28058064","28078498"])
+docs = pub.getPubTatorAnnotations(["27940449","28058064","28078498"])
 
 
 ```
