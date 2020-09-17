@@ -104,7 +104,15 @@ https://github.com/smart-on-fhir/sample-patients
 from pymedextcore import pymedext
 pub = pymedext.PubTatorSource()
 docs = pub.getPubTatorAnnotations(["27940449","28058064","28078498"])
+thisIt=1
+for doc in docs:
+    doc.writeJson("pubtator_"+str(thisIt)+".json")
+    thisIt+=1
 
+docs = pub.getPubTatorAnnotations(["27940449","28058064","28078498"],returnFormat=1)
+outData=open("pubtator_all.xml","w")
+outData.write(docs)
+outData.close()
 
 ```
 
