@@ -24,7 +24,7 @@ class PubTatorSource(Source, SimpleAPIConnector):
         super().__init__( host)
         logger.info("Initialize APi connection")
 
-    def getPubTatorAnnotations(self, pmid_list, Bioconcept=""):
+    def getPubTatorAnnotations(self, pmid_list, Bioconcept="",returnFormat=0):
         # load pmids
         json_pmid = {"pmids": [pmid.strip() for pmid in pmid_list]}
 
@@ -39,4 +39,7 @@ class PubTatorSource(Source, SimpleAPIConnector):
         if r.status_code != 200 :
             return ("[Error]: HTTP code "+ str(r.status_code))
         else:
-            return(BioC.load_collection(r.text,isFile=False))
+            if returnFormat==0: # return a document
+                return(BioC.load_collection(r.text,isFile=False ))
+            else:
+                return(r.text)
