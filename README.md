@@ -1,15 +1,18 @@
 
-# Description pymedext_core
+# PyMedExt - a library to process clinical text
 
-pymedext_core contains basic data wrangling function to transform 
-input data format txt, pymedext,biocxml,biocjson,fhir,brat
-into another one pymedext,biocxml,biocjson,omop,brat.
+PyMedExt is a library designed to process clinical text.
+PyMedExt includes basic data wrangling functions to transform 
+text input formated as txt, pymedext,biocxml,biocjson,fhir, or brat
+into pymedext, biocxml, biocjson, omop or brat.
+
+PyMedExt also includes
 pymedext core to extend in order to add new annotators.
 
-# Install
+## Installation of PyMedExt
 
-## package 
-### pip install
+### Installing the package 
+#### Using pip
 ```bash
 
 pip3 install git+https://github.com/equipe22/pymedext_core.git
@@ -17,7 +20,7 @@ pip3 install git+https://github.com/equipe22/pymedext_core.git
 
 ```
 
-### make
+#### Using GNU Make
 ```bash
 
 #local install of pymedext packages
@@ -26,11 +29,11 @@ make install
 
 ```
 
-## docker image
+### Deploying PyMedExt a Docker image
 first create a file config/.git-credentials based on the config/.git-credentials_template 
  http:user:pass@github.com
 
-## docker command line
+#### Docker in command line
 ```bash
 
 docker build -t pymedext-core:v0.0.2 .
@@ -38,7 +41,7 @@ docker build -t pymedext-core:v0.0.2 .
 
 ```
 
-### make
+#### Using GNU Make
 ```bash
 
 #build docker instance
@@ -46,17 +49,36 @@ make build
 
 ```
 
-# Examples
+## Examples
 
-## Datasets
+### Datasets
 
-all dataset used are on located on the data folder
+All the datasets used in the examples can be found in the data folder
 
-### PubTator (biocxml)
-We have implemented Pubtator as a resource for pymedext
+#### PubTator (biocxml)
+Users can retrieve pre-annotated PubMed files using PubTator.
 
-### QUAERO french corpus (biocxml)
-based on the QUAERO dataset
+**Get Data from PubTator**
+``` python
+from pymedextcore import pymedext
+
+pub = pymedext.PubTatorSource()
+docs = pub.getPubTatorAnnotations(["27940449","28058064","28078498"])
+counter=1
+for doc in docs:
+    doc.writeJson("pubtator_"+str(counter)+".json")
+    counter+=1
+
+docs = pub.getPubTatorAnnotations(["27940449","28058064","28078498"],returnFormat=1)
+
+outData=open("pubtator_all.xml","w")
+outData.write(docs)
+outData.close()
+
+```
+
+#### QUAERO french corpus (biocxml)
+In the example, we also used the QUAERO dataset:
 
 ``` tex
 Névéol A, Grouin C, Leixa J, Rosset S, Zweigenbaum P. 
@@ -66,7 +88,7 @@ Evaluating Ressources for Health and Biomedical Text Processing
 - BioTxtM2014. 2014:24-30 
 
 ```
-download the dataset
+To download the dataset
 
 ``` bash
 cd data
@@ -76,9 +98,7 @@ wget https://quaerofrenchmed.limsi.fr/QUAERO_FrenchMed_BioC.zip
 unzip QUAERO_FrenchMed_BioC.zip
 
 ```
-
-
-### CellFinder corpus
+#### CellFinder corpus
  Mariana Neves, Alexander Damaschun, Andreas Kurtz, Ulf Leser. Annotating and evaluating text for stem cell research. Third Workshop on Building and Evaluation Resources for Biomedical Text Mining (BioTxtM 2012) at Language Resources and Evaluation (LREC) 2012. [workshop] [paper] 
 https://www.informatik.hu-berlin.de/de/forschung/gebiete/wbi/resources/cellfinder
 
@@ -99,22 +119,7 @@ https://github.com/smart-on-fhir/sample-patients
 
 ## library pymedext Usage
 
-### Get Data from PubTator
-``` python
-from pymedextcore import pymedext
-pub = pymedext.PubTatorSource()
-docs = pub.getPubTatorAnnotations(["27940449","28058064","28078498"])
-thisIt=1
-for doc in docs:
-    doc.writeJson("pubtator_"+str(thisIt)+".json")
-    thisIt+=1
 
-docs = pub.getPubTatorAnnotations(["27940449","28058064","28078498"],returnFormat=1)
-outData=open("pubtator_all.xml","w")
-outData.write(docs)
-outData.close()
-
-```
 
 
 ### text to pymedext 
