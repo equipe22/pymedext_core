@@ -197,3 +197,12 @@ class Document:
         """
         annot = self.get_annotations('raw_text')[0]
         return annot
+
+    
+    def get_annotation_by_id(self, _id):
+        
+        res = [x for x in self.annotations if x.ID == _id]
+        if res == []:
+            return None
+        else:
+            return res[0]
