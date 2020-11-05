@@ -70,7 +70,7 @@ class Annotation:
                 'source_ID': self.source_ID,
                 'isEntity': self.isEntity,
                 'attributes': self.attributes,
-                'id':self.ID}
+                'ID':self.ID}
 
     def getAttributes(self):
         """get Attributes from current and parents Node
