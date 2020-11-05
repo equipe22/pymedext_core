@@ -133,6 +133,25 @@ class Document:
                 'attributes': self.attributes, 
                 'documentDate':self.documentDate
                }
+    
+    @staticMethod
+    def from_dict(d):
+        """Create a Document from a dict of document (as created using to_dict)
+        :param d: Dict
+        :returns: Document
+        :rtype: Document
+        """
+        doc = Document(raw_text='')
+        for k,v in d.items(): 
+            if k != 'annotations': 
+                setattr(doc, k ,v)
+            else:
+                doc.annotations = []
+                for ann in v:
+                    doc.annotations.append(Annotation(**ann))
+        return doc
+
+
 
     def writeJson(self, pathToOutput):
         """Transform Document to json PyMedExt
