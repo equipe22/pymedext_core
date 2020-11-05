@@ -134,7 +134,7 @@ class Document:
                 'documentDate':self.documentDate
                }
     
-    @staticMethod
+    @staticmethod
     def from_dict(d):
         """Create a Document from a dict of document (as created using to_dict)
         :param d: Dict
