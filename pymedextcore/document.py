@@ -14,7 +14,7 @@ class Document:
         :param raw_text: raw_text of the doc. if raw_text = load
         will load a json PyMedExt and transform it back to a Document object
         :param ID: The document name
-        :param attributes: Dict of attributes related to the document (e.g., person_id). 
+        :param attributes: Dict of attributes related to the document (e.g., person_id).
         :param source: not use yet but could be the source name I2B2, OMOP HEGP...
         :param pathToconfig: in case of (raw_text = load), it is a list which contains path to each PyMedExt file
         (could be use directly to filter)
@@ -41,6 +41,15 @@ class Document:
             self.source_ID = None
             for thisPath in pathToconfig:
                 self.loadFromData(thisPath)
+
+    def __repr__(self):
+        return str(self.to_dict())
+
+    def __str__(self):
+        if self.annotations is not None:
+            anns = f'\n            annotations : {[ x.__str__() for x in self.annotations if x.type !="raw_text"]}'
+        return f'Document( ID: {self.ID} \n\
+          raw_text: "{self.raw_text}" ) {anns} '
 
     def loadFromData(self, pathToconfig):
          """Transform json Pymedext to Document
@@ -84,7 +93,7 @@ class Document:
                                                         ngram=annot["ngram"]))
 
 
-    def annotate(self, annotator): 
+    def annotate(self, annotator):
         """Main function to annotate Document
 
         :param annotator: annotators list
@@ -94,10 +103,10 @@ class Document:
         """
         if type(annotator) == Annotator:
             annotator = [annotator]
-            
+
         for ann in annotator:
             self._annotate(ann)
-        
+
     def _annotate(self, annotator):
         """ Hidden function to annotate document
         :param annotator: an annotator
@@ -110,7 +119,7 @@ class Document:
         if new_annotations is not None:
             [self.annotations.append(x) for x in new_annotations]
         #setattr(self, annotator.key_output ,annotator.annotate_function(self))
-        
+
     def to_json(self):
         """ transform annotations to a json
 
@@ -118,8 +127,8 @@ class Document:
         :rtype: json
 
         """
-        return json.dump(self.to_dict())
-    
+        return json.dumps(self.to_dict())
+
     def to_dict(self):
         """transform Document to dict PyMedExt
         TODO: Need to add the Document Date if available,
@@ -132,10 +141,10 @@ class Document:
         return {'annotations' : [x.to_dict() for x in self.annotations],
                 'ID':self.ID,
                 'source_ID': self.source_ID,
-                'attributes': self.attributes, 
+                'attributes': self.attributes,
                 'documentDate':self.documentDate
                }
-    
+
     @staticmethod
     def from_dict(d):
         """Create a Document from a dict of document (as created using to_dict)
@@ -144,8 +153,8 @@ class Document:
         :rtype: Document
         """
         doc = Document(raw_text='')
-        for k,v in d.items(): 
-            if k != 'annotations': 
+        for k,v in d.items():
+            if k != 'annotations':
                 setattr(doc, k ,v)
             else:
                 doc.annotations = []
@@ -199,7 +208,8 @@ class Document:
             if anno.type == _type:
                 res.append(anno)
         return res
-           
+
+    @property
     def raw_text(self):
         """return the Document raw_text
 
@@ -219,9 +229,9 @@ class Document:
         annot = self.get_annotations('raw_text')[0]
         return annot
 
-    
+
     def get_annotation_by_id(self, _id):
-        
+
         res = [x for x in self.annotations if x.ID == _id]
         if res == []:
             return None

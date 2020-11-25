@@ -1,4 +1,3 @@
-import uuid
 import re
 import json
 import unidecode
@@ -7,14 +6,63 @@ from os import path
 import logging
 logger = logging.getLogger(__name__)
 
+from .utils import generate_id
 
+class Attribute:
+    """
+    Object containing an attribute of an Annotation
+    """
+    def __init__(self, type, value, source, source_ID , props = None, ID = None):
+        """Initialize an Attribute object
 
+        :param type: attribute type
+        :param value: value of the attribute
+        :param source: Annotator name
+        :param source_ID: Annotator ID
+        :param props: dict of properties
+        :returns: Attribute object
+        :rtype: Attribute
+        """
+        self.type = type
+        self.value = value
+        self.source = source
+        self.source_ID = source_ID
+        self.props = props
+        self.ID = generate_id(ID)
+
+    def to_json(self):
+        """Tranforms Attribute to json
+
+        :returns: json
+        :rtype: json
+
+        """
+        return json.dumps(self.to_dict())
+
+    def to_dict(self):
+        """Transform Annotation to a dict object
+        :returns: dict
+        :rtype: dict
+
+        """
+        return {'type':self.type,
+                'value':self.value,
+                'source':self.source,
+                'source_ID': self.source_ID,
+                'props': self.props,
+                'ID':self.ID}
+
+    def __repr__(self):
+        return str(self.to_dict())
+
+    def __str__(self):
+        return f'Attribute( {self.type}: "{self.value}")'
 
 class Annotation:
     """
     Based object which contains Annotation
     """
-    
+
     def __init__(self, type, value, source, source_ID, span = None, attributes = None, isEntity=False, ID = None, ngram = None):
         """Intialize an Annotation object
 
@@ -23,7 +71,7 @@ class Annotation:
         :param source: the name of the Annotator
         :param source_ID: the Annotator id
         :param span: the (start, end) position of the annotators
-        :param attributes: In some cases, the value is not enough so other key elements could be saved as dict in attributes
+        :param attributes: In some cases, the value is not enough so other key elements could be saved as a list of Attributes
         :param isEntity: if the Annotation is an entity define as an annotation which can be normalized  (e.g. by a specific uri from an ontology) not the case for segment
         :param ID: Annotation ID of this specific annotation
         :returns: Annotation
@@ -36,10 +84,7 @@ class Annotation:
         self.span = span
         self.source_ID = source_ID
         self.attributes = attributes
-        if ID is None:
-            self.ID = str(uuid.uuid1())
-        else:
-            self.ID = ID
+        self.ID = generate_id(ID)
         self.isEntity = isEntity
         #add graph properties
         self.ngram = ngram # should be called raw_value?
@@ -48,14 +93,14 @@ class Annotation:
         self.root = None
 
     def to_json(self):
-        """Tranform Annotation  to json
+        """Tranforms Annotation  to json
 
         :returns: json
         :rtype: json
 
         """
-        return json.dump(self.to_dict())
-    
+        return json.dumps(self.to_dict())
+
     def to_dict(self):
         """Transform Annotation to a dict object
         :returns: dict
@@ -69,8 +114,18 @@ class Annotation:
                 'source':self.source,
                 'source_ID': self.source_ID,
                 'isEntity': self.isEntity,
-                'attributes': self.attributes,
+                'attributes': [x.to_dict() for x in self.attributes] if self.attributes is not None else None,
                 'ID':self.ID}
+
+    def __repr__(self):
+        return str(self.to_dict())
+
+    def __str__(self):
+        atts = ""
+        if self.attributes is not None:
+            atts = f'\n            attributes : {[ x.__str__() for x in self.attributes ]}'
+        return \
+            f'Annotation( {self.type} : "{self.value}" / span : {self.span} {atts} )'
 
     def getAttributes(self):
         """get Attributes from current and parents Node
@@ -259,11 +314,6 @@ class Annotation:
 
 
 
-
-
-
-
-
 class Annotator:
     """
     Abstract class of each Annotator. Furthermore each Annotator must returns a list of Annotation
@@ -284,7 +334,7 @@ class Annotator:
         self.key_input = key_input # list
         self.key_output = key_output # str
         self.ID = ID
-        
+
     def get_first_key_input(self,_input):
         """get_first_key_input
 	    return the annotation type [0],
@@ -295,7 +345,7 @@ class Annotator:
         """
         logger.debug("returns annotation")
         return  self.get_key_input(_input, 0)
-    
+
     def get_all_key_input(self,_input):
         """returns all key input for the Annotors
         TODO: rename selectAll
@@ -306,7 +356,7 @@ class Annotator:
         """
         logger.debug("returns all annotations")
         return [x for x in _input.annotations if x.type in self.key_input]
-    
+
     def get_key_input(self, _input, i):
         """return a specific annotations type from key_input
         :param _input: key_input list
