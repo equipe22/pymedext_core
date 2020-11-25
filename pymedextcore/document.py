@@ -1,7 +1,9 @@
 import uuid
 import json
 from .annotators import Annotator, Annotation
-        
+
+from .utils import generate_id
+
 class Document:
     """
     Document is the main class of pymedext. It is use to load file and annotate them with annotators
@@ -23,14 +25,14 @@ class Document:
         self.documentDate = documentDate
         self.attributes = attributes
         self.source = source
-        
+
         if raw_text != "load":
             self.annotations = [Annotation(type="raw_text",
                                            value=raw_text,
                                            source_ID=ID,
                                            source=source,
                                            span=(0, len(raw_text)))]
-            self.ID = str(uuid.uuid1())
+            self.ID = generate_id(ID)
             self.source_ID = ID
 
         else:
