@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 
+import uuid
 import bioc
 from bioc import biocjson
 from .datatransform import DataTransform
 from .document import Document
 from .annotators import Annotation
-import uuid
 
 class BioC(DataTransform):
+    @staticmethod
     def load_collection(bioc_input,format =0, isFile = True):
         #Generalize load and add as an argument type 0 default is an xml, 1 a json bioc collection
         collection = None
@@ -25,26 +26,26 @@ class BioC(DataTransform):
                 raw_text = raw_text + passage.text
                 passageID= str(uuid.uuid1())
                 if "section_type" in passage.infons:
-                    passageAttribute = {value:passage.infons[value]
-                                  for value in passage.infons  if value not in ["section_type"] }
+                    #passageAttribute = {value:passage.infons[value]
+                    #              for value in passage.infons  if value not in ["section_type"] }
                     annotations_list.append(
                         Annotation(type=passage.infons["section_type"],
-                                              value=passage.text,
-                                              ngram = passage.text,
-                                              source_ID=raw_text_ID,
-                                              ID=passageID,
-                                              source="BioCPassage",
-                                              span=(passage.offset,passage.offset+len(passage.text)))
+                                  value=passage.text,
+                                  ngram = passage.text,
+                                  source_ID=raw_text_ID,
+                                  ID=passageID,
+                                  source="BioCPassage",
+                                  span=(passage.offset,passage.offset+len(passage.text)))
                         )
                 else:
-                     annotations_list.append(
+                    annotations_list.append(
                         Annotation(type="BioCPassage",
-                                              value=passage.text,
-                                              ngram = passage.text,
-                                              source_ID=raw_text_ID,
-                                              ID=passageID,
-                                              source="BioCPassage",
-                                              span=(passage.offset,passage.offset+len(passage.text)))
+                                  value=passage.text,
+                                  ngram = passage.text,
+                                  source_ID=raw_text_ID,
+                                  ID=passageID,
+                                  source="BioCPassage",
+                                  span=(passage.offset,passage.offset+len(passage.text)))
                         )
 
                 relations_annot_dict=dict()
@@ -57,10 +58,17 @@ class BioC(DataTransform):
                         elif "Identifier" in thisAnnotation.infons.keys() :
                             identifier=thisAnnotation.infons["Identifier"]
                         thisAttributes = {value:thisAnnotation.infons[value]
-                                          for value in thisAnnotation.infons  if value not in ["type","identifier","Identifier"] }
+                                          for value in thisAnnotation.infons  \
+                                          if value not in ["type","identifier","Identifier"] }
                         thisAttributes["id"]=thisAnnotation.id
-                        relations_annot_dict[thisAnnotation.id]=(thisAnnotation.locations[0].offset,thisAnnotation.locations[0].offset+ thisAnnotation.locations[0].length)
-                        thisType = str(type(thisAnnotation)).replace(">","").replace("<","").replace("class ","").replace("bioc.bioc.","").replace("'","")
+                        relations_annot_dict[thisAnnotation.id]= \
+                                (thisAnnotation.locations[0].offset,
+                                 thisAnnotation.locations[0].offset + thisAnnotation.locations[0].length)
+                        thisType = str(type(thisAnnotation)).replace(">","") \
+                                                            .replace("<","") \
+                                                            .replace("class ","") \
+                                                            .replace("bioc.bioc.","") \
+                                                            .replace("'","")
                         annotations_list.append(
                            Annotation(type=thisAnnotation.infons["type"],
                                       value=identifier,
@@ -68,7 +76,8 @@ class BioC(DataTransform):
                                       source_ID=passageID,
                                       ID=annotationID,
                                       source=thisType,
-                                      span=(thisAnnotation.locations[0].offset,thisAnnotation.locations[0].offset+ thisAnnotation.locations[0].length),
+                                      span=(thisAnnotation.locations[0].offset,
+                                            thisAnnotation.locations[0].offset+ thisAnnotation.locations[0].length),
                                       attributes =thisAttributes, isEntity=True)
                             )
                 if passage.relations:
@@ -80,9 +89,14 @@ class BioC(DataTransform):
                         elif "Identifier" in thisrelation.infons.keys():
                             identifier=thisrelation.infons["Identifier"]
                         thisAttributes = {value:thisrelation.infons[value]
-                                          for value in thisrelation.infons  if value not in ["type","identifier","Identifier"] }
+                                          for value in thisrelation.infons
+                                          if value not in ["type","identifier","Identifier"] }
                         thisAttributes["id"]=thisrelation.id
-                        thisType = str(type(thisrelation)).replace(">","").replace("<","").replace("class ","").replace("bioc.bioc.","").replace("'","")
+                        thisType = str(type(thisrelation)).replace(">","") \
+                                                          .replace("<","") \
+                                                          .replace("class ","") \
+                                                          .replace("bioc.bioc.","") \
+                                                          .replace("'","")
                         for refNode in thisrelation.nodes:
                             annotations_list.append(
                                Annotation(type=thisrelation.infons["type"],
@@ -95,33 +109,38 @@ class BioC(DataTransform):
                                           attributes=thisAttributes)
                                 )
 
-            thisDocument = Document(raw_text =raw_text,ID =raw_text_ID, source = collection.source, documentDate = collection.date)
+            thisDocument = Document(raw_text =raw_text,
+                                    ID =raw_text_ID,
+                                    source = collection.source,
+                                    documentDate = collection.date)
             # attributes=collection.key,collection.standalone,
             # collection.encoding,collection.version
             # collection.infons
             thisDocument.annotations.extend(annotations_list)
             documents_collection.append(thisDocument)
-        return(documents_collection)
+        return documents_collection
 
+    @staticmethod
     def __load_collection_xml(bioc_xml, isFile=True):
         if isFile :
             with open(bioc_xml, 'r') as fp:
                 collection = bioc.load(fp)
-            return(collection)
+            return collection
         else:
             collection = bioc.loads(bioc_xml)
-            return(collection)
+            return collection
 
-
+    @staticmethod
     def __load_collection_json(bioc_json, isFile=True):
         if isFile:
             with open(bioc_json, 'r') as fp:
                 collection = biocjson.load(fp)
-            return(collection)
+            return collection
         else:
             collection = biocjson.loads(bioc_json)
-            return(collection)
+            return collection
 
+    @staticmethod
     def save_as_collection(list_of_pymedDocs):
         thisBiocCollection = bioc.BioCCollection()
         for thisPymedDoc in list_of_pymedDocs:
@@ -150,9 +169,10 @@ class BioC(DataTransform):
                     thisBiocDoc.passages[-1].add_annotation(thisAnnotation)
             thisBiocCollection.add_document(thisBiocDoc)
 
+    @staticmethod
     def writeBiocCollection(filename, collection):
         with bioc.BioCXMLDocumentWriter(filename) as writer:
             writer.write_collection_info(collection)
             for document in collection.documents:
                 writer.write_document(document)
-        return(1)
+        return 1

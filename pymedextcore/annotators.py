@@ -1,18 +1,15 @@
-import re
+"""Classes related to Annotators and Annotations"""
 import json
-import unidecode
-from subprocess import Popen, PIPE
-from os import path
 import logging
-logger = logging.getLogger(__name__)
-
 from .utils import generate_id
+logger = logging.getLogger(__name__)
 
 class Attribute:
     """
     Object containing an attribute of an Annotation
     """
-    def __init__(self, type, value, source, source_ID , props = None, ID = None):
+    def __init__(self, type, value, source=None, source_ID=None ,
+                 props = None, ID = None):
         """Initialize an Attribute object
 
         :param type: attribute type
@@ -63,7 +60,8 @@ class Annotation:
     Based object which contains Annotation
     """
 
-    def __init__(self, type, value, source, source_ID, span = None, attributes = None, isEntity=False, ID = None, ngram = None):
+    def __init__(self, type, value, source, source_ID, span = None,
+                 attributes = None, isEntity=False, ID = None, ngram = None):
         """Intialize an Annotation object
 
         :param type: annotation type define by the user (linked to the Annotator)
@@ -71,8 +69,11 @@ class Annotation:
         :param source: the name of the Annotator
         :param source_ID: the Annotator id
         :param span: the (start, end) position of the annotators
-        :param attributes: In some cases, the value is not enough so other key elements could be saved as a list of Attributes
-        :param isEntity: if the Annotation is an entity define as an annotation which can be normalized  (e.g. by a specific uri from an ontology) not the case for segment
+        :param attributes: In some cases, the value is not enough so other key
+                           elements could be saved as a list of Attributes
+        :param isEntity: if the Annotation is an entity define as an annotation
+                         which can be normalized  (e.g. by a specific uri from
+                         an ontology) not the case for segment
         :param ID: Annotation ID of this specific annotation
         :returns: Annotation
         :rtype: Annotation
@@ -114,7 +115,8 @@ class Annotation:
                 'source':self.source,
                 'source_ID': self.source_ID,
                 'isEntity': self.isEntity,
-                'attributes': [x.to_dict() for x in self.attributes] if self.attributes is not None else None,
+                'attributes': [x.to_dict() for x in self.attributes] \
+                                if self.attributes is not None else None,
                 'ID':self.ID}
 
     def __repr__(self):
@@ -134,7 +136,7 @@ class Annotation:
         :rtype: a dict
 
         """
-        return(self.attributes+self.parents.getAttributes())
+        return self.attributes+self.parent.getAttributes()
 
     def getNgram(self):
         """get nGram from root
@@ -143,7 +145,7 @@ class Annotation:
         :rtype: string
 
         """
-        return(self.ngram)
+        return self.ngram
 
     def setNgram(self):
         """set nGram from root
@@ -161,7 +163,7 @@ class Annotation:
         :rtype: tuple
 
         """
-        return(self.span)
+        return self.span
 
     def getChildrenSpan(self):
         """from current node  get all children span
@@ -171,10 +173,10 @@ class Annotation:
 
         """
         childrenSpans = []
-        if self.children != None:
+        if self.children is not None:
             for child in self.children:
                 childrenSpans.append(child.getSpan())
-        return(childrenSpans)
+        return childrenSpans
 
     def getEntitiesChildren(self):
         """From current Node, return all children which are
@@ -185,9 +187,9 @@ class Annotation:
 
         """
         listChildren=[]
-        if self.children != None:
+        if self.children is not None:
             for child in self.children:
-                if child.children == None:
+                if child.children is None:
                     if child.isEntity:
                         listChildren.append(child)
                 else:
@@ -195,7 +197,7 @@ class Annotation:
         else:
             if self.isEntity:
                 listChildren.append(self)
-        return(listChildren)
+        return listChildren
 
     def getProperties(self, filterType):
         """return current node Properties if the Annotation is from a given type
@@ -208,7 +210,7 @@ class Annotation:
         properties=[]
         if self.type in filterType:
             properties.append(self.to_dict())
-        return(properties)
+        return properties
 
     def getParentsProperties(self, filterType):
         """ return parent properties of current annotations if
@@ -220,7 +222,7 @@ class Annotation:
 
         """
         properties = []
-        if self.parent != None:
+        if self.parent is not None:
             # print( " go see parents" )
             # print(properties)
             properties.extend(self.parent.getParentsProperties(filterType))
@@ -231,7 +233,7 @@ class Annotation:
             # print(self.span)
             # print(properties)
             properties.extend(self.getProperties(filterType))
-        return(properties)
+        return properties
 
     def setParent(self, parent):
         """set Parent to current Annotation
@@ -262,7 +264,7 @@ class Annotation:
 
         """
         child.setParent(self)
-        if self.children == None:
+        if self.children is None:
             self.children = [child]
         else:
             self.children.append(child)
@@ -304,27 +306,32 @@ class Annotation:
         :rtype: Annotation
 
         """
-        if self.parent != None:
+        if self.parent is not None:
             if self.parent.type == fromType :
-                return(self.parent)
+                return self.parent
             else:
                 self.parent.getParent(fromType)
         else:
-            return(None)
+            return None
 
 
 
 class Annotator:
     """
-    Abstract class of each Annotator. Furthermore each Annotator must returns a list of Annotation
-    TODO: get_all_key_input	return the annotations oF Documents.annotations which have the same type of key_input list (rename as selectall)
-    TODO: get_key_input	return the annotations oF Documents.annotations which have the same type of the i th key_input element  (rename as select)
-    TODO: annotate_function	each annotator should implement this functionand return a list of annotations object
+    Abstract class of each Annotator. Furthermore each Annotator must returns
+    a list of Annotation
+    TODO: get_all_key_input	return the annotations oF Documents.annotations
+          which have the same type of key_input list (rename as selectall)
+    TODO: get_key_input	return the annotations oF Documents.annotations which
+          have the same type of the i th key_input element  (rename as select)
+    TODO: annotate_function	each annotator should implement this functionand
+          return a list of annotations object
     """
     def __init__(self, key_input, key_output, ID):
         """Initialied an Annotator
 
-        :param key_input: a list of input annotation type (because annotators could use more than one type of annotation)
+        :param key_input: a list of input annotation type (because annotators
+                          could use more than one type of annotation)
         :param key_output:  a string which is the type of Annotator
         :param ID: an uuid object, must be generate by the user to be uniq
         :returns: Annotator
@@ -375,4 +382,4 @@ class Annotator:
         :returns: a list of annotations. they will be added to Document.annotations
         :rtype:a list of annotations
         """
-        pass
+        return NotImplemented

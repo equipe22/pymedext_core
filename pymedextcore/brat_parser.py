@@ -43,7 +43,7 @@ def sanitize_tabs(line: str, max_tabs: int = 2) -> str:
 
 
 @dataclass
-class Entity(object):
+class Entity:
     """A simple annotation data structure."""
 
     id: str
@@ -61,7 +61,7 @@ class Entity(object):
 
 
 @dataclass
-class Relation(object):
+class Relation:
     """A simple relation data structure."""
 
     id: str
@@ -71,7 +71,7 @@ class Relation(object):
 
 
 @dataclass
-class Attribute(object):
+class Attribute:
     """A simple attribute data structure."""
 
     id: str
@@ -81,7 +81,7 @@ class Attribute(object):
 
 
 @dataclass
-class Grouping(object):
+class Grouping:
     id: str
     type: str
     items: List[Entity]
@@ -92,7 +92,7 @@ class Grouping(object):
 
 
 @dataclass
-class AugmentedEntity(object):
+class AugmentedEntity:
     """An augmented entity data structure with its relations and attributes."""
 
     id: str
@@ -113,7 +113,7 @@ class AugmentedEntity(object):
 
 
 @dataclass
-class Document(object):
+class Document:
     entities: List[Entity]
     relations: List[Relation]
     attributes: List[Attribute]

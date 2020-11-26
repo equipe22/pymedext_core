@@ -1,14 +1,17 @@
-import uuid
+"""Classes relative to the documents"""
+
+
 import json
 from .annotators import Annotator, Annotation
-
 from .utils import generate_id
 
 class Document:
     """
-    Document is the main class of pymedext. It is use to load file and annotate them with annotators
+    Document is the main class of pymedext. It is use to load file and annotate
+    them with annotators
     """
-    def __init__(self, raw_text, ID=None, attributes=None, source=None, pathToconfig=None, documentDate = None):
+    def __init__(self, raw_text, ID=None, attributes=None, source=None,
+                 pathToconfig=None, documentDate = None):
         """create a Document object
 
         :param raw_text: raw_text of the doc. if raw_text = load
@@ -16,7 +19,8 @@ class Document:
         :param ID: The document name
         :param attributes: Dict of attributes related to the document (e.g., person_id).
         :param source: not use yet but could be the source name I2B2, OMOP HEGP...
-        :param pathToconfig: in case of (raw_text = load), it is a list which contains path to each PyMedExt file
+        :param pathToconfig: in case of (raw_text = load), it is a list which
+                             contains path to each PyMedExt file
         (could be use directly to filter)
         :returns: Document
         :rtype: Document
@@ -47,32 +51,33 @@ class Document:
 
     def __str__(self):
         if self.annotations is not None:
-            anns = f'\n            annotations : {[ x.__str__() for x in self.annotations if x.type !="raw_text"]}'
+            anns = f'\n            annotations : \
+            {[ x.__str__() for x in self.annotations if x.type !="raw_text"]}'
         return f'Document( ID: {self.ID} \n\
           raw_text: "{self.raw_text}" ) {anns} '
 
     def loadFromData(self, pathToconfig):
-         """Transform json Pymedext to Document
+        """Transform json Pymedext to Document
 
-         :param pathToconfig: list of path to json files,
-         :returns: add annotations to Document
-         :rtype: Document
+        :param pathToconfig: list of path to json files,
+        :returns: add annotations to Document
+        :rtype: Document
 
-         """
-         with open(pathToconfig) as f:
-             mesannotations=json.load(f)
-         for annot in mesannotations["annotations"]:
+        """
+        with open(pathToconfig) as file:
+            mesannotations=json.load(file)
+        for annot in mesannotations["annotations"]:
             #print("annot[value]", annot["value"])
             #print("type(annot[value])", type(annot["value"]))
             if "empty" not in annot["value"]:
                 #print("empty not in annot[value]")
 
                 if "raw_text" in annot["type"]:
-                    if self.ID == None:
+                    if self.ID is None:
                         self.ID=annot["id"]
-                    if self.source_ID == None:
+                    if self.source_ID is None:
                         self.source_ID=annot["source_ID"]
-                    if self.source == None:
+                    if self.source is None:
                         self.source=annot["source"]
 
                     self.annotations.insert(0,Annotation(type=annot["type"],
@@ -82,7 +87,7 @@ class Document:
                                                          source=annot["source"],
                                                          span=annot["span"]))
                 else:
-                     self.annotations.append(Annotation(type=annot["type"],
+                    self.annotations.append(Annotation(type=annot["type"],
                                                         value=annot["value"],
                                                         source_ID=annot["source_ID"],
                                                         ID=annot["id"],
@@ -101,7 +106,7 @@ class Document:
         :rtype: Document
 
         """
-        if type(annotator) == Annotator:
+        if isinstance(Annotator, annotator):
             annotator = [annotator]
 
         for ann in annotator:
@@ -117,7 +122,8 @@ class Document:
         new_annotations = annotator.annotate_function(self)
         #print(new_annotations)
         if new_annotations is not None:
-            [self.annotations.append(x) for x in new_annotations]
+            for ann in new_annotations:
+                self.annotations.append(ann)
         #setattr(self, annotator.key_output ,annotator.annotate_function(self))
 
     def to_json(self):
@@ -146,19 +152,19 @@ class Document:
                }
 
     @staticmethod
-    def from_dict(d):
+    def from_dict(doc_dict):
         """Create a Document from a dict of document (as created using to_dict)
-        :param d: Dict
+        :param doc_dict: Dict
         :returns: Document
         :rtype: Document
         """
         doc = Document(raw_text='')
-        for k,v in d.items():
-            if k != 'annotations':
-                setattr(doc, k ,v)
+        for key,value in doc_dict.items():
+            if key != 'annotations':
+                setattr(doc, key ,value)
             else:
                 doc.annotations = []
-                for ann in v:
+                for ann in value:
                     doc.annotations.append(Annotation(**ann))
         return doc
 
@@ -172,10 +178,11 @@ class Document:
         :rtype: none
 
         """
-        with open(pathToOutput, 'w', encoding='utf-8') as f:
-            json.dump(self.to_dict(), f, ensure_ascii=False, indent=4)
+        with open(pathToOutput, 'w', encoding='utf-8') as file:
+            json.dump(self.to_dict(), file, ensure_ascii=False, indent=4)
 
-    def get_annotations(self, _type, source_id=None, target_id=None, attributes=None, value=None, span=None):
+    def get_annotations(self, _type, source_id=None, target_id=None,
+                        attributes=None, value=None, span=None):
         """
         returns an annotations of a specific type from source. Can  filter from
         type, source_id or target_id, span, source_id, attributes and value.
@@ -231,9 +238,10 @@ class Document:
 
 
     def get_annotation_by_id(self, _id):
+        """Retrieves an annotation given its id
+        """
 
         res = [x for x in self.annotations if x.ID == _id]
         if res == []:
             return None
-        else:
-            return res[0]
+        return res[0]
