@@ -129,6 +129,12 @@ class Annotation:
         return \
             f'Annotation( {self.type} : "{self.value}" / span : {self.span} {atts} )'
 
+    def add_attribute(self, attribute):
+        """adds an Attribute"""
+        if self.attributes is None:
+            self.attributes = []
+        self.attributes.append(attribute)
+
     def getAttributes(self):
         """get Attributes from current and parents Node
 

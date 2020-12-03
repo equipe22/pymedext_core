@@ -106,7 +106,7 @@ class Document:
         :rtype: Document
 
         """
-        if isinstance(Annotator, annotator):
+        if isinstance(annotator, Annotator):
             annotator = [annotator]
 
         for ann in annotator:
