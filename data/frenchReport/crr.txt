@@ -1,0 +1,29 @@
+Patient : Jean Bras
+NIP : XXXXXX
+Date de naissance : 05/01/1968
+…
+EXAMEN DE RADIOLOGIE
+Examen tomodensitometrique thoraco-abdomino-pelvien
+Date : 10 juillet 2015
+Indication :
+Liposarcome
+Bilan en ours de chimiotherapie de 1ere ligne.
+Scanner de reference de fevrier 2015.
+
+Technique :
+Coupes par mililmetriques a 80 secondes sur le thorax, abdomen et le pelvis.
+Ultravist 300 110 ml
+DLP 349 mGY.cm
+
+Resultats :
+Pour les lésions cibles :
+-	C1 : masse volumineuse du flanc gauche hypervasculaire heterogene, etendue du bord superieur de l’aile iliaque gauche, laminant le rein gauche et refoulant les anses digestives en dedans. Cette masse mesure 120 mm de grand axe versus 115 mm sur l’examen du mois de fevrier.
+-	C2 :  ….., mesurant  40 mm de grand axe versus 46 mm en fevrier 2015
+-	C3 : Masse situee en-dedans du colon gauche…, mesurant 35 mm de grand axe versus 31 mm en fevrier 2015.
+Pour les lésions non cibles :
+…
+
+Conclusion :
+1)	La somme des diamètres des lésions cibles est égale a 40 +35+120 = 195 mm versus 192 mm en fevrier 2015 soit + 2% soit SD
+2)	absence de nouvelle lésion NON
+3)	au total : SD – SD – NON = SD
