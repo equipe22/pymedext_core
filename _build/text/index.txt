@@ -1,0 +1,12 @@
+Welcome to pymedext_core’s documentation!
+*****************************************
+
+
+Indices and tables
+******************
+
+* Index
+
+* Module Index
+
+* Search Page

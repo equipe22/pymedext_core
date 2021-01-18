@@ -1,0 +1,438 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pymedext_core.omopsource &mdash; pymedext_core 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'0.0.1',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/js/versions.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/msmb.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pymedext_core
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pymedext_core</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>pymedext_core.omopsource</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for pymedext_core.omopsource</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1">#</span>
+<span class="kn">from</span> <span class="nn">.source</span> <span class="kn">import</span> <span class="n">Source</span>
+<span class="kn">from</span> <span class="nn">.connector</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">psycopg2</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">psycopg2.extras</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">import</span> <span class="nn">io</span>
+<span class="c1">#source from https://hakibenita.com/fast-load-data-python-postgresql</span>
+
+
+
+
+<div class="viewcode-block" id="clean_csv_value"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.omopsource.clean_csv_value">[docs]</a><span class="k">def</span> <span class="nf">clean_csv_value</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">r</span><span class="s1">&#39;\N&#39;</span>
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">n&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StringIteratorIO"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.omopsource.StringIteratorIO">[docs]</a><span class="k">class</span> <span class="nc">StringIteratorIO</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">TextIOBase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">iter</span><span class="p">:</span> <span class="n">Iterator</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_iter</span> <span class="o">=</span> <span class="nb">iter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_buff</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+<div class="viewcode-block" id="StringIteratorIO.readable"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.omopsource.StringIteratorIO.readable">[docs]</a>    <span class="k">def</span> <span class="nf">readable</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+    <span class="k">def</span> <span class="nf">_read1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buff</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_buff</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_iter</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buff</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_buff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buff</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">ret</span><span class="p">):]</span>
+        <span class="k">return</span> <span class="n">ret</span>
+
+<div class="viewcode-block" id="StringIteratorIO.read"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.omopsource.StringIteratorIO.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read1</span><span class="p">()</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="n">line</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read1</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="n">n</span> <span class="o">-=</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+                <span class="n">line</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">line</span><span class="p">)</span></div></div>
+
+
+
+
+
+<div class="viewcode-block" id="OmopSource"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.omopsource.OmopSource">[docs]</a><span class="k">class</span> <span class="nc">OmopSource</span><span class="p">(</span><span class="n">Source</span><span class="p">,</span><span class="n">PostGresConnector</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Connection to a POstgres Ommop source</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">DB_host</span><span class="p">,</span> <span class="n">DB_name</span><span class="p">,</span> <span class="n">DB_port</span><span class="p">,</span> <span class="n">DB_user</span><span class="p">,</span> <span class="n">DB_password</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize a connection to a PostresConnector DB using super() constructor</span>
+
+<span class="sd">        :param DB_host: </span>
+<span class="sd">        :param DB_name: </span>
+<span class="sd">        :param DB_port: </span>
+<span class="sd">        :param DB_user: </span>
+<span class="sd">        :param DB_password: </span>
+<span class="sd">        :returns: </span>
+<span class="sd">        :rtype: </span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span> <span class="n">DB_host</span><span class="p">,</span> <span class="n">DB_name</span><span class="p">,</span> <span class="n">DB_port</span><span class="p">,</span> <span class="n">DB_user</span><span class="p">,</span> <span class="n">DB_password</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Initialize Omop connection&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__insert_execute_values_iterator_person</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dict_person_local</span><span class="p">:</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Insert values to an Omop Person table  &quot;&quot;&quot;</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+            <span class="n">psycopg2</span><span class="o">.</span><span class="n">extras</span><span class="o">.</span><span class="n">execute_values</span><span class="p">(</span><span class="n">cursor</span><span class="p">,</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                INSERT INTO person VALUES </span><span class="si">%s</span><span class="s2">;</span>
+<span class="s2">            &quot;&quot;&quot;</span><span class="p">,</span> <span class="p">((</span>
+                <span class="n">dict_person_local</span><span class="p">[</span><span class="s2">&quot;person_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_person_local</span><span class="p">[</span><span class="s2">&quot;gender_concept_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_person_local</span><span class="p">[</span><span class="s2">&quot;year_of_birth&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_person_local</span><span class="p">[</span><span class="s2">&quot;month_of_birth&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_person_local</span><span class="p">[</span><span class="s2">&quot;day_of_birth&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_person_local</span><span class="p">[</span><span class="s2">&quot;birth_datetime&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_person_local</span><span class="p">[</span><span class="s2">&quot;death_datetime&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_person_local</span><span class="p">[</span><span class="s2">&quot;race_concept_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_person_local</span><span class="p">[</span><span class="s2">&quot;ethnicity_concept_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_person_local</span><span class="p">[</span><span class="s2">&quot;location_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_person_local</span><span class="p">[</span><span class="s2">&quot;provider_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_person_local</span><span class="p">[</span><span class="s2">&quot;care_site_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_person_local</span><span class="p">[</span><span class="s2">&quot;person_source_value&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_person_local</span><span class="p">[</span><span class="s2">&quot;gender_source_value&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_person_local</span><span class="p">[</span><span class="s2">&quot;gender_source_concept_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_person_local</span><span class="p">[</span><span class="s2">&quot;race_source_value&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_person_local</span><span class="p">[</span><span class="s2">&quot;race_source_concept_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_person_local</span><span class="p">[</span><span class="s2">&quot;ethnicity_source_value&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_person_local</span><span class="p">[</span><span class="s2">&quot;ethnicity_source_concept_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+            <span class="p">)</span> <span class="k">for</span> <span class="n">position</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">dict_person_local</span><span class="p">[</span><span class="s2">&quot;person_id&quot;</span><span class="p">])</span> <span class="p">)</span> <span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__insert_execute_values_iterator_note</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dict_note</span><span class="p">:</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+            <span class="n">psycopg2</span><span class="o">.</span><span class="n">extras</span><span class="o">.</span><span class="n">execute_values</span><span class="p">(</span><span class="n">cursor</span><span class="p">,</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                INSERT INTO note VALUES </span><span class="si">%s</span><span class="s2">;</span>
+<span class="s2">            &quot;&quot;&quot;</span><span class="p">,</span> <span class="p">((</span>
+                <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;note_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;person_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;note_event_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;note_event_field_concept_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;note_date&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;note_datetime&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;note_type_concept_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;note_class_concept_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;note_title&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;note_text&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;encoding_concept_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;language_concept_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;provider_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;visit_occurrence_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;visit_detail_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;note_source_value&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+            <span class="p">)</span> <span class="k">for</span> <span class="n">position</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;note_id&quot;</span><span class="p">]))</span> <span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__insert_execute_values_iterator_note_nlp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dict_nlp</span><span class="p">:</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+            <span class="n">psycopg2</span><span class="o">.</span><span class="n">extras</span><span class="o">.</span><span class="n">execute_values</span><span class="p">(</span><span class="n">cursor</span><span class="p">,</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                INSERT INTO note VALUES </span><span class="si">%s</span><span class="s2">;</span>
+<span class="s2">            &quot;&quot;&quot;</span><span class="p">,</span> <span class="p">((</span>
+                <span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;note_nlp_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;note_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;section_concept_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;snippet&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">,</span><span class="s2">&quot;##&quot;</span><span class="p">),</span>
+                <span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;offset&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">,</span><span class="s2">&quot;##&quot;</span><span class="p">),</span>
+                <span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;lexical_variant&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">,</span><span class="s2">&quot;##&quot;</span><span class="p">),</span>
+                <span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;note_nlp_concept_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;nlp_system&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;nlp_date&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;nlp_datetime&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;term_exists&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">,</span><span class="s2">&quot;##&quot;</span><span class="p">),</span>
+                <span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;term_temporal&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">,</span><span class="s2">&quot;##&quot;</span><span class="p">),</span>
+                <span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;term_modifiers&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">,</span><span class="s2">&quot;##&quot;</span><span class="p">),</span>
+                <span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;note_nlp_source_concept_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;term_negation&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">,</span><span class="s2">&quot;##&quot;</span><span class="p">),</span>
+                <span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;term_experiencer&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">,</span><span class="s2">&quot;##&quot;</span><span class="p">),</span>
+                <span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;term_hypothesis&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">,</span><span class="s2">&quot;##&quot;</span><span class="p">),</span>
+                <span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;term_type&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">,</span><span class="s2">&quot;##&quot;</span><span class="p">),</span>
+                <span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;nlp_workflow&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;offset_start&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;offset_end&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+            <span class="p">)</span> <span class="k">for</span> <span class="n">position</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;note_id&quot;</span><span class="p">]))</span> <span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__copy_string_iterator_note_nlp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dict_nlp_local</span><span class="p">:</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8192</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+            <span class="n">note_nlp_string_iterator</span> <span class="o">=</span> <span class="n">StringIteratorIO</span><span class="p">((</span>
+                <span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">clean_csv_value</span><span class="p">,</span> <span class="p">(</span>
+                <span class="n">dict_nlp_local</span><span class="p">[</span><span class="s2">&quot;note_nlp_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_nlp_local</span><span class="p">[</span><span class="s2">&quot;note_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_nlp_local</span><span class="p">[</span><span class="s2">&quot;section_concept_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_nlp_local</span><span class="p">[</span><span class="s2">&quot;snippet&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">,</span><span class="s2">&quot;##&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;\ &quot;</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span> <span class="p">),</span>
+                <span class="n">dict_nlp_local</span><span class="p">[</span><span class="s2">&quot;offset&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">,</span><span class="s2">&quot;##&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;\ &quot;</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">),</span>
+                <span class="n">dict_nlp_local</span><span class="p">[</span><span class="s2">&quot;lexical_variant&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">,</span><span class="s2">&quot;##&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;\ &quot;</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">),</span>
+                <span class="n">dict_nlp_local</span><span class="p">[</span><span class="s2">&quot;note_nlp_concept_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_nlp_local</span><span class="p">[</span><span class="s2">&quot;nlp_system&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_nlp_local</span><span class="p">[</span><span class="s2">&quot;nlp_date&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_nlp_local</span><span class="p">[</span><span class="s2">&quot;nlp_datetime&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_nlp_local</span><span class="p">[</span><span class="s2">&quot;term_exists&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_nlp_local</span><span class="p">[</span><span class="s2">&quot;term_temporal&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="s1">&#39;&quot;&quot;&quot;&#39;</span><span class="o">+</span><span class="n">dict_nlp_local</span><span class="p">[</span><span class="s2">&quot;term_modifiers&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;&quot;&quot;&quot;&#39;</span><span class="p">,</span>
+                <span class="n">dict_nlp_local</span><span class="p">[</span><span class="s2">&quot;note_nlp_source_concept_id&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_nlp_local</span><span class="p">[</span><span class="s2">&quot;term_negation&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_nlp_local</span><span class="p">[</span><span class="s2">&quot;term_experiencer&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_nlp_local</span><span class="p">[</span><span class="s2">&quot;term_hypothesis&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_nlp_local</span><span class="p">[</span><span class="s2">&quot;term_type&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_nlp_local</span><span class="p">[</span><span class="s2">&quot;nlp_workflow&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_nlp_local</span><span class="p">[</span><span class="s2">&quot;offset_start&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="n">dict_nlp_local</span><span class="p">[</span><span class="s2">&quot;offset_end&quot;</span><span class="p">][</span><span class="n">position</span><span class="p">],</span>
+                <span class="p">)))</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+                <span class="k">for</span> <span class="n">position</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">dict_nlp_local</span><span class="p">[</span><span class="s2">&quot;note_id&quot;</span><span class="p">])</span> <span class="p">)</span>
+            <span class="p">))</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">copy_from</span><span class="p">(</span><span class="n">note_nlp_string_iterator</span><span class="p">,</span> <span class="s1">&#39;note_nlp&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getInfo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">getcolumn</span><span class="p">,</span> <span class="n">fromTable</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;select &quot;</span><span class="o">+</span><span class="n">getcolumn</span><span class="o">+</span><span class="s2">&quot; from &quot;</span><span class="o">+</span><span class="n">fromTable</span><span class="p">)</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="n">theColumn</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">this_id</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+            <span class="c1"># print(this_id)</span>
+            <span class="n">theColumn</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">this_id</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">theColumn</span><span class="p">)</span>
+
+
+    <span class="c1"># @staticmethod</span>
+<div class="viewcode-block" id="OmopSource.getLastNotenlpid"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.omopsource.OmopSource.getLastNotenlpid">[docs]</a>    <span class="k">def</span> <span class="nf">getLastNotenlpid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;select note_nlp_id from note_nlp order by note_nlp_id desc limit 1&quot;</span><span class="p">)</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="n">lastIDs</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">this_ids</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+            <span class="n">lastIDs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">this_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">lastIDs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="OmopSource.saveToSource"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.omopsource.OmopSource.saveToSource">[docs]</a>    <span class="k">def</span> <span class="nf">saveToSource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table_person</span><span class="p">,</span> <span class="n">table_note</span><span class="p">,</span> <span class="n">table_note_nlp</span><span class="p">):</span>
+        <span class="n">patient_ids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getInfo</span><span class="p">(</span><span class="s2">&quot;person_id&quot;</span><span class="p">,</span><span class="s2">&quot;person&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">patient_ids</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">table_person</span><span class="p">[</span><span class="s2">&quot;person_id&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">patient_ids</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__insert_execute_values_iterator_person</span><span class="p">(</span><span class="n">table_person</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;patient already exist&quot;</span><span class="p">)</span>
+        <span class="n">note_ids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getInfo</span><span class="p">(</span><span class="s2">&quot;note_id&quot;</span><span class="p">,</span><span class="s2">&quot;note&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">table_note</span><span class="p">[</span><span class="s2">&quot;note_id&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">note_ids</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__insert_execute_values_iterator_note</span><span class="p">(</span><span class="n">table_note</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__copy_string_iterator_note_nlp</span><span class="p">(</span><span class="n">table_note_nlp</span><span class="p">)</span> <span class="c1">#faster but data note cleaned so difficult to load it easily</span>
+            <span class="c1"># self.__insert_execute_values_iterator_note_nlp(table_note_nlp)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;note already exist, skip it&quot;</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Antoine Neuraz, William Digan, Ivan Lerner, Alice Rogier, David Baudoin, Anita Burgun, Nicolas Garcelon, Bastien Rance
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <script>
+    var versions_json_url = ''
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        0.0.1
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

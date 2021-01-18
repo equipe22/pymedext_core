@@ -1,0 +1,588 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pymedext_core.omopload &mdash; pymedext_core 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'0.0.1',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/js/versions.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/msmb.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pymedext_core
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pymedext_core</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>pymedext_core.omopload</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for pymedext_core.omopload</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="kn">import</span> <span class="nn">pandas</span>
+<span class="kn">from</span> <span class="nn">.datatransform</span> <span class="kn">import</span> <span class="n">DataTransform</span>
+
+<div class="viewcode-block" id="omop"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.omopload.omop">[docs]</a><span class="k">class</span> <span class="nc">omop</span><span class="p">(</span><span class="n">DataTransform</span><span class="p">):</span>
+
+<div class="viewcode-block" id="omop.load"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.omopload.omop.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">Document</span><span class="p">,</span> <span class="n">server</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">Document</span><span class="o">.</span><span class="n">annotations</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;load from &quot;</span><span class="o">+</span><span class="n">server</span><span class="p">)</span></div>
+
+    <span class="c1"># def generateNoteNLPEntity(dict_omop, to_omop_nlp, to_date,</span>
+    <span class="c1">#                           note_nlp_id = &quot;nlp_id&quot;, note_id = &quot;note_id&quot;,</span>
+    <span class="c1">#                           section_concept_id=&quot;section_concept_id&quot;,</span>
+    <span class="c1">#                           note_nlp_concept_id=&quot;note_nlp_concept_id&quot;,</span>
+    <span class="c1">#                           note_nlp_source_concept_id=&quot;note_nlp_source_concept_id&quot;,</span>
+    <span class="c1">#                           nlp_workflow=&quot;nlp_workflow&quot;,</span>
+    <span class="c1">#                           term_exist=&quot;T&quot;, entity=&quot;entity&quot;):</span>
+      <span class="c1">#                    note_nlp_id = &quot;nlp_id&quot;, note_id = &quot;note_id&quot;,</span>
+        <span class="c1">#                       section_concept_id=&quot;section_concept_id&quot;,</span>
+        <span class="c1">#                       note_nlp_concept_id=&quot;note_nlp_concept_id&quot;,</span>
+        <span class="c1">#                       note_nlp_source_concept_id=&quot;note_nlp_source_concept_id&quot;,</span>
+        <span class="c1">#                       nlp_workflow=&quot;nlp_workflow&quot;,</span>
+        <span class="c1">#                       term_exist=&quot;T&quot;, entity=&quot;entity&quot;):</span>
+        <span class="c1"># note_nlp_id = &quot;nlp_id&quot;</span>
+        <span class="c1"># note_id = &quot;note_id&quot;</span>
+        <span class="c1"># section_concept_id=&quot;section_concept_id&quot;</span>
+        <span class="c1"># note_nlp_concept_id=&quot;note_nlp_concept_id&quot;</span>
+        <span class="c1"># note_nlp_source_concept_id=&quot;note_nlp_source_concept_id&quot;</span>
+        <span class="c1"># nlp_workflow=&quot;nlp_workflow&quot;</span>
+        <span class="c1"># term_exist=&quot;T&quot;</span>
+        <span class="c1"># entity=&quot;entity&quot;</span>
+
+<div class="viewcode-block" id="omop.generateNoteNLP"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.omopload.omop.generateNoteNLP">[docs]</a>    <span class="k">def</span> <span class="nf">generateNoteNLP</span><span class="p">(</span><span class="n">dict_omop</span><span class="p">,</span> <span class="n">to_omop_nlp</span><span class="p">,</span> <span class="n">to_date</span><span class="p">,</span>
+                              <span class="n">note_nlp_id</span><span class="p">,</span> <span class="n">note_id</span><span class="p">,</span>
+                              <span class="n">section_concept_id</span><span class="p">,</span>
+                              <span class="n">note_nlp_concept_id</span><span class="p">,</span>
+                              <span class="n">note_nlp_source_concept_id</span><span class="p">,</span>
+                              <span class="n">nlp_workflow</span><span class="p">,</span>
+                              <span class="n">term_exist</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span>
+
+        <span class="c1"># print(note_nlp_id)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dict_omop</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">dict_omop</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;note_nlp_id&quot;</span><span class="p">:[</span><span class="n">note_nlp_id</span><span class="p">],</span> <span class="c1">#different for each note</span>
+                <span class="s2">&quot;note_id&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">note_id</span><span class="p">],</span> <span class="c1">#get from note</span>
+                <span class="s2">&quot;section_concept_id&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">section_concept_id</span><span class="p">],</span> <span class="c1">##a voir avec les informations de la table concepte par example le terme normalisé par le cui ou autres</span>
+                <span class="s2">&quot;snippet&quot;</span><span class="p">:[</span><span class="n">to_omop_nlp</span><span class="p">[</span><span class="s2">&quot;drwh_sentences&quot;</span><span class="p">]],</span>
+                <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">to_omop_nlp</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]],</span> <span class="c1">#the normalized term extract</span>
+                <span class="s2">&quot;lexical_variant&quot;</span><span class="p">:[</span><span class="n">to_omop_nlp</span><span class="p">[</span><span class="s2">&quot;ngram&quot;</span><span class="p">]],</span> <span class="c1"># raw ngram of the extracted texts</span>
+                <span class="s2">&quot;note_nlp_concept_id&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">note_nlp_concept_id</span><span class="p">],</span> <span class="c1">#voir table concept</span>
+                <span class="s2">&quot;note_nlp_source_concept_id&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">note_nlp_source_concept_id</span><span class="p">],</span> <span class="c1">#table vocabularies</span>
+                <span class="s2">&quot;nlp_system&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">to_omop_nlp</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]],</span> <span class="c1">#annotations_type from pymedext</span>
+                <span class="s2">&quot;nlp_workflow&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">nlp_workflow</span><span class="p">],</span>  <span class="c1">#the workflow id which generate the annotations</span>
+                <span class="s2">&quot;nlp_date&quot;</span><span class="p">:[</span><span class="n">to_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)],</span> <span class="c1"># date of process</span>
+                <span class="s2">&quot;nlp_datetime&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">to_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)],</span> <span class="c1">#date of process and time</span>
+                <span class="s2">&quot;term_exists&quot;</span><span class="p">:[</span><span class="n">term_exist</span><span class="p">],</span> <span class="c1">#not set</span>
+                <span class="s2">&quot;term_modifiers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;drwh_&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;=&quot;</span><span class="o">+</span><span class="n">to_omop_nlp</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;drwh_negation&quot;</span><span class="p">,</span><span class="s2">&quot;drwh_family&quot;</span><span class="p">,</span> <span class="s2">&quot;hypothesis&quot;</span><span class="p">]])],</span> <span class="c1">#lexical variants + all terms negation=no,experiencer=patient,hypothesis=false +</span>
+                <span class="s2">&quot;term_temporal&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">to_omop_nlp</span><span class="p">[</span><span class="s2">&quot;temporality&quot;</span><span class="p">]],</span> <span class="c1">#normalized date extract from heideltime</span>
+                <span class="s2">&quot;term_negation&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">to_omop_nlp</span><span class="p">[</span><span class="s2">&quot;drwh_negation&quot;</span><span class="p">]],</span> <span class="c1"># just negation state</span>
+                <span class="s2">&quot;term_experiencer&quot;</span><span class="p">:[</span><span class="n">to_omop_nlp</span><span class="p">[</span><span class="s2">&quot;drwh_family&quot;</span><span class="p">]],</span> <span class="c1">#experiencer state</span>
+                <span class="s2">&quot;term_hypothesis&quot;</span><span class="p">:[</span><span class="n">to_omop_nlp</span><span class="p">[</span><span class="s2">&quot;hypothesis&quot;</span><span class="p">]],</span> <span class="c1"># hypo state</span>
+                <span class="s2">&quot;term_type&quot;</span><span class="p">:[</span><span class="n">entity</span><span class="p">],</span>
+                <span class="s2">&quot;offset_start&quot;</span><span class="p">:[</span><span class="nb">int</span><span class="p">(</span><span class="n">to_omop_nlp</span><span class="p">[</span><span class="s2">&quot;span&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">])],</span>
+                <span class="s2">&quot;offset_end&quot;</span><span class="p">:[</span><span class="nb">int</span><span class="p">(</span><span class="n">to_omop_nlp</span><span class="p">[</span><span class="s2">&quot;span&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">])]</span>
+                <span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dict_omop</span><span class="p">[</span><span class="s2">&quot;note_nlp_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">note_nlp_id</span><span class="p">)</span> <span class="c1">#different for each note</span>
+            <span class="n">dict_omop</span><span class="p">[</span><span class="s2">&quot;note_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">note_id</span><span class="p">)</span> <span class="c1">#get from note</span>
+            <span class="n">dict_omop</span><span class="p">[</span><span class="s2">&quot;section_concept_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">section_concept_id</span><span class="p">)</span> <span class="c1">##a voir avec les informations de la table concepte par example le terme normalisé par le cui ou autres</span>
+            <span class="n">dict_omop</span><span class="p">[</span><span class="s2">&quot;snippet&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">to_omop_nlp</span><span class="p">[</span><span class="s2">&quot;drwh_sentences&quot;</span><span class="p">])</span>
+            <span class="n">dict_omop</span><span class="p">[</span><span class="s2">&quot;offset&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">to_omop_nlp</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span> <span class="c1">#the normalized term extract</span>
+            <span class="n">dict_omop</span><span class="p">[</span><span class="s2">&quot;lexical_variant&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">to_omop_nlp</span><span class="p">[</span><span class="s2">&quot;ngram&quot;</span><span class="p">])</span> <span class="c1"># raw ngram of the extracted texts</span>
+            <span class="n">dict_omop</span><span class="p">[</span><span class="s2">&quot;note_nlp_concept_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">note_nlp_concept_id</span><span class="p">)</span> <span class="c1">#voir table concept</span>
+            <span class="n">dict_omop</span><span class="p">[</span><span class="s2">&quot;note_nlp_source_concept_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">note_nlp_source_concept_id</span><span class="p">)</span> <span class="c1">#table vocabularies</span>
+            <span class="n">dict_omop</span><span class="p">[</span><span class="s2">&quot;nlp_system&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">to_omop_nlp</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">])</span> <span class="c1">#annotations_type from pymedext</span>
+            <span class="n">dict_omop</span><span class="p">[</span><span class="s2">&quot;nlp_workflow&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">nlp_workflow</span><span class="p">)</span>  <span class="c1">#the workflow id which generate the annotations</span>
+            <span class="n">dict_omop</span><span class="p">[</span><span class="s2">&quot;nlp_date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">to_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">))</span> <span class="c1"># date of process</span>
+            <span class="n">dict_omop</span><span class="p">[</span><span class="s2">&quot;nlp_datetime&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">to_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">))</span> <span class="c1">#date of process and time</span>
+            <span class="n">dict_omop</span><span class="p">[</span><span class="s2">&quot;term_exists&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">term_exist</span><span class="p">)</span> <span class="c1">#not set</span>
+            <span class="n">dict_omop</span><span class="p">[</span><span class="s2">&quot;term_modifiers&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;drwh_&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;=&quot;</span><span class="o">+</span><span class="n">to_omop_nlp</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;drwh_negation&quot;</span><span class="p">,</span><span class="s2">&quot;drwh_family&quot;</span><span class="p">,</span> <span class="s2">&quot;hypothesis&quot;</span><span class="p">]]))</span> <span class="c1">#lexical variants + all terms negation=no,experiencer=patient,hypothesis=false +</span>
+            <span class="n">dict_omop</span><span class="p">[</span><span class="s2">&quot;term_temporal&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">to_omop_nlp</span><span class="p">[</span><span class="s2">&quot;temporality&quot;</span><span class="p">])</span> <span class="c1">#normalized date extract from heideltime</span>
+            <span class="n">dict_omop</span><span class="p">[</span><span class="s2">&quot;term_negation&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">to_omop_nlp</span><span class="p">[</span><span class="s2">&quot;drwh_negation&quot;</span><span class="p">])</span> <span class="c1"># just negation state</span>
+            <span class="n">dict_omop</span><span class="p">[</span><span class="s2">&quot;term_experiencer&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">to_omop_nlp</span><span class="p">[</span><span class="s2">&quot;drwh_family&quot;</span><span class="p">])</span> <span class="c1">#experiencer state</span>
+            <span class="n">dict_omop</span><span class="p">[</span><span class="s2">&quot;term_hypothesis&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">to_omop_nlp</span><span class="p">[</span><span class="s2">&quot;hypothesis&quot;</span><span class="p">])</span> <span class="c1"># hypo state</span>
+            <span class="n">dict_omop</span><span class="p">[</span><span class="s2">&quot;term_type&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">entity</span><span class="p">)</span>
+            <span class="n">dict_omop</span><span class="p">[</span><span class="s2">&quot;offset_start&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="nb">int</span><span class="p">(</span><span class="n">to_omop_nlp</span><span class="p">[</span><span class="s2">&quot;span&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="n">dict_omop</span><span class="p">[</span><span class="s2">&quot;offset_end&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="nb">int</span><span class="p">(</span><span class="n">to_omop_nlp</span><span class="p">[</span><span class="s2">&quot;span&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">dict_omop</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="omop.generateNote"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.omopload.omop.generateNote">[docs]</a>    <span class="k">def</span> <span class="nf">generateNote</span><span class="p">(</span><span class="n">dict_note</span><span class="p">,</span> <span class="n">to_omop_note</span><span class="p">,</span> <span class="n">to_date</span><span class="p">,</span>
+                     <span class="n">note_event_id</span><span class="p">,</span>
+                     <span class="n">note_event_field_concept_id</span><span class="p">,</span>
+                     <span class="n">note_type_concept_id</span><span class="p">,</span>
+                     <span class="n">note_class_concept_id</span><span class="p">,</span>
+                     <span class="n">note_title</span><span class="p">,</span>
+                     <span class="n">encoding_concept_id</span><span class="p">,</span>
+                     <span class="n">language_concept_id</span><span class="p">,</span>
+                     <span class="n">provider_id</span><span class="p">,</span>
+                     <span class="n">visit_detail_id</span><span class="p">,</span>
+                     <span class="n">note_source_value</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dict_note</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">dict_note</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;note_id&quot;</span><span class="p">:[</span><span class="n">to_omop_note</span><span class="p">[</span><span class="s2">&quot;note_id&quot;</span><span class="p">]],</span><span class="c1">#	A unique identifier for each note.</span>
+                <span class="s2">&quot;person_id&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">to_omop_note</span><span class="p">[</span><span class="s2">&quot;person_id&quot;</span><span class="p">]],</span><span class="c1">#[]	A foreign key identifier to the Person about whom the Note was recorded. The demographic details of that Person are stored in the PERSON table.</span>
+                <span class="s2">&quot;note_event_id&quot;</span><span class="p">:[</span><span class="n">note_event_id</span><span class="p">],</span><span class="c1">#A foreign key identifier to the event (e.g. Measurement, Procedure, Visit, Drug Exposure, etc) record during which the note was recorded.</span>
+                <span class="s2">&quot;note_event_field_concept_id&quot;</span><span class="p">:[</span><span class="n">note_event_field_concept_id</span><span class="p">],</span> <span class="c1">#A foreign key to the predefined Concept in the Standardized Vocabularies reflecting the field to which the note_event_id is referring.</span>
+                <span class="s2">&quot;note_date&quot;</span><span class="p">:[</span><span class="n">to_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)],</span> <span class="c1">#The date the note was recorded.</span>
+                <span class="s2">&quot;note_datetime&quot;</span><span class="p">:[</span><span class="n">to_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)],</span> <span class="c1">#The date and time the note was recorded.</span>
+                <span class="s2">&quot;note_type_concept_id&quot;</span><span class="p">:[</span><span class="n">note_type_concept_id</span><span class="p">],</span> <span class="c1">#	A foreign key to the predefined Concept in the Standardized Vocabularies reflecting the type, origin or provenance of the Note. These belong to the &#39;Note Type&#39; vocabulary</span>
+                <span class="s2">&quot;note_class_concept_id&quot;</span><span class="p">:[</span><span class="n">note_class_concept_id</span><span class="p">],</span> <span class="c1">#	A foreign key to the predefined Concept in the Standardized Vocabularies reflecting the HL7 LOINC Document Type Vocabulary classification of the note.</span>
+                <span class="s2">&quot;note_title&quot;</span><span class="p">:[</span><span class="n">note_title</span><span class="p">],</span> <span class="c1">#	The title of the Note as it appears in the source.</span>
+                <span class="s2">&quot;note_text&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">to_omop_note</span><span class="p">[</span><span class="s2">&quot;note_text&quot;</span><span class="p">]],</span><span class="c1">#  The content of the Note.</span>
+                <span class="s2">&quot;encoding_concept_id&quot;</span><span class="p">:[</span><span class="n">encoding_concept_id</span><span class="p">],</span><span class="c1">#	A foreign key to the predefined Concept in the Standardized Vocabularies reflecting the note character encoding type</span>
+                <span class="s2">&quot;language_concept_id&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">language_concept_id</span><span class="p">],</span><span class="c1"># A foreign key to the predefined Concept in the Standardized Vocabularies reflecting the language of the note</span>
+                <span class="s2">&quot;provider_id&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">provider_id</span><span class="p">],</span><span class="c1"># A foreign key to the Provider in the PROVIDER table who took the Note.</span>
+                <span class="s2">&quot;visit_occurrence_id&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">to_omop_note</span><span class="p">[</span><span class="s2">&quot;visit_occurrence_id&quot;</span><span class="p">]],</span><span class="c1">#    A foreign key to the Visit in the VISIT_OCCURRENCE table when the Note was taken.</span>
+                <span class="s2">&quot;visit_detail_id&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="n">visit_detail_id</span><span class="p">],</span><span class="c1">#    A foreign key to the Visit in the VISIT_DETAIL table when the Note was taken.</span>
+                <span class="s2">&quot;note_source_value&quot;</span><span class="p">:[</span><span class="n">note_source_value</span><span class="p">]</span> <span class="c1">#	The source value associated with the origin of the Note</span>
+                <span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;note_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">to_omop_note</span><span class="p">[</span><span class="s2">&quot;note_id&quot;</span><span class="p">])</span><span class="c1">#	A unique identifier for each note.</span>
+            <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;person_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">to_omop_note</span><span class="p">[</span><span class="s2">&quot;person_id&quot;</span><span class="p">])</span><span class="c1">#[]	A foreign key identifier to the Person about whom the Note was recorded. The demographic details of that Person are stored in the PERSON table.</span>
+            <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;note_event_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note_event_id</span><span class="p">)</span><span class="c1">#A foreign key identifier to the event (e.g. Measurement) Procedure) Visit) Drug Exposure) etc) record during which the note was recorded.</span>
+            <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;note_event_field_concept_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note_event_field_concept_id</span><span class="p">)</span> <span class="c1">#A foreign key to the predefined Concept in the Standardized Vocabularies reflecting the field to which the note_event_id is referring.</span>
+            <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;note_date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">to_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">))</span> <span class="c1">#The date the note was recorded.</span>
+            <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;note_datetime&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">to_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">))</span> <span class="c1">#The date and time the note was recorded.</span>
+            <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;note_type_concept_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note_type_concept_id</span><span class="p">)</span> <span class="c1">#	A foreign key to the predefined Concept in the Standardized Vocabularies reflecting the type) origin or provenance of the Note. These belong to the &#39;Note Type&#39; vocabulary</span>
+            <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;note_class_concept_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note_class_concept_id</span><span class="p">)</span> <span class="c1">#	A foreign key to the predefined Concept in the Standardized Vocabularies reflecting the HL7 LOINC Document Type Vocabulary classification of the note.</span>
+            <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;note_title&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note_title</span><span class="p">)</span> <span class="c1">#	The title of the Note as it appears in the source.</span>
+            <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;note_text&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">to_omop_note</span><span class="p">[</span><span class="s2">&quot;note_text&quot;</span><span class="p">])</span><span class="c1">#  The content of the Note.</span>
+            <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;encoding_concept_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">encoding_concept_id</span><span class="p">)</span><span class="c1">#	A foreign key to the predefined Concept in the Standardized Vocabularies reflecting the note character encoding type</span>
+            <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;language_concept_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">language_concept_id</span><span class="p">)</span><span class="c1"># A foreign key to the predefined Concept in the Standardized Vocabularies reflecting the language of the note</span>
+            <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;provider_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">provider_id</span><span class="p">)</span><span class="c1"># A foreign key to the Provider in the PROVIDER table who took the Note.</span>
+            <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;visit_occurrence_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">to_omop_note</span><span class="p">[</span><span class="s2">&quot;visit_occurrence_id&quot;</span><span class="p">])</span><span class="c1">#    A foreign key to the Visit in the VISIT_OCCURRENCE table when the Note was taken.</span>
+            <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;visit_detail_id&quot;</span> <span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">visit_detail_id</span><span class="p">)</span><span class="c1">#    A foreign key to the Visit in the VISIT_DETAIL table when the Note was taken.</span>
+            <span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;note_source_value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note_source_value</span><span class="p">)</span> <span class="c1">#	The source value associated with the origin of the Note</span>
+
+        <span class="k">return</span><span class="p">(</span><span class="n">dict_note</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="omop.generatePerson"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.omopload.omop.generatePerson">[docs]</a>    <span class="k">def</span> <span class="nf">generatePerson</span><span class="p">(</span><span class="n">dict_person</span><span class="p">,</span> <span class="n">to_omop_person</span><span class="p">,</span>
+                       <span class="n">gender_concept_id</span><span class="p">,</span>
+                       <span class="n">year_of_birth</span><span class="p">,</span>
+                       <span class="n">month_of_birth</span><span class="p">,</span>
+                       <span class="n">day_of_birth</span><span class="p">,</span>
+                       <span class="n">birth_datetime</span><span class="p">,</span>
+                       <span class="n">death_datetime</span><span class="p">,</span>
+                       <span class="n">race_concept_id</span><span class="p">,</span>
+                       <span class="n">ethnicity_concept_id</span><span class="p">,</span>
+                       <span class="n">location_id</span><span class="p">,</span>
+                       <span class="n">provider_id</span><span class="p">,</span>
+                       <span class="n">care_site_id</span><span class="p">,</span>
+                       <span class="n">person_source_value</span><span class="p">,</span>
+                       <span class="n">gender_source_value</span><span class="p">,</span>
+                       <span class="n">gender_source_concept_id</span><span class="p">,</span>
+                       <span class="n">race_source_value</span><span class="p">,</span>
+                       <span class="n">race_source_concept_id</span><span class="p">,</span>
+                       <span class="n">ethnicity_source_value</span><span class="p">,</span>
+                       <span class="n">ethnicity_source_concept_id</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dict_person</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">dict_person</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;person_id&quot;</span><span class="p">:[</span><span class="n">to_omop_person</span><span class="p">[</span><span class="s2">&quot;person_id&quot;</span><span class="p">]],</span> <span class="c1">#	A unique identifier for each person.</span>
+                <span class="s2">&quot;gender_concept_id&quot;</span><span class="p">:[</span><span class="n">gender_concept_id</span><span class="p">],</span><span class="c1">#	A foreign key that refers to an identifier in the CONCEPT table for the unique gender of the person.</span>
+                <span class="s2">&quot;year_of_birth&quot;</span><span class="p">:[</span><span class="n">year_of_birth</span><span class="p">],</span><span class="c1">#	The year of birth of the person. For data sources with date of birth, the year is extracted. For data sources where the year of birth is not available, the approximate year of birth is derived based on any age group categorization available.</span>
+                <span class="s2">&quot;month_of_birth&quot;</span>	<span class="p">:[</span><span class="n">month_of_birth</span><span class="p">],</span><span class="c1">#	The month of birth of the person. For data sources that provide the precise date of birth, the month is extracted and stored in this field.</span>
+                <span class="s2">&quot;day_of_birth&quot;</span><span class="p">:[</span><span class="n">day_of_birth</span><span class="p">],</span>	<span class="c1">#The day of the month of birth of the person. For data sources that provide the precise date of birth, the day is extracted and stored in this field.</span>
+                <span class="s2">&quot;birth_datetime&quot;</span>	<span class="p">:</span>	<span class="p">[</span><span class="n">birth_datetime</span><span class="p">],</span><span class="c1">#	The date and time of birth of the person.</span>
+                <span class="s2">&quot;death_datetime&quot;</span>	<span class="p">:</span>	<span class="p">[</span><span class="n">death_datetime</span><span class="p">],</span><span class="c1">#	The date and time of death of the person.</span>
+                <span class="s2">&quot;race_concept_id&quot;</span>	<span class="p">:</span>	<span class="p">[</span><span class="n">race_concept_id</span><span class="p">],</span><span class="c1">#	A foreign key that refers to an identifier in the CONCEPT table for the unique race of the person, belonging to the &#39;Race&#39; vocabulary.</span>
+                <span class="s2">&quot;ethnicity_concept_id&quot;</span>	<span class="p">:</span>	<span class="p">[</span><span class="n">ethnicity_concept_id</span><span class="p">],</span><span class="c1">#	A foreign key that refers to the standard concept identifier in the Standardized Vocabularies for the ethnicity of the person, belonging to the &#39;Ethnicity&#39; vocabulary.</span>
+                <span class="s2">&quot;location_id&quot;</span>	<span class="p">:</span>	<span class="p">[</span><span class="n">location_id</span><span class="p">],</span><span class="c1">#	A foreign key to the place of residency for the person in the location table, where the detailed address information is stored.</span>
+                <span class="s2">&quot;provider_id&quot;</span>	<span class="p">:</span>	<span class="p">[</span><span class="n">provider_id</span><span class="p">],</span><span class="c1">#	A foreign key to the primary care provider the person is seeing in the provider table.</span>
+                <span class="s2">&quot;care_site_id&quot;</span>	<span class="p">:</span>	<span class="p">[</span><span class="n">care_site_id</span><span class="p">],</span><span class="c1">#	A foreign key to the site of primary care in the care_site table, where the details of the care site are stored.</span>
+                <span class="s2">&quot;person_source_value&quot;</span>	<span class="p">:</span>	<span class="p">[</span><span class="n">person_source_value</span><span class="p">],</span><span class="c1">#	An (encrypted) key derived from the person identifier in the source data. This is necessary when a use case requires a link back to the person data at the source dataset.</span>
+                <span class="s2">&quot;gender_source_value&quot;</span>	<span class="p">:</span>	<span class="p">[</span><span class="n">gender_source_value</span><span class="p">],</span><span class="c1">#	The source code for the gender of the person as it appears in the source data. The person’s gender is mapped to a standard gender concept in the Standardized Vocabularies; the original value is stored here for reference.</span>
+                <span class="s2">&quot;gender_source_concept_id&quot;</span>	<span class="p">:</span>	<span class="p">[</span><span class="n">gender_source_concept_id</span><span class="p">],</span><span class="c1">#	A foreign key to the gender concept that refers to the code used in the source.</span>
+                <span class="s2">&quot;race_source_value&quot;</span> <span class="p">:</span>	<span class="p">[</span><span class="n">race_source_value</span><span class="p">],</span><span class="c1">#	The source code for the race of the person as it appears in the source data. The person race is mapped to a standard race concept in the Standardized Vocabularies and the original value is stored here for reference.</span>
+                <span class="s2">&quot;race_source_concept_id&quot;</span>	<span class="p">:</span>	<span class="p">[</span><span class="n">race_source_concept_id</span><span class="p">],</span><span class="c1">#	A foreign key to the race concept that refers to the code used in the source.</span>
+                <span class="s2">&quot;ethnicity_source_value&quot;</span>	<span class="p">:</span>	<span class="p">[</span><span class="n">ethnicity_source_value</span><span class="p">],</span><span class="c1">#	The source code for the ethnicity of the person as it appears in the source data. The person ethnicity is mapped to a standard ethnicity concept in the Standardized Vocabularies and the original code is, stored here for reference.</span>
+                <span class="s2">&quot;ethnicity_source_concept_id&quot;</span>	<span class="p">:</span>	<span class="p">[</span><span class="n">ethnicity_source_concept_id</span><span class="p">]</span><span class="c1">#	A foreign key to the ethnicity concept that refers to the code used in the source.</span>
+                    <span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dict_person</span><span class="p">[</span><span class="s2">&quot;person_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">to_omop_person</span><span class="p">[</span><span class="s2">&quot;person_id&quot;</span><span class="p">])</span> <span class="c1">#A unique identifier for each person.</span>
+            <span class="n">dict_person</span><span class="p">[</span><span class="s2">&quot;gender_concept_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gender_concept_id</span><span class="p">)</span><span class="c1">#A foreign key that refers to an identifier in the CONCEPT table for the unique gender of the person.</span>
+            <span class="n">dict_person</span><span class="p">[</span><span class="s2">&quot;year_of_birth&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">year_of_birth</span><span class="p">)</span><span class="c1">#The year of birth of the person. For data sources with date of birth, the year is extracted. For data sources where the year of birth is not available, the approximate year of birth is derived based on any age group categorization available.</span>
+            <span class="n">dict_person</span><span class="p">[</span><span class="s2">&quot;month_of_birth&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">month_of_birth</span><span class="p">)</span><span class="c1">#The month of birth of the person. For data sources that provide the precise date of birth, the month is extracted and stored in this field.</span>
+            <span class="n">dict_person</span><span class="p">[</span><span class="s2">&quot;day_of_birth&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">day_of_birth</span><span class="p">)</span><span class="c1">#The day of the month of birth of the person. For data sources that provide the precise date of birth, the day is extracted and stored in this field.</span>
+            <span class="n">dict_person</span><span class="p">[</span><span class="s2">&quot;birth_datetime&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">birth_datetime</span><span class="p">)</span><span class="c1">#The date and time of birth of the person.</span>
+            <span class="n">dict_person</span><span class="p">[</span><span class="s2">&quot;death_datetime&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">death_datetime</span><span class="p">)</span><span class="c1">#The date and time of death of the person.</span>
+            <span class="n">dict_person</span><span class="p">[</span><span class="s2">&quot;race_concept_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">race_concept_id</span><span class="p">)</span><span class="c1">#A foreign key that refers to an identifier in the CONCEPT table for the unique race of the person, belonging to the &#39;Race&#39; vocabulary.</span>
+            <span class="n">dict_person</span><span class="p">[</span><span class="s2">&quot;ethnicity_concept_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ethnicity_concept_id</span><span class="p">)</span><span class="c1">#A foreign key that refers to the standard concept identifier in the Standardized Vocabularies for the ethnicity of the person, belonging to the &#39;Ethnicity&#39; vocabulary.</span>
+            <span class="n">dict_person</span><span class="p">[</span><span class="s2">&quot;location_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">location_id</span><span class="p">)</span><span class="c1">#A foreign key to the place of residency for the person in the location table, where the detailed address information is stored.</span>
+            <span class="n">dict_person</span><span class="p">[</span><span class="s2">&quot;provider_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">provider_id</span><span class="p">)</span><span class="c1">#A foreign key to the primary care provider the person is seeing in the provider table.</span>
+            <span class="n">dict_person</span><span class="p">[</span><span class="s2">&quot;care_site_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">care_site_id</span><span class="p">)</span><span class="c1">#A foreign key to the site of primary care in the care_site table, where the details of the care site are stored.</span>
+            <span class="n">dict_person</span><span class="p">[</span><span class="s2">&quot;person_source_value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">person_source_value</span><span class="p">)</span><span class="c1">#An (encrypted) key derived from the person identifier in the source data. This is necessary when a use case requires a link back to the person data at the source dataset.</span>
+            <span class="n">dict_person</span><span class="p">[</span><span class="s2">&quot;gender_source_value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gender_source_value</span><span class="p">)</span><span class="c1">#The source code for the gender of the person as it appears in the source data. The person’s gender is mapped to a standard gender concept in the Standardized Vocabularies; the original value is stored here for reference.</span>
+            <span class="n">dict_person</span><span class="p">[</span><span class="s2">&quot;gender_source_concept_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gender_source_concept_id</span><span class="p">)</span><span class="c1">#A foreign key to the gender concept that refers to the code used in the source.</span>
+            <span class="n">dict_person</span><span class="p">[</span><span class="s2">&quot;race_source_value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">race_source_value</span><span class="p">)</span><span class="c1">#The source code for the race of the person as it appears in the source data. The person race is mapped to a standard race concept in the Standardized Vocabularies and the original value is stored here for reference.</span>
+            <span class="n">dict_person</span><span class="p">[</span><span class="s2">&quot;race_source_concept_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">race_source_concept_id</span><span class="p">)</span><span class="c1">#A foreign key to the race concept that refers to the code used in the source.</span>
+            <span class="n">dict_person</span><span class="p">[</span><span class="s2">&quot;ethnicity_source_value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ethnicity_source_value</span><span class="p">)</span><span class="c1">#The source code for the ethnicity of the person as it appears in the source data. The person ethnicity is mapped to a standard ethnicity concept in the Standardized Vocabularies and the original code is, stored here for reference</span>
+            <span class="n">dict_person</span><span class="p">[</span><span class="s2">&quot;ethnicity_source_concept_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ethnicity_source_concept_id</span><span class="p">)</span><span class="c1">#	A foreign key to the ethnicity concept that refers to the code used in the source.</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">dict_person</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="omop.buildNoteNlP"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.omopload.omop.buildNoteNlP">[docs]</a>    <span class="k">def</span> <span class="nf">buildNoteNlP</span><span class="p">(</span><span class="n">thisRoot</span><span class="p">,</span> <span class="n">dict_note</span><span class="p">,</span> <span class="n">note_id</span><span class="p">,</span><span class="n">note_nlp_id</span><span class="p">,</span> <span class="n">nlp_workflow</span><span class="p">,</span><span class="n">thisTime</span><span class="p">,</span>  <span class="n">filterType</span><span class="p">,</span> <span class="n">dataframe</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="c1">#table Note initial value</span>
+        <span class="n">note_event_id</span><span class="o">=</span><span class="kc">None</span> <span class="c1"># &quot;note_event_id&quot;</span>
+        <span class="n">note_event_field_concept_id</span><span class="o">=</span><span class="mi">0</span><span class="c1"># &quot;note_event_field_concept_id&quot;</span>
+        <span class="n">note_type_concept_id</span><span class="o">=</span><span class="mi">0</span><span class="c1"># &quot;note_type_concept_id&quot;</span>
+        <span class="n">note_class_concept_id</span><span class="o">=</span><span class="mi">0</span><span class="c1">#&quot;note_class_concept_id&quot;</span>
+        <span class="n">note_title</span><span class="o">=</span><span class="kc">None</span><span class="c1"># &quot;note_title&quot;</span>
+        <span class="n">encoding_concept_id</span><span class="o">=</span><span class="mi">0</span><span class="c1">#&quot;encoding_concept_id&quot;</span>
+        <span class="n">language_concept_id</span><span class="o">=</span><span class="mi">0</span><span class="c1">#&quot;language_concept_id&quot;</span>
+        <span class="n">provider_id</span><span class="o">=</span><span class="kc">None</span><span class="c1">##&quot;provider_id&quot;</span>
+        <span class="n">visit_detail_id</span><span class="o">=</span><span class="kc">None</span><span class="c1">#&quot;visit_occurrence_id&quot;</span>
+        <span class="n">note_source_value</span><span class="o">=</span><span class="kc">None</span> <span class="c1">#&quot;note_source_value&quot;</span>
+
+        <span class="c1">#table Person initial value</span>
+        <span class="n">gender_concept_id</span><span class="o">=</span><span class="mi">0</span> <span class="c1">#&quot;gender_concept_id&quot;</span>
+        <span class="n">year_of_birth</span><span class="o">=</span><span class="mi">0</span> <span class="c1"># &quot;year_of_birth&quot;</span>
+        <span class="n">month_of_birth</span><span class="o">=</span><span class="kc">None</span> <span class="c1">#&quot;month_of_birth&quot;</span>
+        <span class="n">day_of_birth</span><span class="o">=</span><span class="kc">None</span><span class="c1"># &quot;day_of_birth&quot;</span>
+        <span class="n">birth_datetime</span><span class="o">=</span><span class="kc">None</span>  <span class="c1"># &quot;birth_datetime&quot;</span>
+        <span class="n">death_datetime</span><span class="o">=</span><span class="kc">None</span> <span class="c1">#&quot;death_datetime&quot;</span>
+        <span class="n">race_concept_id</span><span class="o">=</span><span class="mi">0</span> <span class="c1">#&quot;race_concept_id&quot;</span>
+        <span class="n">ethnicity_concept_id</span><span class="o">=</span><span class="mi">0</span> <span class="c1"># &quot;ethnicity_concept_id&quot;</span>
+        <span class="n">location_id</span><span class="o">=</span><span class="kc">None</span> <span class="c1"># &quot;location_id&quot;</span>
+        <span class="n">provider_id</span><span class="o">=</span><span class="kc">None</span> <span class="c1"># &quot;provider_id&quot;</span>
+        <span class="n">care_site_id</span><span class="o">=</span><span class="kc">None</span> <span class="c1">#&quot;care_site_id&quot;</span>
+        <span class="n">person_source_value</span><span class="o">=</span><span class="kc">None</span><span class="c1"># &quot;person_source_value&quot;</span>
+        <span class="n">gender_source_value</span><span class="o">=</span><span class="kc">None</span><span class="c1">#&quot;gender_source_value&quot;</span>
+        <span class="n">gender_source_concept_id</span><span class="o">=</span><span class="mi">0</span><span class="c1">#&quot;gender_source_concept_id&quot;</span>
+        <span class="n">race_source_value</span><span class="o">=</span><span class="kc">None</span><span class="c1"># &quot;race_source_value&quot;</span>
+        <span class="n">race_source_concept_id</span><span class="o">=</span><span class="mi">0</span> <span class="c1">#&quot;race_source_concept_id&quot;</span>
+        <span class="n">ethnicity_source_value</span><span class="o">=</span><span class="kc">None</span><span class="c1">#&quot;ethnicity_source_value&quot;</span>
+        <span class="n">ethnicity_source_concept_id</span><span class="o">=</span><span class="mi">0</span><span class="c1">#&quot;ethnicity_source_concept_id&quot;</span>
+
+        <span class="c1"># Table Note_NLP</span>
+        <span class="c1">#&quot;note_annotate&quot;:json.dumps(&quot;&#39;&#39;&#39;&quot;+json.dumps(grou.to_dict())+&quot;&#39;&#39;&#39;&quot;),</span>
+        <span class="n">annotations</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
+        <span class="c1"># note_nlp_id = 0#&quot;nlp_id&quot;</span>
+        <span class="n">section_concept_id</span><span class="o">=</span><span class="mi">0</span><span class="c1">#&quot;section_concept_id&quot;</span>
+        <span class="n">note_nlp_concept_id</span><span class="o">=</span><span class="mi">0</span><span class="c1">#&quot;note_nlp_concept_id&quot;</span>
+        <span class="n">note_nlp_source_concept_id</span><span class="o">=</span><span class="mi">0</span><span class="c1">#&quot;note_nlp_source_concept_id&quot;</span>
+        <span class="n">allchildren</span> <span class="o">=</span> <span class="n">thisRoot</span><span class="o">.</span><span class="n">getEntitiesChildren</span><span class="p">()</span>
+        <span class="n">negation</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s2">&quot;affirmation&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="s2">&quot;negation&quot;</span><span class="p">,</span> <span class="s2">&quot;Null&quot;</span><span class="p">:</span><span class="s2">&quot;Null&quot;</span><span class="p">}</span>
+        <span class="n">family</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s2">&quot;family&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="s2">&quot;patient&quot;</span><span class="p">,</span> <span class="s2">&quot;Null&quot;</span><span class="p">:</span><span class="s2">&quot;Null&quot;</span><span class="p">}</span>
+        <span class="k">for</span> <span class="n">thisChild</span> <span class="ow">in</span> <span class="n">allchildren</span><span class="p">:</span>
+            <span class="n">childProperties</span><span class="o">=</span> <span class="n">thisChild</span><span class="o">.</span><span class="n">getParentsProperties</span><span class="p">(</span><span class="n">filterType</span><span class="p">)</span>
+            <span class="c1"># print(childProperties)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">childProperties</span><span class="p">:</span>
+                <span class="n">dict_sentence</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;Null&quot;</span> <span class="p">,</span>
+                                 <span class="s2">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;Null&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;span&quot;</span><span class="p">:(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+                                  <span class="s2">&quot;ngram&quot;</span><span class="p">:</span><span class="s2">&quot;Null&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;hypothesis&quot;</span><span class="p">:</span><span class="s2">&quot;Null&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;drwh_negation&quot;</span><span class="p">:</span><span class="s2">&quot;Null&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;drwh_family&quot;</span><span class="p">:</span><span class="s2">&quot;Null&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;drwh_sentences&quot;</span><span class="p">:</span><span class="s2">&quot;Null&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;temporality&quot;</span><span class="p">:</span><span class="s2">&quot;document_date&quot;</span><span class="p">}</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dict_sentence</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="n">childProperties</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="p">,</span>
+                                 <span class="s2">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;Null&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;span&quot;</span><span class="p">:</span><span class="n">childProperties</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;span&quot;</span><span class="p">],</span>
+                                  <span class="s2">&quot;ngram&quot;</span><span class="p">:</span><span class="n">childProperties</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">],</span>
+                                  <span class="s2">&quot;hypothesis&quot;</span><span class="p">:</span><span class="s2">&quot;Null&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;drwh_negation&quot;</span><span class="p">:</span><span class="s2">&quot;Null&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;drwh_family&quot;</span><span class="p">:</span><span class="s2">&quot;Null&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;drwh_sentences&quot;</span><span class="p">:</span><span class="s2">&quot;Null&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;temporality&quot;</span><span class="p">:</span><span class="s2">&quot;document_date&quot;</span><span class="p">}</span>
+            <span class="n">dict_nlp</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="n">thisChild</span><span class="o">.</span><span class="n">type</span> <span class="p">,</span>
+                      <span class="s2">&quot;value&quot;</span><span class="p">:</span><span class="n">thisChild</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                      <span class="s2">&quot;span&quot;</span><span class="p">:</span><span class="n">thisChild</span><span class="o">.</span><span class="n">span</span><span class="p">,</span>
+                      <span class="s2">&quot;ngram&quot;</span><span class="p">:</span><span class="n">thisChild</span><span class="o">.</span><span class="n">getNgram</span><span class="p">(),</span>
+                      <span class="s2">&quot;hypothesis&quot;</span><span class="p">:</span><span class="s2">&quot;Null&quot;</span><span class="p">,</span>
+                      <span class="s2">&quot;drwh_negation&quot;</span><span class="p">:</span><span class="s2">&quot;Null&quot;</span><span class="p">,</span>
+                      <span class="s2">&quot;drwh_family&quot;</span><span class="p">:</span><span class="s2">&quot;Null&quot;</span><span class="p">,</span>
+                      <span class="s2">&quot;drwh_sentences&quot;</span><span class="p">:</span><span class="s2">&quot;Null&quot;</span><span class="p">,</span>
+                      <span class="s2">&quot;temporality&quot;</span><span class="p">:</span><span class="s2">&quot;document_date&quot;</span><span class="p">}</span>
+           
+            <span class="k">if</span> <span class="n">childProperties</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">childProperties</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;attributes&quot;</span><span class="p">]</span> <span class="p">[</span><span class="s2">&quot;properties&quot;</span><span class="p">]:</span>
+                    <span class="n">dict_nlp</span><span class="p">[</span><span class="n">element</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]]</span><span class="o">=</span><span class="n">element</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+                    <span class="n">dict_sentence</span><span class="p">[</span><span class="n">element</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]]</span><span class="o">=</span><span class="n">element</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;drwh_negation&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;Null&quot;</span><span class="p">:</span>
+                <span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;drwh_negation&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">negation</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;drwh_negation&quot;</span><span class="p">])]</span>
+                <span class="n">dict_sentence</span><span class="p">[</span><span class="s2">&quot;drwh_negation&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">negation</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">dict_sentence</span><span class="p">[</span><span class="s2">&quot;drwh_negation&quot;</span><span class="p">])]</span>
+
+            <span class="k">if</span> <span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;drwh_family&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;Null&quot;</span><span class="p">:</span>
+                <span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;drwh_family&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">family</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">dict_nlp</span><span class="p">[</span><span class="s2">&quot;drwh_family&quot;</span><span class="p">])]</span>
+                <span class="n">dict_sentence</span><span class="p">[</span><span class="s2">&quot;drwh_family&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">family</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">dict_sentence</span><span class="p">[</span><span class="s2">&quot;drwh_family&quot;</span><span class="p">])]</span>
+
+            <span class="n">term_exist</span><span class="o">=</span><span class="s2">&quot;T&quot;</span>
+            <span class="n">entity</span><span class="o">=</span><span class="s2">&quot;entity&quot;</span>
+            <span class="c1"># print(&quot;#########dict nlp############&quot;)</span>
+            <span class="c1"># print(dict_nlp)</span>
+            <span class="c1"># print(annotations)</span>
+            <span class="n">annotations</span> <span class="o">=</span> <span class="n">omop</span><span class="o">.</span><span class="n">generateNoteNLP</span><span class="p">(</span><span class="n">annotations</span><span class="p">,</span> <span class="n">dict_nlp</span><span class="p">,</span><span class="n">thisTime</span><span class="p">,</span>
+                                                              <span class="n">note_nlp_id</span><span class="p">,</span> <span class="n">note_id</span><span class="p">,</span>
+                                                              <span class="n">section_concept_id</span><span class="p">,</span>
+                                                              <span class="n">note_nlp_concept_id</span><span class="p">,</span>
+                                                              <span class="n">note_nlp_source_concept_id</span><span class="p">,</span>
+                                                              <span class="n">nlp_workflow</span><span class="p">,</span>
+                                                              <span class="n">term_exist</span><span class="p">,</span> <span class="n">entity</span><span class="p">)</span>
+            <span class="c1"># term_exist=&quot;F&quot;</span>
+            <span class="c1"># entity=&quot;segment&quot;</span>
+            <span class="n">note_nlp_id</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="n">annotations</span> <span class="o">=</span> <span class="n">omop</span><span class="o">.</span><span class="n">generateNoteNLP</span><span class="p">(</span><span class="n">annotations</span><span class="p">,</span> <span class="n">dict_sentence</span><span class="p">,</span><span class="n">thisTime</span><span class="p">,</span>
+                                                              <span class="n">note_nlp_id</span><span class="p">,</span> <span class="n">note_id</span><span class="p">,</span>
+                                                              <span class="n">section_concept_id</span><span class="p">,</span>
+                                                              <span class="n">note_nlp_concept_id</span><span class="p">,</span>
+                                                              <span class="n">note_nlp_source_concept_id</span><span class="p">,</span>
+                                                              <span class="n">nlp_workflow</span><span class="p">,</span>
+                                                              <span class="n">term_exist</span><span class="p">,</span> <span class="n">entity</span><span class="p">)</span>
+            <span class="c1"># print(&quot;annotation&quot;)</span>
+            <span class="c1"># print(annotations)</span>
+            <span class="n">note_nlp_id</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="n">table_note</span> <span class="o">=</span><span class="n">omop</span><span class="o">.</span><span class="n">generateNote</span><span class="p">(</span><span class="nb">dict</span><span class="p">(),</span> <span class="n">dict_note</span><span class="p">,</span> <span class="n">thisTime</span><span class="p">,</span>
+                             <span class="n">note_event_id</span><span class="p">,</span>
+                             <span class="n">note_event_field_concept_id</span><span class="p">,</span>
+                             <span class="n">note_type_concept_id</span><span class="p">,</span>
+                             <span class="n">note_class_concept_id</span><span class="p">,</span>
+                             <span class="n">note_title</span><span class="p">,</span>
+                             <span class="n">encoding_concept_id</span><span class="p">,</span>
+                             <span class="n">language_concept_id</span><span class="p">,</span>
+                             <span class="n">provider_id</span><span class="p">,</span>
+                             <span class="n">visit_detail_id</span><span class="p">,</span>
+                             <span class="n">note_source_value</span><span class="p">)</span>
+        <span class="n">table_person</span> <span class="o">=</span> <span class="n">omop</span><span class="o">.</span><span class="n">generatePerson</span><span class="p">(</span><span class="nb">dict</span><span class="p">(),</span> <span class="p">{</span><span class="s2">&quot;person_id&quot;</span><span class="p">:</span><span class="n">dict_note</span><span class="p">[</span><span class="s2">&quot;person_id&quot;</span><span class="p">]},</span>
+                               <span class="n">gender_concept_id</span><span class="p">,</span>
+                               <span class="n">year_of_birth</span><span class="p">,</span>
+                               <span class="n">month_of_birth</span><span class="p">,</span>
+                               <span class="n">day_of_birth</span><span class="p">,</span>
+                               <span class="n">birth_datetime</span><span class="p">,</span>
+                               <span class="n">death_datetime</span><span class="p">,</span>
+                               <span class="n">race_concept_id</span><span class="p">,</span>
+                               <span class="n">ethnicity_concept_id</span><span class="p">,</span>
+                               <span class="n">location_id</span><span class="p">,</span>
+                               <span class="n">provider_id</span><span class="p">,</span>
+                               <span class="n">care_site_id</span><span class="p">,</span>
+                               <span class="n">person_source_value</span><span class="p">,</span>
+                               <span class="n">gender_source_value</span><span class="p">,</span>
+                               <span class="n">gender_source_concept_id</span><span class="p">,</span>
+                               <span class="n">race_source_value</span><span class="p">,</span>
+                               <span class="n">race_source_concept_id</span><span class="p">,</span>
+                               <span class="n">ethnicity_source_value</span><span class="p">,</span>
+                               <span class="n">ethnicity_source_concept_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dataframe</span><span class="p">:</span>
+            <span class="k">return</span><span class="p">(</span><span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">annotations</span><span class="p">),</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">table_note</span><span class="p">),</span><span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">table_person</span><span class="p">)</span> <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span><span class="p">(</span><span class="n">annotations</span><span class="p">,</span> <span class="n">table_note</span><span class="p">,</span> <span class="n">table_person</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Antoine Neuraz, William Digan, Ivan Lerner, Alice Rogier, David Baudoin, Anita Burgun, Nicolas Garcelon, Bastien Rance
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <script>
+    var versions_json_url = ''
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        0.0.1
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

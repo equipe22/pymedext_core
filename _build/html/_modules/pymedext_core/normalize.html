@@ -1,0 +1,344 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pymedext_core.normalize &mdash; pymedext_core 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'0.0.1',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/js/versions.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/msmb.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pymedext_core
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pymedext_core</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>pymedext_core.normalize</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for pymedext_core.normalize</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+
+<span class="kn">from</span> <span class="nn">.document</span> <span class="kn">import</span> <span class="n">Document</span>
+<span class="kn">from</span> <span class="nn">intervaltree</span> <span class="kn">import</span> <span class="n">Interval</span><span class="p">,</span><span class="n">IntervalTree</span>
+<span class="c1"># from .annotationGraph import AnnotationGraph</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="normalize"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.normalize.normalize">[docs]</a><span class="k">class</span> <span class="nc">normalize</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__setSentencesAndRawText</span><span class="p">(</span><span class="n">Document</span><span class="p">,</span><span class="n">rootNode</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Build an intervalTree of Annotations from a Document</span>
+
+<span class="sd">        :param Document: a Document</span>
+<span class="sd">        :param rootNode: type to filter Document</span>
+<span class="sd">        :returns: tree,sentencepose,raw_textpos,annotGraph</span>
+<span class="sd">        :rtype: intervalTree,dict,dict,dict</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">__raw_textpos</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
+        <span class="n">__sentencepos</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
+        <span class="n">__tree</span><span class="o">=</span><span class="n">IntervalTree</span><span class="p">()</span>
+        <span class="n">annotsGraph</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">thisAnnotation</span> <span class="ow">in</span> <span class="n">Document</span><span class="o">.</span><span class="n">annotations</span><span class="p">:</span>
+            <span class="n">thisSpan</span> <span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">thisAnnotation</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="s2">&quot;_&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">thisAnnotation</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">thisAnnotation</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span><span class="s2">&quot;raw_text&quot;</span> <span class="ow">and</span> <span class="s2">&quot;id&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">__raw_textpos</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">__raw_textpos</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;source_ID&quot;</span><span class="p">:</span><span class="n">thisAnnotation</span><span class="o">.</span><span class="n">source_ID</span><span class="p">,</span><span class="s2">&quot;id&quot;</span><span class="p">:</span><span class="n">thisAnnotation</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="n">thisAnnotation</span><span class="o">.</span><span class="n">type</span><span class="p">}</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">__raw_textpos</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">thisAnnotation</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">rootNode</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">thisSpan</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">__sentencepos</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">thisAnnotation</span><span class="o">.</span><span class="n">source_ID</span><span class="o">=</span><span class="n">__raw_textpos</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+                    <span class="n">__tree</span><span class="p">[</span><span class="n">thisAnnotation</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">thisAnnotation</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">=</span><span class="p">{</span>
+                        <span class="s2">&quot;annotation&quot;</span><span class="p">:[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="n">thisAnnotation</span><span class="o">.</span><span class="n">type</span><span class="p">,</span><span class="s2">&quot;value&quot;</span><span class="p">:</span><span class="n">thisAnnotation</span><span class="p">}]}</span>
+                    <span class="n">__sentencepos</span><span class="p">[</span><span class="n">thisSpan</span><span class="p">]</span><span class="o">=</span><span class="n">thisAnnotation</span><span class="o">.</span><span class="n">ID</span>
+                    <span class="n">annotsGraph</span><span class="p">[</span><span class="n">thisSpan</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="n">thisAnnotation</span><span class="p">]</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">__tree</span><span class="p">,</span><span class="n">__sentencepos</span><span class="p">,</span><span class="n">__raw_textpos</span><span class="p">,</span><span class="n">annotsGraph</span><span class="p">)</span>
+    <span class="c1">#filtrer les fonctions en fonction du syntagmes</span>
+    <span class="c1">#</span>
+    <span class="k">def</span> <span class="nf">__buildTree</span><span class="p">(</span><span class="n">Document</span><span class="p">,</span><span class="n">__tree</span><span class="p">,</span> <span class="n">__sentencepos</span><span class="p">,</span> <span class="n">__raw_textpos</span><span class="p">,</span> <span class="n">annotsGraph</span><span class="p">,</span> <span class="n">otherSegments</span><span class="p">,</span> <span class="n">rootNode</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Build tree from Document</span>
+
+<span class="sd">        :param Document:</span>
+<span class="sd">        :param __tree:</span>
+<span class="sd">        :param __sentencepos:</span>
+<span class="sd">        :param __raw_textpos:</span>
+<span class="sd">        :param annotsGraph:</span>
+<span class="sd">        :param otherSegments:</span>
+<span class="sd">        :param rootNode:</span>
+<span class="sd">        :returns:</span>
+<span class="sd">        :rtype:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">thisAnnotation</span> <span class="ow">in</span> <span class="n">Document</span><span class="o">.</span><span class="n">annotations</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">thisAnnotation</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">end</span>   <span class="o">=</span> <span class="n">thisAnnotation</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">thisSpan</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">start</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;_&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">end</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">thisAnnotation</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="n">otherSegments</span><span class="p">:</span>
+               <span class="n">thisAnnotation</span><span class="o">.</span><span class="n">source_ID</span><span class="o">=</span><span class="n">__sentencepos</span><span class="p">[</span><span class="n">thisSpan</span><span class="p">]</span>
+               <span class="n">findSentence</span><span class="o">=</span><span class="n">__tree</span><span class="p">[</span><span class="n">start</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+               <span class="n">__tree</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;annotation&quot;</span><span class="p">:[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="n">thisAnnotation</span><span class="o">.</span><span class="n">type</span><span class="p">,</span><span class="s2">&quot;value&quot;</span><span class="p">:</span><span class="n">thisAnnotation</span><span class="p">}]}</span>
+            <span class="k">if</span> <span class="n">thisAnnotation</span><span class="o">.</span><span class="n">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">otherSegments</span> <span class="ow">and</span> <span class="n">thisAnnotation</span><span class="o">.</span><span class="n">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">rootNode</span><span class="p">,</span><span class="s2">&quot;raw_text&quot;</span><span class="p">]</span> <span class="p">:</span>
+                 <span class="n">thisAnnotation</span><span class="o">.</span><span class="n">source_ID</span><span class="o">=</span><span class="n">__raw_textpos</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+                 <span class="n">__tree</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;annotation&quot;</span><span class="p">:[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="n">thisAnnotation</span><span class="o">.</span><span class="n">type</span><span class="p">,</span><span class="s2">&quot;value&quot;</span><span class="p">:</span><span class="n">thisAnnotation</span><span class="p">}]}</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">Document</span><span class="p">,</span> <span class="n">__tree</span><span class="p">,</span> <span class="n">__sentencepos</span><span class="p">)</span>
+
+    <span class="c1">#filterEntities stay until i resolve the entity declaration issue</span>
+    <span class="k">def</span> <span class="nf">__buildGraph</span><span class="p">(</span><span class="n">Document</span><span class="p">,</span> <span class="n">__tree</span><span class="p">,</span> <span class="n">__sentencepos</span><span class="p">,</span> <span class="n">thisGraph</span><span class="p">,</span><span class="n">filterEntities</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Build Graph from intervaltree and Doc</span>
+
+<span class="sd">        :param Document:</span>
+<span class="sd">        :param __tree:</span>
+<span class="sd">        :param __sentencepos:</span>
+<span class="sd">        :param thisGraph:</span>
+<span class="sd">        :param filterEntities:</span>
+<span class="sd">        :returns:</span>
+<span class="sd">        :rtype:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">lenentities</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">grousentences</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">typeliste</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">__sentencepos</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">thisAnnotation</span> <span class="ow">in</span> <span class="n">__sentencepos</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">thisSpan</span> <span class="o">=</span> <span class="n">thisAnnotation</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
+                <span class="n">start</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">thisSpan</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">end</span>   <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">thisSpan</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">thisMatch</span><span class="o">=</span><span class="n">__tree</span><span class="o">.</span><span class="n">overlap</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="n">end</span><span class="p">)</span>
+                <span class="n">entities</span><span class="o">=</span><span class="p">[]</span>
+                <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">thisMatch</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">annot</span> <span class="ow">in</span> <span class="n">interval</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;annotation&quot;</span><span class="p">]:</span>
+                        <span class="c1"># print(annot[&quot;value&quot;].to_dict())</span>
+                        <span class="n">annot</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">setRoot</span><span class="p">(</span><span class="n">Document</span><span class="o">.</span><span class="n">annotations</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                        <span class="k">if</span> <span class="n">annot</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">start</span> <span class="ow">and</span> <span class="n">annot</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">end</span><span class="p">:</span>
+                            <span class="c1"># print(&quot;add properties&quot;)</span>
+                            <span class="n">thisGraph</span><span class="p">[</span><span class="n">thisAnnotation</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">addProperty</span><span class="p">(</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+                        <span class="k">elif</span> <span class="n">annot</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isEntity</span> <span class="o">==</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">annot</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">start</span> <span class="ow">and</span>  <span class="n">annot</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">:</span>
+                            <span class="n">thisGraph</span><span class="p">[</span><span class="n">thisAnnotation</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">addChild</span><span class="p">(</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+                <span class="c1"># lenentities.append(len(entities))</span>
+                <span class="n">Document</span><span class="o">.</span><span class="n">annotations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">addChild</span><span class="p">(</span><span class="n">thisGraph</span><span class="p">[</span><span class="n">thisAnnotation</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">__tree</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">annot</span> <span class="ow">in</span> <span class="n">interval</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;annotation&quot;</span><span class="p">]:</span>
+                    <span class="c1"># print(annot[&quot;value&quot;].to_dict())</span>
+                    <span class="n">annot</span><span class="o">.</span><span class="n">setRoot</span><span class="p">(</span><span class="n">Document</span><span class="o">.</span><span class="n">annotations</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="n">Document</span><span class="o">.</span><span class="n">annotations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">addChild</span><span class="p">(</span><span class="n">annot</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">Document</span><span class="p">)</span>
+
+<div class="viewcode-block" id="normalize.uri"><a class="viewcode-back" href="../../pymedext_core.html#pymedext_core.normalize.normalize.uri">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">uri</span><span class="p">(</span><span class="n">Document</span><span class="p">,</span><span class="n">otherSegments</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;drwh_family&quot;</span><span class="p">,</span><span class="s2">&quot;hypothesis&quot;</span><span class="p">],</span><span class="n">rootNode</span><span class="o">=</span><span class="s2">&quot;drwh_sentences&quot;</span><span class="p">,</span> <span class="n">filterEntities</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;drugs_fast&#39;</span><span class="p">,</span> <span class="s1">&#39;cui&#39;</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;uri Normalization</span>
+
+<span class="sd">        :param Document:</span>
+<span class="sd">        :param otherSegments:</span>
+<span class="sd">        :param &quot;hypothesis&quot;]:</span>
+<span class="sd">        :param rootNode:</span>
+<span class="sd">        :param filterEntities:</span>
+<span class="sd">        :param &#39;cui&#39;]:</span>
+<span class="sd">        :returns:</span>
+<span class="sd">        :rtype:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># __raw_textpos=dict()</span>
+        <span class="c1"># normalize.__sentencepos=dict()</span>
+        <span class="c1"># normalize.__tree=IntervalTree()</span>
+        <span class="n">__tree</span><span class="p">,</span> <span class="n">__sentencepos</span><span class="p">,</span> <span class="n">__raw_textpos</span><span class="p">,</span> <span class="n">thisGraph</span><span class="o">=</span><span class="n">normalize</span><span class="o">.</span><span class="n">__setSentencesAndRawText</span><span class="p">(</span><span class="n">Document</span><span class="p">,</span><span class="n">rootNode</span><span class="p">)</span>
+        <span class="n">Document</span><span class="p">,</span> <span class="n">__tree</span><span class="p">,</span> <span class="n">__sentencepos</span> <span class="o">=</span> <span class="n">normalize</span><span class="o">.</span><span class="n">__buildTree</span><span class="p">(</span><span class="n">Document</span><span class="p">,</span><span class="n">__tree</span><span class="p">,</span> <span class="n">__sentencepos</span><span class="p">,</span> <span class="n">__raw_textpos</span><span class="p">,</span><span class="n">thisGraph</span><span class="p">,</span> <span class="n">otherSegments</span><span class="p">,</span> <span class="n">rootNode</span><span class="p">)</span>
+        <span class="n">Document</span> <span class="o">=</span> <span class="n">normalize</span><span class="o">.</span><span class="n">__buildGraph</span><span class="p">(</span><span class="n">Document</span><span class="p">,</span> <span class="n">__tree</span><span class="p">,</span> <span class="n">__sentencepos</span><span class="p">,</span> <span class="n">thisGraph</span><span class="p">,</span><span class="n">filterEntities</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">Document</span><span class="p">,</span><span class="n">__tree</span><span class="p">,</span> <span class="n">__sentencepos</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Antoine Neuraz, William Digan, Ivan Lerner, Alice Rogier, David Baudoin, Anita Burgun, Nicolas Garcelon, Bastien Rance
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <script>
+    var versions_json_url = ''
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        0.0.1
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

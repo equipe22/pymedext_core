@@ -1,0 +1,24 @@
+pymedext_core
+*************
+
+* pymedext_core package
+
+  * Submodules
+
+  * pymedext_core.annotationGraph module
+
+  * pymedext_core.annotators module
+
+  * pymedext_core.connector module
+
+  * pymedext_core.datasource module
+
+  * pymedext_core.document module
+
+  * pymedext_core.normalize module
+
+  * pymedext_core.omopload module
+
+  * pymedext_core.pymedext module
+
+  * Module contents

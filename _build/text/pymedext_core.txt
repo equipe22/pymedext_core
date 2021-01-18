@@ -1,0 +1,222 @@
+pymedext_core package
+*********************
+
+
+Submodules
+==========
+
+
+pymedext_core.annotationGraph module
+====================================
+
+class pymedext_core.annotationGraph.AnnotationGraph(value, type, span, attributes, isEntity, ngram='')
+
+   Bases: "object"
+
+   addChild(child)
+
+   addProperty(neighbor)
+
+   getAttributes()
+
+   getChildrenSpan()
+
+   getEntitiesChildren()
+
+   getNgram()
+
+   getParent(fromType)
+
+   getParentsProperties(filterType=['drwh_sentences', 'drwh_syntagms'])
+
+   getProperties(filterType)
+
+   getSpan()
+
+   setParent(parent)
+
+   setRoot(root)
+
+   to_dict()
+
+
+pymedext_core.annotators module
+===============================
+
+class pymedext_core.annotators.Annotation(type, value, source, source_ID, span=None, attributes=None, isEntity=False, ID='4c569b00-ca74-11ea-b282-e454e863ec7d')
+
+   Bases: "object"
+
+   to_dict()
+
+   to_json()
+
+class pymedext_core.annotators.Annotator(key_input, key_output, ID)
+
+   Bases: "object"
+
+   get_all_key_input(_input)
+
+   get_first_key_input(_input)
+
+   get_key_input(_input, i)
+
+
+pymedext_core.connector module
+==============================
+
+class pymedext_core.connector.APIConnector
+
+   Bases: "object"
+
+class pymedext_core.connector.Connector
+
+   Bases: "object"
+
+class pymedext_core.connector.DatabaseConnector(DB_host, DB_name, DB_port, DB_user, DB_password)
+
+   Bases: "object"
+
+   startConnection()
+
+class pymedext_core.connector.PostGresConnector(DB_host, DB_name, DB_port, DB_user, DB_password)
+
+   Bases: "pymedext_core.connector.DatabaseConnector"
+
+   startConnection()
+
+class pymedext_core.connector.SSHConnector
+
+   Bases: "object"
+
+class pymedext_core.connector.cxORacleConnector
+
+   Bases: "object"
+
+
+pymedext_core.datasource module
+===============================
+
+class pymedext_core.datasource.OmopSource(DB_host, DB_name, DB_port, DB_user, DB_password)
+
+   Bases: "pymedext_core.datasource.Source",
+   "pymedext_core.connector.PostGresConnector"
+
+   getLastNotenlpid()
+
+   saveToSource(table_person, table_note, table_note_nlp)
+
+class pymedext_core.datasource.Source
+
+   Bases: "object"
+
+   static loadFromSource()
+
+   static saveToSource()
+
+class pymedext_core.datasource.StringIteratorIO(iter: typing.Iterator[str])
+
+   Bases: "io.TextIOBase"
+
+   read(n: typing.Union[int, NoneType] = None) -> str
+
+   readable() -> bool
+
+pymedext_core.datasource.clean_csv_value(value: typing.Union[typing.Any, NoneType]) -> str
+
+
+pymedext_core.document module
+=============================
+
+class pymedext_core.document.Document(raw_text, ID, source=None, pathToconfig=None, documentDate=None)
+
+   Bases: "object"
+
+   annotate(annotator)
+
+   get_annotations(_type, source_id=None, target_id=None)
+
+   loadFromData(pathToconfig)
+
+      Transform json Pymedext to Document object
+
+      Parameters:
+         **pathToconfig** – list of path to json files,
+
+      Returns:
+         none
+
+      Return type:
+         none
+
+   raw_text()
+
+   to_dict()
+
+      transform Document to json PyMedExt Need to add the Document
+      Date if available, the processing date, the annotators used
+
+      Returns:
+         json PyMedExt
+
+      Return type:
+         dict
+
+   to_json()
+
+   writeJson(pathToOutput)
+
+      Transform Document to json PyMedExt
+
+      Parameters:
+         **pathToOutput** – path to result file
+
+      Returns:
+         none
+
+      Return type:
+         none
+
+
+pymedext_core.normalize module
+==============================
+
+class pymedext_core.normalize.normalize
+
+   Bases: "object"
+
+   static uri(Document, otherSegments=['drwh_family', 'hypothesis'], rootNode='drwh_sentences', filterEntities=['drugs_fast', 'cui'])
+
+
+pymedext_core.omopload module
+=============================
+
+class pymedext_core.omopload.DataTransform
+
+   Bases: "object"
+
+   static load()
+
+   static save()
+
+class pymedext_core.omopload.omop
+
+   Bases: "pymedext_core.omopload.DataTransform"
+
+   buildNoteNlP(thisRoot, dict_note, note_id, note_nlp_id, nlp_workflow, thisTime, filterType, dataframe=False)
+
+   generateNote(dict_note, to_omop_note, to_date, note_event_id, note_event_field_concept_id, note_type_concept_id, note_class_concept_id, note_title, encoding_concept_id, language_concept_id, provider_id, visit_detail_id, note_source_value)
+
+   generateNoteNLP(dict_omop, to_omop_nlp, to_date, note_nlp_id, note_id, section_concept_id, note_nlp_concept_id, note_nlp_source_concept_id, nlp_workflow, term_exist, entity)
+
+   generatePerson(dict_person, to_omop_person, gender_concept_id, year_of_birth, month_of_birth, day_of_birth, birth_datetime, death_datetime, race_concept_id, ethnicity_concept_id, location_id, provider_id, care_site_id, person_source_value, gender_source_value, gender_source_concept_id, race_source_value, race_source_concept_id, ethnicity_source_value, ethnicity_source_concept_id)
+
+   load(Document, server)
+
+
+pymedext_core.pymedext module
+=============================
+
+
+Module contents
+===============
