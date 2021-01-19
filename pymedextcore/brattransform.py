@@ -8,14 +8,14 @@ Created 2020/04/14
 fonction : creation ou update  d'un fichier BRAT a partir d'un dic pymedext
 
 """
-from typing import List
+from typing import List, Optional
 
 from .datatransform import DataTransform
 import logging
 logger = logging.getLogger(__name__)
 import uuid
 from .brat_parser import read_file_annotations
-from .annotators import Annotation
+from .annotators import Annotation, Relation
 from .document import Document
 
 
@@ -121,29 +121,58 @@ class brat(DataTransform):
         f_brat.write(conf_file)
         f_brat.close()
 
-    def load_from_brat(self, ann_file) -> Document:
-        entities, relations, attributes=read_file_annotations(ann_file)
+    @staticmethod
+    def load_from_brat(ann_file: str, 
+                       txt_file: Optional[str] = None) -> Document:
+        """Load annotations from a .ann file in the Brat format
+        :param ann_file: path to the .ann file
+        :param txt_file: path to the corresponding .txt file, if None: defaults to replacing .ann by .txt 
+        :returns: Document
+        :rtype: Document
+        """
+        entities, relations, attributes =read_file_annotations(ann_file)
         annotations_list=[]
-        raw_text = open(ann_file.replace(".ann",".txt"), 'r').read()
-        raw_text_ID=str(uuid.uuid1())
+        relations_list = []
+        
+        if txt_file is None: 
+            txt_file = ann_file.replace(".ann",".txt")
+            
+        raw_text = open(txt_file, 'r').read()
+        raw_text_ID=str(ann_file.replace(".ann", ""))
+        
+        doc = Document(raw_text =raw_text,ID =raw_text_ID, source = ann_file)
+        
+        raw_id = doc.get_annotations('raw_text')[0].ID
+        
         for entity in entities:
             for span in entity.span:
-                thisID = str(uuid.uuid1())
+                ID = entity.id
                 annotations_list.append(
                             Annotation(type=entity.type,
-                                      value=entity.text,
-                                      ngram = entity.text,
-                                      source_ID=raw_text_ID,
-                                      ID=thisID,
-                                      source="BratFile",
-                                       span=(span[0],span[1]),
-                                       isEntity=True
+                                    value=entity.text,
+                                    ngram = entity.text,
+                                    source_ID=raw_id,
+                                    ID=ID,
+                                    source="BratFile",
+                                    span=(span[0],span[1]),
+                                    isEntity=True
                             )
                     )
+                
+        for relation in relations: 
+            relations_list.append(
+                Relation(type= relation.type, 
+                        head = relation.subj,
+                        target = relation.obj,
+                        ID = relation.id, 
+                        source_ID = raw_id, 
+                        source = "BratFile")
+            )
 
-        thisDocument = Document(raw_text =raw_text,ID =raw_text_ID, source = ann_file)
-        thisDocument.annotations.extend(annotations_list)
-        return(thisDocument)
+        doc.annotations.extend(annotations_list)
+        doc.relations.extend(relations_list)
+
+        return(doc)
 
 
 
