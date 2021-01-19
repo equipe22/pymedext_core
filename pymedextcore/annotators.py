@@ -4,6 +4,7 @@ import json
 import unidecode
 from subprocess import Popen, PIPE
 from os import path
+from typing import List, Optional, Tuple
 import logging
 logger = logging.getLogger(__name__)
 
@@ -15,7 +16,9 @@ class Annotation:
     Based object which contains Annotation
     """
     
-    def __init__(self, type, value, source, source_ID, span = None, attributes = None, isEntity=False, ID = None, ngram = None):
+    def __init__(self, type:str, value:str, source:str, source_ID:str, 
+                 span:Optional[Tuple[int,int]] = None, attributes:Optional[List] = None, 
+                 isEntity:bool=False, ID:Optional[str] = None, ngram:Optional[str] = None):
         """Intialize an Annotation object
 
         :param type: annotation type define by the user (linked to the Annotator)
@@ -79,7 +82,7 @@ class Annotation:
         :rtype: a dict
 
         """
-        return(self.attributes+self.parents.getAttributes())
+        return(self.attributes+self.parent.getAttributes())
 
     def getNgram(self):
         """get nGram from root
@@ -326,3 +329,60 @@ class Annotator:
         :rtype:a list of annotations
         """
         pass
+
+
+
+class Relation:
+    """
+    Based object which contains Relation
+    """
+    
+    def __init__(self, type: str, head: str, target:str, source:str, 
+                 source_ID:str, attributes:Optional[List] = None, ID:Optional[str] = None):
+        """Intialize an Annotation object
+        :param type: annotation type define by the user (linked to the Annotator)
+        :param head: head of the relation, ID of the source entity
+        :param target: target of the relation, ID of the target entity
+        :param source: the name of the Annotator
+        :param source_ID: the Annotator id
+        :param attributes: In some cases, the value is not enough so other key elements could be saved as dict in attributes
+        :param ID: Annotation ID of this specific annotation
+        :returns: Relation
+        :rtype: Relation
+        """
+        self.head = head
+        self.target = target
+        self.type = type
+        self.source = source
+        self.source_ID = source_ID
+        self.attributes = attributes
+        if ID is None:
+            self.ID = str(uuid.uuid1())
+        else:
+            self.ID = ID
+            
+#         TODO: add graph properties
+#         self.ngram = ngram # should be called raw_value?
+#         self.parent = None
+#         self.children = None
+#         self.root = None
+
+    def to_json(self):
+        """Tranform Relation to json
+        :returns: json
+        :rtype: json
+        """
+        return json.dump(self.to_dict())
+    
+    def to_dict(self):
+        """Transform Relation to a dict object
+        :returns: dict
+        :rtype: dict
+        """
+        return {'type':self.type,
+                'head':self.head,
+                'target': self.target,
+                'source':self.source,
+                'source_ID': self.source_ID,
+                'attributes': self.attributes,
+                'ID':self.ID}

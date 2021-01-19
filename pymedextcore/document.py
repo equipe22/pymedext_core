@@ -1,6 +1,6 @@
 import uuid
 import json
-from .annotators import Annotator, Annotation
+from .annotators import Annotator, Annotation, Relation
         
 class Document:
     """
@@ -23,6 +23,7 @@ class Document:
         self.documentDate = documentDate
         self.attributes = attributes
         self.source = source
+        self.relations = []
         
         if raw_text != "load":
             self.annotations = [Annotation(type="raw_text",
@@ -41,16 +42,16 @@ class Document:
                 self.loadFromData(thisPath)
 
     def loadFromData(self, pathToconfig):
-         """Transform json Pymedext to Document
+        """Transform json Pymedext to Document
 
-         :param pathToconfig: list of path to json files,
-         :returns: add annotations to Document
-         :rtype: Document
+        :param pathToconfig: list of path to json files,
+        :returns: add annotations to Document
+        :rtype: Document
 
-         """
-         with open(pathToconfig) as f:
+        """
+        with open(pathToconfig) as f:
              mesannotations=json.load(f)
-         for annot in mesannotations["annotations"]:
+        for annot in mesannotations["annotations"]:
             #print("annot[value]", annot["value"])
             #print("type(annot[value])", type(annot["value"]))
             if "empty" not in annot["value"]:
@@ -81,6 +82,14 @@ class Document:
                                                         isEntity=annot["isEntity"],
                                                         ngram=annot["ngram"]))
 
+        for relation in mesannotations['relations']:
+            self.relations.append(Relation( type= relation['type'], 
+                                            head = relation['head'],
+                                            target = relation['target'],
+                                            ID = relation['id'], 
+                                            source_ID = relation['source_ID'], 
+                                            source = relation['source']))
+
 
     def annotate(self, annotator): 
         """Main function to annotate Document
@@ -106,7 +115,13 @@ class Document:
         new_annotations = annotator.annotate_function(self)
         #print(new_annotations)
         if new_annotations is not None:
-            [self.annotations.append(x) for x in new_annotations]
+            for annot in new_annotations: 
+                if isinstance(annot, Annotation): 
+                    self.annotations.append(annot)
+                elif isinstance(annot, Relation):
+                    self.annotations.append(annot)
+                else: 
+                    raise TypeError("New annotations must be of type Annotation or Relation")
         #setattr(self, annotator.key_output ,annotator.annotate_function(self))
         
     def to_json(self):
@@ -128,6 +143,7 @@ class Document:
 
         """
         return {'annotations' : [x.to_dict() for x in self.annotations],
+                'relations' : [x.to_dict() for x in self.relations],
                 'ID':self.ID,
                 'source_ID': self.source_ID,
                 'attributes': self.attributes, 
@@ -145,10 +161,14 @@ class Document:
         for k,v in d.items(): 
             if k != 'annotations': 
                 setattr(doc, k ,v)
-            else:
+            elif k == 'annotations':
                 doc.annotations = []
                 for ann in v:
                     doc.annotations.append(Annotation(**ann))
+            elif k == 'relations':
+                doc.relations = []
+                for relation in v: 
+                    doc.relations.append(Relations(**relation))
         return doc
 
 
@@ -197,6 +217,36 @@ class Document:
             if anno.type == _type:
                 res.append(anno)
         return res
+
+    def get_relations(self, _type=None, head_id=None, target_id=None):
+        """
+        returns relations of a specific type from source. Can  filter from
+        type, head_id or target_id.
+        :param _type: annotation type
+        :param head_id: annotation source id
+        :param target_id: annotation target id
+        :return:
+        """
+
+        if self.relations == []: 
+            return []
+
+        res = []
+        for relation in self.relations:
+            if _type is not None: 
+                if relation.type != _type:
+                    continue
+            if head_id is not None:
+                if relation.head != head_id:
+                    continue
+            if target_id is not None:
+                if relation.target != target_id:
+                    continue
+
+            res.append(relation)
+
+        return res
+
            
     def raw_text(self):
         """return the Document raw_text
@@ -221,6 +271,15 @@ class Document:
     def get_annotation_by_id(self, _id):
         
         res = [x for x in self.annotations if x.ID == _id]
+        if res == []:
+            return None
+        else:
+            return res[0]
+
+
+    def get_relation_by_id(self, _id):
+        
+        res = [x for x in self.relations if x.ID == _id]
         if res == []:
             return None
         else:
