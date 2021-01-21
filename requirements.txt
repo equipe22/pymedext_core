@@ -4,4 +4,3 @@ json5==0.8.5
 jsonschema==3.0.2
 intervaltree==3.0.2
 pandas
-psycopg2-binary
