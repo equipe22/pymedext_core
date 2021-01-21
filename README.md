@@ -67,7 +67,20 @@ make install
 
 ```
 
-### Deploying PyMedExt a Docker image
+### Deploying PyMedExt as Docker image
+
+#### Install Docker
+check on 21 January 2021
+
+##### Linux
+https://docs.docker.com/engine/install/#server
+##### Mac Intel Processor
+https://docs.docker.com/docker-for-mac/install/#system-requirements
+
+##### Mac Apple M1 Processor
+https://docs.docker.com/docker-for-mac/apple-m1/
+
+#### fullfill configuration
 first create a file config/.git-credentials based on the config/.git-credentials_template
  http:user:pass@github.com
 
