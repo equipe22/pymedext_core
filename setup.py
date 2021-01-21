@@ -11,7 +11,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 reqs = ["flashtext==2.7","Unidecode==1.1.1",
         "json5==0.8.5","jsonschema==3.0.2",
         "intervaltree==3.0.2", "pandas",
-        "bioc==1.3.5", "psycopg2-binary","scp",
+        "bioc==1.3.5","scp",
         "paramiko", "dataclasses","smart_open"]
 
 
