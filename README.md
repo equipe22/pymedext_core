@@ -9,6 +9,63 @@ into pymedext, biocxml, biocjson, omop or brat.
 PyMedExt also includes
 pymedext core to extend in order to add new annotators.
 
+## How to use
+
+### Installation
+#### Using pip
+```bash
+
+pip3 install git+https://github.com/equipe22/pymedext_core.git
+
+
+```
+
+#### Using GNU Make
+```bash
+
+#local install of pymedext packages
+make install
+
+```
+
+#### Deploying PyMedExt as Docker image
+
+##### Install as Docker Image
+check on 21 January 2021
+
+###### Linux
+https://docs.docker.com/engine/install/#server
+
+###### Mac Intel Processor
+https://docs.docker.com/docker-for-mac/install/#system-requirements
+
+###### Mac M1 Processor
+https://docs.docker.com/docker-for-mac/install/#system-requirements
+trouble to make it work
+
+#### Build Image
+
+##### fullfill configuration
+first create a file config/.git-credentials based on the config/.git-credentials_template
+ http:user:pass@github.com
+
+##### Docker in command line
+```bash
+
+docker build -t pymedext-core:v0.0.2 .
+
+
+```
+
+##### Using GNU Make
+```bash
+#build docker instance
+make build
+
+```
+
+# Tutorial Add an annotator
+
 
 # PyMedExt Documentation
 
@@ -49,56 +106,8 @@ class Annotation:
 also to a use case of Documentation example for the Annotation class --> https://equipe22.github.io/pymedext_core/pymedext_core.html?highlight=annotation#pymedext_core.annotators.Annotation
 ## Installation of PyMedExt
 
-### Installing the package
-#### Using pip
-```bash
-
-pip3 install git+https://github.com/equipe22/pymedext_core.git
 
 
-```
-
-#### Using GNU Make
-```bash
-
-#local install of pymedext packages
-make install
-
-
-```
-
-### Deploying PyMedExt as Docker image
-
-#### Install Docker
-check on 21 January 2021
-
-##### Linux
-https://docs.docker.com/engine/install/#server
-##### Mac Intel Processor
-https://docs.docker.com/docker-for-mac/install/#system-requirements
-
-##### Mac Apple M1 Processor
-https://docs.docker.com/docker-for-mac/apple-m1/
-
-#### fullfill configuration
-first create a file config/.git-credentials based on the config/.git-credentials_template
- http:user:pass@github.com
-
-#### Docker in command line
-```bash
-
-docker build -t pymedext-core:v0.0.2 .
-
-
-```
-
-#### Using GNU Make
-```bash
-
-#build docker instance
-make build
-
-```
 
 ## Examples
 
