@@ -9,7 +9,7 @@ into pymedext, biocxml, biocjson, omop or brat.
 PyMedExt also includes
 pymedext core to extend in order to add new annotators.
 
-## How to use
+## Requirements
 
 ### Installation
 #### Using pip
@@ -65,6 +65,42 @@ make build
 ```
 
 # Tutorial Add an annotator
+
+
+# Add an Annotator
+if you want to expand PyMedExt and add a new annotator you will have to
+
+```python
+#from core import annotators
+from pymedextcore import annotators
+
+# Implement a new class which extend annotators.Annotator
+class PreprocessText(annotators.Annotator):
+# you need to implement the function annotate_function and
+# return a list of annotors.Annotation object
+    def annotate_function(self, _input):
+        inp = self.get_first_key_input(_input)[0]
+
+        clean = self.clean_text(inp.value)
+
+        return [annotators.Annotation(type=self.key_output,
+                         value = clean,
+                         span = (0, len(clean)),
+                         source_ID = inp.ID,
+                         source= self.ID)]
+
+
+
+```
+in the pymedtator.py script add your annotators to the list
+
+```python
+
+from .annotators import regexFast, PreprocessText, SentenceTokenizer, DictionaryCatcher, RomediCatcher, DoseCatcher
+from .romedi import Romedi
+
+
+```
 
 
 # PyMedExt Documentation
