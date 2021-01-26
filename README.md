@@ -68,36 +68,93 @@ make build
 
 
 # Add an Annotator
-if you want to expand PyMedExt and add a new annotator you will have to
+if you want to expand PyMedExt and add a new local annotator.
+
+first you will have to
 
 ```python
-#from core import annotators
 from pymedextcore import annotators
 
-# Implement a new class which extend annotators.Annotator
-class PreprocessText(annotators.Annotator):
-# you need to implement the function annotate_function and
-# return a list of annotors.Annotation object
-    def annotate_function(self, _input):
-        inp = self.get_first_key_input(_input)[0]
-
-        clean = self.clean_text(inp.value)
-
-        return [annotators.Annotation(type=self.key_output,
-                         value = clean,
-                         span = (0, len(clean)),
-                         source_ID = inp.ID,
-                         source= self.ID)]
-
-
-
 ```
-in the pymedtator.py script add your annotators to the list
+### the use case of grep
+
+grep is a linux command-line which allow you to search into plain-text data sets
+for lines that match a regular expression.
+The script grepWrapperAnnotator.py located on the src
+directory, is a wrapper around grep.
+
+#### resources
+It takes as input two files :
+- regexResource.txt --> a one column list of words to search in a text
+- pivotResource.csv --> a two columns list of words: pattern,normalizewords
+
+#### Define the Annotator
+
+In order to define a new annotator, first you need to extend the annotators.Annotator class.
+After that you will need at list two linux functions.
+- __init__
+- sannotate_function
+
+##### __init__
+- def __init__(self,key_input, key_output, ID , ......)
+
 
 ```python
 
-from .annotators import regexFast, PreprocessText, SentenceTokenizer, DictionaryCatcher, RomediCatcher, DoseCatcher
-from .romedi import Romedi
+class regexFast(annotators.Annotator):
+    """
+    Annotator based on linux grep to search regext from a source file
+    """
+    def __init__(self, key_input, key_output, ID, regexResource, pathToPivot, ignore_syntax=False):
+        """FIXME! initialize the annotator
+
+        :param key_input: input [raw_text']
+        :param key_output: either regex_fast or the normalized regex value need to discuss
+        :param ID: regex_fast.version
+        :param regexResource: path to regex value file
+        :param pathToPivot: pivot table between regex and the normalized value
+        :param ignore_syntax: not used yet
+        :returns:
+        :rtype:
+
+        """
+        super().__init__(key_input, key_output, ID)
+        self.ignore_syntax=ignore_syntax
+        self.fileAnnotation=None
+        self.countValue=None
+        self.pathToPivot=pathToPivot
+        self.pivot=dict()
+        self.cmds=["fgrep -iow -n -b -F -f "+regexResource]
+        self.loadPivot()
+
+    def annotate_function(self, _input):
+        """ main annotation function
+        :param _input: in this case raw_text
+        :returns: a list of annotations
+        :rtype:
+        """
+        logger.debug(_input)
+        inp = self.get_key_input(_input,0)[0]
+        fileAnnotation,countValue=self.makeMatch(inp.source_ID)
+        countValue=self.setPivot(countValue)
+        logger.debug(countValue)
+        annotations=[]
+        for matchPos in list(fileAnnotation.keys()):
+            for drug in fileAnnotation[matchPos]:
+                ID = str(uuid.uuid1())
+                attributes={"ngram":drug}
+                annotations.append(annotators.Annotation(type= self.key_output,
+                                              value=countValue[drug]["normalized"], #drug,
+                                              span=(int(matchPos), int(matchPos)+len(drug)),
+                                              source=self.ID,
+                                              isEntity=True,
+                                              ID=ID,
+                                              attributes=attributes,
+                                              source_ID = inp.ID))
+        return(annotations)
+
+
+
 
 
 ```
