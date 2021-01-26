@@ -2,15 +2,13 @@ import uuid
 import re
 from subprocess import Popen, PIPE
 from os import path
-from .annotators import Annotation
-from .annotators import Annotator
+from pymedextcore import annotators
 
-from typing import List, Optional, Tuple
 import logging
 logger = logging.getLogger(__name__)
 
 
-class regexFast(Annotator):
+class regexFast(annotators.Annotator):
     """
     Annotator based on linux grep to search regext from a source file
     """
@@ -52,7 +50,7 @@ class regexFast(Annotator):
             for drug in fileAnnotation[matchPos]:
                 ID = str(uuid.uuid1())
                 attributes={"ngram":drug}
-                annotations.append(Annotation(type= self.key_output,
+                annotations.append(annotators.Annotation(type= self.key_output,
                                               value=countValue[drug]["normalized"], #drug,
                                               span=(int(matchPos), int(matchPos)+len(drug)),
                                               source=self.ID,
