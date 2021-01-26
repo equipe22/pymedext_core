@@ -93,21 +93,24 @@ It takes as input two files :
 In order to define a new annotator, first you need to extend the annotators.Annotator class.
 After that you will need at list two linux functions.
 - __init__
-- sannotate_function
+- annotate_function
 
-##### __init__
-- def __init__(self,key_input, key_output, ID , ......)
 
+##### __init__()
+
+The initialise function must contains
+- key_input --> the type of Annotation to be used by the annotator, in that case the raw_text
+- key_output --> the type of the Annotation output by the Annotator
+- ID --> the tooo id, preferencially the the tool github repository and version tag
+- other arguments are specific to the type of annotator
 
 ```python
-
 class regexFast(annotators.Annotator):
     """
     Annotator based on linux grep to search regext from a source file
     """
     def __init__(self, key_input, key_output, ID, regexResource, pathToPivot, ignore_syntax=False):
         """FIXME! initialize the annotator
-
         :param key_input: input [raw_text']
         :param key_output: either regex_fast or the normalized regex value need to discuss
         :param ID: regex_fast.version
@@ -126,6 +129,12 @@ class regexFast(annotators.Annotator):
         self.pivot=dict()
         self.cmds=["fgrep -iow -n -b -F -f "+regexResource]
         self.loadPivot()
+
+```
+
+##### annotate_function()
+
+```python
 
     def annotate_function(self, _input):
         """ main annotation function
