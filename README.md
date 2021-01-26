@@ -169,6 +169,155 @@ class regexFast(annotators.Annotator):
 ```
 
 
+
+##### Use the Annotator in a python script
+
+``` python
+#import dependencies
+from .grepWrapperAnnotator import regexFast # contains your local annotator
+from pymedextcore import pymedext # contains Document and other pymed connector object
+
+thisDoc=pymedext.Document(raw_text= " a document demo you want to work with"
+, ID="your doc id")
+
+#define your annotator
+pathTofile =args.inputFile
+resourcePath=os.getcwd().replace("src","resources/")
+# Preprocess of Romedi (should be done once)
+logger.info("Preprocess of Romedi (should be done once)" )
+#done
+logger.info("load input data")
+thisFile=open(pathTofile,"r").read()
+thisDoc=pymedext.Document(raw_text=thisFile, ID=pathTofile)
+logger.info("Define annotators")
+getRegex = regexFast(key_input = ['raw_text'],
+                     key_output = 'regex_fast',
+                     ID = "regex_fast.v1",
+                     regexResource=resourcePath+"regexResource.txt ",
+                     pathToPivot=resourcePath+"pivotResource.csv"
+                     )
+
+
+# add all your annotators in a list
+annotators =[preprocessor]
+# annotate your document
+thisDoc.annotate(annotators)
+
+#write your annotation in pymedext json
+thisDoc.writeJson("outputfile.json")
+
+```
+
+
+
+
+# PyMedExt conversion tutorial
+
+## PyMedExt commandline
+
+``` bash
+
+pymedext -h
+usage: pymedext [-h] [-i INPUTFILE] [-o OUTPUT]
+                [--itype {txt,pymedext,biocxml,biocjson,fhir,brat}]
+                [--otype {omop,pymedext,bioc,brat}] [-f] [-be BRATEXCLUDE]
+                [-v]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -i INPUTFILE, --inputFile INPUTFILE
+                        path to input folder
+  -o OUTPUT, --output OUTPUT
+                        enter the output file name
+  --itype {txt,pymedext,biocxml,biocjson,fhir,brat}
+                        input type
+  --otype {omop,pymedext,bioc,brat}
+                        output type
+  -f, --folder          if set, the input is consider to be a folder of json
+                        pymedext
+  -be BRATEXCLUDE, --bratexclude BRATEXCLUDE
+                        list of annotations to exclude from brat
+  -v, --version         show program's version number and exit
+```
+
+
+
+
+### text to pymedext
+
+``` python
+
+    pymedext -i demo.txt --itype txt -otype pymedext
+```
+
+
+### fhir to pymedext
+
+``` python
+
+    pymedext -i patient-2169591.fhir-bundle.xml  --itype fhir -otype pymedext
+    pymedext -i patient-99912345.fhir-bundle.xml  --itype fhir -otype pymedext
+
+```
+
+
+### bioc to pymedext
+
+
+### text to pymedext
+
+``` bash
+
+    pymedext -i demo.txt --itype txt -otype pymedext
+```
+
+
+### fhir to pymedext
+
+``` bash
+
+    pymedext -i patient-2169591.fhir-bundle.xml  --itype fhir -otype pymedext
+    pymedext -i patient-99912345.fhir-bundle.xml  --itype fhir -otype pymedext
+
+```
+
+
+### bioc to pymedext
+
+``` bash
+    cd data
+    wget https://quaerofrenchmed.limsi.fr/QUAERO_FrenchMed_BioC.zip
+    unzip QUAERO_FrenchMed_BioC.zip
+    pymedext -i 7382743.xml --itype biocxml -otype pymedext
+    pymedext -i biocformat.json --itype biocjson -otype pymedext
+    pymedext -i QUAERO_BioC/corpus/train/MEDLINE_train_bioc --itype biocjson -otype pymedext
+    pymedext -i QUAERO_BioC/corpus/train/EMEA_train_bioc --itype biocjson -otype pymedext
+    #pymedext to bioc, need to be able to construct collection
+
+
+
+```
+
+
+### brat to pymedext (no example)
+
+``` bash
+ no example
+ brat to bioc
+
+```
+### require annotation
+It will be done on pymedext_public
+  - pymedext to omop
+  - fhir to omop
+  - fhir to bioc
+  - brat to omop
+  - pymedext to doccano
+
+
+
+
+
 # PyMedExt Documentation
 
 PyMedExt Documentation is generated automatically with
@@ -281,106 +430,6 @@ https://github.com/smart-on-fhir/sample-patients
 
 ## library pymedext Usage
 
-
-
-
-### text to pymedext
-
-``` python
-
-    pymedext -i demo.txt --itype txt -otype pymedext
-```
-
-
-### fhir to pymedext
-
-``` python
-
-    pymedext -i patient-2169591.fhir-bundle.xml  --itype fhir -otype pymedext
-    pymedext -i patient-99912345.fhir-bundle.xml  --itype fhir -otype pymedext
-
-```
-
-
-### bioc to pymedext
-
-## pymedext commandline
-
-``` bash
-pymedext -h
-usage: pymedext [-h] [-i INPUTFILE] [-o OUTPUT]
-                [--itype {txt,pymedext,biocxml,biocjson,fhir,brat}]
-                [--otype {omop,pymedext,bioc,brat}] [-f] [-be BRATEXCLUDE]
-                [-v]
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -i INPUTFILE, --inputFile INPUTFILE
-                        path to input folder
-  -o OUTPUT, --output OUTPUT
-                        enter the output file name
-  --itype {txt,pymedext,biocxml,biocjson,fhir,brat}
-                        input type
-  --otype {omop,pymedext,bioc,brat}
-                        output type
-  -f, --folder          if set, the input is consider to be a folder of json
-                        pymedext
-  -be BRATEXCLUDE, --bratexclude BRATEXCLUDE
-                        list of annotations to exclude from brat
-  -v, --version         show program's version number and exit
-
-
-```
-
-### text to pymedext
-
-``` bash
-
-    pymedext -i demo.txt --itype txt -otype pymedext
-```
-
-
-### fhir to pymedext
-
-``` bash
-
-    pymedext -i patient-2169591.fhir-bundle.xml  --itype fhir -otype pymedext
-    pymedext -i patient-99912345.fhir-bundle.xml  --itype fhir -otype pymedext
-
-```
-
-
-### bioc to pymedext
-
-``` bash
-    cd data
-    wget https://quaerofrenchmed.limsi.fr/QUAERO_FrenchMed_BioC.zip
-    unzip QUAERO_FrenchMed_BioC.zip
-    pymedext -i 7382743.xml --itype biocxml -otype pymedext
-    pymedext -i biocformat.json --itype biocjson -otype pymedext
-    pymedext -i QUAERO_BioC/corpus/train/MEDLINE_train_bioc --itype biocjson -otype pymedext
-    pymedext -i QUAERO_BioC/corpus/train/EMEA_train_bioc --itype biocjson -otype pymedext
-    #pymedext to bioc, need to be able to construct collection
-
-
-
-```
-
-
-### brat to pymedext (no example)
-
-``` bash
- no example
- brat to bioc
-
-```
-### require annotation
-It will be done on pymedext_public
-  - pymedext to omop
-  - fhir to omop
-  - fhir to bioc
-  - brat to omop
-  - pymedext to doccano
 
 
 
