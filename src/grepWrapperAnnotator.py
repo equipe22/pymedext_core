@@ -48,12 +48,12 @@ class regexFast(annotators.Annotator):
         logger.debug(countValue)
         annotations=[]
         for matchPos in list(fileAnnotation.keys()):
-            for drug in fileAnnotation[matchPos]:
+            for thisMatch in fileAnnotation[matchPos]:
                 ID = str(uuid.uuid1())
-                attributes={"ngram":drug}
+                attributes={"ngram":thisMatch}
                 annotations.append(annotators.Annotation(type= self.key_output,
-                                              value=countValue[drug]["normalized"], #drug,
-                                              span=(int(matchPos), int(matchPos)+len(drug)),
+                                              value=countValue[thisMatch]["normalized"], #thisMatch,
+                                              span=(int(matchPos), int(matchPos)+len(thisMatch)),
                                               source=self.ID,
                                               isEntity=True,
                                               ID=ID,
