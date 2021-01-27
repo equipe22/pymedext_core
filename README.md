@@ -20,50 +20,6 @@ pip3 install git+https://github.com/equipe22/pymedext_core.git
 
 ```
 
-#### Using GNU Make
-```bash
-
-#local install of pymedext packages
-make install
-
-```
-
-#### Deploying PyMedExt as Docker image
-
-##### Install as Docker Image
-check on 21 January 2021
-
-###### Linux
-https://docs.docker.com/engine/install/#server
-
-###### Mac Intel Processor
-https://docs.docker.com/docker-for-mac/install/#system-requirements
-
-###### Mac M1 Processor
-https://docs.docker.com/docker-for-mac/install/#system-requirements
-trouble to make it work
-
-#### Build Image
-
-##### fullfill configuration
-first create a file config/.git-credentials based on the config/.git-credentials_template
- http:user:pass@github.com
-
-##### Docker in command line
-```bash
-
-docker build -t pymedext-core:v0.0.2 .
-
-
-```
-
-##### Using GNU Make
-```bash
-#build docker instance
-make build
-
-```
-
 # Tutorial Add an annotator
 
 
@@ -320,6 +276,54 @@ It will be done on pymedext_public
   - pymedext to doccano
 
 
+
+
+
+### Other Install mode
+
+#### Using GNU Make
+```bash
+
+#local install of pymedext packages
+make install
+
+```
+
+#### Deploying PyMedExt as Docker image
+
+##### Install as Docker Image
+check on 21 January 2021
+
+###### Linux
+https://docs.docker.com/engine/install/#server
+
+###### Mac Intel Processor
+https://docs.docker.com/docker-for-mac/install/#system-requirements
+
+###### Mac M1 Processor
+https://docs.docker.com/docker-for-mac/install/#system-requirements
+trouble to make it work
+
+#### Build Image
+
+##### fullfill configuration
+first create a file config/.git-credentials based on the config/.git-credentials_template
+ http:user:pass@github.com
+
+##### Docker in command line
+```bash
+
+docker build -t pymedext-core:v0.0.2 .
+
+
+```
+
+##### Using GNU Make
+```bash
+#build docker instance
+make build
+
+```
 
 
 
