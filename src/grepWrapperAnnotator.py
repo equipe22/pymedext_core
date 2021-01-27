@@ -76,7 +76,7 @@ class regexFast(annotators.Annotator):
                     self.pivot[record[0]] = record[-1]
 
 
-    def makeMatch(self, inputFileName):
+    def makeMatch(self, inp):
         """ wrapper aroung grep to search words match
         :param inputFileName: file name
         :returns:   matches
@@ -85,7 +85,6 @@ class regexFast(annotators.Annotator):
         """
         fileAnnotation = dict()
         countValue = dict()
-        logger.debug(inputFileName)
         inputFileName=inp.source_ID+"tmpfile"
         tmpFile=open(inputFileName,"w")
         tmpFile.write(inp.value)
@@ -108,7 +107,7 @@ class regexFast(annotators.Annotator):
                         countValue[thisRecord[2]] = {"count":1 ,"normalized":"" }
                     else:
                         countValue[thisRecord[2]]["count"]+=1
-        os.remove(inputFileName)                        
+        os.remove(inputFileName)
         return(fileAnnotation,countValue)
 
     def setPivot(self, countValue):
