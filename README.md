@@ -92,32 +92,31 @@ class regexFast(annotators.Annotator):
 
 ```python
 
-    def annotate_function(self, _input):
-        """ main annotation function
-        :param _input: in this case raw_text
-        :returns: a list of annotations
-        :rtype:
-        """
-        logger.debug(_input)
-        inp = self.get_key_input(_input,0)[0]
-        fileAnnotation,countValue=self.makeMatch(inp)
-        countValue=self.setPivot(countValue)
-        logger.debug(countValue)
-        annotations=[]
-        for matchPos in list(fileAnnotation.keys()):
-            for drug in fileAnnotation[matchPos]:
-                ID = str(uuid.uuid1())
-                attributes={"ngram":drug}
-                annotations.append(annotators.Annotation(type= self.key_output,
-                                              value=countValue[drug]["normalized"], #drug,
-                                              span=(int(matchPos), int(matchPos)+len(drug)),
-                                              source=self.ID,
-                                              isEntity=True,
-                                              ID=ID,
-                                              attributes=attributes,
-                                              source_ID = inp.ID))
-        return(annotations)
-
+def annotate_function(self, _input):
+    """ main annotation function
+    :param _input: in this case raw_text
+    :returns: a list of annotations
+    :rtype:
+    """
+    logger.debug(_input)
+    inp = self.get_key_input(_input,0)[0]
+    fileAnnotation,countValue=self.makeMatch(inp)
+    countValue=self.setPivot(countValue)
+    logger.debug(countValue)
+    annotations=[]
+    for matchPos in list(fileAnnotation.keys()):
+        for drug in fileAnnotation[matchPos]:
+            ID = str(uuid.uuid1())
+            attributes={"ngram":drug}
+            annotations.append(annotators.Annotation(type= self.key_output,
+                                          value=countValue[drug]["normalized"], #drug,
+                                          span=(int(matchPos), int(matchPos)+len(drug)),
+                                          source=self.ID,
+                                          isEntity=True,
+                                          ID=ID,
+                                          attributes=attributes,
+                                          source_ID = inp.ID))
+    return(annotations)
 ```
 
 
