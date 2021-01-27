@@ -6,7 +6,7 @@ PyMedExt includes basic data wrangling functions to transform
 text input formated as txt, pymedext,biocxml,biocjson,fhir, or brat
 into pymedext, biocxml, biocjson, omop or brat.
 
-PyMedExt also includesn an easy way to define Annotator.
+PyMedExt also includes an easy way to define Annotator.
 ## Requirements
 ### Installation
 #### Using pip
@@ -21,10 +21,9 @@ pip3 install git+https://github.com/equipe22/pymedext_core.git
 
 
 ## Add an Annotator
-if you want to expand PyMedExt and add a new local annotator.
-
+if you want to expand PyMedExt and add a new Annotator.
 First you need create a new class which extend the annotators.Annotator class.
-After that you will need to extends two functions.
+After that you will need to extend two functions.
 
 - __init__
 - annotate_function
@@ -39,7 +38,7 @@ directory, is a wrapper around grep.
 
 this wrapper takes as resources two files :
 - regexResource.txt --> a one column list of words to search in a text
-- pivotResource.csv --> a two columns list of words: pattern,normalizewords
+- pivotResource.csv --> a two columns list of words: pattern, normalizewords
 
 #### Define the Grep Annotator
 
@@ -84,7 +83,7 @@ class regexFast(annotators.Annotator):
 ##### annotate_function()
 
 The annotate_function must contains
-- _input --> Annotations associated with the Document to annotator
+- _input --> Annotations associated with the Document to annotate
 - returns --> Annotations ( a list of annotations object )
 
 ```python
@@ -96,7 +95,8 @@ def annotate_function(self, _input):
     :rtype:
     """
     logger.debug(_input)
-    #get_key_input	return the annotations oF Documents.annotations which have the same type of the i th key_input element
+    #get_key_input: return the annotations oF Documents.annotations which have
+    # the same type of the i th key_input element
     inp = self.get_key_input(_input,0)[0]
     fileAnnotation,countValue=self.makeMatch(inp)
     countValue=self.setPivot(countValue)
@@ -120,7 +120,7 @@ def annotate_function(self, _input):
 
 
 ##### Use the Annotator in a python script
-For this demo clone the pymedext_core git repository and go to the src directory
+First, clone the pymedext_core git repository and go to the src directory
 
 ``` bash
 git clone https://github.com/equipe22/pymedext_core.git
@@ -131,15 +131,15 @@ python3
 ```
 
 ``` python
+
 #import dependencies
 from grepWrapperAnnotator import regexFast # contains your local annotator
-from pymedextcore import pymedext # contains Document and other pymed connector object
+from pymedextcore import pymedext # contains all pymedextcore  objects
 import os
 import logging
 
 logging.basicConfig(level=logging.DEBUG)
 resourcePath=os.getcwd().replace("src","ressources/")
-
 thisDoc=pymedext.Document(raw_text= " a document demo you want to work with and contains evidence of. covid 19, sras, sars ", ID="ID01")
 
 
@@ -154,7 +154,7 @@ annotators =[getRegex]
 # annotate your document
 thisDoc.annotate(annotators)
 thisDoc.to_dict()
-#write your annotation in pymedext json
+#write your annotation in PymedExt json
 thisDoc.writeJson("outputfile.json")
 
 ```
@@ -162,9 +162,7 @@ thisDoc.writeJson("outputfile.json")
 
 
 
-# PyMedExt conversion tutorial
-
-## PyMedExt commandline
+## PyMedExt commandline (in progress)
 
 ``` bash
 
@@ -190,8 +188,6 @@ optional arguments:
                         list of annotations to exclude from brat
   -v, --version         show program's version number and exit
 ```
-
-
 
 
 ### text to pymedext
@@ -245,8 +241,6 @@ optional arguments:
     pymedext -i QUAERO_BioC/corpus/train/EMEA_train_bioc --itype biocjson -otype pymedext
     #pymedext to bioc, need to be able to construct collection
 
-
-
 ```
 
 
@@ -257,6 +251,8 @@ optional arguments:
  brat to bioc
 
 ```
+
+
 ### require annotation
 It will be done on pymedext_public
   - pymedext to omop
@@ -264,9 +260,6 @@ It will be done on pymedext_public
   - fhir to bioc
   - brat to omop
   - pymedext to doccano
-
-
-
 
 
 ### Other Install mode
@@ -302,9 +295,7 @@ first create a file config/.git-credentials based on the config/.git-credentials
 
 ##### Docker in command line
 ```bash
-
 docker build -t pymedext-core:v0.0.2 .
-
 
 ```
 
@@ -312,5 +303,4 @@ docker build -t pymedext-core:v0.0.2 .
 ```bash
 #build docker instance
 make build
-
 ```
