@@ -12,7 +12,7 @@ reqs = ["flashtext==2.7","Unidecode==1.1.1",
         "json5==0.8.5","jsonschema==3.0.2",
         "intervaltree==3.0.2", "pandas",
         "bioc==1.3.5", "psycopg2-binary","scp",
-        "paramiko", "dataclasses","smart_open"]
+        "paramiko", "dataclasses","smart_open","requests"]
 
 
 setup(name='pymedextcore',
