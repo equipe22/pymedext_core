@@ -22,7 +22,7 @@ pip3 install git+https://github.com/equipe22/pymedext_core.git
 
 ## Add an Annotator
 if you want to expand PyMedExt and add a new Annotator.
-First you need create a new class which extend the annotators.Annotator class.
+Firstly, create a class which extend the annotators.Annotator class.
 After that you will need to extend two functions.
 
 - __init__
