@@ -6,64 +6,57 @@ PyMedExt includes basic data wrangling functions to transform
 text input formated as txt, pymedext,biocxml,biocjson,fhir, or brat
 into pymedext, biocxml, biocjson, omop or brat.
 
-PyMedExt also includes
-pymedext core to extend in order to add new annotators.
-
+PyMedExt also includesn an easy way to define Annotator.
 ## Requirements
-
 ### Installation
 #### Using pip
+
 ```bash
 
 pip3 install git+https://github.com/equipe22/pymedext_core.git
 
-
 ```
 
-# Tutorial Add an annotator
+# Tutorials
 
 
-# Add an Annotator
+## Add an Annotator
 if you want to expand PyMedExt and add a new local annotator.
 
-first you will have to
+First you need create a new class which extend the annotators.Annotator class.
+After that you will need to extends two functions.
 
-```python
-from pymedextcore import annotators
+- __init__
+- annotate_function
 
-```
-### the use case of grep
+
+### the GREP use case
 
 grep is a linux command-line which allow you to search into plain-text data sets
 for lines that match a regular expression.
 The script grepWrapperAnnotator.py located on the src
 directory, is a wrapper around grep.
 
-#### resources
-It takes as input two files :
+this wrapper takes as resources two files :
 - regexResource.txt --> a one column list of words to search in a text
 - pivotResource.csv --> a two columns list of words: pattern,normalizewords
 
-#### Define the Annotator
-
-In order to define a new annotator, first you need to extend the annotators.Annotator class.
-After that you will need at list two linux functions.
-- __init__
-- annotate_function
-
+#### Define the Grep Annotator
 
 ##### __init__()
 
-The initialise function must contains
-- key_input --> the type of Annotation to be used by the annotator, in that case the raw_text
-- key_output --> the type of the Annotation output by the Annotator
-- ID --> the tooo id, preferencially the the tool github repository and version tag
-- other arguments are specific to the type of annotator
+The init function must contains
+- key_input --> the type of Annotation's input used by the Annotator, here  "raw_text"
+- key_output --> the type of the Annotation's output by the Annotator, here "regex_fast"
+- ID --> the tool ID, will be the the tool github repository address and version
+- other arguments are specific to the type of the defined Annotator
 
 ```python
+from pymedextcore import annotators
+
 class regexFast(annotators.Annotator):
     """
-    Annotator based on linux grep to search regext from a source file
+    Annotator based on linux grep to search regex from a source file
     """
     def __init__(self, key_input, key_output, ID, regexResource, pathToPivot, ignore_syntax=False):
         """FIXME! initialize the annotator
