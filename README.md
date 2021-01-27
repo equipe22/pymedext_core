@@ -144,7 +144,7 @@ class regexFast(annotators.Annotator):
         """
         logger.debug(_input)
         inp = self.get_key_input(_input,0)[0]
-        fileAnnotation,countValue=self.makeMatch(inp.source_ID)
+        fileAnnotation,countValue=self.makeMatch(inp)
         countValue=self.setPivot(countValue)
         logger.debug(countValue)
         annotations=[]
@@ -162,34 +162,37 @@ class regexFast(annotators.Annotator):
                                               source_ID = inp.ID))
         return(annotations)
 
-
-
-
-
 ```
 
 
 
 ##### Use the Annotator in a python script
+For this demo clone  the pymedext_core git repository and go to the src directory
+
+``` bash
+git clone https://github.com/equipe22/pymedext_core.git
+cd pymedext_core/src
+
+# go in python interactive mode
+python3
+```
 
 ``` python
 #import dependencies
-from .grepWrapperAnnotator import regexFast # contains your local annotator
+from grepWrapperAnnotator import regexFast # contains your local annotator
 from pymedextcore import pymedext # contains Document and other pymed connector object
+import os
+import logging
 
-thisDoc=pymedext.Document(raw_text= " a document demo you want to work with"
-, ID="your doc id")
+logging.basicConfig(level=logging.DEBUG)
+resourcePath=os.getcwd().replace("src","ressources/")
 
-#define your annotator
-pathTofile =args.inputFile
-resourcePath=os.getcwd().replace("src","resources/")
-# Preprocess of Romedi (should be done once)
-logger.info("Preprocess of Romedi (should be done once)" )
-#done
-logger.info("load input data")
-thisFile=open(pathTofile,"r").read()
-thisDoc=pymedext.Document(raw_text=thisFile, ID=pathTofile)
-logger.info("Define annotators")
+dataPath=os.getcwd().replace("src","data/frenchReport/letter.txt")
+
+
+thisDoc=pymedext.Document(raw_text= " a document demo you want to work with and contains evidence of. covid 19, sras, sars ", ID="dataPath")
+
+
 getRegex = regexFast(key_input = ['raw_text'],
                      key_output = 'regex_fast',
                      ID = "regex_fast.v1",
@@ -197,11 +200,13 @@ getRegex = regexFast(key_input = ['raw_text'],
                      pathToPivot=resourcePath+"pivotResource.csv"
                      )
 
-
 # add all your annotators in a list
-annotators =[preprocessor]
+annotators =[getRegex]
 # annotate your document
+
+
 thisDoc.annotate(annotators)
+thisDoc.to_dict()
 
 #write your annotation in pymedext json
 thisDoc.writeJson("outputfile.json")

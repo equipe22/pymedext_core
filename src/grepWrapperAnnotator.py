@@ -2,6 +2,7 @@ import uuid
 import re
 from subprocess import Popen, PIPE
 from os import path
+import os
 from pymedextcore import annotators
 
 import logging
@@ -42,7 +43,7 @@ class regexFast(annotators.Annotator):
         """
         logger.debug(_input)
         inp = self.get_key_input(_input,0)[0]
-        fileAnnotation,countValue=self.makeMatch(inp.source_ID)
+        fileAnnotation,countValue=self.makeMatch(inp)
         countValue=self.setPivot(countValue)
         logger.debug(countValue)
         annotations=[]
@@ -85,6 +86,10 @@ class regexFast(annotators.Annotator):
         fileAnnotation = dict()
         countValue = dict()
         logger.debug(inputFileName)
+        inputFileName=inp.source_ID+"tmpfile"
+        tmpFile=open(inputFileName,"w")
+        tmpFile.write(inp.value)
+        tmpFile.close()
         for cmd in self.cmds:
             p = Popen((cmd+" "+inputFileName).split() ,stdout=PIPE, stderr=PIPE)
             out, err = p.communicate()
@@ -103,6 +108,7 @@ class regexFast(annotators.Annotator):
                         countValue[thisRecord[2]] = {"count":1 ,"normalized":"" }
                     else:
                         countValue[thisRecord[2]]["count"]+=1
+        os.remove(inputFileName)                        
         return(fileAnnotation,countValue)
 
     def setPivot(self, countValue):
