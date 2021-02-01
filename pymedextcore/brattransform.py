@@ -20,7 +20,7 @@ from .document import Document
 
 
 class brat(DataTransform):
-    def savetobrat(self, dic_pymedext: Document, folder_path: str,
+    def savetobrat(dic_pymedext: Document, folder_path: str,
                    exclusion: List[str] = ["raw_text", "sentence", "endlines"],
                    export_attributes: bool = False):
         """
@@ -95,7 +95,7 @@ class brat(DataTransform):
         """
         Attributes section is like:
 
-        [attributes]	  
+        [attributes]
         hypothesis	Arg:Syntagme, Value:certain|hypothesis
         context Arg:Syntagme, Value:family|patient
         negation Arg:Syntagme, Value:neg|aff
@@ -122,28 +122,28 @@ class brat(DataTransform):
         f_brat.close()
 
     @staticmethod
-    def load_from_brat(ann_file: str, 
+    def load_from_brat(ann_file: str,
                        txt_file: Optional[str] = None) -> Document:
         """Load annotations from a .ann file in the Brat format
         :param ann_file: path to the .ann file
-        :param txt_file: path to the corresponding .txt file, if None: defaults to replacing .ann by .txt 
+        :param txt_file: path to the corresponding .txt file, if None: defaults to replacing .ann by .txt
         :returns: Document
         :rtype: Document
         """
         entities, relations, attributes =read_file_annotations(ann_file)
         annotations_list=[]
         relations_list = []
-        
-        if txt_file is None: 
+
+        if txt_file is None:
             txt_file = ann_file.replace(".ann",".txt")
-            
+
         raw_text = open(txt_file, 'r').read()
         raw_text_ID=str(ann_file.replace(".ann", ""))
-        
+
         doc = Document(raw_text =raw_text,ID =raw_text_ID, source = ann_file)
-        
+
         raw_id = doc.get_annotations('raw_text')[0].ID
-        
+
         for entity in entities:
             for span in entity.span:
                 ID = entity.id
@@ -158,14 +158,14 @@ class brat(DataTransform):
                                     isEntity=True
                             )
                     )
-                
-        for relation in relations: 
+
+        for relation in relations:
             relations_list.append(
-                Relation(type= relation.type, 
+                Relation(type= relation.type,
                         head = relation.subj,
                         target = relation.obj,
-                        ID = relation.id, 
-                        source_ID = raw_id, 
+                        ID = relation.id,
+                        source_ID = raw_id,
                         source = "BratFile")
             )
 
@@ -195,4 +195,3 @@ class brat(DataTransform):
     #         f_brat.close()
     #     except:
     #         logger.info('cannot turn into int the value : ' + str(lastline.split('   ')[0]))
-
