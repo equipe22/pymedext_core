@@ -19,14 +19,52 @@ pip3 install git+https://github.com/equipe22/pymedext_core.git
 
 # Tutorials
 
+## Clone the repository for demo
 
-## Add an Annotator
+
+``` bash
+git clone https://github.com/equipe22/pymedext_core.git
+cd pymedext_core/src
+
+# go in python interactive mode
+python3
+```
+
+## Load a file as a PyMedExt Document
+
+``` python
+#import dependencies
+from pymedextcore import pymedext # contains all pymedextcore  objects
+import os
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
+
+
+dataPath=os.getcwd().replace("src","data/frenchReport/")
+resourcePath=os.getcwd().replace("src","ressources/")
+letter=open(dataPath+"letter.txt","r").read()
+print(letter)
+
+LetterPyMedExt=pymedext.Document(raw_text= letter, ID="ID_letter01")
+LetterPyMedExt.to_dict()
+
+```
+
+
+
+## Add a basic Annotator
 if you want to expand PyMedExt and add a new Annotator.
 Firstly, create a class which extend the annotators.Annotator class.
 After that you will need to extend two functions.
 
 - __init__
 - annotate_function
+
+### the findMatches use case
+
+the simplest annotator possibles
 
 
 ### the GREP use case
