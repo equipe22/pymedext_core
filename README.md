@@ -49,15 +49,14 @@ print(letter)
 
 LetterPyMedExt=pymedext.Document(raw_text= letter, ID="ID_letter01")
 LetterPyMedExt.to_dict()
-
 ```
 
 
 
-## Add a basic Annotator
+## Add an Annotator
 if you want to expand PyMedExt and add a new Annotator.
 Firstly, create a class which extend the annotators.Annotator class.
-After that you will need to extend two functions.
+Secondly, you will need to extend two functions.
 
 - __init__
 - annotate_function
@@ -65,6 +64,89 @@ After that you will need to extend two functions.
 ### the findMatches use case
 
 the simplest annotator possibles
+
+##### __init__()
+
+The init function must contains
+- key_input --> the type of Annotation's input used by the Annotator, here  "raw_text"
+- key_output --> the type of the Annotation's output by the Annotator, here "regex_fast"
+- ID --> the tool ID, eventually the tool git repository address and version for Annotation Traceabilitys
+- other arguments are specific to the type of the defined Annotator for example, findValues: "list of value to identify in the text"
+
+
+``` python
+class findMatches(annotators.Annotator):
+    """
+    Annotator based on linux grep to search regext from a source file
+    """
+    def __init__(self, key_input, key_output, ID, findValues ):
+        """FIXME! initialize the annotator
+
+        :param key_input: input ['raw_text']
+        :param key_output: Annotation type here "Liposarcom.V0"
+        :param ID: regex_fast.version
+        :param findValues: "list of value to identify in the text"
+        :returns:
+        :rtype:
+
+        """
+        super().__init__(key_input, key_output, ID)
+        self.findValues=findValues
+```
+
+##### annotate_function()
+
+The annotate_function must contains
+- _input --> Annotations associated with the Document to annotate
+- returns --> Annotations ( a list of annotations object )
+
+```python
+
+def annotate_function(self, _input):
+""" main annotation function
+:param _input: in this case raw_text
+:returns: a list of annotations
+:rtype:
+"""
+logger.debug(_input)
+inp = self.get_key_input(_input,0)[0]
+annotationsList=[]
+for thisValue in self.findValues:
+    #result = [i.start() for i in re.finditer(thisValue, inp.value.lower())]
+    for i in re.finditer(thisValue, inp.value.lower()):				
+        matchPos=i.start()
+        if matchPos is not []:
+            logger.debug("ok go in loop")
+            logger.debug(matchPos)
+            ID = str(uuid.uuid1())
+            annotationsList.append(annotators.Annotation(type= self.key_output,
+                                            value=thisValue, #thisMatch,
+                                            span=(int(matchPos), int(matchPos)+len(thisValue)),
+                                            source=self.ID,
+                                            isEntity=True,
+                                            ID=ID,
+                                            source_ID = inp.ID))
+        logger.debug(annotationsList)                					                          
+return(annotationsList)
+
+```
+
+#### findMatches Demo
+
+
+```python
+
+demoAnnotator = findMatches(key_input = ['raw_text'],
+                     key_output = 'Liposarcom.V0',
+                     ID = "demoreiter", findValues = ["liposarcome"])
+
+# add all your annotators in a list
+annotatorsList =[demoAnnotator]
+# annotate your document
+LetterPyMedExt.annotate(annotatorsList)
+
+```
+
 
 
 ### the GREP use case
@@ -157,16 +239,8 @@ def annotate_function(self, _input):
 
 
 
-##### Use the Annotator in a python script
+##### regexFast demo
 First, clone the pymedext_core git repository and go to the src directory
-
-``` bash
-git clone https://github.com/equipe22/pymedext_core.git
-cd pymedext_core/src
-
-# go in python interactive mode
-python3
-```
 
 ``` python
 
@@ -194,7 +268,6 @@ thisDoc.annotate(annotators)
 thisDoc.to_dict()
 #write your annotation in PymedExt json
 thisDoc.writeJson("outputfile.json")
-
 ```
 
 
