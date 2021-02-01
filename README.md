@@ -268,10 +268,30 @@ thisDoc.annotate(annotators)
 thisDoc.to_dict()
 #write your annotation in PymedExt json
 thisDoc.writeJson("outputfile.json")
+LetterPyMedExt.annotate(annotators)
+LetterPyMedExt.to_dict()
+#write your annotation in PymedExt json
 ```
 
+## Export PyMedExt Document as a Brat file
 
+``` python
 
+pymedext.brat.savetobrat(LetterPyMedExt,"outputfolder")
+```
+
+this will output three files on the outputfolder:
+- xxx.txt --> the raw Text
+- xxx.ann --> the annotations
+-  annotation.conf
+
+``` bash
+cat xxx.ann
+
+T0	Liposarcom.V0 246 258	liposarcome
+T1	Liposarcom.V0 518 530	liposarcome
+T2	regex_fast 445 450	sars-cov-2
+```
 
 ## PyMedExt commandline (in progress)
 
