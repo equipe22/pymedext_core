@@ -75,6 +75,7 @@ The init function must contains
 
 
 ``` python
+from pymedextcore import annotators
 class findMatches(annotators.Annotator):
     """
     Annotator based on linux grep to search regext from a source file
