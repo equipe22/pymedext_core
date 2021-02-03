@@ -24,7 +24,7 @@ pip3 install git+https://github.com/equipe22/pymedext_core.git
 
 ``` bash
 git clone https://github.com/equipe22/pymedext_core.git
-cd pymedext_core/src
+cd pymedext_core/examples
 
 #This script contains the Tutorial
 #python3 demo.py
@@ -44,8 +44,8 @@ logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
-dataPath=os.getcwd().replace("src","data/frenchReport/")
-resourcePath=os.getcwd().replace("src","ressources/")
+dataPath=os.getcwd().replace("examples","data/frenchReport/")
+resourcePath=os.getcwd().replace("examples","ressources/")
 letter=open(dataPath+"letter.txt","r").read()
 print(letter)
 
@@ -173,7 +173,7 @@ LetterPyMedExt.annotate(annotatorsList)
 
 grep is a linux command-line which allow you to search into plain-text data sets
 for lines that match a regular expression.
-The script grepWrapperAnnotator.py located on the src
+The script grepWrapperAnnotator.py located on the examples
 directory, is a wrapper around grep.
 
 this wrapper takes as resources two files :
@@ -260,7 +260,7 @@ def annotate_function(self, _input):
 
 
 ##### regexFast demo
-First, clone the pymedext_core git repository and go to the src directory
+First, clone the pymedext_core git repository and go to the examples directory
 
 ``` python
 
@@ -271,7 +271,7 @@ import os
 import logging
 
 logging.basicConfig(level=logging.DEBUG)
-resourcePath=os.getcwd().replace("src","ressources/")
+resourcePath=os.getcwd().replace("examples","ressources/")
 thisDoc=pymedext.Document(raw_text= " a document demo you want to work with and contains evidence of. covid 19, sras, sars ", ID="ID01")
 
 
