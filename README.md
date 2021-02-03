@@ -26,6 +26,8 @@ pip3 install git+https://github.com/equipe22/pymedext_core.git
 git clone https://github.com/equipe22/pymedext_core.git
 cd pymedext_core/src
 
+#This script contains the Tutorial
+#python3 demo.py
 # go in python interactive mode
 python3
 ```
@@ -76,6 +78,7 @@ The init function must contains
 
 ``` python
 from pymedextcore import annotators
+
 class findMatches(annotators.Annotator):
     """
     Annotator based on linux grep to search regext from a source file
@@ -93,7 +96,7 @@ class findMatches(annotators.Annotator):
         """
         super().__init__(key_input, key_output, ID)
         self.findValues=findValues
-```
+        ```
 
 ##### annotate_function()
 
@@ -101,38 +104,38 @@ The annotate_function must contains
 - _input --> Annotations associated with the Document to annotate
 - returns --> Annotations ( a list of annotations object )
 
-```python
-
-def annotate_function(self, _input):
-""" main annotation function
-:param _input: in this case raw_text
-:returns: a list of annotations
-:rtype:
-"""
-logger.debug(_input)
-inp = self.get_key_input(_input,0)[0]
-annotationsList=[]
-for thisValue in self.findValues:
-    #result = [i.start() for i in re.finditer(thisValue, inp.value.lower())]
-    for i in re.finditer(thisValue, inp.value.lower()):				
-        matchPos=i.start()
-        if matchPos is not []:
-            logger.debug("ok go in loop")
-            logger.debug(matchPos)
-            ID = str(uuid.uuid1())
-            annotationsList.append(annotators.Annotation(type= self.key_output,
-                                            value=thisValue, #thisMatch,
-                                            span=(int(matchPos), int(matchPos)+len(thisValue)),
-                                            source=self.ID,
-                                            isEntity=True,
-                                            ID=ID,
-                                            source_ID = inp.ID))
-        logger.debug(annotationsList)                					                          
-return(annotationsList)
+```python        
+    def annotate_function(self, _input):
+        """ main annotation function
+        :param _input: in this case raw_text
+        :returns: a list of annotations
+        :rtype:
+        """
+        logger.debug(_input)
+        inp = self.get_key_input(_input,0)[0]
+        annotationsList=[]
+        for thisValue in self.findValues:
+            #result = [i.start() for i in re.finditer(thisValue, inp.value.lower())]
+            for i in re.finditer(thisValue, inp.value.lower()):				
+                matchPos=i.start()
+                if matchPos is not []:
+                    logger.debug("ok go in loop")
+                    logger.debug(matchPos)
+                    ID = str(uuid.uuid1())
+                    annotationsList.append(annotators.Annotation(type= self.key_output,
+                					                          value=thisValue, #thisMatch,
+                					                          span=(int(matchPos), int(matchPos)+len(thisValue)),
+                					                          source=self.ID,
+                					                          isEntity=True,
+                					                          ID=ID,
+                					                          source_ID = inp.ID))
+                logger.debug(annotationsList)                					                          
+        return(annotationsList)
 
 ```
 
-#### findMatches Demo
+
+#### findMatches demo
 
 
 ```python
@@ -277,11 +280,18 @@ LetterPyMedExt.to_dict()
 ## Export PyMedExt Document as a Brat file
 
 ``` python
+path="outputfolder"
+try:
+    os.mkdir(path)
+except OSError:
+    print ("Creation of the directory %s failed" % path)
+else:
+    print ("Successfully created the directory %s " % path)
 
-pymedext.brat.savetobrat(LetterPyMedExt,"outputfolder")
+pymedext.brat.savetobrat(LetterPyMedExt,path)
 ```
 
-this will output three files on the outputfolder:
+this will output three files located on outputfolder:
 - xxx.txt --> the raw Text
 - xxx.ann --> the annotations
 -  annotation.conf
