@@ -1,13 +1,13 @@
 from pymedextcore import pymedext # contains all pymedextcore  objects
 import os
 import logging
-from grepWrapperAnnotator import findMatches # import findMatches Annotator
+from findMatches import findMatches # import findMatches Annotator
 from grepWrapperAnnotator import regexFast # a wrapper annotator arround the grep cmd regexFast
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
-dataPath=os.getcwd().replace("src","data/frenchReport/")
-resourcePath=os.getcwd().replace("src","ressources/")
+dataPath=os.getcwd().replace("examples","data/frenchReport/")
+resourcePath=os.getcwd().replace("examples","ressources/")
 letter=open(dataPath+"letter.txt","r").read()
 print(letter)
 
