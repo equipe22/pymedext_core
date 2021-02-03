@@ -289,10 +289,11 @@ else:
     print ("Successfully created the directory %s " % path)
 
 pymedext.brat.savetobrat(LetterPyMedExt,path)
+
 ```
 
 this will output three files located on outputfolder:
-- xxx.txt --> the raw Text
+- xxx.txt --> the raw TextÒÒ
 - xxx.ann --> the annotations
 -  annotation.conf
 
