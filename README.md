@@ -67,12 +67,28 @@ Secondly, you will need to extend two functions.
 
 the simplest annotator possibles
 
-##### __init__()
+#### Define a function based on re.inter
 
+``` python
+
+import re
+thisValue="liposarcome"
+#find the position of each thisValue in the letter text
+for i in re.finditer(thisValue, letter.lower()): 				
+          matchPos=i.start()
+          if matchPos is not []:
+            span=(int(matchPos), int(matchPos)+len(thisValue))
+            print(span)
+
+```
+
+Now we will adapt this function to the Annotator class
+
+##### __init__()
 The init function must contains
 - key_input --> the type of Annotation's input used by the Annotator, here  "raw_text"
 - key_output --> the type of the Annotation's output by the Annotator, here "regex_fast"
-- ID --> the tool ID, eventually the tool git repository address and version for Annotation Traceabilitys
+- ID --> the tool ID, eventually the tool git repository address and version for Annotation Traceability
 - other arguments are specific to the type of the defined Annotator for example, findValues: "list of value to identify in the text"
 
 
