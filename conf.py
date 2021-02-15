@@ -146,7 +146,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'pymedextcore.tex', 'pymedext\\_core Documentation',
+    (master_doc, 'pymedextcore.tex', 'pymedextcore Documentation',
      'Antoine Neuraz, William Digan, Ivan Lerner, Alice Rogier, David Baudoin, Anita Burgun, Nicolas Garcelon, Bastien Rance', 'manual'),
 ]
 
