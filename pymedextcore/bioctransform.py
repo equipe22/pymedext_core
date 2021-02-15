@@ -8,7 +8,19 @@ from .annotators import Annotation
 import uuid
 
 class BioC(DataTransform):
+        """
+        Bioc Data to transform pymedext to Bioc Will
+        """
     def load_collection(bioc_input,format =0, isFile = True):
+        """load a bioc collection ad list of Document object
+
+        :param bioc_input: blabla
+        :param format: xml or to_json
+        :param isFile: Boolean
+        :returns: list of Document
+        :rtype: list
+
+        """
         #Generalize load and add as an argument type 0 default is an xml, 1 a json bioc collection
         collection = None
         if format == 0:
