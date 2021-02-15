@@ -1,0 +1,561 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>pymedextcore.brat_parser &mdash; pymedextcore 0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/msmb.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/versions.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pymedextcore
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pymedextcore</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>pymedextcore.brat_parser</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for pymedextcore.brat_parser</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Text</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">from</span> <span class="nn">smart_open</span> <span class="kn">import</span> <span class="nb">open</span>
+
+<span class="n">GROUPING_ENTITIES</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">([</span><span class="s2">&quot;And-Group&quot;</span><span class="p">,</span> <span class="s2">&quot;Or-Group&quot;</span><span class="p">])</span>
+<span class="n">GROUPING_RELATIONS</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">([</span><span class="s2">&quot;And&quot;</span><span class="p">,</span> <span class="s2">&quot;Or&quot;</span><span class="p">])</span>
+
+
+<div class="viewcode-block" id="remove_empty"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.brat_parser.remove_empty">[docs]</a><span class="k">def</span> <span class="nf">remove_empty</span><span class="p">(</span><span class="n">iterable</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Text</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Text</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns only non-empty strings from an iterable.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ==========</span>
+
+<span class="sd">    - iterable : Iterable</span>
+<span class="sd">      An iterable of strings that possibly contains empty strings.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    =======</span>
+<span class="sd">    - The same iterable with the empty strings removed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">iterable</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="sanitize_tabs"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.brat_parser.sanitize_tabs">[docs]</a><span class="k">def</span> <span class="nf">sanitize_tabs</span><span class="p">(</span><span class="n">line</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">max_tabs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">sanitized_line</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">tab_count</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">char</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span> <span class="ow">and</span> <span class="n">tab_count</span> <span class="o">&lt;</span> <span class="n">max_tabs</span><span class="p">:</span>
+            <span class="n">sanitized_line</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>
+            <span class="n">tab_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">char</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span> <span class="ow">and</span> <span class="n">tab_count</span> <span class="o">==</span> <span class="n">max_tabs</span><span class="p">:</span>
+            <span class="n">sanitized_line</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sanitized_line</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>
+
+    <span class="n">line</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sanitized_line</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">line</span></div>
+
+
+<div class="viewcode-block" id="Entity"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.brat_parser.Entity">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Entity</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A simple annotation data structure.&quot;&quot;&quot;</span>
+
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">span</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="o">...</span><span class="p">]</span>
+    <span class="n">text</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">end</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="Relation"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.brat_parser.Relation">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Relation</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A simple relation data structure.&quot;&quot;&quot;</span>
+
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">subj</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">obj</span><span class="p">:</span> <span class="nb">str</span></div>
+
+
+<div class="viewcode-block" id="Attribute"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.brat_parser.Attribute">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Attribute</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A simple attribute data structure.&quot;&quot;&quot;</span>
+
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">target</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">values</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Grouping"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.brat_parser.Grouping">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Grouping</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">items</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Entity</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">text</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AugmentedEntity"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.brat_parser.AugmentedEntity">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">AugmentedEntity</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;An augmented entity data structure with its relations and attributes.&quot;&quot;&quot;</span>
+
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">span</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="o">...</span><span class="p">]</span>
+    <span class="n">text</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">relations_from_me</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Relation</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+    <span class="n">relations_to_me</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Relation</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+    <span class="n">attributes</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Attribute</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">end</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="Document"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.brat_parser.Document">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Document</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">entities</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Entity</span><span class="p">]</span>
+    <span class="n">relations</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Relation</span><span class="p">]</span>
+    <span class="n">attributes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Attribute</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="parse"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.brat_parser.parse">[docs]</a><span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="n">ann_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Document</span><span class="p">:</span>
+    <span class="n">entities</span><span class="p">,</span> <span class="n">relations</span><span class="p">,</span> <span class="n">attributes</span> <span class="o">=</span> <span class="n">read_file_annotations</span><span class="p">(</span><span class="n">ann_path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Document</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">entities</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="n">relations</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="n">attributes</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="parse_string"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.brat_parser.parse_string">[docs]</a><span class="k">def</span> <span class="nf">parse_string</span><span class="p">(</span><span class="n">annotation_string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Document</span><span class="p">:</span>
+    <span class="n">annotations_s</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">annotation_string</span>
+    <span class="n">annotations_s</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^#.+&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">annotations_s</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
+    <span class="n">annotations</span> <span class="o">=</span> <span class="n">remove_empty</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\n([TRAE]\d+\t)&quot;</span><span class="p">,</span> <span class="n">annotations_s</span><span class="p">))</span>
+    <span class="n">entities</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="n">relations</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="n">attributes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">annotations</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">annotations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">):</span>
+            <span class="n">entity</span> <span class="o">=</span> <span class="n">parse_entity</span><span class="p">(</span><span class="n">annotations</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">annotations</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="n">entities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">annotations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;R&quot;</span><span class="p">):</span>
+            <span class="n">relation</span> <span class="o">=</span> <span class="n">parse_relation</span><span class="p">(</span><span class="n">annotations</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">annotations</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="n">relations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">relation</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">annotations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">):</span>
+            <span class="n">attribute</span> <span class="o">=</span> <span class="n">parse_attribute</span><span class="p">(</span><span class="n">annotations</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">annotations</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="n">attributes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">attribute</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Document</span><span class="p">(</span><span class="n">entities</span><span class="p">,</span> <span class="n">relations</span><span class="p">,</span> <span class="n">attributes</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="parse_string_to_augmented_entities"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.brat_parser.parse_string_to_augmented_entities">[docs]</a><span class="k">def</span> <span class="nf">parse_string_to_augmented_entities</span><span class="p">(</span>
+    <span class="n">annotation_string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">AugmentedEntity</span><span class="p">]:</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">parse_string</span><span class="p">(</span><span class="n">annotation_string</span><span class="p">)</span>
+    <span class="n">augmented_entities</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">AugmentedEntity</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">document</span><span class="o">.</span><span class="n">entities</span><span class="p">:</span>
+        <span class="n">entity_id</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="n">id</span>
+        <span class="n">entity_relations_from_me</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">entity_relations_to_me</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">entity_attributes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">relation</span> <span class="ow">in</span> <span class="n">document</span><span class="o">.</span><span class="n">relations</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">relation</span><span class="o">.</span><span class="n">subj</span> <span class="o">==</span> <span class="n">entity_id</span><span class="p">:</span>
+                <span class="n">entity_relations_from_me</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">relation</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">relation</span><span class="o">.</span><span class="n">obj</span> <span class="o">==</span> <span class="n">entity_id</span><span class="p">:</span>
+                <span class="n">entity_relations_to_me</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">relation</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">attribute</span> <span class="ow">in</span> <span class="n">document</span><span class="o">.</span><span class="n">attributes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">attribute</span><span class="o">.</span><span class="n">target</span> <span class="o">==</span> <span class="n">entity_id</span><span class="p">:</span>
+                <span class="n">entity_attributes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">attribute</span><span class="p">)</span>
+        <span class="n">augmented_entities</span><span class="p">[</span><span class="n">entity</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">AugmentedEntity</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="n">entity</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="nb">type</span><span class="o">=</span><span class="n">entity</span><span class="o">.</span><span class="n">type</span><span class="p">,</span>
+            <span class="n">span</span><span class="o">=</span><span class="n">entity</span><span class="o">.</span><span class="n">span</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">entity</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+            <span class="n">relations_from_me</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">entity_relations_from_me</span><span class="p">),</span>
+            <span class="n">relations_to_me</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">entity_relations_to_me</span><span class="p">),</span>
+            <span class="n">attributes</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">entity_attributes</span><span class="p">),</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">augmented_entities</span></div>
+
+
+<div class="viewcode-block" id="get_augmented_entities"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.brat_parser.get_augmented_entities">[docs]</a><span class="k">def</span> <span class="nf">get_augmented_entities</span><span class="p">(</span><span class="n">ann_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">AugmentedEntity</span><span class="p">]:</span>
+    <span class="n">entities</span><span class="p">,</span> <span class="n">relations</span><span class="p">,</span> <span class="n">attributes</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">get_entities_relations_attributes_groups</span><span class="p">(</span>
+        <span class="n">ann_path</span>
+    <span class="p">)</span>
+    <span class="n">augmented_entities</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">entity_id</span><span class="p">,</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">entities</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">entity_relations_from_me</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">entity_relations_to_me</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">entity_attributes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">relation</span> <span class="ow">in</span> <span class="n">relations</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">relation</span><span class="o">.</span><span class="n">subj</span> <span class="o">==</span> <span class="n">entity_id</span><span class="p">:</span>
+                <span class="n">entity_relations_from_me</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">relation</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">relation</span><span class="o">.</span><span class="n">obj</span> <span class="o">==</span> <span class="n">entity_id</span><span class="p">:</span>
+                <span class="n">entity_relations_to_me</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">relation</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">attribute</span> <span class="ow">in</span> <span class="n">attributes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">attribute</span><span class="o">.</span><span class="n">target</span> <span class="o">==</span> <span class="n">entity_id</span><span class="p">:</span>
+                <span class="n">entity_attributes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">attribute</span><span class="p">)</span>
+        <span class="n">augmented_entities</span><span class="p">[</span><span class="n">entity</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">AugmentedEntity</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="n">entity</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="nb">type</span><span class="o">=</span><span class="n">entity</span><span class="o">.</span><span class="n">type</span><span class="p">,</span>
+            <span class="n">span</span><span class="o">=</span><span class="n">entity</span><span class="o">.</span><span class="n">span</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">entity</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+            <span class="n">relations_from_me</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">entity_relations_from_me</span><span class="p">),</span>
+            <span class="n">relations_to_me</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">entity_relations_to_me</span><span class="p">),</span>
+            <span class="n">attributes</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">entity_attributes</span><span class="p">),</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">augmented_entities</span></div>
+
+
+<div class="viewcode-block" id="list_to_dict"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.brat_parser.list_to_dict">[docs]</a><span class="k">def</span> <span class="nf">list_to_dict</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="n">List</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">i</span><span class="o">.</span><span class="n">id</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">s</span><span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="get_entities_relations_attributes_groups"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.brat_parser.get_entities_relations_attributes_groups">[docs]</a><span class="k">def</span> <span class="nf">get_entities_relations_attributes_groups</span><span class="p">(</span>
+    <span class="n">ann_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span>
+    <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Entity</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Relation</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Attribute</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Grouping</span><span class="p">],</span>
+<span class="p">]:</span>
+    <span class="n">entities_s</span><span class="p">,</span> <span class="n">relations_s</span><span class="p">,</span> <span class="n">attributes_s</span> <span class="o">=</span> <span class="n">read_file_annotations</span><span class="p">(</span><span class="n">ann_path</span><span class="p">)</span>
+    <span class="n">entities</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Entity</span><span class="p">]</span> <span class="o">=</span> <span class="n">list_to_dict</span><span class="p">(</span><span class="n">entities_s</span><span class="p">)</span>
+    <span class="n">relations</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Relation</span><span class="p">]</span> <span class="o">=</span> <span class="n">list_to_dict</span><span class="p">(</span><span class="n">relations_s</span><span class="p">)</span>
+    <span class="n">attributes</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Attribute</span><span class="p">]</span> <span class="o">=</span> <span class="n">list_to_dict</span><span class="p">(</span><span class="n">attributes_s</span><span class="p">)</span>
+
+    <span class="c1"># Process Groups</span>
+
+    <span class="n">grouping_relations</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">r</span><span class="o">.</span><span class="n">id</span><span class="p">:</span> <span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">relations</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="n">GROUPING_RELATIONS</span>
+    <span class="p">}</span>
+
+    <span class="n">groups</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Grouping</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">entity_id</span><span class="p">,</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">entities</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">entity</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="n">GROUPING_ENTITIES</span><span class="p">:</span>
+            <span class="n">items</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Entity</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">relation</span> <span class="ow">in</span> <span class="n">grouping_relations</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">relation</span><span class="o">.</span><span class="n">subj</span> <span class="o">==</span> <span class="n">entity_id</span><span class="p">:</span>
+                    <span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entities</span><span class="p">[</span><span class="n">relation</span><span class="o">.</span><span class="n">obj</span><span class="p">])</span>
+            <span class="n">groups</span><span class="p">[</span><span class="n">entity_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">Grouping</span><span class="p">(</span><span class="n">entity_id</span><span class="p">,</span> <span class="n">entity</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">items</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">entities</span><span class="p">,</span> <span class="n">relations</span><span class="p">,</span> <span class="n">attributes</span><span class="p">,</span> <span class="n">groups</span></div>
+
+
+<div class="viewcode-block" id="parse_entity"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.brat_parser.parse_entity">[docs]</a><span class="k">def</span> <span class="nf">parse_entity</span><span class="p">(</span><span class="n">tag_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tag_content</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Entity</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parse the entity string into an Entity structure.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ==========</span>
+<span class="sd">    - tag_id : str</span>
+<span class="sd">      The Tag ID in the annotation. (`T12\t` for example)</span>
+<span class="sd">    - tag_content : str</span>
+<span class="sd">      The tag text content. (`Temporal-Modifier 116 126\thistory of` for example)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    =======</span>
+<span class="sd">    - Entity</span>
+<span class="sd">      An Entity object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tag_content</span> <span class="o">=</span> <span class="n">sanitize_tabs</span><span class="p">(</span><span class="n">tag_content</span><span class="p">,</span> <span class="n">max_tabs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">tag_spans</span><span class="p">,</span> <span class="n">text</span> <span class="o">=</span> <span class="n">tag_content</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">tag_id</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">e</span>
+    <span class="n">tag</span> <span class="o">=</span> <span class="n">tag_spans</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="n">spans_</span> <span class="o">=</span> <span class="n">tag_spans</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span> <span class="p">:]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
+    <span class="n">spans</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">span</span> <span class="ow">in</span> <span class="n">spans_</span><span class="p">:</span>
+        <span class="n">start_s</span><span class="p">,</span> <span class="n">end_s</span> <span class="o">=</span> <span class="n">span</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">start_s</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">end_s</span><span class="p">)</span>
+        <span class="n">spans</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">Entity</span><span class="p">(</span><span class="n">tag_id</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">tag</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">spans</span><span class="p">),</span> <span class="n">text</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="parse_relation"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.brat_parser.parse_relation">[docs]</a><span class="k">def</span> <span class="nf">parse_relation</span><span class="p">(</span><span class="n">relation_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">relation_content</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Relation</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parse the annotation string into a Relation structure.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ==========</span>
+<span class="sd">    - relation_id : str</span>
+<span class="sd">      The Relation ID in the annotation. (`R12\t` for example)</span>
+<span class="sd">    - relation_content : str</span>
+<span class="sd">      The relation text content. (`Modified-By Arg1:T8 Arg2:T6\t` for example)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    =======</span>
+<span class="sd">    - Relation</span>
+<span class="sd">      A Relation object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">relation</span><span class="p">,</span> <span class="n">subj</span><span class="p">,</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">relation_content</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">relation_id</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">e</span>
+    <span class="n">subj</span> <span class="o">=</span> <span class="n">subj</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Arg1:&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Arg2:&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Relation</span><span class="p">(</span><span class="n">relation_id</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">relation</span><span class="p">,</span> <span class="n">subj</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="parse_attribute"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.brat_parser.parse_attribute">[docs]</a><span class="k">def</span> <span class="nf">parse_attribute</span><span class="p">(</span><span class="n">attribute_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">attribute_content</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Attribute</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parse the annotation string into an Attribute structure.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ==========</span>
+<span class="sd">    - Attribute_id : str</span>
+<span class="sd">      The attribute ID in the annotation. (`A1\t` for example)</span>
+<span class="sd">    - Attribute_content : str</span>
+<span class="sd">      The attribute text content. (`Tense T19 Past-Ended` for example)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    =======</span>
+<span class="sd">    - Attribute</span>
+<span class="sd">      An Attribute object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">attribute_arguments</span> <span class="o">=</span> <span class="n">attribute_content</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">attribute_arguments</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The input attribute couldn&#39;t be parsed.&quot;</span><span class="p">)</span>
+    <span class="n">attribute_name</span> <span class="o">=</span> <span class="n">attribute_arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">attribute_target</span> <span class="o">=</span> <span class="n">attribute_arguments</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">attribute_arguments</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Attribute</span><span class="p">(</span><span class="n">attribute_id</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">attribute_name</span><span class="p">,</span> <span class="n">attribute_target</span><span class="p">)</span>
+    <span class="c1"># elif len(attribute_arguments) &gt; 2:</span>
+    <span class="k">return</span> <span class="n">Attribute</span><span class="p">(</span>
+        <span class="n">attribute_id</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
+        <span class="n">attribute_name</span><span class="p">,</span>
+        <span class="n">attribute_target</span><span class="p">,</span>
+        <span class="nb">tuple</span><span class="p">(</span><span class="n">attribute_arguments</span><span class="p">[</span><span class="mi">2</span><span class="p">:]),</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="read_file_annotations"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.brat_parser.read_file_annotations">[docs]</a><span class="k">def</span> <span class="nf">read_file_annotations</span><span class="p">(</span>
+    <span class="n">ann</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Entity</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">Relation</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">Attribute</span><span class="p">]]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read an annotation file and get the Entities and Relations in it.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ==========</span>
+<span class="sd">    - ann : str</span>
+<span class="sd">      The path to the annotation file to be processed.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    =======</span>
+<span class="sd">    - Tuple[Set[Entity], Set[Relation], Set[Attribute]]</span>
+<span class="sd">      A tuple of sets of Entities, Relations, and Attributes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ann_content</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ann</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">ann_content</span> <span class="o">+=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">parse_string</span><span class="p">(</span><span class="n">ann_content</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">document</span><span class="o">.</span><span class="n">entities</span><span class="p">,</span> <span class="n">document</span><span class="o">.</span><span class="n">relations</span><span class="p">,</span> <span class="n">document</span><span class="o">.</span><span class="n">attributes</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Antoine Neuraz, William Digan, Ivan Lerner, Alice Rogier, David Baudoin, Anita Burgun, Nicolas Garcelon, Bastien Rance.
+
+    </p>
+  </div> 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <script>
+    var versions_json_url = ''
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        0.1
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

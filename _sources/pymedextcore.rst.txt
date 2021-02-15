@@ -1,0 +1,165 @@
+pymedextcore package
+====================
+
+Submodules
+----------
+
+pymedextcore.annotators module
+------------------------------
+
+.. automodule:: pymedextcore.annotators
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pymedextcore.bioctransform module
+---------------------------------
+
+.. automodule:: pymedextcore.bioctransform
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pymedextcore.brat\_parser module
+--------------------------------
+
+.. automodule:: pymedextcore.brat_parser
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pymedextcore.brattransform module
+---------------------------------
+
+.. automodule:: pymedextcore.brattransform
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pymedextcore.connector module
+-----------------------------
+
+.. automodule:: pymedextcore.connector
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pymedextcore.datatransform module
+---------------------------------
+
+.. automodule:: pymedextcore.datatransform
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pymedextcore.doccanoannotator module
+------------------------------------
+
+.. automodule:: pymedextcore.doccanoannotator
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pymedextcore.doccanodocument module
+-----------------------------------
+
+.. automodule:: pymedextcore.doccanodocument
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pymedextcore.doccanosource module
+---------------------------------
+
+.. automodule:: pymedextcore.doccanosource
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pymedextcore.doccanotransform module
+------------------------------------
+
+.. automodule:: pymedextcore.doccanotransform
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pymedextcore.document module
+----------------------------
+
+.. automodule:: pymedextcore.document
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pymedextcore.fhirtransform module
+---------------------------------
+
+.. automodule:: pymedextcore.fhirtransform
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pymedextcore.ncbisource module
+------------------------------
+
+.. automodule:: pymedextcore.ncbisource
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pymedextcore.normalize module
+-----------------------------
+
+.. automodule:: pymedextcore.normalize
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pymedextcore.omopsource module
+------------------------------
+
+.. automodule:: pymedextcore.omopsource
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pymedextcore.omoptransform module
+---------------------------------
+
+.. automodule:: pymedextcore.omoptransform
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pymedextcore.pymedext module
+----------------------------
+
+.. automodule:: pymedextcore.pymedext
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pymedextcore.pymedext\_cmdline module
+-------------------------------------
+
+.. automodule:: pymedextcore.pymedext_cmdline
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pymedextcore.source module
+--------------------------
+
+.. automodule:: pymedextcore.source
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: pymedextcore
+   :members:
+   :undoc-members:
+   :show-inheritance:
