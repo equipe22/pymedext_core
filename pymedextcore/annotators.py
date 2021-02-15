@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 class Annotation:
     """
-    Based object which contains Annotation
+    Based object which contains Annotation liveannotation
     """
     
     def __init__(self, type:str, value:str, source:str, source_ID:str, 
