@@ -5,7 +5,8 @@ name: github pages
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
+    branches: 
+      - master
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -45,14 +46,15 @@ jobs:
           pip3 install git+https://github.com/equipe22/pymedext_core.git
           pip3 install sphinx Pallets-Sphinx-Themes msmb_theme sphinx-rtd-theme
           sphinx-apidoc -o _build pymedextcore
-          touch ./docs/.nojekyll
-          sphinx-build _build ./docs -b html
+          touch ./public/.nojekyll
+          sphinx-build _build ./public -b html
       #- run: cp -r _build/html public
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
+          publish_dir: ./public
+          enable_jekyll: true
 
 # This is a basic workflow to help you get started with Actions
