@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 
 import bioc
 from bioc import biocjson
@@ -11,9 +10,9 @@ class BioC(DataTransform):
         """
         Bioc Data to transform pymedext to Bioc Will
         """
-    def load_collection(bioc_input,format =0, isFile = True):
-        """load a bioc collection ad list of Document object
 
+    def load_collection(bioc_input: str,format: int =0, isFile: bool  = True):
+        """load a bioc collection ad list of Document object
         :param bioc_input: blabla
         :param format: xml or to_json
         :param isFile: Boolean
