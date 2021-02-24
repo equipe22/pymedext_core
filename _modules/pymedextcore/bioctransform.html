@@ -164,13 +164,13 @@
 <div class="viewcode-block" id="BioC"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.bioctransform.BioC">[docs]</a><span class="k">class</span> <span class="nc">BioC</span><span class="p">(</span><span class="n">DataTransform</span><span class="p">):</span>
 <div class="viewcode-block" id="BioC.load_collection"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.bioctransform.BioC.load_collection">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">load_collection</span><span class="p">(</span><span class="n">bioc_input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span><span class="nb">format</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">isFile</span><span class="p">:</span> <span class="nb">bool</span>  <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;load a bioc collection and return a list of Document object</span>
-<span class="sd">        :param bioc_input: blabla</span>
-<span class="sd">        :param format: xml or to_json</span>
-<span class="sd">        :param isFile: Boolean</span>
-<span class="sd">        :returns: list of Document</span>
-<span class="sd">        :rtype: list</span>
+        <span class="sd">&quot;&quot;&quot;load a bioc collection xml or json.</span>
+<span class="sd">        It will return a list of Document object.</span>
 
+<span class="sd">        :param bioc_input: a str path to a bioc file or a bioc input string</span>
+<span class="sd">        :param format: xml or to_json type of the bioc file</span>
+<span class="sd">        :param isFile: if True bioc_input is pat else it is a string</span>
+<span class="sd">        :returns: list of Document</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1">#Generalize load and add as an argument type 0 default is an xml, 1 a json bioc collection</span>
         <span class="n">collection</span> <span class="o">=</span> <span class="kc">None</span>

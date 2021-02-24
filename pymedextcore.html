@@ -503,12 +503,20 @@ TODO: rename selectAll
 <dl class="py method">
 <dt id="pymedextcore.bioctransform.BioC.load_collection">
 <em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">load_collection</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bioc_input</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isFile</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/bioctransform.html#BioC.load_collection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.bioctransform.BioC.load_collection" title="Permalink to this definition">¶</a></dt>
-<dd><p>load a bioc collection and return a list of Document object
-:param bioc_input: blabla
-:param format: xml or to_json
-:param isFile: Boolean
-:returns: list of Document
-:rtype: list</p>
+<dd><p>load a bioc collection xml or json.
+It will return a list of Document object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bioc_input</strong> – a str path to a bioc file or a bioc input string</p></li>
+<li><p><strong>format</strong> – xml or to_json type of the bioc file</p></li>
+<li><p><strong>isFile</strong> – if True bioc_input is pat else it is a string</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of Document</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
