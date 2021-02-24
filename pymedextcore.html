@@ -92,7 +92,7 @@
 <li><a class="reference internal" href="#">pymedextcore package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#module-pymedextcore.annotators">pymedextcore.annotators module</a></li>
-<li><a class="reference internal" href="#module-pymedextcore.bioctransform">pymedextcore.bioctransform module</a></li>
+<li><a class="reference internal" href="#pymedextcore-bioctransform-module">pymedextcore.bioctransform module</a></li>
 <li><a class="reference internal" href="#module-pymedextcore.brat_parser">pymedextcore.brat_parser module</a></li>
 <li><a class="reference internal" href="#module-pymedextcore.brattransform">pymedextcore.brattransform module</a></li>
 <li><a class="reference internal" href="#module-pymedextcore.connector">pymedextcore.connector module</a></li>
@@ -103,12 +103,12 @@
 <li><a class="reference internal" href="#module-pymedextcore.doccanotransform">pymedextcore.doccanotransform module</a></li>
 <li><a class="reference internal" href="#module-pymedextcore.document">pymedextcore.document module</a></li>
 <li><a class="reference internal" href="#module-pymedextcore.fhirtransform">pymedextcore.fhirtransform module</a></li>
-<li><a class="reference internal" href="#module-pymedextcore.ncbisource">pymedextcore.ncbisource module</a></li>
+<li><a class="reference internal" href="#pymedextcore-ncbisource-module">pymedextcore.ncbisource module</a></li>
 <li><a class="reference internal" href="#module-pymedextcore.normalize">pymedextcore.normalize module</a></li>
 <li><a class="reference internal" href="#module-pymedextcore.omopsource">pymedextcore.omopsource module</a></li>
 <li><a class="reference internal" href="#module-pymedextcore.omoptransform">pymedextcore.omoptransform module</a></li>
-<li><a class="reference internal" href="#module-pymedextcore.pymedext">pymedextcore.pymedext module</a></li>
-<li><a class="reference internal" href="#module-pymedextcore.pymedext_cmdline">pymedextcore.pymedext_cmdline module</a></li>
+<li><a class="reference internal" href="#pymedextcore-pymedext-module">pymedextcore.pymedext module</a></li>
+<li><a class="reference internal" href="#pymedextcore-pymedext-cmdline-module">pymedextcore.pymedext_cmdline module</a></li>
 <li><a class="reference internal" href="#module-pymedextcore.source">pymedextcore.source module</a></li>
 <li><a class="reference internal" href="#module-pymedextcore">Module contents</a></li>
 </ul>
@@ -494,33 +494,8 @@ TODO: rename selectAll
 </dd></dl>
 
 </div>
-<div class="section" id="module-pymedextcore.bioctransform">
-<span id="pymedextcore-bioctransform-module"></span><h2>pymedextcore.bioctransform module<a class="headerlink" href="#module-pymedextcore.bioctransform" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt id="pymedextcore.bioctransform.BioC">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymedextcore.bioctransform.</span></code><code class="sig-name descname"><span class="pre">BioC</span></code><a class="reference internal" href="_modules/pymedextcore/bioctransform.html#BioC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.bioctransform.BioC" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#pymedextcore.datatransform.DataTransform" title="pymedextcore.datatransform.DataTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">pymedextcore.datatransform.DataTransform</span></code></a></p>
-<dl class="py method">
-<dt id="pymedextcore.bioctransform.BioC.load_collection">
-<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">load_collection</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bioc_input</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/bioctransform.html#BioC.load_collection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.bioctransform.BioC.load_collection" title="Permalink to this definition">¶</a></dt>
-<dd><p>load a bioc collection xml or json.
-It will return a list of Document object.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>bioc_input</strong> – a str path to a bioc file or a bioc input string</p></li>
-<li><p><strong>format</strong> – xml or to_json type of the bioc file</p></li>
-<li><p><strong>is_file</strong> – if True bioc_input is path else it is a string</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>list of Document</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
+<div class="section" id="pymedextcore-bioctransform-module">
+<h2>pymedextcore.bioctransform module<a class="headerlink" href="#pymedextcore-bioctransform-module" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-pymedextcore.brat_parser">
 <span id="pymedextcore-brat-parser-module"></span><h2>pymedextcore.brat_parser module<a class="headerlink" href="#module-pymedextcore.brat_parser" title="Permalink to this headline">¶</a></h2>
@@ -1758,20 +1733,8 @@ the processing date, the annotators used</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-pymedextcore.ncbisource">
-<span id="pymedextcore-ncbisource-module"></span><h2>pymedextcore.ncbisource module<a class="headerlink" href="#module-pymedextcore.ncbisource" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt id="pymedextcore.ncbisource.PubTatorSource">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymedextcore.ncbisource.</span></code><code class="sig-name descname"><span class="pre">PubTatorSource</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'https://www.ncbi.nlm.nih.gov/research/pubtator-api/publications/export/'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/ncbisource.html#PubTatorSource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.ncbisource.PubTatorSource" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#pymedextcore.source.Source" title="pymedextcore.source.Source"><code class="xref py py-class docutils literal notranslate"><span class="pre">pymedextcore.source.Source</span></code></a>, <a class="reference internal" href="#pymedextcore.connector.SimpleAPIConnector" title="pymedextcore.connector.SimpleAPIConnector"><code class="xref py py-class docutils literal notranslate"><span class="pre">pymedextcore.connector.SimpleAPIConnector</span></code></a></p>
-<p>Connection to a POstgres Ommop source</p>
-<dl class="py method">
-<dt id="pymedextcore.ncbisource.PubTatorSource.getPubTatorAnnotations">
-<code class="sig-name descname"><span class="pre">getPubTatorAnnotations</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pmid_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Bioconcept</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">returnFormat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/ncbisource.html#PubTatorSource.getPubTatorAnnotations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.ncbisource.PubTatorSource.getPubTatorAnnotations" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
+<div class="section" id="pymedextcore-ncbisource-module">
+<h2>pymedextcore.ncbisource module<a class="headerlink" href="#pymedextcore-ncbisource-module" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-pymedextcore.normalize">
 <span id="pymedextcore-normalize-module"></span><h2>pymedextcore.normalize module<a class="headerlink" href="#module-pymedextcore.normalize" title="Permalink to this headline">¶</a></h2>
@@ -1889,27 +1852,11 @@ If n is negative or omitted, read until EOF.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-pymedextcore.pymedext">
-<span id="pymedextcore-pymedext-module"></span><h2>pymedextcore.pymedext module<a class="headerlink" href="#module-pymedextcore.pymedext" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="pymedextcore-pymedext-module">
+<h2>pymedextcore.pymedext module<a class="headerlink" href="#pymedextcore-pymedext-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-pymedextcore.pymedext_cmdline">
-<span id="pymedextcore-pymedext-cmdline-module"></span><h2>pymedextcore.pymedext_cmdline module<a class="headerlink" href="#module-pymedextcore.pymedext_cmdline" title="Permalink to this headline">¶</a></h2>
-<dl class="py function">
-<dt id="pymedextcore.pymedext_cmdline.export">
-<code class="sig-prename descclassname"><span class="pre">pymedextcore.pymedext_cmdline.</span></code><code class="sig-name descname"><span class="pre">export</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thisDoc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">otype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rawFileName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bexclude</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/pymedext_cmdline.html#export"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.pymedext_cmdline.export" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt id="pymedextcore.pymedext_cmdline.loadFile">
-<code class="sig-prename descclassname"><span class="pre">pymedextcore.pymedext_cmdline.</span></code><code class="sig-name descname"><span class="pre">loadFile</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rawFileName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">itype</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/pymedext_cmdline.html#loadFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.pymedext_cmdline.loadFile" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt id="pymedextcore.pymedext_cmdline.main">
-<code class="sig-prename descclassname"><span class="pre">pymedextcore.pymedext_cmdline.</span></code><code class="sig-name descname"><span class="pre">main</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/pymedext_cmdline.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.pymedext_cmdline.main" title="Permalink to this definition">¶</a></dt>
-<dd><p>Simple program that greets NAME for a total of COUNT times.</p>
-</dd></dl>
-
+<div class="section" id="pymedextcore-pymedext-cmdline-module">
+<h2>pymedextcore.pymedext_cmdline module<a class="headerlink" href="#pymedextcore-pymedext-cmdline-module" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-pymedextcore.source">
 <span id="pymedextcore-source-module"></span><h2>pymedextcore.source module<a class="headerlink" href="#module-pymedextcore.source" title="Permalink to this headline">¶</a></h2>
