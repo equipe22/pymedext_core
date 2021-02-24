@@ -1,0 +1,733 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>PyMedExt - a library to process clinical text &mdash; pymedextcore 0.2 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/msmb.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/js/versions.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> pymedextcore
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">PyMedExt - a library to process clinical text</a><ul>
+<li><a class="reference internal" href="#requirements">Requirements</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#using-pip">Using pip</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tutorials">Tutorials</a><ul>
+<li><a class="reference internal" href="#clone-the-repository-for-demo">Clone the repository for demo</a></li>
+<li><a class="reference internal" href="#load-a-file-as-a-pymedext-document">Load a file as a PyMedExt Document</a></li>
+<li><a class="reference internal" href="#add-an-annotator">Add an Annotator</a><ul>
+<li><a class="reference internal" href="#the-findmatches-use-case">the findMatches use case</a><ul>
+<li><a class="reference internal" href="#define-a-function-based-on-re-inter">Define a function based on re.inter</a><ul>
+<li><a class="reference internal" href="#init"><strong>init</strong>()</a></li>
+<li><a class="reference internal" href="#annotate-function">annotate_function()</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#findmatches-demo">findMatches demo</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-grep-use-case">the GREP use case</a><ul>
+<li><a class="reference internal" href="#define-the-grep-annotator">Define the Grep Annotator</a><ul>
+<li><a class="reference internal" href="#id1"><strong>init</strong>()</a></li>
+<li><a class="reference internal" href="#id2">annotate_function()</a></li>
+<li><a class="reference internal" href="#regexfast-demo">regexFast demo</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#export-pymedext-document-as-a-brat-file">Export PyMedExt Document as a Brat file</a></li>
+<li><a class="reference internal" href="#pymedext-commandline-in-progress">PyMedExt commandline (in progress)</a><ul>
+<li><a class="reference internal" href="#text-to-pymedext">text to pymedext</a></li>
+<li><a class="reference internal" href="#fhir-to-pymedext">fhir to pymedext</a></li>
+<li><a class="reference internal" href="#bioc-to-pymedext">bioc to pymedext</a></li>
+<li><a class="reference internal" href="#id3">text to pymedext</a></li>
+<li><a class="reference internal" href="#id4">fhir to pymedext</a></li>
+<li><a class="reference internal" href="#id5">bioc to pymedext</a></li>
+<li><a class="reference internal" href="#brat-to-pymedext-no-example">brat to pymedext (no example)</a></li>
+<li><a class="reference internal" href="#require-annotation">require annotation</a></li>
+<li><a class="reference internal" href="#other-install-mode">Other Install mode</a><ul>
+<li><a class="reference internal" href="#using-gnu-make">Using GNU Make</a></li>
+<li><a class="reference internal" href="#deploying-pymedext-as-docker-image">Deploying PyMedExt as Docker image</a><ul>
+<li><a class="reference internal" href="#install-as-docker-image">Install as Docker Image</a><ul>
+<li><a class="reference internal" href="#linux">Linux</a></li>
+<li><a class="reference internal" href="#mac-intel-processor">Mac Intel Processor</a></li>
+<li><a class="reference internal" href="#mac-m1-processor">Mac M1 Processor</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#build-image">Build Image</a><ul>
+<li><a class="reference internal" href="#fullfill-configuration">fullfill configuration</a></li>
+<li><a class="reference internal" href="#docker-in-command-line">Docker in command line</a></li>
+<li><a class="reference internal" href="#id6">Using GNU Make</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pymedextcore</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>PyMedExt - a library to process clinical text</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/README.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pymedext-a-library-to-process-clinical-text">
+<h1>PyMedExt - a library to process clinical text<a class="headerlink" href="#pymedext-a-library-to-process-clinical-text" title="Permalink to this headline">¶</a></h1>
+<p>PyMedExt is a library designed to process clinical text.
+PyMedExt includes basic data wrangling functions to transform
+text input formated as txt, pymedext,biocxml,biocjson,fhir, or brat
+into pymedext, biocxml, biocjson, omop or brat.</p>
+<p>PyMedExt also includes an easy way to define Annotator.</p>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="using-pip">
+<h4>Using pip<a class="headerlink" href="#using-pip" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3 install git+https://github.com/equipe22/pymedext_core.git
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="tutorials">
+<h1>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="clone-the-repository-for-demo">
+<h2>Clone the repository for demo<a class="headerlink" href="#clone-the-repository-for-demo" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/equipe22/pymedext_core.git
+<span class="nb">cd</span> pymedext_core/examples
+
+<span class="c1">#This script contains the Tutorial</span>
+<span class="c1">#python3 demo.py</span>
+<span class="c1"># go in python interactive mode</span>
+python3
+</pre></div>
+</div>
+</div>
+<div class="section" id="load-a-file-as-a-pymedext-document">
+<h2>Load a file as a PyMedExt Document<a class="headerlink" href="#load-a-file-as-a-pymedext-document" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#import dependencies</span>
+<span class="kn">from</span> <span class="nn">pymedextcore</span> <span class="kn">import</span> <span class="n">pymedext</span> <span class="c1"># contains all pymedextcore  objects</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="n">dataPath</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;examples&quot;</span><span class="p">,</span><span class="s2">&quot;data/frenchReport/&quot;</span><span class="p">)</span>
+<span class="n">resourcePath</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;examples&quot;</span><span class="p">,</span><span class="s2">&quot;ressources/&quot;</span><span class="p">)</span>
+<span class="n">letter</span><span class="o">=</span><span class="nb">open</span><span class="p">(</span><span class="n">dataPath</span><span class="o">+</span><span class="s2">&quot;letter.txt&quot;</span><span class="p">,</span><span class="s2">&quot;r&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span>
+
+<span class="n">LetterPyMedExt</span><span class="o">=</span><span class="n">pymedext</span><span class="o">.</span><span class="n">Document</span><span class="p">(</span><span class="n">raw_text</span><span class="o">=</span> <span class="n">letter</span><span class="p">,</span> <span class="n">ID</span><span class="o">=</span><span class="s2">&quot;ID_letter01&quot;</span><span class="p">)</span>
+<span class="n">LetterPyMedExt</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-an-annotator">
+<h2>Add an Annotator<a class="headerlink" href="#add-an-annotator" title="Permalink to this headline">¶</a></h2>
+<p>if you want to expand PyMedExt and add a new Annotator.
+Firstly, create a class which extend the annotators.Annotator class.
+Secondly, you will need to extend two functions.</p>
+<ul class="simple">
+<li><p><strong>init</strong></p></li>
+<li><p>annotate_function</p></li>
+</ul>
+<div class="section" id="the-findmatches-use-case">
+<h3>the findMatches use case<a class="headerlink" href="#the-findmatches-use-case" title="Permalink to this headline">¶</a></h3>
+<p>the simplest annotator possibles</p>
+<div class="section" id="define-a-function-based-on-re-inter">
+<h4>Define a function based on re.inter<a class="headerlink" href="#define-a-function-based-on-re-inter" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">thisValue</span><span class="o">=</span><span class="s2">&quot;liposarcome&quot;</span>
+<span class="c1">#find the position of each thisValue in the letter text</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">thisValue</span><span class="p">,</span> <span class="n">letter</span><span class="o">.</span><span class="n">lower</span><span class="p">()):</span>
+          <span class="n">matchPos</span><span class="o">=</span><span class="n">i</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+          <span class="k">if</span> <span class="n">matchPos</span> <span class="ow">is</span> <span class="ow">not</span> <span class="p">[]:</span>
+            <span class="n">span</span><span class="o">=</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">matchPos</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">matchPos</span><span class="p">)</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">thisValue</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">span</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we will adapt this function to the Annotator class</p>
+<div class="section" id="init">
+<h5><strong>init</strong>()<a class="headerlink" href="#init" title="Permalink to this headline">¶</a></h5>
+<p>The init function must contains</p>
+<ul class="simple">
+<li><p>key_input –&gt; the type of Annotation’s input used by the Annotator, here  “raw_text”</p></li>
+<li><p>key_output –&gt; the type of the Annotation’s output by the Annotator, here “regex_fast”</p></li>
+<li><p>ID –&gt; the tool ID, eventually the tool git repository address and version for Annotation Traceability</p></li>
+<li><p>other arguments are specific to the type of the defined Annotator for example, findValues: “list of value to identify in the text”</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pymedextcore</span> <span class="kn">import</span> <span class="n">annotators</span>
+
+<span class="k">class</span> <span class="nc">findMatches</span><span class="p">(</span><span class="n">annotators</span><span class="o">.</span><span class="n">Annotator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Annotator based on linux grep to search regext from a source file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_input</span><span class="p">,</span> <span class="n">key_output</span><span class="p">,</span> <span class="n">ID</span><span class="p">,</span> <span class="n">findValues</span> <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;FIXME! initialize the annotator</span>
+
+<span class="sd">        :param key_input: input [&#39;raw_text&#39;]</span>
+<span class="sd">        :param key_output: Annotation type here &quot;Liposarcom.V0&quot;</span>
+<span class="sd">        :param ID: regex_fast.version</span>
+<span class="sd">        :param findValues: &quot;list of value to identify in the text&quot;</span>
+<span class="sd">        :returns:</span>
+<span class="sd">        :rtype:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">key_input</span><span class="p">,</span> <span class="n">key_output</span><span class="p">,</span> <span class="n">ID</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">findValues</span><span class="o">=</span><span class="n">findValues</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="annotate-function">
+<h5>annotate_function()<a class="headerlink" href="#annotate-function" title="Permalink to this headline">¶</a></h5>
+<p>The annotate_function must contains</p>
+<ul class="simple">
+<li><p>_input –&gt; Annotations associated with the Document to annotate</p></li>
+<li><p>returns –&gt; Annotations ( a list of annotations object )</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">annotate_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_input</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; main annotation function</span>
+<span class="sd">    :param _input: in this case raw_text</span>
+<span class="sd">    :returns: a list of annotations</span>
+<span class="sd">    :rtype:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">_input</span><span class="p">)</span>
+    <span class="n">inp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_key_input</span><span class="p">(</span><span class="n">_input</span><span class="p">,</span><span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">annotationsList</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">for</span> <span class="n">thisValue</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">findValues</span><span class="p">:</span>
+        <span class="c1">#result = [i.start() for i in re.finditer(thisValue, inp.value.lower())]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">thisValue</span><span class="p">,</span> <span class="n">inp</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">lower</span><span class="p">()):</span>
+            <span class="n">matchPos</span><span class="o">=</span><span class="n">i</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">matchPos</span> <span class="ow">is</span> <span class="ow">not</span> <span class="p">[]:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;ok go in loop&quot;</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">matchPos</span><span class="p">)</span>
+                <span class="n">ID</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid1</span><span class="p">())</span>
+                <span class="n">annotationsList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">annotators</span><span class="o">.</span><span class="n">Annotation</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_output</span><span class="p">,</span>
+                                                          <span class="n">value</span><span class="o">=</span><span class="n">thisValue</span><span class="p">,</span> <span class="c1">#thisMatch,</span>
+                                                          <span class="n">span</span><span class="o">=</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">matchPos</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">matchPos</span><span class="p">)</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">thisValue</span><span class="p">)),</span>
+                                                          <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span>
+                                                          <span class="n">isEntity</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                                          <span class="n">ID</span><span class="o">=</span><span class="n">ID</span><span class="p">,</span>
+                                                          <span class="n">source_ID</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">ID</span><span class="p">))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">annotationsList</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">annotationsList</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="findmatches-demo">
+<h4>findMatches demo<a class="headerlink" href="#findmatches-demo" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">demoAnnotator</span> <span class="o">=</span> <span class="n">findMatches</span><span class="p">(</span><span class="n">key_input</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;raw_text&#39;</span><span class="p">],</span>
+                     <span class="n">key_output</span> <span class="o">=</span> <span class="s1">&#39;Liposarcom.V0&#39;</span><span class="p">,</span>
+                     <span class="n">ID</span> <span class="o">=</span> <span class="s2">&quot;demoreiter&quot;</span><span class="p">,</span> <span class="n">findValues</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;liposarcome&quot;</span><span class="p">])</span>
+
+<span class="c1"># add all your annotators in a list</span>
+<span class="n">annotatorsList</span> <span class="o">=</span><span class="p">[</span><span class="n">demoAnnotator</span><span class="p">]</span>
+<span class="c1"># annotate your document</span>
+<span class="n">LetterPyMedExt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">annotatorsList</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="the-grep-use-case">
+<h3>the GREP use case<a class="headerlink" href="#the-grep-use-case" title="Permalink to this headline">¶</a></h3>
+<p>grep is a linux command-line which allow you to search into plain-text data sets
+for lines that match a regular expression.
+The script grepWrapperAnnotator.py located on the examples
+directory, is a wrapper around grep.</p>
+<p>this wrapper takes as resources two files :</p>
+<ul class="simple">
+<li><p>regexResource.txt –&gt; a one column list of words to search in a text</p></li>
+<li><p>pivotResource.csv –&gt; a two columns list of words: pattern, normalizewords</p></li>
+</ul>
+<div class="section" id="define-the-grep-annotator">
+<h4>Define the Grep Annotator<a class="headerlink" href="#define-the-grep-annotator" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id1">
+<h5><strong>init</strong>()<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h5>
+<p>The init function must contains</p>
+<ul class="simple">
+<li><p>key_input –&gt; the type of Annotation’s input used by the Annotator, here  “raw_text”</p></li>
+<li><p>key_output –&gt; the type of the Annotation’s output by the Annotator, here “regex_fast”</p></li>
+<li><p>ID –&gt; the tool ID, eventually the tool git repository address and version</p></li>
+<li><p>other arguments are specific to the type of the defined Annotator</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pymedextcore</span> <span class="kn">import</span> <span class="n">annotators</span>
+<span class="k">class</span> <span class="nc">regexFast</span><span class="p">(</span><span class="n">annotators</span><span class="o">.</span><span class="n">Annotator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Annotator based on linux grep to search regex from a source file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_input</span><span class="p">,</span> <span class="n">key_output</span><span class="p">,</span> <span class="n">ID</span><span class="p">,</span> <span class="n">regexResource</span><span class="p">,</span> <span class="n">pathToPivot</span><span class="p">,</span> <span class="n">ignore_syntax</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;FIXME! initialize the annotator</span>
+<span class="sd">        :param key_input: input [raw_text&#39;]</span>
+<span class="sd">        :param key_output: either regex_fast or the normalized regex value need to discuss</span>
+<span class="sd">        :param ID: regex_fast.version</span>
+<span class="sd">        :param regexResource: path to regex value file</span>
+<span class="sd">        :param pathToPivot: pivot table between regex and the normalized value</span>
+<span class="sd">        :param ignore_syntax: not used yet</span>
+<span class="sd">        :returns:</span>
+<span class="sd">        :rtype:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">key_input</span><span class="p">,</span> <span class="n">key_output</span><span class="p">,</span> <span class="n">ID</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ignore_syntax</span><span class="o">=</span><span class="n">ignore_syntax</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fileAnnotation</span><span class="o">=</span><span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">countValue</span><span class="o">=</span><span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pathToPivot</span><span class="o">=</span><span class="n">pathToPivot</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pivot</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cmds</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;fgrep -iow -n -b -F -f &quot;</span><span class="o">+</span><span class="n">regexResource</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loadPivot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h5>annotate_function()<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h5>
+<p>The annotate_function must contains</p>
+<ul class="simple">
+<li><p>_input –&gt; Annotations associated with the Document to annotate</p></li>
+<li><p>returns –&gt; Annotations ( a list of annotations object )</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">annotate_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_input</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; main annotation function</span>
+<span class="sd">    :param _input: in this case raw_text</span>
+<span class="sd">    :returns: a list of annotations</span>
+<span class="sd">    :rtype:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">_input</span><span class="p">)</span>
+    <span class="c1">#get_key_input: return the annotations oF Documents.annotations which have</span>
+    <span class="c1"># the same type of the i th key_input element</span>
+    <span class="n">inp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_key_input</span><span class="p">(</span><span class="n">_input</span><span class="p">,</span><span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">fileAnnotation</span><span class="p">,</span><span class="n">countValue</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">makeMatch</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+    <span class="n">countValue</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">setPivot</span><span class="p">(</span><span class="n">countValue</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">countValue</span><span class="p">)</span>
+    <span class="n">annotations</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">for</span> <span class="n">matchPos</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">fileAnnotation</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+        <span class="k">for</span> <span class="n">thisMatch</span> <span class="ow">in</span> <span class="n">fileAnnotation</span><span class="p">[</span><span class="n">matchPos</span><span class="p">]:</span>
+            <span class="n">ID</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid1</span><span class="p">())</span>
+            <span class="n">attributes</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;ngram&quot;</span><span class="p">:</span><span class="n">thisMatch</span><span class="p">}</span>
+            <span class="n">annotations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">annotators</span><span class="o">.</span><span class="n">Annotation</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_output</span><span class="p">,</span>
+                                          <span class="n">value</span><span class="o">=</span><span class="n">countValue</span><span class="p">[</span><span class="n">thisMatch</span><span class="p">][</span><span class="s2">&quot;normalized&quot;</span><span class="p">],</span> <span class="c1">#thisMatch,</span>
+                                          <span class="n">span</span><span class="o">=</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">matchPos</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">matchPos</span><span class="p">)</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">thisMatch</span><span class="p">)),</span>
+                                          <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span>
+                                          <span class="n">isEntity</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                          <span class="n">ID</span><span class="o">=</span><span class="n">ID</span><span class="p">,</span>
+                                          <span class="n">attributes</span><span class="o">=</span><span class="n">attributes</span><span class="p">,</span>
+                                          <span class="n">source_ID</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">ID</span><span class="p">))</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">annotations</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="regexfast-demo">
+<h5>regexFast demo<a class="headerlink" href="#regexfast-demo" title="Permalink to this headline">¶</a></h5>
+<p>First, clone the pymedext_core git repository and go to the examples directory</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#import dependencies</span>
+<span class="kn">from</span> <span class="nn">grepWrapperAnnotator</span> <span class="kn">import</span> <span class="n">regexFast</span> <span class="c1"># contains your local annotator</span>
+<span class="kn">from</span> <span class="nn">pymedextcore</span> <span class="kn">import</span> <span class="n">pymedext</span> <span class="c1"># contains all pymedextcore  objects</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+<span class="n">resourcePath</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;examples&quot;</span><span class="p">,</span><span class="s2">&quot;ressources/&quot;</span><span class="p">)</span>
+<span class="n">thisDoc</span><span class="o">=</span><span class="n">pymedext</span><span class="o">.</span><span class="n">Document</span><span class="p">(</span><span class="n">raw_text</span><span class="o">=</span> <span class="s2">&quot; a document demo you want to work with and contains evidence of. covid 19, sras, sars &quot;</span><span class="p">,</span> <span class="n">ID</span><span class="o">=</span><span class="s2">&quot;ID01&quot;</span><span class="p">)</span>
+
+
+<span class="n">getRegex</span> <span class="o">=</span> <span class="n">regexFast</span><span class="p">(</span><span class="n">key_input</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;raw_text&#39;</span><span class="p">],</span>
+                     <span class="n">key_output</span> <span class="o">=</span> <span class="s1">&#39;regex_fast&#39;</span><span class="p">,</span>
+                     <span class="n">ID</span> <span class="o">=</span> <span class="s2">&quot;regex_fast.v1&quot;</span><span class="p">,</span>
+                     <span class="n">regexResource</span><span class="o">=</span><span class="n">resourcePath</span><span class="o">+</span><span class="s2">&quot;regexResource.txt &quot;</span><span class="p">,</span>
+                     <span class="n">pathToPivot</span><span class="o">=</span><span class="n">resourcePath</span><span class="o">+</span><span class="s2">&quot;pivotResource.csv&quot;</span>
+                     <span class="p">)</span>
+<span class="c1"># add all your annotators in a list</span>
+<span class="n">annotators</span> <span class="o">=</span><span class="p">[</span><span class="n">getRegex</span><span class="p">]</span>
+<span class="c1"># annotate your document</span>
+<span class="n">thisDoc</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">annotators</span><span class="p">)</span>
+<span class="n">thisDoc</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+<span class="c1">#write your annotation in PymedExt json</span>
+<span class="n">thisDoc</span><span class="o">.</span><span class="n">writeJson</span><span class="p">(</span><span class="s2">&quot;outputfile.json&quot;</span><span class="p">)</span>
+<span class="n">LetterPyMedExt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">annotators</span><span class="p">)</span>
+<span class="n">LetterPyMedExt</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+<span class="c1">#write your annotation in PymedExt json</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="export-pymedext-document-as-a-brat-file">
+<h2>Export PyMedExt Document as a Brat file<a class="headerlink" href="#export-pymedext-document-as-a-brat-file" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;outputfolder&quot;</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Creation of the directory </span><span class="si">%s</span><span class="s2"> failed&quot;</span> <span class="o">%</span> <span class="n">path</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Successfully created the directory </span><span class="si">%s</span><span class="s2"> &quot;</span> <span class="o">%</span> <span class="n">path</span><span class="p">)</span>
+
+<span class="n">pymedext</span><span class="o">.</span><span class="n">brat</span><span class="o">.</span><span class="n">savetobrat</span><span class="p">(</span><span class="n">LetterPyMedExt</span><span class="p">,</span><span class="n">path</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>this will output three files located on outputfolder:</p>
+<ul class="simple">
+<li><p>xxx.txt –&gt; the raw TextÒÒ</p></li>
+<li><p>xxx.ann –&gt; the annotations</p></li>
+<li><p>annotation.conf</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat xxx.ann
+
+T0  Liposarcom.V0 <span class="m">246</span> <span class="m">258</span>   liposarcome
+T1  Liposarcom.V0 <span class="m">518</span> <span class="m">530</span>   liposarcome
+T2  regex_fast <span class="m">445</span> <span class="m">450</span>  sars-cov-2
+</pre></div>
+</div>
+</div>
+<div class="section" id="pymedext-commandline-in-progress">
+<h2>PyMedExt commandline (in progress)<a class="headerlink" href="#pymedext-commandline-in-progress" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pymedext -h
+usage: pymedext [-h] [-i INPUTFILE] [-o OUTPUT]
+                [--itype {txt,pymedext,biocxml,biocjson,fhir,brat}]
+                [--otype {omop,pymedext,bioc,brat}] [-f] [-be BRATEXCLUDE]
+                [-v]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -i INPUTFILE, --inputFile INPUTFILE
+                        path to input folder
+  -o OUTPUT, --output OUTPUT
+                        enter the output file name
+  --itype {txt,pymedext,biocxml,biocjson,fhir,brat}
+                        input type
+  --otype {omop,pymedext,bioc,brat}
+                        output type
+  -f, --folder          if set, the input is consider to be a folder of json
+                        pymedext
+  -be BRATEXCLUDE, --bratexclude BRATEXCLUDE
+                        list of annotations to exclude from brat
+  -v, --version         show program&#39;s version number and exit
+</pre></div>
+</div>
+<div class="section" id="text-to-pymedext">
+<h3>text to pymedext<a class="headerlink" href="#text-to-pymedext" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pymedext</span> <span class="o">-</span><span class="n">i</span> <span class="n">demo</span><span class="o">.</span><span class="n">txt</span> <span class="o">--</span><span class="n">itype</span> <span class="n">txt</span> <span class="o">-</span><span class="n">otype</span> <span class="n">pymedext</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fhir-to-pymedext">
+<h3>fhir to pymedext<a class="headerlink" href="#fhir-to-pymedext" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pymedext</span> <span class="o">-</span><span class="n">i</span> <span class="n">patient</span><span class="o">-</span><span class="mf">2169591.</span><span class="n">fhir</span><span class="o">-</span><span class="n">bundle</span><span class="o">.</span><span class="n">xml</span>  <span class="o">--</span><span class="n">itype</span> <span class="n">fhir</span> <span class="o">-</span><span class="n">otype</span> <span class="n">pymedext</span>
+<span class="n">pymedext</span> <span class="o">-</span><span class="n">i</span> <span class="n">patient</span><span class="o">-</span><span class="mf">99912345.</span><span class="n">fhir</span><span class="o">-</span><span class="n">bundle</span><span class="o">.</span><span class="n">xml</span>  <span class="o">--</span><span class="n">itype</span> <span class="n">fhir</span> <span class="o">-</span><span class="n">otype</span> <span class="n">pymedext</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="bioc-to-pymedext">
+<h3>bioc to pymedext<a class="headerlink" href="#bioc-to-pymedext" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id3">
+<h3>text to pymedext<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pymedext -i demo.txt --itype txt -otype pymedext
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>fhir to pymedext<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pymedext -i patient-2169591.fhir-bundle.xml  --itype fhir -otype pymedext
+pymedext -i patient-99912345.fhir-bundle.xml  --itype fhir -otype pymedext
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>bioc to pymedext<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> data
+wget https://quaerofrenchmed.limsi.fr/QUAERO_FrenchMed_BioC.zip
+unzip QUAERO_FrenchMed_BioC.zip
+pymedext -i <span class="m">7382743</span>.xml --itype biocxml -otype pymedext
+pymedext -i biocformat.json --itype biocjson -otype pymedext
+pymedext -i QUAERO_BioC/corpus/train/MEDLINE_train_bioc --itype biocjson -otype pymedext
+pymedext -i QUAERO_BioC/corpus/train/EMEA_train_bioc --itype biocjson -otype pymedext
+<span class="c1">#pymedext to bioc, need to be able to construct collection</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="brat-to-pymedext-no-example">
+<h3>brat to pymedext (no example)<a class="headerlink" href="#brat-to-pymedext-no-example" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>no example
+brat to bioc
+</pre></div>
+</div>
+</div>
+<div class="section" id="require-annotation">
+<h3>require annotation<a class="headerlink" href="#require-annotation" title="Permalink to this headline">¶</a></h3>
+<p>It will be done on pymedext_public</p>
+<ul class="simple">
+<li><p>pymedext to omop</p></li>
+<li><p>fhir to omop</p></li>
+<li><p>fhir to bioc</p></li>
+<li><p>brat to omop</p></li>
+<li><p>pymedext to doccano</p></li>
+</ul>
+</div>
+<div class="section" id="other-install-mode">
+<h3>Other Install mode<a class="headerlink" href="#other-install-mode" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="using-gnu-make">
+<h4>Using GNU Make<a class="headerlink" href="#using-gnu-make" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#local install of pymedext packages</span>
+make install
+</pre></div>
+</div>
+</div>
+<div class="section" id="deploying-pymedext-as-docker-image">
+<h4>Deploying PyMedExt as Docker image<a class="headerlink" href="#deploying-pymedext-as-docker-image" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="install-as-docker-image">
+<h5>Install as Docker Image<a class="headerlink" href="#install-as-docker-image" title="Permalink to this headline">¶</a></h5>
+<p>check on 21 January 2021</p>
+<div class="section" id="linux">
+<h6>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h6>
+<p><a class="reference external" href="https://docs.docker.com/engine/install/#server">https://docs.docker.com/engine/install/#server</a></p>
+</div>
+<div class="section" id="mac-intel-processor">
+<h6>Mac Intel Processor<a class="headerlink" href="#mac-intel-processor" title="Permalink to this headline">¶</a></h6>
+<p><a class="reference external" href="https://docs.docker.com/docker-for-mac/install/#system-requirements">https://docs.docker.com/docker-for-mac/install/#system-requirements</a></p>
+</div>
+<div class="section" id="mac-m1-processor">
+<h6>Mac M1 Processor<a class="headerlink" href="#mac-m1-processor" title="Permalink to this headline">¶</a></h6>
+<p><a class="reference external" href="https://docs.docker.com/docker-for-mac/install/#system-requirements">https://docs.docker.com/docker-for-mac/install/#system-requirements</a>
+trouble to make it work</p>
+</div>
+</div>
+</div>
+<div class="section" id="build-image">
+<h4>Build Image<a class="headerlink" href="#build-image" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="fullfill-configuration">
+<h5>fullfill configuration<a class="headerlink" href="#fullfill-configuration" title="Permalink to this headline">¶</a></h5>
+<dl class="simple">
+<dt>first create a file config/.git-credentials based on the config/.git-credentials_template</dt><dd><p><a class="reference external" href="http:user:pass&#64;github.com">http:user:pass&#64;github.com</a></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="docker-in-command-line">
+<h5>Docker in command line<a class="headerlink" href="#docker-in-command-line" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker build -t pymedext-core:v0.0.2 .
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h5>Using GNU Make<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#build docker instance</span>
+make build
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Antoine Neuraz, William Digan, Ivan Lerner, Alice Rogier, David Baudoin, Anita Burgun, Nicolas Garcelon, Bastien Rance.
+
+    </p>
+  </div> 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <script>
+    var versions_json_url = ''
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        0.2
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
