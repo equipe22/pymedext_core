@@ -44,7 +44,7 @@ jobs:
           sudo apt-get install -y python3-lxml python3-sphinx
           pip3 install lxml
           pip3 install git+https://github.com/equipe22/pymedext_core.git@master
-          pip3 install sphinx Pallets-Sphinx-Themes msmb_theme sphinx-rtd-theme
+          pip3 install sphinx Pallets-Sphinx-Themes msmb_theme sphinx-rtd-theme m2r2
           cp README.md ./_build
           cp conf.py ./_build
           cp index.rst ./_build
