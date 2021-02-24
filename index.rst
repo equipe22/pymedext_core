@@ -32,10 +32,18 @@ Indices and tables
 
 README
 ==================
-.. include ::./README.html
+.. include ::./README.md
 
 README 2
 ==================
 
 .. :raw:: html
    ::file: README.html
+
+
+
+   README 2
+   ==================
+
+   .. :raw:: html
+      ::file: README
