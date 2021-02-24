@@ -1,4 +1,6 @@
 
+from typing import List, Optional
+
 import bioc
 from bioc import biocjson
 from .datatransform import DataTransform
@@ -16,7 +18,6 @@ class BioC(DataTransform):
         :param is_file: if True bioc_input is path else it is a string
         :returns: list of Document
         """
-        #Generalize load and add as an argument type 0 default is an xml, 1 a json bioc collection
         collection = None
         if format == 0:
             collection = BioC.__load_collection_xml(bioc_input, is_file)
@@ -110,7 +111,7 @@ class BioC(DataTransform):
             documents_collection.append(this_document)
         return(documents_collection)
 
-    def save_as_collection(list_of_pymedext_documents: List):
+    def save_as_collection(list_of_pymedext_documents: List[Document]):
         """save a list of pymedext document as a bioc collection .
         It will return a bioc collection object.
 
@@ -144,7 +145,7 @@ class BioC(DataTransform):
                     this_bioc_doc.passages[-1].add_annotation(this_annotation)
             this_bioc_collection.add_document(this_bioc_doc)
         return(this_bioc_collection)
-    
+
     #
     # @staticmethod
     # def write_bioc_collection(filename:str, collection):
