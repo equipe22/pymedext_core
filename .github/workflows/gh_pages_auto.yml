@@ -48,6 +48,7 @@ jobs:
           cp README.md ./_build
           cp conf.py ./_build
           cp index.rst ./_build
+          cp readme.rst ./_build
           sphinx-apidoc -o _build pymedextcore
           touch ./docs/.nojekyll
           sphinx-build _build ./docs -b html
