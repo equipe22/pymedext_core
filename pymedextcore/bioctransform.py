@@ -7,13 +7,9 @@ from .annotators import Annotation
 import uuid
 
 class BioC(DataTransform):
-        """
-        Bioc Data to transform pymedext to Bioc Will
-        """
-
     @staticmethod
     def load_collection(bioc_input: str,format: int =0, isFile: bool  = True):
-        """load a bioc collection ad list of Document object
+        """load a bioc collection and return a list of Document object
         :param bioc_input: blabla
         :param format: xml or to_json
         :param isFile: Boolean
