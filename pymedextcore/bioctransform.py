@@ -14,7 +14,7 @@ class BioC(DataTransform):
 
         :param bioc_input: a str path to a bioc file or a bioc input string
         :param format: xml or to_json type of the bioc file
-        :param is_file: if True bioc_input is pat else it is a string
+        :param is_file: if True bioc_input is path else it is a string
         :returns: list of Document
         """
         #Generalize load and add as an argument type 0 default is an xml, 1 a json bioc collection
@@ -112,27 +112,40 @@ class BioC(DataTransform):
         return(documents_collection)
 
 
-    # @staticmethod
-    # def __load_collection_xml(bioc_xml, is_file=True):
-    #     if is_file :
-    #         with open(bioc_xml, 'r') as fp:
-    #             collection = bioc.load(fp)
-    #         return(collection)
-    #     else:
-    #         collection = bioc.loads(bioc_xml)
-    #         return(collection)
-    #
-    # @staticmethod
-    # def __load_collection_json(bioc_json, is_file=True):
-    #     if is_file:
-    #         with open(bioc_json, 'r') as fp:
-    #             collection = biocjson.load(fp)
-    #         return(collection)
-    #     else:
-    #         collection = biocjson.loads(bioc_json)
-    #         return(collection)
-    #
-    #
+    def __load_collection_xml(bioc_xml: str, is_file: bool  = True):
+        """load a xml bioc collection.
+        It will return a bioc collection object.
+
+        :param bioc_xml: a str path to a bioc file or a bioc input xml string
+        :param is_file: if True bioc_input is a path else it is a string
+        :returns:  a bioc collection object
+        """
+        if is_file :
+            with open(bioc_xml, 'r') as fp:
+                collection = bioc.load(fp)
+            return(collection)
+        else:
+            collection = bioc.loads(bioc_xml)
+            return(collection)
+
+
+    def __load_collection_json(bioc_json: str, is_file: bool  =True):
+        """load a json bioc collection .
+        It will return a bioc collection object.
+
+        :param bioc_json: a str path to a bioc file or a bioc input json string
+        :param is_file: if True bioc_input is a path else it is a string
+        :returns:  a bioc collection object
+        """
+        if is_file:
+            with open(bioc_json, 'r') as fp:
+                collection = biocjson.load(fp)
+            return(collection)
+        else:
+            collection = biocjson.loads(bioc_json)
+            return(collection)
+
+
     # @staticmethod
     # def save_as_collection(list_of_pymedDocs):
     #     thisBiocCollection = bioc.BioCCollection()
