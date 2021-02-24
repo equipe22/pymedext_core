@@ -40,6 +40,6 @@ class PubTatorSource(Source, SimpleAPIConnector):
             return ("[Error]: HTTP code "+ str(r.status_code))
         else:
             if returnFormat==0: # return a document
-                return(BioC.load_collection(r.text,isFile=False ))
+                return(BioC.load_collection(r.text,is_file=False ))
             else:
                 return(r.text)

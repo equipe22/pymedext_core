@@ -8,21 +8,21 @@ import uuid
 
 class BioC(DataTransform):
     @staticmethod
-    def load_collection(bioc_input: str,format: int =0, isFile: bool  = True):
+    def load_collection(bioc_input: str,format: int =0, is_file: bool  = True):
         """load a bioc collection xml or json.
         It will return a list of Document object.
 
         :param bioc_input: a str path to a bioc file or a bioc input string
         :param format: xml or to_json type of the bioc file
-        :param isFile: if True bioc_input is pat else it is a string
+        :param is_file: if True bioc_input is pat else it is a string
         :returns: list of Document
         """
         #Generalize load and add as an argument type 0 default is an xml, 1 a json bioc collection
         collection = None
         if format == 0:
-            collection = BioC.__load_collection_xml(bioc_input, isFile)
+            collection = BioC.__load_collection_xml(bioc_input, is_file)
         else :
-            collection = BioC.__load_collection_json(bioc_input, isFile)
+            collection = BioC.__load_collection_json(bioc_input, is_file)
         annotations_list=[]
         raw_text = ""
         raw_text_ID=str(uuid.uuid1())
@@ -113,8 +113,8 @@ class BioC(DataTransform):
 
 
     # @staticmethod
-    # def __load_collection_xml(bioc_xml, isFile=True):
-    #     if isFile :
+    # def __load_collection_xml(bioc_xml, is_file=True):
+    #     if is_file :
     #         with open(bioc_xml, 'r') as fp:
     #             collection = bioc.load(fp)
     #         return(collection)
@@ -123,8 +123,8 @@ class BioC(DataTransform):
     #         return(collection)
     #
     # @staticmethod
-    # def __load_collection_json(bioc_json, isFile=True):
-    #     if isFile:
+    # def __load_collection_json(bioc_json, is_file=True):
+    #     if is_file:
     #         with open(bioc_json, 'r') as fp:
     #             collection = biocjson.load(fp)
     #         return(collection)
