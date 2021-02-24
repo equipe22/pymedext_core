@@ -9,13 +9,13 @@ import uuid
 class BioC(DataTransform):
     @staticmethod
     def load_collection(bioc_input: str,format: int =0, isFile: bool  = True):
-        """load a bioc collection and return a list of Document object
-        :param bioc_input: blabla
-        :param format: xml or to_json
-        :param isFile: Boolean
-        :returns: list of Document
-        :rtype: list
+        """load a bioc collection xml or json.
+        It will return a list of Document object.
 
+        :param bioc_input: a str path to a bioc file or a bioc input string
+        :param format: xml or to_json type of the bioc file
+        :param isFile: if True bioc_input is pat else it is a string
+        :returns: list of Document
         """
         #Generalize load and add as an argument type 0 default is an xml, 1 a json bioc collection
         collection = None
