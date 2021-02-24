@@ -31,16 +31,16 @@ class BioC(DataTransform):
         for doc in collection.documents:
             for passage in doc.passages:
                 raw_text = raw_text + passage.text
-                passageID= str(uuid.uuid1())
+                passage_ID= str(uuid.uuid1())
                 if "section_type" in passage.infons:
-                    passageAttribute = {value:passage.infons[value]
+                    passage_attribute = {value:passage.infons[value]
                                   for value in passage.infons  if value not in ["section_type"] }
                     annotations_list.append(
                         Annotation(type=passage.infons["section_type"],
                                               value=passage.text,
                                               ngram = passage.text,
                                               source_ID=raw_text_ID,
-                                              ID=passageID,
+                                              ID=passage_ID,
                                               source="BioCPassage",
                                               span=(passage.offset,passage.offset+len(passage.text)))
                         )
@@ -50,65 +50,65 @@ class BioC(DataTransform):
                                               value=passage.text,
                                               ngram = passage.text,
                                               source_ID=raw_text_ID,
-                                              ID=passageID,
+                                              ID=passage_ID,
                                               source="BioCPassage",
                                               span=(passage.offset,passage.offset+len(passage.text)))
                         )
 
                 relations_annot_dict=dict()
                 if passage.annotations:
-                    for thisAnnotation in passage.annotations:
-                        annotationID= str(uuid.uuid1())
+                    for this_annotation in passage.annotations:
+                        annotation_ID= str(uuid.uuid1())
                         identifier =None
-                        if "identifier" in thisAnnotation.infons.keys() :
-                            identifier=thisAnnotation.infons["identifier"]
-                        elif "Identifier" in thisAnnotation.infons.keys() :
-                            identifier=thisAnnotation.infons["Identifier"]
-                        thisAttributes = {value:thisAnnotation.infons[value]
-                                          for value in thisAnnotation.infons  if value not in ["type","identifier","Identifier"] }
-                        thisAttributes["id"]=thisAnnotation.id
-                        relations_annot_dict[thisAnnotation.id]=(thisAnnotation.locations[0].offset,thisAnnotation.locations[0].offset+ thisAnnotation.locations[0].length)
-                        thisType = str(type(thisAnnotation)).replace(">","").replace("<","").replace("class ","").replace("bioc.bioc.","").replace("'","")
+                        if "identifier" in this_annotation.infons.keys() :
+                            identifier=this_annotation.infons["identifier"]
+                        elif "Identifier" in this_annotation.infons.keys() :
+                            identifier=this_annotation.infons["Identifier"]
+                        this_attributes = {value:this_annotation.infons[value]
+                                          for value in this_annotation.infons  if value not in ["type","identifier","Identifier"] }
+                        this_attributes["id"]=this_annotation.id
+                        relations_annot_dict[this_annotation.id]=(this_annotation.locations[0].offset,this_annotation.locations[0].offset+ this_annotation.locations[0].length)
+                        this_type = str(type(this_annotation)).replace(">","").replace("<","").replace("class ","").replace("bioc.bioc.","").replace("'","")
                         annotations_list.append(
-                           Annotation(type=thisAnnotation.infons["type"],
+                           Annotation(type=this_annotation.infons["type"],
                                       value=identifier,
-                                      ngram =thisAnnotation.text,
-                                      source_ID=passageID,
-                                      ID=annotationID,
-                                      source=thisType,
-                                      span=(thisAnnotation.locations[0].offset,thisAnnotation.locations[0].offset+ thisAnnotation.locations[0].length),
-                                      attributes =thisAttributes, isEntity=True)
+                                      ngram =this_annotation.text,
+                                      source_ID=passage_ID,
+                                      ID=annotation_ID,
+                                      source=this_type,
+                                      span=(this_annotation.locations[0].offset,this_annotation.locations[0].offset+ this_annotation.locations[0].length),
+                                      attributes =this_attributes, isEntity=True)
                             )
                 if passage.relations:
-                    for thisrelation in passage.relations:
-                        annotationID= str(uuid.uuid1())
+                    for this_relation in passage.relations:
+                        annotation_ID= str(uuid.uuid1())
                         identifier =None
-                        if "identifier" in thisrelation.infons.keys() :
-                            identifier=thisrelation.infons["identifier"]
-                        elif "Identifier" in thisrelation.infons.keys():
-                            identifier=thisrelation.infons["Identifier"]
-                        thisAttributes = {value:thisrelation.infons[value]
-                                          for value in thisrelation.infons  if value not in ["type","identifier","Identifier"] }
-                        thisAttributes["id"]=thisrelation.id
-                        thisType = str(type(thisrelation)).replace(">","").replace("<","").replace("class ","").replace("bioc.bioc.","").replace("'","")
-                        for refNode in thisrelation.nodes:
+                        if "identifier" in this_relation.infons.keys() :
+                            identifier=this_relation.infons["identifier"]
+                        elif "Identifier" in this_relation.infons.keys():
+                            identifier=this_relation.infons["Identifier"]
+                        this_attributes = {value:this_relation.infons[value]
+                                          for value in this_relation.infons  if value not in ["type","identifier","Identifier"] }
+                        this_attributes["id"]=this_relation.id
+                        this_type = str(type(this_relation)).replace(">","").replace("<","").replace("class ","").replace("bioc.bioc.","").replace("'","")
+                        for refNode in this_relation.nodes:
                             annotations_list.append(
-                               Annotation(type=thisrelation.infons["type"],
+                               Annotation(type=this_relation.infons["type"],
                                           value=identifier,
                                           ngram ="Null",
-                                          source_ID=passageID,
-                                          ID=annotationID,
-                                          source=thisType,
+                                          source_ID=passage_ID,
+                                          ID=annotation_ID,
+                                          source=this_type,
                                           span= relations_annot_dict[refNode.refid],
-                                          attributes=thisAttributes)
+                                          attributes=this_attributes)
                                 )
 
-            thisDocument = Document(raw_text =raw_text,ID =raw_text_ID, source = collection.source, documentDate = collection.date)
+            this_document = Document(raw_text =raw_text,ID =raw_text_ID, source = collection.source, documentDate = collection.date)
             # attributes=collection.key,collection.standalone,
             # collection.encoding,collection.version
             # collection.infons
-            thisDocument.annotations.extend(annotations_list)
-            documents_collection.append(thisDocument)
+            this_document.annotations.extend(annotations_list)
+            documents_collection.append(this_document)
         return(documents_collection)
 
 
@@ -153,13 +153,13 @@ class BioC(DataTransform):
     #                 thisBiocDoc.add_passage(thisPassage)
     #                 # passageAttributes to add
     #             elif annot.source =="BioCAnnotation":
-    #                 thisAnnotation = bioc.BioCAnnotation()
-    #                 thisAnnotation.infons = annot.attributes
-    #                 thisAnnotation.id = annot.attributes["id"]
-    #                 thisAnnotation.text = annot.ngram
+    #                 this_annotation = bioc.BioCAnnotation()
+    #                 this_annotation.infons = annot.attributes
+    #                 this_annotation.id = annot.attributes["id"]
+    #                 this_annotation.text = annot.ngram
     #                 thisLocation = bioc.BioCLocation(annot.span[0],annot.span[1]-annot.span[0])
-    #                 thisAnnotation.add_location(thisLocation)
-    #                 thisBiocDoc.passages[-1].add_annotation(thisAnnotation)
+    #                 this_annotation.add_location(thisLocation)
+    #                 thisBiocDoc.passages[-1].add_annotation(this_annotation)
     #         thisBiocCollection.add_document(thisBiocDoc)
     #
     #
