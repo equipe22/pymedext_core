@@ -9,6 +9,7 @@ from .annotators import Annotation
 import uuid
 
 class BioC(DataTransform):
+    @staticmethod
     def load_collection(bioc_input: str,format: int =0, is_file: bool  = True):
         """load a bioc collection xml or json.
         It will return a list of Document object.
@@ -111,6 +112,7 @@ class BioC(DataTransform):
             documents_collection.append(this_document)
         return(documents_collection)
 
+    @staticmethod
     def save_as_collection(list_of_pymedext_documents: List[Document]):
         """save a list of pymedext document as a bioc collection .
         It will return a bioc collection object.
@@ -146,21 +148,21 @@ class BioC(DataTransform):
             this_bioc_collection.add_document(this_bioc_doc)
         return(this_bioc_collection)
 
-    #
-    # @staticmethod
-    # def write_bioc_collection(filename:str, collection):
-    #     """write a BiocCollection as an xml document
-    #     It will return 1
-    #
-    #     :param filename: a str filename of the collection
-    #     :param collection: a bioc collection
-    #     :returns: 1
-    #     """
-    #     with bioc.BioCXMLDocumentWriter(filename) as writer:
-    #         writer.write_collection_info(collection)
-    #         for document in collection.documents:
-    #             writer.write_document(document)
-    #     return(1)
+
+    @staticmethod
+    def write_bioc_collection(filename:str, collection:bioc.BioCCollection):
+        """write a BiocCollection as an xml document
+        It will return 1
+
+        :param filename: a str filename of the collection
+        :param collection: a bioc collection
+        :returns: 1
+        """
+        with bioc.BioCXMLDocumentWriter(filename) as writer:
+            writer.write_collection_info(collection)
+            for document in collection.documents:
+                writer.write_document(document)
+        return(1)
 
     def __load_collection_xml(bioc_xml: str, is_file: bool  = True):
         """load a xml bioc collection.
