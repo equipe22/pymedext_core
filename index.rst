@@ -19,6 +19,8 @@ PyMedExt also includes an easy way to define Annotator.
    :maxdepth: 2
    :caption: Contents:
 
+   source ./README.html
+
 
 
 Indices and tables
@@ -30,6 +32,10 @@ Indices and tables
 
 README
 ==================
+.. include ::./README.html
+
+README 2
+==================
 
 .. :raw:: html
-   ::file: README
+   ::file: README.html
