@@ -195,7 +195,7 @@
             <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;[Error]: HTTP code &quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">returnFormat</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span> <span class="c1"># return a document</span>
-                <span class="k">return</span><span class="p">(</span><span class="n">BioC</span><span class="o">.</span><span class="n">load_collection</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">,</span><span class="n">isFile</span><span class="o">=</span><span class="kc">False</span> <span class="p">))</span>
+                <span class="k">return</span><span class="p">(</span><span class="n">BioC</span><span class="o">.</span><span class="n">load_collection</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">,</span><span class="n">is_file</span><span class="o">=</span><span class="kc">False</span> <span class="p">))</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">return</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span></div></div>
 </pre></div>
