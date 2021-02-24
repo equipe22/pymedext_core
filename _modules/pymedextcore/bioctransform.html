@@ -1,0 +1,406 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>pymedextcore.bioctransform &mdash; pymedextcore 0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/msmb.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/versions.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pymedextcore
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pymedextcore</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>pymedextcore.bioctransform</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for pymedextcore.bioctransform</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">import</span> <span class="nn">bioc</span>
+<span class="kn">from</span> <span class="nn">bioc</span> <span class="kn">import</span> <span class="n">biocjson</span>
+<span class="kn">from</span> <span class="nn">.datatransform</span> <span class="kn">import</span> <span class="n">DataTransform</span>
+<span class="kn">from</span> <span class="nn">.document</span> <span class="kn">import</span> <span class="n">Document</span>
+<span class="kn">from</span> <span class="nn">.annotators</span> <span class="kn">import</span> <span class="n">Annotation</span>
+<span class="kn">import</span> <span class="nn">uuid</span>
+
+<div class="viewcode-block" id="BioC"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.bioctransform.BioC">[docs]</a><span class="k">class</span> <span class="nc">BioC</span><span class="p">(</span><span class="n">DataTransform</span><span class="p">):</span>
+<div class="viewcode-block" id="BioC.load_collection"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.bioctransform.BioC.load_collection">[docs]</a>    <span class="k">def</span> <span class="nf">load_collection</span><span class="p">(</span><span class="n">bioc_input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span><span class="nb">format</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">is_file</span><span class="p">:</span> <span class="nb">bool</span>  <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;load a bioc collection xml or json.</span>
+<span class="sd">        It will return a list of Document object.</span>
+
+<span class="sd">        :param bioc_input: a str path to a bioc file or a bioc input string</span>
+<span class="sd">        :param format: xml or to_json type of the bioc file</span>
+<span class="sd">        :param is_file: if True bioc_input is path else it is a string</span>
+<span class="sd">        :returns: list of Document</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">collection</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="nb">format</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">collection</span> <span class="o">=</span> <span class="n">BioC</span><span class="o">.</span><span class="n">__load_collection_xml</span><span class="p">(</span><span class="n">bioc_input</span><span class="p">,</span> <span class="n">is_file</span><span class="p">)</span>
+        <span class="k">else</span> <span class="p">:</span>
+            <span class="n">collection</span> <span class="o">=</span> <span class="n">BioC</span><span class="o">.</span><span class="n">__load_collection_json</span><span class="p">(</span><span class="n">bioc_input</span><span class="p">,</span> <span class="n">is_file</span><span class="p">)</span>
+        <span class="n">annotations_list</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">raw_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">raw_text_ID</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid1</span><span class="p">())</span>
+        <span class="c1"># document source = collection.source</span>
+        <span class="n">documents_collection</span> <span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">collection</span><span class="o">.</span><span class="n">documents</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">passage</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">passages</span><span class="p">:</span>
+                <span class="n">raw_text</span> <span class="o">=</span> <span class="n">raw_text</span> <span class="o">+</span> <span class="n">passage</span><span class="o">.</span><span class="n">text</span>
+                <span class="n">passage_ID</span><span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid1</span><span class="p">())</span>
+                <span class="k">if</span> <span class="s2">&quot;section_type&quot;</span> <span class="ow">in</span> <span class="n">passage</span><span class="o">.</span><span class="n">infons</span><span class="p">:</span>
+                    <span class="n">passage_attribute</span> <span class="o">=</span> <span class="p">{</span><span class="n">value</span><span class="p">:</span><span class="n">passage</span><span class="o">.</span><span class="n">infons</span><span class="p">[</span><span class="n">value</span><span class="p">]</span>
+                                  <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">passage</span><span class="o">.</span><span class="n">infons</span>  <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;section_type&quot;</span><span class="p">]</span> <span class="p">}</span>
+                    <span class="n">annotations_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                        <span class="n">Annotation</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">passage</span><span class="o">.</span><span class="n">infons</span><span class="p">[</span><span class="s2">&quot;section_type&quot;</span><span class="p">],</span>
+                                              <span class="n">value</span><span class="o">=</span><span class="n">passage</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+                                              <span class="n">ngram</span> <span class="o">=</span> <span class="n">passage</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+                                              <span class="n">source_ID</span><span class="o">=</span><span class="n">raw_text_ID</span><span class="p">,</span>
+                                              <span class="n">ID</span><span class="o">=</span><span class="n">passage_ID</span><span class="p">,</span>
+                                              <span class="n">source</span><span class="o">=</span><span class="s2">&quot;BioCPassage&quot;</span><span class="p">,</span>
+                                              <span class="n">span</span><span class="o">=</span><span class="p">(</span><span class="n">passage</span><span class="o">.</span><span class="n">offset</span><span class="p">,</span><span class="n">passage</span><span class="o">.</span><span class="n">offset</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">passage</span><span class="o">.</span><span class="n">text</span><span class="p">)))</span>
+                        <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                     <span class="n">annotations_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                        <span class="n">Annotation</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;BioCPassage&quot;</span><span class="p">,</span>
+                                              <span class="n">value</span><span class="o">=</span><span class="n">passage</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+                                              <span class="n">ngram</span> <span class="o">=</span> <span class="n">passage</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+                                              <span class="n">source_ID</span><span class="o">=</span><span class="n">raw_text_ID</span><span class="p">,</span>
+                                              <span class="n">ID</span><span class="o">=</span><span class="n">passage_ID</span><span class="p">,</span>
+                                              <span class="n">source</span><span class="o">=</span><span class="s2">&quot;BioCPassage&quot;</span><span class="p">,</span>
+                                              <span class="n">span</span><span class="o">=</span><span class="p">(</span><span class="n">passage</span><span class="o">.</span><span class="n">offset</span><span class="p">,</span><span class="n">passage</span><span class="o">.</span><span class="n">offset</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">passage</span><span class="o">.</span><span class="n">text</span><span class="p">)))</span>
+                        <span class="p">)</span>
+
+                <span class="n">relations_annot_dict</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">passage</span><span class="o">.</span><span class="n">annotations</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">this_annotation</span> <span class="ow">in</span> <span class="n">passage</span><span class="o">.</span><span class="n">annotations</span><span class="p">:</span>
+                        <span class="n">annotation_ID</span><span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid1</span><span class="p">())</span>
+                        <span class="n">identifier</span> <span class="o">=</span><span class="kc">None</span>
+                        <span class="k">if</span> <span class="s2">&quot;identifier&quot;</span> <span class="ow">in</span> <span class="n">this_annotation</span><span class="o">.</span><span class="n">infons</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="p">:</span>
+                            <span class="n">identifier</span><span class="o">=</span><span class="n">this_annotation</span><span class="o">.</span><span class="n">infons</span><span class="p">[</span><span class="s2">&quot;identifier&quot;</span><span class="p">]</span>
+                        <span class="k">elif</span> <span class="s2">&quot;Identifier&quot;</span> <span class="ow">in</span> <span class="n">this_annotation</span><span class="o">.</span><span class="n">infons</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="p">:</span>
+                            <span class="n">identifier</span><span class="o">=</span><span class="n">this_annotation</span><span class="o">.</span><span class="n">infons</span><span class="p">[</span><span class="s2">&quot;Identifier&quot;</span><span class="p">]</span>
+                        <span class="n">this_attributes</span> <span class="o">=</span> <span class="p">{</span><span class="n">value</span><span class="p">:</span><span class="n">this_annotation</span><span class="o">.</span><span class="n">infons</span><span class="p">[</span><span class="n">value</span><span class="p">]</span>
+                                          <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">this_annotation</span><span class="o">.</span><span class="n">infons</span>  <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">,</span><span class="s2">&quot;identifier&quot;</span><span class="p">,</span><span class="s2">&quot;Identifier&quot;</span><span class="p">]</span> <span class="p">}</span>
+                        <span class="n">this_attributes</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">this_annotation</span><span class="o">.</span><span class="n">id</span>
+                        <span class="n">relations_annot_dict</span><span class="p">[</span><span class="n">this_annotation</span><span class="o">.</span><span class="n">id</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">this_annotation</span><span class="o">.</span><span class="n">locations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">offset</span><span class="p">,</span><span class="n">this_annotation</span><span class="o">.</span><span class="n">locations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">offset</span><span class="o">+</span> <span class="n">this_annotation</span><span class="o">.</span><span class="n">locations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">length</span><span class="p">)</span>
+                        <span class="n">this_type</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">this_annotation</span><span class="p">))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&lt;&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;class &quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;bioc.bioc.&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                        <span class="n">annotations_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                           <span class="n">Annotation</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">this_annotation</span><span class="o">.</span><span class="n">infons</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">],</span>
+                                      <span class="n">value</span><span class="o">=</span><span class="n">identifier</span><span class="p">,</span>
+                                      <span class="n">ngram</span> <span class="o">=</span><span class="n">this_annotation</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+                                      <span class="n">source_ID</span><span class="o">=</span><span class="n">passage_ID</span><span class="p">,</span>
+                                      <span class="n">ID</span><span class="o">=</span><span class="n">annotation_ID</span><span class="p">,</span>
+                                      <span class="n">source</span><span class="o">=</span><span class="n">this_type</span><span class="p">,</span>
+                                      <span class="n">span</span><span class="o">=</span><span class="p">(</span><span class="n">this_annotation</span><span class="o">.</span><span class="n">locations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">offset</span><span class="p">,</span><span class="n">this_annotation</span><span class="o">.</span><span class="n">locations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">offset</span><span class="o">+</span> <span class="n">this_annotation</span><span class="o">.</span><span class="n">locations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">length</span><span class="p">),</span>
+                                      <span class="n">attributes</span> <span class="o">=</span><span class="n">this_attributes</span><span class="p">,</span> <span class="n">isEntity</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                            <span class="p">)</span>
+                <span class="k">if</span> <span class="n">passage</span><span class="o">.</span><span class="n">relations</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">this_relation</span> <span class="ow">in</span> <span class="n">passage</span><span class="o">.</span><span class="n">relations</span><span class="p">:</span>
+                        <span class="n">annotation_ID</span><span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid1</span><span class="p">())</span>
+                        <span class="n">identifier</span> <span class="o">=</span><span class="kc">None</span>
+                        <span class="k">if</span> <span class="s2">&quot;identifier&quot;</span> <span class="ow">in</span> <span class="n">this_relation</span><span class="o">.</span><span class="n">infons</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="p">:</span>
+                            <span class="n">identifier</span><span class="o">=</span><span class="n">this_relation</span><span class="o">.</span><span class="n">infons</span><span class="p">[</span><span class="s2">&quot;identifier&quot;</span><span class="p">]</span>
+                        <span class="k">elif</span> <span class="s2">&quot;Identifier&quot;</span> <span class="ow">in</span> <span class="n">this_relation</span><span class="o">.</span><span class="n">infons</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                            <span class="n">identifier</span><span class="o">=</span><span class="n">this_relation</span><span class="o">.</span><span class="n">infons</span><span class="p">[</span><span class="s2">&quot;Identifier&quot;</span><span class="p">]</span>
+                        <span class="n">this_attributes</span> <span class="o">=</span> <span class="p">{</span><span class="n">value</span><span class="p">:</span><span class="n">this_relation</span><span class="o">.</span><span class="n">infons</span><span class="p">[</span><span class="n">value</span><span class="p">]</span>
+                                          <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">this_relation</span><span class="o">.</span><span class="n">infons</span>  <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">,</span><span class="s2">&quot;identifier&quot;</span><span class="p">,</span><span class="s2">&quot;Identifier&quot;</span><span class="p">]</span> <span class="p">}</span>
+                        <span class="n">this_attributes</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">this_relation</span><span class="o">.</span><span class="n">id</span>
+                        <span class="n">this_type</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">this_relation</span><span class="p">))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&lt;&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;class &quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;bioc.bioc.&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                        <span class="k">for</span> <span class="n">refNode</span> <span class="ow">in</span> <span class="n">this_relation</span><span class="o">.</span><span class="n">nodes</span><span class="p">:</span>
+                            <span class="n">annotations_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                               <span class="n">Annotation</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">this_relation</span><span class="o">.</span><span class="n">infons</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">],</span>
+                                          <span class="n">value</span><span class="o">=</span><span class="n">identifier</span><span class="p">,</span>
+                                          <span class="n">ngram</span> <span class="o">=</span><span class="s2">&quot;Null&quot;</span><span class="p">,</span>
+                                          <span class="n">source_ID</span><span class="o">=</span><span class="n">passage_ID</span><span class="p">,</span>
+                                          <span class="n">ID</span><span class="o">=</span><span class="n">annotation_ID</span><span class="p">,</span>
+                                          <span class="n">source</span><span class="o">=</span><span class="n">this_type</span><span class="p">,</span>
+                                          <span class="n">span</span><span class="o">=</span> <span class="n">relations_annot_dict</span><span class="p">[</span><span class="n">refNode</span><span class="o">.</span><span class="n">refid</span><span class="p">],</span>
+                                          <span class="n">attributes</span><span class="o">=</span><span class="n">this_attributes</span><span class="p">)</span>
+                                <span class="p">)</span>
+
+            <span class="n">this_document</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="n">raw_text</span> <span class="o">=</span><span class="n">raw_text</span><span class="p">,</span><span class="n">ID</span> <span class="o">=</span><span class="n">raw_text_ID</span><span class="p">,</span> <span class="n">source</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">source</span><span class="p">,</span> <span class="n">documentDate</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">date</span><span class="p">)</span>
+            <span class="c1"># attributes=collection.key,collection.standalone,</span>
+            <span class="c1"># collection.encoding,collection.version</span>
+            <span class="c1"># collection.infons</span>
+            <span class="n">this_document</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">annotations_list</span><span class="p">)</span>
+            <span class="n">documents_collection</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">this_document</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">documents_collection</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="BioC.save_as_collection"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.bioctransform.BioC.save_as_collection">[docs]</a>    <span class="k">def</span> <span class="nf">save_as_collection</span><span class="p">(</span><span class="n">list_of_pymedext_documents</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Document</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;save a list of pymedext document as a bioc collection .</span>
+<span class="sd">        It will return a bioc collection object.</span>
+
+<span class="sd">        :param list_of_pymedext_documents: a list of Document</span>
+<span class="sd">        :returns:  a bioc collection object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">this_bioc_collection</span> <span class="o">=</span> <span class="n">bioc</span><span class="o">.</span><span class="n">BioCCollection</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">this_pymedext_doc</span> <span class="ow">in</span> <span class="n">list_of_pymedext_documents</span><span class="p">:</span>
+            <span class="n">this_bioc_doc</span> <span class="o">=</span> <span class="n">bioc</span><span class="o">.</span><span class="n">BioCDocument</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">annot</span> <span class="ow">in</span> <span class="n">this_pymedext_doc</span><span class="o">.</span><span class="n">annotations</span><span class="p">:</span>
+                <span class="c1"># print(annot.type)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">annot</span><span class="o">.</span><span class="n">source</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">annot</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;raw_text&quot;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">this_bioc_collection</span><span class="o">.</span><span class="n">source</span> <span class="o">==</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
+                        <span class="n">this_bioc_collection</span><span class="o">.</span><span class="n">source</span><span class="o">=</span><span class="n">annot</span><span class="o">.</span><span class="n">source</span>
+                <span class="k">if</span> <span class="n">annot</span><span class="o">.</span><span class="n">source</span> <span class="o">==</span> <span class="s2">&quot;BioCPassage&quot;</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">annot</span><span class="o">.</span><span class="n">ngram</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">annot</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+                    <span class="n">this_passage</span> <span class="o">=</span> <span class="n">bioc</span><span class="o">.</span><span class="n">BioCPassage</span><span class="p">()</span>
+                    <span class="n">this_passage</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">annot</span><span class="o">.</span><span class="n">ngram</span>
+                    <span class="n">this_passage</span><span class="o">.</span><span class="n">offset</span> <span class="o">=</span> <span class="n">annot</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">this_bioc_doc</span><span class="o">.</span><span class="n">add_passage</span><span class="p">(</span><span class="n">this_passage</span><span class="p">)</span>
+                    <span class="c1"># passageAttributes to add</span>
+                <span class="k">elif</span> <span class="n">annot</span><span class="o">.</span><span class="n">source</span> <span class="o">==</span><span class="s2">&quot;BioCAnnotation&quot;</span><span class="p">:</span>
+                    <span class="n">this_annotation</span> <span class="o">=</span> <span class="n">bioc</span><span class="o">.</span><span class="n">BioCAnnotation</span><span class="p">()</span>
+                    <span class="n">this_annotation</span><span class="o">.</span><span class="n">infons</span> <span class="o">=</span> <span class="n">annot</span><span class="o">.</span><span class="n">attributes</span>
+                    <span class="n">this_annotation</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">annot</span><span class="o">.</span><span class="n">attributes</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+                    <span class="n">this_annotation</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">annot</span><span class="o">.</span><span class="n">ngram</span>
+                    <span class="n">thisLocation</span> <span class="o">=</span> <span class="n">bioc</span><span class="o">.</span><span class="n">BioCLocation</span><span class="p">(</span><span class="n">annot</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">annot</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">annot</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="n">this_annotation</span><span class="o">.</span><span class="n">add_location</span><span class="p">(</span><span class="n">thisLocation</span><span class="p">)</span>
+                    <span class="n">this_bioc_doc</span><span class="o">.</span><span class="n">passages</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">add_annotation</span><span class="p">(</span><span class="n">this_annotation</span><span class="p">)</span>
+            <span class="n">this_bioc_collection</span><span class="o">.</span><span class="n">add_document</span><span class="p">(</span><span class="n">this_bioc_doc</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">this_bioc_collection</span><span class="p">)</span></div>
+
+    <span class="c1">#</span>
+    <span class="c1"># @staticmethod</span>
+    <span class="c1"># def write_bioc_collection(filename:str, collection):</span>
+    <span class="c1">#     &quot;&quot;&quot;write a BiocCollection as an xml document</span>
+    <span class="c1">#     It will return 1</span>
+    <span class="c1">#</span>
+    <span class="c1">#     :param filename: a str filename of the collection</span>
+    <span class="c1">#     :param collection: a bioc collection</span>
+    <span class="c1">#     :returns: 1</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     with bioc.BioCXMLDocumentWriter(filename) as writer:</span>
+    <span class="c1">#         writer.write_collection_info(collection)</span>
+    <span class="c1">#         for document in collection.documents:</span>
+    <span class="c1">#             writer.write_document(document)</span>
+    <span class="c1">#     return(1)</span>
+
+    <span class="k">def</span> <span class="nf">__load_collection_xml</span><span class="p">(</span><span class="n">bioc_xml</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">is_file</span><span class="p">:</span> <span class="nb">bool</span>  <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;load a xml bioc collection.</span>
+<span class="sd">        It will return a bioc collection object.</span>
+
+<span class="sd">        :param bioc_xml: a str path to a bioc file or a bioc input xml string</span>
+<span class="sd">        :param is_file: if True bioc_input is a path else it is a string</span>
+<span class="sd">        :returns:  a bioc collection object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">is_file</span> <span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">bioc_xml</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+                <span class="n">collection</span> <span class="o">=</span> <span class="n">bioc</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+            <span class="k">return</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">collection</span> <span class="o">=</span> <span class="n">bioc</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">bioc_xml</span><span class="p">)</span>
+            <span class="k">return</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__load_collection_json</span><span class="p">(</span><span class="n">bioc_json</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">is_file</span><span class="p">:</span> <span class="nb">bool</span>  <span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;load a json bioc collection .</span>
+<span class="sd">        It will return a bioc collection object.</span>
+
+<span class="sd">        :param bioc_json: a str path to a bioc file or a bioc input json string</span>
+<span class="sd">        :param is_file: if True bioc_input is a path else it is a string</span>
+<span class="sd">        :returns:  a bioc collection object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">is_file</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">bioc_json</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+                <span class="n">collection</span> <span class="o">=</span> <span class="n">biocjson</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+            <span class="k">return</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">collection</span> <span class="o">=</span> <span class="n">biocjson</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">bioc_json</span><span class="p">)</span>
+            <span class="k">return</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Antoine Neuraz, William Digan, Ivan Lerner, Alice Rogier, David Baudoin, Anita Burgun, Nicolas Garcelon, Bastien Rance.
+
+    </p>
+  </div> 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <script>
+    var versions_json_url = ''
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        0.1
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
