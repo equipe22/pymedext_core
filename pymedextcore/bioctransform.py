@@ -11,6 +11,7 @@ class BioC(DataTransform):
         Bioc Data to transform pymedext to Bioc Will
         """
 
+    @staticmethod
     def load_collection(bioc_input: str,format: int =0, isFile: bool  = True):
         """load a bioc collection ad list of Document object
         :param bioc_input: blabla
@@ -114,56 +115,62 @@ class BioC(DataTransform):
             documents_collection.append(thisDocument)
         return(documents_collection)
 
-    def __load_collection_xml(bioc_xml, isFile=True):
-        if isFile :
-            with open(bioc_xml, 'r') as fp:
-                collection = bioc.load(fp)
-            return(collection)
-        else:
-            collection = bioc.loads(bioc_xml)
-            return(collection)
 
-
-    def __load_collection_json(bioc_json, isFile=True):
-        if isFile:
-            with open(bioc_json, 'r') as fp:
-                collection = biocjson.load(fp)
-            return(collection)
-        else:
-            collection = biocjson.loads(bioc_json)
-            return(collection)
-
-    def save_as_collection(list_of_pymedDocs):
-        thisBiocCollection = bioc.BioCCollection()
-        for thisPymedDoc in list_of_pymedDocs:
-            thisBiocDoc = bioc.BioCDocument()
-            for annot in thisPymedDoc.annotations:
-                # print(annot.type)
-                print(annot.source)
-                if annot.type == "raw_text":
-                    if thisBiocCollection.source =='':
-                        thisBiocCollection.source=annot.source
-                if annot.source == "BioCPassage":
-                    print(annot.ngram)
-                    print(annot.value)
-                    thisPassage = bioc.BioCPassage()
-                    thisPassage.text = annot.ngram
-                    thisPassage.offset = annot.span[0]
-                    thisBiocDoc.add_passage(thisPassage)
-                    # passageAttributes to add
-                elif annot.source =="BioCAnnotation":
-                    thisAnnotation = bioc.BioCAnnotation()
-                    thisAnnotation.infons = annot.attributes
-                    thisAnnotation.id = annot.attributes["id"]
-                    thisAnnotation.text = annot.ngram
-                    thisLocation = bioc.BioCLocation(annot.span[0],annot.span[1]-annot.span[0])
-                    thisAnnotation.add_location(thisLocation)
-                    thisBiocDoc.passages[-1].add_annotation(thisAnnotation)
-            thisBiocCollection.add_document(thisBiocDoc)
-
-    def writeBiocCollection(filename, collection):
-        with bioc.BioCXMLDocumentWriter(filename) as writer:
-            writer.write_collection_info(collection)
-            for document in collection.documents:
-                writer.write_document(document)
-        return(1)
+    # @staticmethod
+    # def __load_collection_xml(bioc_xml, isFile=True):
+    #     if isFile :
+    #         with open(bioc_xml, 'r') as fp:
+    #             collection = bioc.load(fp)
+    #         return(collection)
+    #     else:
+    #         collection = bioc.loads(bioc_xml)
+    #         return(collection)
+    #
+    # @staticmethod
+    # def __load_collection_json(bioc_json, isFile=True):
+    #     if isFile:
+    #         with open(bioc_json, 'r') as fp:
+    #             collection = biocjson.load(fp)
+    #         return(collection)
+    #     else:
+    #         collection = biocjson.loads(bioc_json)
+    #         return(collection)
+    #
+    #
+    # @staticmethod
+    # def save_as_collection(list_of_pymedDocs):
+    #     thisBiocCollection = bioc.BioCCollection()
+    #     for thisPymedDoc in list_of_pymedDocs:
+    #         thisBiocDoc = bioc.BioCDocument()
+    #         for annot in thisPymedDoc.annotations:
+    #             # print(annot.type)
+    #             print(annot.source)
+    #             if annot.type == "raw_text":
+    #                 if thisBiocCollection.source =='':
+    #                     thisBiocCollection.source=annot.source
+    #             if annot.source == "BioCPassage":
+    #                 print(annot.ngram)
+    #                 print(annot.value)
+    #                 thisPassage = bioc.BioCPassage()
+    #                 thisPassage.text = annot.ngram
+    #                 thisPassage.offset = annot.span[0]
+    #                 thisBiocDoc.add_passage(thisPassage)
+    #                 # passageAttributes to add
+    #             elif annot.source =="BioCAnnotation":
+    #                 thisAnnotation = bioc.BioCAnnotation()
+    #                 thisAnnotation.infons = annot.attributes
+    #                 thisAnnotation.id = annot.attributes["id"]
+    #                 thisAnnotation.text = annot.ngram
+    #                 thisLocation = bioc.BioCLocation(annot.span[0],annot.span[1]-annot.span[0])
+    #                 thisAnnotation.add_location(thisLocation)
+    #                 thisBiocDoc.passages[-1].add_annotation(thisAnnotation)
+    #         thisBiocCollection.add_document(thisBiocDoc)
+    #
+    #
+    # @staticmethod
+    # def writeBiocCollection(filename, collection):
+    #     with bioc.BioCXMLDocumentWriter(filename) as writer:
+    #         writer.write_collection_info(collection)
+    #         for document in collection.documents:
+    #             writer.write_document(document)
+    #     return(1)
