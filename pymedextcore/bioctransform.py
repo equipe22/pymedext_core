@@ -111,58 +111,57 @@ class BioC(DataTransform):
             documents_collection.append(this_document)
         return(documents_collection)
 
-    @staticmethod
-    def save_as_collection(list_of_pymedext_documents: List):
-        """save a list of pymedext document as a bioc collection .
-        It will return a bioc collection object.
-
-        :param list_of_pymedext_documents: a list of Document
-        :returns:  a bioc collection object
-        """
-        this_bioc_collection = bioc.BioCCollection()
-        for this_pymedext_doc in list_of_pymedext_documents:
-            this_bioc_doc = bioc.BioCDocument()
-            for annot in this_pymedext_doc.annotations:
-                # print(annot.type)
-                print(annot.source)
-                if annot.type == "raw_text":
-                    if this_bioc_collection.source =='':
-                        this_bioc_collection.source=annot.source
-                if annot.source == "BioCPassage":
-                    print(annot.ngram)
-                    print(annot.value)
-                    this_passage = bioc.BioCPassage()
-                    this_passage.text = annot.ngram
-                    this_passage.offset = annot.span[0]
-                    this_bioc_doc.add_passage(this_passage)
-                    # passageAttributes to add
-                elif annot.source =="BioCAnnotation":
-                    this_annotation = bioc.BioCAnnotation()
-                    this_annotation.infons = annot.attributes
-                    this_annotation.id = annot.attributes["id"]
-                    this_annotation.text = annot.ngram
-                    thisLocation = bioc.BioCLocation(annot.span[0],annot.span[1]-annot.span[0])
-                    this_annotation.add_location(thisLocation)
-                    this_bioc_doc.passages[-1].add_annotation(this_annotation)
-            this_bioc_collection.add_document(this_bioc_doc)
-        return(this_bioc_collection)
-
-
-    @staticmethod
-    def write_bioc_collection(filename:str, collection):
-        """write a BiocCollection as an xml document
-        It will return 1
-
-        :param filename: a str filename of the collection
-        :param collection: a bioc collection
-        :returns: 1
-        """
-        with bioc.BioCXMLDocumentWriter(filename) as writer:
-            writer.write_collection_info(collection)
-            for document in collection.documents:
-                writer.write_document(document)
-        return(1)
-
+    # @staticmethod
+    # def save_as_collection(list_of_pymedext_documents: List):
+    #     """save a list of pymedext document as a bioc collection .
+    #     It will return a bioc collection object.
+    #
+    #     :param list_of_pymedext_documents: a list of Document
+    #     :returns:  a bioc collection object
+    #     """
+    #     this_bioc_collection = bioc.BioCCollection()
+    #     for this_pymedext_doc in list_of_pymedext_documents:
+    #         this_bioc_doc = bioc.BioCDocument()
+    #         for annot in this_pymedext_doc.annotations:
+    #             # print(annot.type)
+    #             print(annot.source)
+    #             if annot.type == "raw_text":
+    #                 if this_bioc_collection.source =='':
+    #                     this_bioc_collection.source=annot.source
+    #             if annot.source == "BioCPassage":
+    #                 print(annot.ngram)
+    #                 print(annot.value)
+    #                 this_passage = bioc.BioCPassage()
+    #                 this_passage.text = annot.ngram
+    #                 this_passage.offset = annot.span[0]
+    #                 this_bioc_doc.add_passage(this_passage)
+    #                 # passageAttributes to add
+    #             elif annot.source =="BioCAnnotation":
+    #                 this_annotation = bioc.BioCAnnotation()
+    #                 this_annotation.infons = annot.attributes
+    #                 this_annotation.id = annot.attributes["id"]
+    #                 this_annotation.text = annot.ngram
+    #                 thisLocation = bioc.BioCLocation(annot.span[0],annot.span[1]-annot.span[0])
+    #                 this_annotation.add_location(thisLocation)
+    #                 this_bioc_doc.passages[-1].add_annotation(this_annotation)
+    #         this_bioc_collection.add_document(this_bioc_doc)
+    #     return(this_bioc_collection)
+    #
+    #
+    # @staticmethod
+    # def write_bioc_collection(filename:str, collection):
+    #     """write a BiocCollection as an xml document
+    #     It will return 1
+    #
+    #     :param filename: a str filename of the collection
+    #     :param collection: a bioc collection
+    #     :returns: 1
+    #     """
+    #     with bioc.BioCXMLDocumentWriter(filename) as writer:
+    #         writer.write_collection_info(collection)
+    #         for document in collection.documents:
+    #             writer.write_document(document)
+    #     return(1)
 
     def __load_collection_xml(bioc_xml: str, is_file: bool  = True):
         """load a xml bioc collection.
@@ -179,7 +178,6 @@ class BioC(DataTransform):
         else:
             collection = bioc.loads(bioc_xml)
             return(collection)
-
 
     def __load_collection_json(bioc_json: str, is_file: bool  =True):
         """load a json bioc collection .
