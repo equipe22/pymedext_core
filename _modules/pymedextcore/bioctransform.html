@@ -169,7 +169,7 @@
 
 <span class="sd">        :param bioc_input: a str path to a bioc file or a bioc input string</span>
 <span class="sd">        :param format: xml or to_json type of the bioc file</span>
-<span class="sd">        :param is_file: if True bioc_input is pat else it is a string</span>
+<span class="sd">        :param is_file: if True bioc_input is path else it is a string</span>
 <span class="sd">        :returns: list of Document</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1">#Generalize load and add as an argument type 0 default is an xml, 1 a json bioc collection</span>
@@ -264,30 +264,43 @@
             <span class="c1"># collection.infons</span>
             <span class="n">this_document</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">annotations_list</span><span class="p">)</span>
             <span class="n">documents_collection</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">this_document</span><span class="p">)</span>
-        <span class="k">return</span><span class="p">(</span><span class="n">documents_collection</span><span class="p">)</span></div></div>
+        <span class="k">return</span><span class="p">(</span><span class="n">documents_collection</span><span class="p">)</span></div>
 
 
-    <span class="c1"># @staticmethod</span>
-    <span class="c1"># def __load_collection_xml(bioc_xml, is_file=True):</span>
-    <span class="c1">#     if is_file :</span>
-    <span class="c1">#         with open(bioc_xml, &#39;r&#39;) as fp:</span>
-    <span class="c1">#             collection = bioc.load(fp)</span>
-    <span class="c1">#         return(collection)</span>
-    <span class="c1">#     else:</span>
-    <span class="c1">#         collection = bioc.loads(bioc_xml)</span>
-    <span class="c1">#         return(collection)</span>
-    <span class="c1">#</span>
-    <span class="c1"># @staticmethod</span>
-    <span class="c1"># def __load_collection_json(bioc_json, is_file=True):</span>
-    <span class="c1">#     if is_file:</span>
-    <span class="c1">#         with open(bioc_json, &#39;r&#39;) as fp:</span>
-    <span class="c1">#             collection = biocjson.load(fp)</span>
-    <span class="c1">#         return(collection)</span>
-    <span class="c1">#     else:</span>
-    <span class="c1">#         collection = biocjson.loads(bioc_json)</span>
-    <span class="c1">#         return(collection)</span>
-    <span class="c1">#</span>
-    <span class="c1">#</span>
+    <span class="k">def</span> <span class="nf">__load_collection_xml</span><span class="p">(</span><span class="n">bioc_xml</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">is_file</span><span class="p">:</span> <span class="nb">bool</span>  <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;load a xml bioc collection.</span>
+<span class="sd">        It will return a bioc collection object.</span>
+
+<span class="sd">        :param bioc_xml: a str path to a bioc file or a bioc input xml string</span>
+<span class="sd">        :param is_file: if True bioc_input is a path else it is a string</span>
+<span class="sd">        :returns:  a bioc collection object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">is_file</span> <span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">bioc_xml</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+                <span class="n">collection</span> <span class="o">=</span> <span class="n">bioc</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+            <span class="k">return</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">collection</span> <span class="o">=</span> <span class="n">bioc</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">bioc_xml</span><span class="p">)</span>
+            <span class="k">return</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">__load_collection_json</span><span class="p">(</span><span class="n">bioc_json</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">is_file</span><span class="p">:</span> <span class="nb">bool</span>  <span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;load a json bioc collection .</span>
+<span class="sd">        It will return a bioc collection object.</span>
+
+<span class="sd">        :param bioc_json: a str path to a bioc file or a bioc input json string</span>
+<span class="sd">        :param is_file: if True bioc_input is a path else it is a string</span>
+<span class="sd">        :returns:  a bioc collection object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">is_file</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">bioc_json</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+                <span class="n">collection</span> <span class="o">=</span> <span class="n">biocjson</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+            <span class="k">return</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">collection</span> <span class="o">=</span> <span class="n">biocjson</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">bioc_json</span><span class="p">)</span>
+            <span class="k">return</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span></div>
+
+
     <span class="c1"># @staticmethod</span>
     <span class="c1"># def save_as_collection(list_of_pymedDocs):</span>
     <span class="c1">#     thisBiocCollection = bioc.BioCCollection()</span>
