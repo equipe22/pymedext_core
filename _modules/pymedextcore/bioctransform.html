@@ -164,7 +164,8 @@
 <span class="kn">import</span> <span class="nn">uuid</span>
 
 <div class="viewcode-block" id="BioC"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.bioctransform.BioC">[docs]</a><span class="k">class</span> <span class="nc">BioC</span><span class="p">(</span><span class="n">DataTransform</span><span class="p">):</span>
-<div class="viewcode-block" id="BioC.load_collection"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.bioctransform.BioC.load_collection">[docs]</a>    <span class="k">def</span> <span class="nf">load_collection</span><span class="p">(</span><span class="n">bioc_input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span><span class="nb">format</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">is_file</span><span class="p">:</span> <span class="nb">bool</span>  <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="BioC.load_collection"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.bioctransform.BioC.load_collection">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">load_collection</span><span class="p">(</span><span class="n">bioc_input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span><span class="nb">format</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">is_file</span><span class="p">:</span> <span class="nb">bool</span>  <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;load a bioc collection xml or json.</span>
 <span class="sd">        It will return a list of Document object.</span>
 
@@ -266,7 +267,8 @@
             <span class="n">documents_collection</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">this_document</span><span class="p">)</span>
         <span class="k">return</span><span class="p">(</span><span class="n">documents_collection</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="BioC.save_as_collection"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.bioctransform.BioC.save_as_collection">[docs]</a>    <span class="k">def</span> <span class="nf">save_as_collection</span><span class="p">(</span><span class="n">list_of_pymedext_documents</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Document</span><span class="p">]):</span>
+<div class="viewcode-block" id="BioC.save_as_collection"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.bioctransform.BioC.save_as_collection">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">save_as_collection</span><span class="p">(</span><span class="n">list_of_pymedext_documents</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Document</span><span class="p">]):</span>
         <span class="sd">&quot;&quot;&quot;save a list of pymedext document as a bioc collection .</span>
 <span class="sd">        It will return a bioc collection object.</span>
 
@@ -301,21 +303,21 @@
             <span class="n">this_bioc_collection</span><span class="o">.</span><span class="n">add_document</span><span class="p">(</span><span class="n">this_bioc_doc</span><span class="p">)</span>
         <span class="k">return</span><span class="p">(</span><span class="n">this_bioc_collection</span><span class="p">)</span></div>
 
-    <span class="c1">#</span>
-    <span class="c1"># @staticmethod</span>
-    <span class="c1"># def write_bioc_collection(filename:str, collection):</span>
-    <span class="c1">#     &quot;&quot;&quot;write a BiocCollection as an xml document</span>
-    <span class="c1">#     It will return 1</span>
-    <span class="c1">#</span>
-    <span class="c1">#     :param filename: a str filename of the collection</span>
-    <span class="c1">#     :param collection: a bioc collection</span>
-    <span class="c1">#     :returns: 1</span>
-    <span class="c1">#     &quot;&quot;&quot;</span>
-    <span class="c1">#     with bioc.BioCXMLDocumentWriter(filename) as writer:</span>
-    <span class="c1">#         writer.write_collection_info(collection)</span>
-    <span class="c1">#         for document in collection.documents:</span>
-    <span class="c1">#             writer.write_document(document)</span>
-    <span class="c1">#     return(1)</span>
+
+<div class="viewcode-block" id="BioC.write_bioc_collection"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.bioctransform.BioC.write_bioc_collection">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">write_bioc_collection</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">collection</span><span class="p">:</span><span class="n">bioc</span><span class="o">.</span><span class="n">BioCCollection</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;write a BiocCollection as an xml document</span>
+<span class="sd">        It will return 1</span>
+
+<span class="sd">        :param filename: a str filename of the collection</span>
+<span class="sd">        :param collection: a bioc collection</span>
+<span class="sd">        :returns: 1</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">bioc</span><span class="o">.</span><span class="n">BioCXMLDocumentWriter</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">write_collection_info</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">document</span> <span class="ow">in</span> <span class="n">collection</span><span class="o">.</span><span class="n">documents</span><span class="p">:</span>
+                <span class="n">writer</span><span class="o">.</span><span class="n">write_document</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">__load_collection_xml</span><span class="p">(</span><span class="n">bioc_xml</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">is_file</span><span class="p">:</span> <span class="nb">bool</span>  <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;load a xml bioc collection.</span>
