@@ -111,43 +111,8 @@ class BioC(DataTransform):
             documents_collection.append(this_document)
         return(documents_collection)
 
-
-    def __load_collection_xml(bioc_xml: str, is_file: bool  = True):
-        """load a xml bioc collection.
-        It will return a bioc collection object.
-
-        :param bioc_xml: a str path to a bioc file or a bioc input xml string
-        :param is_file: if True bioc_input is a path else it is a string
-        :returns:  a bioc collection object
-        """
-        if is_file :
-            with open(bioc_xml, 'r') as fp:
-                collection = bioc.load(fp)
-            return(collection)
-        else:
-            collection = bioc.loads(bioc_xml)
-            return(collection)
-
-
-    def __load_collection_json(bioc_json: str, is_file: bool  =True):
-        """load a json bioc collection .
-        It will return a bioc collection object.
-
-        :param bioc_json: a str path to a bioc file or a bioc input json string
-        :param is_file: if True bioc_input is a path else it is a string
-        :returns:  a bioc collection object
-        """
-        if is_file:
-            with open(bioc_json, 'r') as fp:
-                collection = biocjson.load(fp)
-            return(collection)
-        else:
-            collection = biocjson.loads(bioc_json)
-            return(collection)
-
-
     @staticmethod
-    def save_as_collection(list_of_pymedext_documents: List[Document]):
+    def save_as_collection(list_of_pymedext_documents: List):
         """save a list of pymedext document as a bioc collection .
         It will return a bioc collection object.
 
@@ -184,7 +149,7 @@ class BioC(DataTransform):
 
 
     @staticmethod
-    def write_bioc_collection(filename:str, collection: bioc.BioCCollection):
+    def write_bioc_collection(filename:str, collection):
         """write a BiocCollection as an xml document
         It will return 1
 
@@ -197,3 +162,37 @@ class BioC(DataTransform):
             for document in collection.documents:
                 writer.write_document(document)
         return(1)
+
+
+    def __load_collection_xml(bioc_xml: str, is_file: bool  = True):
+        """load a xml bioc collection.
+        It will return a bioc collection object.
+
+        :param bioc_xml: a str path to a bioc file or a bioc input xml string
+        :param is_file: if True bioc_input is a path else it is a string
+        :returns:  a bioc collection object
+        """
+        if is_file :
+            with open(bioc_xml, 'r') as fp:
+                collection = bioc.load(fp)
+            return(collection)
+        else:
+            collection = bioc.loads(bioc_xml)
+            return(collection)
+
+
+    def __load_collection_json(bioc_json: str, is_file: bool  =True):
+        """load a json bioc collection .
+        It will return a bioc collection object.
+
+        :param bioc_json: a str path to a bioc file or a bioc input json string
+        :param is_file: if True bioc_input is a path else it is a string
+        :returns:  a bioc collection object
+        """
+        if is_file:
+            with open(bioc_json, 'r') as fp:
+                collection = biocjson.load(fp)
+            return(collection)
+        else:
+            collection = biocjson.loads(bioc_json)
+            return(collection)
