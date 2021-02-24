@@ -24,6 +24,7 @@ PyMedExt also includes an easy way to define Annotator.
 Indices and tables
 ==================
 
+* :ref:`README`
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
