@@ -21,8 +21,6 @@ PyMedExt also includes an easy way to define Annotator.
 
    Readme <README.md>
 
-   source ./README.html
-
 
 
 Indices and tables
