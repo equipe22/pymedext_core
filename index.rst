@@ -14,12 +14,15 @@ into pymedext, biocxml, biocjson, omop or brat.
 PyMedExt also includes an easy way to define Annotator.
 
 .. mdinclude ::./README.md
+.. mdinclude ::./otherInformations.md
+
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
    Readme <README.md>
+   Other Infor <otherInformations.md>
 
 
 
