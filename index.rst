@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to pymedextcore's documentation!
+PyMedExt - a library to process clinical text
 =========================================
 
 PyMedExt is a library designed to process clinical text.
