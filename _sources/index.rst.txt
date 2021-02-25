@@ -19,6 +19,10 @@ PyMedExt also includes an easy way to define Annotator.
    :maxdepth: 2
    :caption: Contents:
 
+   source README.html
+   Readme <README.html>
+   Readme <README.md>
+
    source ./README.html
 
 
