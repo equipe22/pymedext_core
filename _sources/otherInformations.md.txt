@@ -1,5 +1,5 @@
 
-# PyMedExt Documentation
+# Automatic PyMedExt Documentation from sources
 
 PyMedExt Documentation is generated automatically with
 sphinx-doc https://github.com/equipe22/sphinx_doc. AS an example to generate the documentation you can have a look at
@@ -36,18 +36,17 @@ class Annotation:
 ```
 
 also to a use case of Documentation example for the Annotation class --> https://equipe22.github.io/pymedext_core/pymedextcore.html?highlight=annotation#pymedext_core.annotators.Annotation
-## Installation of PyMedExt
 
 
 
 
-## Examples
+# Examples
 
-### Datasets
+## Datasets
 
 All the datasets used in the examples can be found in the data folder
 
-#### PubTator (biocxml)
+### PubTator (biocxml)
 Users can retrieve pre-annotated PubMed files using PubTator.
 
 **Get Data from PubTator**
@@ -69,7 +68,7 @@ outData.close()
 
 ```
 
-#### QUAERO french corpus (biocxml)
+### QUAERO french corpus (biocxml)
 In the example, we also used the QUAERO dataset:
 
 ``` tex
@@ -90,7 +89,7 @@ wget https://quaerofrenchmed.limsi.fr/QUAERO_FrenchMed_BioC.zip
 unzip QUAERO_FrenchMed_BioC.zip
 
 ```
-#### CellFinder corpus
+### CellFinder corpus
  Mariana Neves, Alexander Damaschun, Andreas Kurtz, Ulf Leser. Annotating and evaluating text for stem cell research. Third Workshop on Building and Evaluation Resources for Biomedical Text Mining (BioTxtM 2012) at Language Resources and Evaluation (LREC) 2012. [workshop] [paper]
 https://www.informatik.hu-berlin.de/de/forschung/gebiete/wbi/resources/cellfinder
 
@@ -109,13 +108,9 @@ data are generated from
 
 https://github.com/smart-on-fhir/sample-patients
 
-## library pymedext Usage
 
-
-
-
-
-# Makefile
+# How to use
+## Makefile
 
 ```bash
 
@@ -128,14 +123,15 @@ uninstall                      uninstall local pymedext packages
 
 
 ```
-# How to used
+## interactive
 
 3) execute bash bin/runInteractive.sh to test it in a docker container
 
 
 
 
-# TODO
+# ROADMAP
+## TODO
 
 - implement a BratSource.py which open an ssh Connector to a brat Server
 - Pymedext to BIOC and specify which annotation are passage
@@ -149,7 +145,7 @@ uninstall                      uninstall local pymedext packages
   - pymedext to doccano
   - add omop as (csv) output and furthermore to a db
 
-# DONE
+## RELEASED
 - implement a generic APIConnector with the request function
 - add the whole api of Doccano as a Source in an other file called DoccanoSource.py
 - Extend datatransform to perform the data wrangling for Doccanotransform.py
