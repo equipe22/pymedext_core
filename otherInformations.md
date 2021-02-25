@@ -35,7 +35,7 @@ class Annotation:
 
 ```
 
-also to a use case of Documentation example for the Annotation class --> https://equipe22.github.io/pymedext_core/pymedext_core.html?highlight=annotation#pymedext_core.annotators.Annotation
+also to a use case of Documentation example for the Annotation class --> https://equipe22.github.io/pymedext_core/pymedextcore.html?highlight=annotation#pymedext_core.annotators.Annotation
 ## Installation of PyMedExt
 
 
@@ -132,9 +132,6 @@ uninstall                      uninstall local pymedext packages
 
 3) execute bash bin/runInteractive.sh to test it in a docker container
 
-# Documentation (in progress)
- firefox html/modules.html
-
 
 
 
@@ -160,7 +157,9 @@ uninstall                      uninstall local pymedext packages
 - implement Bioc output by extending datatransform (done)
 - implement Fhir wrangling by extending datatransform (done)
 
-# BIOC
+# REFERENCES
+
+## BIOC
 input data from article:
 https://www.ncbi.nlm.nih.gov/research/bionlp/APIs/BioC-PMC/
 
@@ -173,7 +172,7 @@ https://pypi.org/project/bioc/
 
 https://www.ncbi.nlm.nih.gov/research/pubtator/api.html
 
-# FHIR
+## FHIR
 
 https://github.com/smart-on-fhir/client-py
 
@@ -185,6 +184,5 @@ https://github.com/smart-on-fhir/fhir-parser
 
 https://github.com/smart-on-fhir/client-py/blob/master/fhirclient/models/documentmanifest.py
 
----
-# BRAT format
+## BRAT format
 https://brat.nlplab.org/standoff.html
