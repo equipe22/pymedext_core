@@ -174,7 +174,7 @@
 <dt id="pymedextcore.annotators.Annotation">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymedextcore.annotators.</span></code><code class="sig-name descname"><span class="pre">Annotation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_ID</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">span</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isEntity</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ID</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ngram</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Based object which contains Annotation. Each annotators must return a list of Annotations.</p>
+<p>Based object which contains Annotation. Each Annotator must return a list of Annotations.</p>
 <dl class="py method">
 <dt id="pymedextcore.annotators.Annotation.add_child">
 <code class="sig-name descname"><span class="pre">add_child</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">child</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.add_child"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.add_child" title="Permalink to this definition">¶</a></dt>
@@ -407,7 +407,7 @@ it’s belong to a specific type</p>
 
 <dl class="py class">
 <dt id="pymedextcore.annotators.Annotator">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymedextcore.annotators.</span></code><code class="sig-name descname"><span class="pre">Annotator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key_input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ID</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotator" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymedextcore.annotators.</span></code><code class="sig-name descname"><span class="pre">Annotator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">key_input:</span> <span class="pre">[&lt;class</span> <span class="pre">'str'&gt;],</span> <span class="pre">key_output:</span> <span class="pre">str,</span> <span class="pre">ID:</span> <span class="pre">str</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Abstract class of each Annotator. Furthermore each Annotator must returns a list of Annotation
 TODO: get_all_key_input     return the annotations oF Documents.annotations which have the same type of key_input list (rename as selectall)
@@ -417,7 +417,7 @@ TODO: annotate_function     each annotator should implement this functionand ret
 <dt id="pymedextcore.annotators.Annotator.annotate_function">
 <code class="sig-name descname"><span class="pre">annotate_function</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotator.annotate_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotator.annotate_function" title="Permalink to this definition">¶</a></dt>
 <dd><p>main annotation function
-each ANnotator must implement this function
+each Annotator must implement this function
 :param _input: a list of Annotation typet
 :returns: a list of annotations. they will be added to Document.annotations
 :rtype:a list of annotations</p>
@@ -427,8 +427,8 @@ each ANnotator must implement this function
 <dt id="pymedextcore.annotators.Annotator.get_all_key_input">
 <code class="sig-name descname"><span class="pre">get_all_key_input</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotator.get_all_key_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotator.get_all_key_input" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="simple">
-<dt>returns all key input for the Annotors</dt><dd><p>TODO: rename selectAll
-:param _input: return all annotations of a specific types from the Documents
+<dt>returns all key input for the Annotator</dt><dd><p>TODO: rename selectAll
+:param _input: return all annotations of a specific types from the Document
 :returns: a list of annotations
 :rtype: a list of annotation</p>
 </dd>
@@ -444,7 +444,7 @@ each ANnotator must implement this function
 <dd><dl class="simple">
 <dt>return the annotation type [0],</dt><dd><dl class="field-list simple">
 <dt class="field-odd">param _input</dt>
-<dd class="field-odd"><p>list of annotations input for the Annotor</p>
+<dd class="field-odd"><p>list of annotations input for the Annotator</p>
 </dd>
 <dt class="field-even">returns</dt>
 <dd class="field-even"><p>a list of annotations</p>
@@ -469,6 +469,50 @@ select_first_input</p>
 :param i: the indice of the list to selecy
 :returns:a list of annotations
 :rtype:a list of annotation</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.annotators.Annotator.select_all_inputs">
+<code class="sig-name descname"><span class="pre">select_all_inputs</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotator.select_all_inputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotator.select_all_inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns all key input for the Annotator</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">param _input</dt>
+<dd class="field-odd"><p>return all annotations of a specific types from the Document</p>
+</dd>
+<dt class="field-even">returns</dt>
+<dd class="field-even"><p>a list of annotations</p>
+</dd>
+<dt class="field-odd">rtype</dt>
+<dd class="field-odd"><p>a list of annotation</p>
+</dd>
+</dl>
+</div></blockquote>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.3: </span>This function replaced get_all_key_input</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.annotators.Annotator.select_first_input">
+<code class="sig-name descname"><span class="pre">select_first_input</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotator.select_first_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotator.select_first_input" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>return the first annotation from _input key list,</dt><dd><dl class="field-list simple">
+<dt class="field-odd">param _input</dt>
+<dd class="field-odd"><p>list of annotations input for the Annotator</p>
+</dd>
+<dt class="field-even">returns</dt>
+<dd class="field-even"><p>a list of annotations</p>
+</dd>
+<dt class="field-odd">rtype</dt>
+<dd class="field-odd"><p>a list of annotations</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.3: </span>This function will replace get_first_key_input</p>
+</div>
 </dd></dl>
 
 </dd></dl>
