@@ -155,7 +155,7 @@ class Annotation:
 
         :param filterType: list of Annotations type
         :returns:  properties
-        :rtype:list of dictionnary
+        :rtype: list of dictionnary
 
         """
         properties=[]
@@ -277,13 +277,13 @@ class Annotation:
 
 class Annotator:
     """
-    Abstract class of each Annotator. Furthermore each Annotator must returns a list of Annotation
-    TODO: get_all_key_input	return the annotations oF Documents.annotations which have the same type of key_input list (rename as selectall)
-    TODO: get_key_input	return the annotations oF Documents.annotations which have the same type of the i th key_input element  (rename as select)
-    TODO: annotate_function	each annotator should implement this functionand return a list of annotations object
+    Abstract class of each Annotator. For that purpose an Annotator must
+    implement the function annotate_function(). This function return
+    a list of Annotations object.
+
     """
     def __init__(self, key_input:[str], key_output:str, ID:str):
-        """Initialied an Annotator
+        """Initialised an Annotator
 
         :param key_input: a list of input annotation type (because annotators could use more than one type of annotation)
         :param key_output:  a string which is the type of Annotator
@@ -298,8 +298,8 @@ class Annotator:
 
     @deprecated(version='0.3', reason="This function will be removed soon use instead select_first_input")
     def get_first_key_input(self,_input):
-        """get_first_key_input
-	    return the annotation type [0],
+        """get_first_key_input, return the annotation type [0].
+        
         :param _input: list of annotations input for the Annotator
         :returns: a list of annotations
         :rtype: a list of annotations
@@ -310,8 +310,8 @@ class Annotator:
 
     @versionadded(version='0.3', reason="This function will replace get_first_key_input")
     def select_first_input(self,_input):
-        """select_first_input
-	    return the first annotation from _input key list,
+        """return the first annotation from _input key list,
+
         :param _input: list of annotations input for the Annotator
         :returns: a list of annotations
         :rtype: a list of annotations
@@ -323,7 +323,7 @@ class Annotator:
     @deprecated(version='0.3', reason="This function will be removed soon use instead select_all_inputs")
     def get_all_key_input(self,_input):
         """returns all key input for the Annotator
-        TODO: rename selectAll
+
         :param _input: return all annotations of a specific types from the Document
         :returns: a list of annotations
         :rtype: a list of annotation
@@ -358,9 +358,10 @@ class Annotator:
     def annotate_function(self, _input):
         """ main annotation function
         each Annotator must implement this function
+
         :param _input: a list of Annotation typet
         :returns: a list of annotations. they will be added to Document.annotations
-        :rtype:a list of annotations
+        :rtype: List[Annotation]
         """
         pass
 
@@ -374,6 +375,7 @@ class Relation:
     def __init__(self, type: str, head: str, target:str, source:str,
                  source_ID:str, attributes:Optional[List] = None, ID:Optional[str] = None):
         """Intialize an Annotation object
+
         :param type: annotation type define by the user (linked to the Annotator)
         :param head: head of the relation, ID of the source entity
         :param target: target of the relation, ID of the target entity
@@ -403,6 +405,7 @@ class Relation:
 
     def to_json(self):
         """Tranform Relation to json
+
         :returns: json
         :rtype: json
         """
@@ -410,6 +413,7 @@ class Relation:
 
     def to_dict(self):
         """Transform Relation to a dict object
+
         :returns: dict
         :rtype: dict
         """
