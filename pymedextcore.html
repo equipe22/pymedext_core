@@ -174,7 +174,7 @@
 <dt id="pymedextcore.annotators.Annotation">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymedextcore.annotators.</span></code><code class="sig-name descname"><span class="pre">Annotation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_ID</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">span</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isEntity</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ID</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ngram</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Based object which contains Annotation liveannotation</p>
+<p>Based object which contains Annotation. Each annotators must return a list of Annotations.</p>
 <dl class="py method">
 <dt id="pymedextcore.annotators.Annotation.addChild">
 <code class="sig-name descname"><span class="pre">addChild</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">child</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.addChild"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.addChild" title="Permalink to this definition">¶</a></dt>
@@ -211,20 +211,6 @@ the current Annotation</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="pymedextcore.annotators.Annotation.getAttributes">
-<code class="sig-name descname"><span class="pre">getAttributes</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.getAttributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.getAttributes" title="Permalink to this definition">¶</a></dt>
-<dd><p>get Attributes from current and parents Node</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>attributes</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>a dict</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt id="pymedextcore.annotators.Annotation.getChildrenSpan">
 <code class="sig-name descname"><span class="pre">getChildrenSpan</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.getChildrenSpan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.getChildrenSpan" title="Permalink to this definition">¶</a></dt>
 <dd><p>from current node  get all children span</p>
@@ -249,20 +235,6 @@ entities</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p>list</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="pymedextcore.annotators.Annotation.getNgram">
-<code class="sig-name descname"><span class="pre">getNgram</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.getNgram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.getNgram" title="Permalink to this definition">¶</a></dt>
-<dd><p>get nGram from root</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>raw ngram</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>string</p>
 </dd>
 </dl>
 </dd></dl>
@@ -333,15 +305,29 @@ it’s belong to a specific type</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="pymedextcore.annotators.Annotation.setNgram">
-<code class="sig-name descname"><span class="pre">setNgram</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.setNgram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.setNgram" title="Permalink to this definition">¶</a></dt>
-<dd><p>set nGram from root</p>
+<dt id="pymedextcore.annotators.Annotation.get_attributes">
+<code class="sig-name descname"><span class="pre">get_attributes</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.get_attributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.get_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>get Attributes from current and parents Node</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>None</p>
+<dd class="field-odd"><p>attributes</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>None</p>
+<dd class="field-even"><p>a dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.annotators.Annotation.get_ngram">
+<code class="sig-name descname"><span class="pre">get_ngram</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.get_ngram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.get_ngram" title="Permalink to this definition">¶</a></dt>
+<dd><p>get nGram from root</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>raw ngram</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>string</p>
 </dd>
 </dl>
 </dd></dl>
@@ -376,6 +362,20 @@ it’s belong to a specific type</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.annotators.Annotation.set_ngram">
+<code class="sig-name descname"><span class="pre">set_ngram</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.set_ngram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.set_ngram" title="Permalink to this definition">¶</a></dt>
+<dd><p>set nGram from root</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>

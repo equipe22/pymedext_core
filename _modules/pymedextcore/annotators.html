@@ -177,11 +177,11 @@
 
 <div class="viewcode-block" id="Annotation"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation">[docs]</a><span class="k">class</span> <span class="nc">Annotation</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Based object which contains Annotation liveannotation</span>
+<span class="sd">    Based object which contains Annotation. Each annotators must return a list of Annotations.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">source_ID</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> 
-                 <span class="n">span</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">attributes</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> 
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">source_ID</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
+                 <span class="n">span</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">attributes</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">isEntity</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ID</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ngram</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Intialize an Annotation object</span>
 
@@ -222,7 +222,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span></div>
-    
+
 <div class="viewcode-block" id="Annotation.to_dict"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.to_dict">[docs]</a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Transform Annotation to a dict object</span>
 <span class="sd">        :returns: dict</span>
@@ -239,16 +239,16 @@
                 <span class="s1">&#39;attributes&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">,</span>
                 <span class="s1">&#39;ID&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">ID</span><span class="p">}</span></div>
 
-<div class="viewcode-block" id="Annotation.getAttributes"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.getAttributes">[docs]</a>    <span class="k">def</span> <span class="nf">getAttributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Annotation.get_attributes"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.get_attributes">[docs]</a>    <span class="k">def</span> <span class="nf">get_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;get Attributes from current and parents Node</span>
 
 <span class="sd">        :returns: attributes</span>
 <span class="sd">        :rtype: a dict</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">getAttributes</span><span class="p">())</span></div>
+        <span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">())</span></div>
 
-<div class="viewcode-block" id="Annotation.getNgram"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.getNgram">[docs]</a>    <span class="k">def</span> <span class="nf">getNgram</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Annotation.get_ngram"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.get_ngram">[docs]</a>    <span class="k">def</span> <span class="nf">get_ngram</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;get nGram from root</span>
 
 <span class="sd">        :returns: raw ngram</span>
@@ -257,7 +257,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ngram</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Annotation.setNgram"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.setNgram">[docs]</a>    <span class="k">def</span> <span class="nf">setNgram</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Annotation.set_ngram"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.set_ngram">[docs]</a>    <span class="k">def</span> <span class="nf">set_ngram</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;set nGram from root</span>
 
 <span class="sd">        :returns: None</span>
@@ -451,7 +451,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">key_input</span> <span class="o">=</span> <span class="n">key_input</span> <span class="c1"># list</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">key_output</span> <span class="o">=</span> <span class="n">key_output</span> <span class="c1"># str</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ID</span> <span class="o">=</span> <span class="n">ID</span>
-        
+
 <div class="viewcode-block" id="Annotator.get_first_key_input"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotator.get_first_key_input">[docs]</a>    <span class="k">def</span> <span class="nf">get_first_key_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">_input</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;get_first_key_input</span>
 <span class="sd">	    return the annotation type [0],</span>
@@ -462,7 +462,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;returns annotation&quot;</span><span class="p">)</span>
         <span class="k">return</span>  <span class="bp">self</span><span class="o">.</span><span class="n">get_key_input</span><span class="p">(</span><span class="n">_input</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
-    
+
 <div class="viewcode-block" id="Annotator.get_all_key_input"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotator.get_all_key_input">[docs]</a>    <span class="k">def</span> <span class="nf">get_all_key_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">_input</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;returns all key input for the Annotors</span>
 <span class="sd">        TODO: rename selectAll</span>
@@ -473,7 +473,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;returns all annotations&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">_input</span><span class="o">.</span><span class="n">annotations</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_input</span><span class="p">]</span></div>
-    
+
 <div class="viewcode-block" id="Annotator.get_key_input"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotator.get_key_input">[docs]</a>    <span class="k">def</span> <span class="nf">get_key_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_input</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;return a specific annotations type from key_input</span>
 <span class="sd">        :param _input: key_input list</span>
@@ -500,8 +500,8 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Based object which contains Relation</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> 
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
                  <span class="n">source_ID</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">attributes</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ID</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Intialize an Annotation object</span>
 <span class="sd">        :param type: annotation type define by the user (linked to the Annotator)</span>
@@ -524,7 +524,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">ID</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid1</span><span class="p">())</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ID</span> <span class="o">=</span> <span class="n">ID</span>
-            
+
 <span class="c1">#         TODO: add graph properties</span>
 <span class="c1">#         self.ngram = ngram # should be called raw_value?</span>
 <span class="c1">#         self.parent = None</span>
@@ -537,7 +537,7 @@
 <span class="sd">        :rtype: json</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span></div>
-    
+
 <div class="viewcode-block" id="Relation.to_dict"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Relation.to_dict">[docs]</a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Transform Relation to a dict object</span>
 <span class="sd">        :returns: dict</span>
