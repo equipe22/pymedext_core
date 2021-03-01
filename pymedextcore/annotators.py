@@ -5,9 +5,8 @@ import unidecode
 from subprocess import Popen, PIPE
 from os import path
 from typing import List, Optional, Tuple
-from deprecated.sphinx import deprecated
-from deprecated.sphinx import versionadded
-from deprecated.sphinx import versionchanged
+from deprecated import deprecated
+
 import logging
 logger = logging.getLogger(__name__)
 
