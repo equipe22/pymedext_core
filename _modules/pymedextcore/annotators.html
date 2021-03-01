@@ -319,7 +319,7 @@
 
 <span class="sd">        :param filterType: list of Annotations type</span>
 <span class="sd">        :returns:  properties</span>
-<span class="sd">        :rtype:list of dictionnary</span>
+<span class="sd">        :rtype: list of dictionnary</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">properties</span><span class="o">=</span><span class="p">[]</span>
@@ -441,13 +441,13 @@
 
 <div class="viewcode-block" id="Annotator"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotator">[docs]</a><span class="k">class</span> <span class="nc">Annotator</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Abstract class of each Annotator. Furthermore each Annotator must returns a list of Annotation</span>
-<span class="sd">    TODO: get_all_key_input	return the annotations oF Documents.annotations which have the same type of key_input list (rename as selectall)</span>
-<span class="sd">    TODO: get_key_input	return the annotations oF Documents.annotations which have the same type of the i th key_input element  (rename as select)</span>
-<span class="sd">    TODO: annotate_function	each annotator should implement this functionand return a list of annotations object</span>
+<span class="sd">    Abstract class of each Annotator. For that purpose an Annotator must</span>
+<span class="sd">    implement the function annotate_function(). This function return</span>
+<span class="sd">    a list of Annotations object.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_input</span><span class="p">:[</span><span class="nb">str</span><span class="p">],</span> <span class="n">key_output</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">ID</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Initialied an Annotator</span>
+        <span class="sd">&quot;&quot;&quot;Initialised an Annotator</span>
 
 <span class="sd">        :param key_input: a list of input annotation type (because annotators could use more than one type of annotation)</span>
 <span class="sd">        :param key_output:  a string which is the type of Annotator</span>
@@ -462,8 +462,8 @@
 
 <div class="viewcode-block" id="Annotator.get_first_key_input"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotator.get_first_key_input">[docs]</a>    <span class="nd">@deprecated</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="s1">&#39;0.3&#39;</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="s2">&quot;This function will be removed soon use instead select_first_input&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">get_first_key_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">_input</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;get_first_key_input</span>
-<span class="sd">	    return the annotation type [0],</span>
+        <span class="sd">&quot;&quot;&quot;get_first_key_input, return the annotation type [0].</span>
+<span class="sd">        </span>
 <span class="sd">        :param _input: list of annotations input for the Annotator</span>
 <span class="sd">        :returns: a list of annotations</span>
 <span class="sd">        :rtype: a list of annotations</span>
@@ -474,8 +474,8 @@
 
 <div class="viewcode-block" id="Annotator.select_first_input"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotator.select_first_input">[docs]</a>    <span class="nd">@versionadded</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="s1">&#39;0.3&#39;</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="s2">&quot;This function will replace get_first_key_input&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">select_first_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">_input</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;select_first_input</span>
-<span class="sd">	    return the first annotation from _input key list,</span>
+        <span class="sd">&quot;&quot;&quot;return the first annotation from _input key list,</span>
+
 <span class="sd">        :param _input: list of annotations input for the Annotator</span>
 <span class="sd">        :returns: a list of annotations</span>
 <span class="sd">        :rtype: a list of annotations</span>
@@ -487,7 +487,7 @@
 <div class="viewcode-block" id="Annotator.get_all_key_input"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotator.get_all_key_input">[docs]</a>    <span class="nd">@deprecated</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="s1">&#39;0.3&#39;</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="s2">&quot;This function will be removed soon use instead select_all_inputs&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">get_all_key_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">_input</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;returns all key input for the Annotator</span>
-<span class="sd">        TODO: rename selectAll</span>
+
 <span class="sd">        :param _input: return all annotations of a specific types from the Document</span>
 <span class="sd">        :returns: a list of annotations</span>
 <span class="sd">        :rtype: a list of annotation</span>
@@ -522,9 +522,10 @@
 <div class="viewcode-block" id="Annotator.annotate_function"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotator.annotate_function">[docs]</a>    <span class="k">def</span> <span class="nf">annotate_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_input</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; main annotation function</span>
 <span class="sd">        each Annotator must implement this function</span>
+
 <span class="sd">        :param _input: a list of Annotation typet</span>
 <span class="sd">        :returns: a list of annotations. they will be added to Document.annotations</span>
-<span class="sd">        :rtype:a list of annotations</span>
+<span class="sd">        :rtype: List[Annotation]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div></div>
 
@@ -538,6 +539,7 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
                  <span class="n">source_ID</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">attributes</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ID</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Intialize an Annotation object</span>
+
 <span class="sd">        :param type: annotation type define by the user (linked to the Annotator)</span>
 <span class="sd">        :param head: head of the relation, ID of the source entity</span>
 <span class="sd">        :param target: target of the relation, ID of the target entity</span>
@@ -567,6 +569,7 @@
 
 <div class="viewcode-block" id="Relation.to_json"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Relation.to_json">[docs]</a>    <span class="k">def</span> <span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Tranform Relation to json</span>
+
 <span class="sd">        :returns: json</span>
 <span class="sd">        :rtype: json</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -574,6 +577,7 @@
 
 <div class="viewcode-block" id="Relation.to_dict"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Relation.to_dict">[docs]</a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Transform Relation to a dict object</span>
+
 <span class="sd">        :returns: dict</span>
 <span class="sd">        :rtype: dict</span>
 <span class="sd">        &quot;&quot;&quot;</span>
