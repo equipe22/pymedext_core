@@ -5,6 +5,9 @@ import unidecode
 from subprocess import Popen, PIPE
 from os import path
 from typing import List, Optional, Tuple
+from deprecated.sphinx import deprecated
+from deprecated.sphinx import versionadded
+from deprecated.sphinx import versionchanged
 import logging
 logger = logging.getLogger(__name__)
 
@@ -293,6 +296,7 @@ class Annotator:
         self.key_output = key_output # str
         self.ID = ID
 
+    @deprecated(version='0.3', reason="This function will be removed soon use instead select_first_input")
     def get_first_key_input(self,_input):
         """get_first_key_input
 	    return the annotation type [0],
@@ -304,6 +308,7 @@ class Annotator:
         logger.debug("returns annotation")
         return  self.get_key_input(_input, 0)
 
+    @deprecated(version='0.3', reason="This function will be removed soon use instead select_all_inputs")
     def get_all_key_input(self,_input):
         """returns all key input for the Annotors
         TODO: rename selectAll
