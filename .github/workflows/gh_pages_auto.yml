@@ -46,6 +46,7 @@ jobs:
           pip3 install git+https://github.com/equipe22/pymedext_core.git@master
           pip3 install sphinx Pallets-Sphinx-Themes msmb_theme sphinx-rtd-theme m2r2
           cp README.md ./_build
+          cp LICENCE ./_build
           cp otherInformations.md ./_build
           cp conf.py ./_build
           cp index.rst ./_build
