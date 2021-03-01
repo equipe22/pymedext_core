@@ -215,7 +215,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="Annotation.to_json"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.to_json">[docs]</a>    <span class="k">def</span> <span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Tranform Annotation  to json</span>
+        <span class="sd">&quot;&quot;&quot;Tranform Annotation to json</span>
 
 <span class="sd">        :returns: json</span>
 <span class="sd">        :rtype: json</span>
@@ -249,7 +249,7 @@
         <span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="Annotation.get_ngram"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.get_ngram">[docs]</a>    <span class="k">def</span> <span class="nf">get_ngram</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;get nGram from root</span>
+        <span class="sd">&quot;&quot;&quot;get nGram of the current Annotation</span>
 
 <span class="sd">        :returns: raw ngram</span>
 <span class="sd">        :rtype: string</span>
@@ -258,15 +258,16 @@
         <span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ngram</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Annotation.set_ngram"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.set_ngram">[docs]</a>    <span class="k">def</span> <span class="nf">set_ngram</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;set nGram from root</span>
+        <span class="sd">&quot;&quot;&quot;set nGram of the current Annotation</span>
 
-<span class="sd">        :returns: None</span>
-<span class="sd">        :rtype: None</span>
+<span class="sd">        :returns: 1</span>
+<span class="sd">        :rtype: int</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ngram</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="bp">self</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ngram</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="bp">self</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="k">return</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Annotation.getSpan"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.getSpan">[docs]</a>    <span class="k">def</span> <span class="nf">getSpan</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Annotation.get_span"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.get_span">[docs]</a>    <span class="k">def</span> <span class="nf">get_span</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;return current Annotation span</span>
 
 <span class="sd">        :returns: span(start,end)</span>
@@ -275,8 +276,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">span</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Annotation.getChildrenSpan"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.getChildrenSpan">[docs]</a>    <span class="k">def</span> <span class="nf">getChildrenSpan</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;from current node  get all children span</span>
+<div class="viewcode-block" id="Annotation.get_children_span"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.get_children_span">[docs]</a>    <span class="k">def</span> <span class="nf">get_children_span</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;from current node, will return all children span</span>
 
 <span class="sd">        :returns: tuple of span</span>
 <span class="sd">        :rtype: list of tuple</span>
@@ -285,11 +286,12 @@
         <span class="n">childrenSpans</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">children</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
-                <span class="n">childrenSpans</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">getSpan</span><span class="p">())</span>
+                <span class="n">childrenSpans</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">get_span</span><span class="p">())</span>
         <span class="k">return</span><span class="p">(</span><span class="n">childrenSpans</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Annotation.getEntitiesChildren"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.getEntitiesChildren">[docs]</a>    <span class="k">def</span> <span class="nf">getEntitiesChildren</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Annotation.get_entities_children"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.get_entities_children">[docs]</a>    <span class="k">def</span> <span class="nf">get_entities_children</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;From current Node, return all children which are</span>
+<span class="sd">        Annotation where isEntity =True</span>
 <span class="sd">        entities</span>
 
 <span class="sd">        :returns: children list</span>
@@ -303,14 +305,14 @@
                     <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">isEntity</span><span class="p">:</span>
                         <span class="n">listChildren</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">listChildren</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">getEntitiesChildren</span><span class="p">())</span>
+                    <span class="n">listChildren</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">get_entities_children</span><span class="p">())</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isEntity</span><span class="p">:</span>
                 <span class="n">listChildren</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">return</span><span class="p">(</span><span class="n">listChildren</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Annotation.getProperties"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.getProperties">[docs]</a>    <span class="k">def</span> <span class="nf">getProperties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filterType</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;return current node Properties if the Annotation is from a given type</span>
+<div class="viewcode-block" id="Annotation.get_properties"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.get_properties">[docs]</a>    <span class="k">def</span> <span class="nf">get_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filterType</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;return current node Properties if the Annotation is from a specific type</span>
 
 <span class="sd">        :param filterType: list of Annotations type</span>
 <span class="sd">        :returns:  properties</span>
@@ -322,7 +324,7 @@
             <span class="n">properties</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
         <span class="k">return</span><span class="p">(</span><span class="n">properties</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Annotation.getParentsProperties"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.getParentsProperties">[docs]</a>    <span class="k">def</span> <span class="nf">getParentsProperties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filterType</span><span class="p">):</span>
+<div class="viewcode-block" id="Annotation.get_parents_properties"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.get_parents_properties">[docs]</a>    <span class="k">def</span> <span class="nf">get_parents_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filterType</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; return parent properties of current annotations if</span>
 <span class="sd">        it&#39;s belong to a specific type</span>
 
@@ -335,37 +337,40 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
             <span class="c1"># print( &quot; go see parents&quot; )</span>
             <span class="c1"># print(properties)</span>
-            <span class="n">properties</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">getParentsProperties</span><span class="p">(</span><span class="n">filterType</span><span class="p">))</span>
-            <span class="n">properties</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getProperties</span><span class="p">(</span><span class="n">filterType</span><span class="p">))</span>
+            <span class="n">properties</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">get_parents_properties</span><span class="p">(</span><span class="n">filterType</span><span class="p">))</span>
+            <span class="n">properties</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_properties</span><span class="p">(</span><span class="n">filterType</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># print(self.type)</span>
             <span class="c1"># print(self.attributes)</span>
             <span class="c1"># print(self.span)</span>
             <span class="c1"># print(properties)</span>
-            <span class="n">properties</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getProperties</span><span class="p">(</span><span class="n">filterType</span><span class="p">))</span>
+            <span class="n">properties</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_properties</span><span class="p">(</span><span class="n">filterType</span><span class="p">))</span>
         <span class="k">return</span><span class="p">(</span><span class="n">properties</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Annotation.setParent"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.setParent">[docs]</a>    <span class="k">def</span> <span class="nf">setParent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+<div class="viewcode-block" id="Annotation.set_parent"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.set_parent">[docs]</a>    <span class="k">def</span> <span class="nf">set_parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;set Parent to current Annotation</span>
 
 <span class="sd">        :param parent: Annotation</span>
-<span class="sd">        :returns: None</span>
-<span class="sd">        :rtype: None</span>
+<span class="sd">        :returns: 1</span>
+<span class="sd">        :rtype: int</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span>
+        <span class="k">return</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Annotation.setRoot"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.setRoot">[docs]</a>    <span class="k">def</span> <span class="nf">setRoot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
+<div class="viewcode-block" id="Annotation.set_root"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.set_root">[docs]</a>    <span class="k">def</span> <span class="nf">set_root</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;set Root to current Annotation</span>
 
 <span class="sd">        :param root: Annotation</span>
-<span class="sd">        :returns: None</span>
-<span class="sd">        :rtype: None</span>
+<span class="sd">        :returns: 1</span>
+<span class="sd">        :rtype: int</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">root</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">root</span>
+        <span class="k">return</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Annotation.addChild"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.addChild">[docs]</a>    <span class="k">def</span> <span class="nf">addChild</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">child</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Annotation.add_child"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.add_child">[docs]</a>    <span class="k">def</span> <span class="nf">add_child</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">child</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add a child to current Annotation</span>
 
 <span class="sd">        :param child: An annotation to set as child of current node</span>
@@ -373,16 +378,16 @@
 <span class="sd">        :rtype: None</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">child</span><span class="o">.</span><span class="n">setParent</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">child</span><span class="o">.</span><span class="n">set_parent</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">children</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">[</span><span class="n">child</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Annotation.addProperty"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.addProperty">[docs]</a>    <span class="k">def</span> <span class="nf">addProperty</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;add property of a neighbor who need to have the same span to</span>
-<span class="sd">        the current Annotation</span>
+<div class="viewcode-block" id="Annotation.add_property"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.add_property">[docs]</a>    <span class="k">def</span> <span class="nf">add_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;add property of a neighbor to current annnotation, if both have the</span>
+<span class="sd">        same span</span>
 
 <span class="sd">        :param neighbor: the Annotation neighbor to add the same property</span>
 <span class="sd">        :returns: None</span>
@@ -407,8 +412,8 @@
 
 
 
-<div class="viewcode-block" id="Annotation.getParent"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.getParent">[docs]</a>    <span class="k">def</span> <span class="nf">getParent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fromType</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;return parent of the current Annottion</span>
+<div class="viewcode-block" id="Annotation.get_parent"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.annotators.Annotation.get_parent">[docs]</a>    <span class="k">def</span> <span class="nf">get_parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fromType</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;return  closest parent of the current Annotation</span>
 <span class="sd">        of a specific type</span>
 
 <span class="sd">        :param fromType: specific type to found</span>
@@ -420,7 +425,7 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">fromType</span> <span class="p">:</span>
                 <span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">getParent</span><span class="p">(</span><span class="n">fromType</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">get_parent</span><span class="p">(</span><span class="n">fromType</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span></div></div>
 
