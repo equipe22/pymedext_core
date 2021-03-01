@@ -263,11 +263,11 @@ class omop(DataTransform):
         section_concept_id=0#"section_concept_id"
         note_nlp_concept_id=0#"note_nlp_concept_id"
         note_nlp_source_concept_id=0#"note_nlp_source_concept_id"
-        allchildren = thisRoot.getEntitiesChildren()
+        allchildren = thisRoot.get_entities_children()
         negation={0:"affirmation", 1:"negation", "Null":"Null"}
         family={0:"family", 1:"patient", "Null":"Null"}
         for thisChild in allchildren:
-            childProperties= thisChild.getParentsProperties(filterType)
+            childProperties= thisChild.get_parents_properties(filterType)
             # print(childProperties)
             if not childProperties:
                 dict_sentence = {"type":"Null" ,

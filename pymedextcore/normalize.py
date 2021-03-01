@@ -90,20 +90,20 @@ class normalize:
                 for interval in thisMatch:
                     for annot in interval.data["annotation"]:
                         # print(annot["value"].to_dict())
-                        annot["value"].setRoot(Document.annotations[0])
+                        annot["value"].set_root(Document.annotations[0])
                         if annot["value"].span[0] == start and annot["value"].span[1] == end:
                             # print("add properties")
-                            thisGraph[thisAnnotation][0].addProperty(annot["value"])
+                            thisGraph[thisAnnotation][0].add_property(annot["value"])
                         elif annot["value"].isEntity == True and annot["value"].span[0] > start and  annot["value"].span[1] < end:
-                            thisGraph[thisAnnotation][0].addChild(annot["value"])
+                            thisGraph[thisAnnotation][0].add_child(annot["value"])
                 # lenentities.append(len(entities))
-                Document.annotations[0].addChild(thisGraph[thisAnnotation][0])
+                Document.annotations[0].add_child(thisGraph[thisAnnotation][0])
         else:
             for interval in __tree:
                 for annot in interval.data["annotation"]:
                     # print(annot["value"].to_dict())
-                    annot.setRoot(Document.annotations[0])
-                    Document.annotations[0].addChild(annot)
+                    annot.set_root(Document.annotations[0])
+                    Document.annotations[0].add_child(annot)
         return(Document)
 
     @staticmethod

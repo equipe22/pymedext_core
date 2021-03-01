@@ -51,7 +51,7 @@ class Annotation:
         self.root = None
 
     def to_json(self):
-        """Tranform Annotation  to json
+        """Tranform Annotation to json
 
         :returns: json
         :rtype: json
@@ -85,7 +85,7 @@ class Annotation:
         return(self.attributes+self.parent.get_attributes())
 
     def get_ngram(self):
-        """get nGram from root
+        """get nGram of the current Annotation
 
         :returns: raw ngram
         :rtype: string
@@ -94,15 +94,16 @@ class Annotation:
         return(self.ngram)
 
     def set_ngram(self):
-        """set nGram from root
+        """set nGram of the current Annotation
 
-        :returns: None
-        :rtype: None
+        :returns: 1
+        :rtype: int
 
         """
         self.ngram = self.root.value[self.span[0]:self.span[1]]
+        return(1)
 
-    def getSpan(self):
+    def get_span(self):
         """return current Annotation span
 
         :returns: span(start,end)
@@ -111,8 +112,8 @@ class Annotation:
         """
         return(self.span)
 
-    def getChildrenSpan(self):
-        """from current node  get all children span
+    def get_children_span(self):
+        """from current node, will return all children span
 
         :returns: tuple of span
         :rtype: list of tuple
@@ -121,11 +122,12 @@ class Annotation:
         childrenSpans = []
         if self.children != None:
             for child in self.children:
-                childrenSpans.append(child.getSpan())
+                childrenSpans.append(child.get_span())
         return(childrenSpans)
 
-    def getEntitiesChildren(self):
+    def get_entities_children(self):
         """From current Node, return all children which are
+        Annotation where isEntity =True
         entities
 
         :returns: children list
@@ -139,14 +141,14 @@ class Annotation:
                     if child.isEntity:
                         listChildren.append(child)
                 else:
-                    listChildren.extend(child.getEntitiesChildren())
+                    listChildren.extend(child.get_entities_children())
         else:
             if self.isEntity:
                 listChildren.append(self)
         return(listChildren)
 
-    def getProperties(self, filterType):
-        """return current node Properties if the Annotation is from a given type
+    def get_properties(self, filterType):
+        """return current node Properties if the Annotation is from a specific type
 
         :param filterType: list of Annotations type
         :returns:  properties
@@ -158,7 +160,7 @@ class Annotation:
             properties.append(self.to_dict())
         return(properties)
 
-    def getParentsProperties(self, filterType):
+    def get_parents_properties(self, filterType):
         """ return parent properties of current annotations if
         it's belong to a specific type
 
@@ -171,37 +173,40 @@ class Annotation:
         if self.parent != None:
             # print( " go see parents" )
             # print(properties)
-            properties.extend(self.parent.getParentsProperties(filterType))
-            properties.extend(self.getProperties(filterType))
+            properties.extend(self.parent.get_parents_properties(filterType))
+            properties.extend(self.get_properties(filterType))
         else:
             # print(self.type)
             # print(self.attributes)
             # print(self.span)
             # print(properties)
-            properties.extend(self.getProperties(filterType))
+            properties.extend(self.get_properties(filterType))
         return(properties)
 
-    def setParent(self, parent):
+    def set_parent(self, parent):
         """set Parent to current Annotation
 
         :param parent: Annotation
-        :returns: None
-        :rtype: None
+        :returns: 1
+        :rtype: int
 
         """
         self.parent = parent
+        return(1)
 
-    def setRoot(self, root):
+    def set_root(self, root):
         """set Root to current Annotation
 
         :param root: Annotation
-        :returns: None
-        :rtype: None
+        :returns: 1
+        :rtype: int
 
         """
         self.root = root
+        return(1)
 
-    def addChild(self, child):
+
+    def add_child(self, child):
         """Add a child to current Annotation
 
         :param child: An annotation to set as child of current node
@@ -209,16 +214,16 @@ class Annotation:
         :rtype: None
 
         """
-        child.setParent(self)
+        child.set_parent(self)
         if self.children == None:
             self.children = [child]
         else:
             self.children.append(child)
 
 
-    def addProperty(self, neighbor):
-        """add property of a neighbor who need to have the same span to
-        the current Annotation
+    def add_property(self, neighbor):
+        """add property of a neighbor to current annnotation, if both have the
+        same span
 
         :param neighbor: the Annotation neighbor to add the same property
         :returns: None
@@ -243,8 +248,8 @@ class Annotation:
 
 
 
-    def getParent(self, fromType):
-        """return parent of the current Annottion
+    def get_parent(self, fromType):
+        """return  closest parent of the current Annotation
         of a specific type
 
         :param fromType: specific type to found
@@ -256,7 +261,7 @@ class Annotation:
             if self.parent.type == fromType :
                 return(self.parent)
             else:
-                self.parent.getParent(fromType)
+                self.parent.get_parent(fromType)
         else:
             return(None)
 
