@@ -193,11 +193,12 @@
 <span class="sd">            - annotation.conf:</span>
 <span class="sd">            - ID.ann: Brat annotation file (with ID = dic_pymedext.id)</span>
 <span class="sd">            - ID.txt: Raw text of the document (with ID = dic_pymedext.id)</span>
+
 <span class="sd">        :param dic_pymedext: Document input, should containes annotations</span>
 <span class="sd">        :param folder_path: path in string format. It will store files at this location. Folder needs to be created.</span>
 <span class="sd">        :param exclusion: list of &quot;type&quot; to exclude from saving = [&quot;raw_text&quot;, &quot;sentence&quot;, &quot;endlines&quot;] by default</span>
 <span class="sd">        :param export_attributes: if True, it will export attributes as Brat attributes.</span>
-<span class="sd">        :return:</span>
+<span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">all_annotation_types</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">all_attribute_types</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
@@ -283,12 +284,14 @@
         <span class="n">conf_file</span> <span class="o">=</span> <span class="n">entities</span> <span class="o">+</span> <span class="n">relations</span> <span class="o">+</span> <span class="n">events</span> <span class="o">+</span> <span class="n">attributes</span>
         <span class="n">f_brat</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">folder_path</span><span class="si">}</span><span class="s2">/annotation.conf&quot;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
         <span class="n">f_brat</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">conf_file</span><span class="p">)</span>
-        <span class="n">f_brat</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+        <span class="n">f_brat</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="brat.load_from_brat"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.brattransform.brat.load_from_brat">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">load_from_brat</span><span class="p">(</span><span class="n">ann_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                        <span class="n">txt_file</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Document</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Load annotations from a .ann file in the Brat format</span>
+
 <span class="sd">        :param ann_file: path to the .ann file</span>
 <span class="sd">        :param txt_file: path to the corresponding .txt file, if None: defaults to replacing .ann by .txt</span>
 <span class="sd">        :returns: Document</span>

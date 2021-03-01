@@ -945,11 +945,21 @@ An iterable of strings that possibly contains empty strings.</p></li>
 <dl class="py method">
 <dt id="pymedextcore.brattransform.brat.load_from_brat">
 <em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">load_from_brat</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ann_file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txt_file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#pymedextcore.document.Document" title="pymedextcore.document.Document"><span class="pre">pymedextcore.document.Document</span></a><a class="reference internal" href="_modules/pymedextcore/brattransform.html#brat.load_from_brat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.brattransform.brat.load_from_brat" title="Permalink to this definition">¶</a></dt>
-<dd><p>Load annotations from a .ann file in the Brat format
-:param ann_file: path to the .ann file
-:param txt_file: path to the corresponding .txt file, if None: defaults to replacing .ann by .txt
-:returns: Document
-:rtype: Document</p>
+<dd><p>Load annotations from a .ann file in the Brat format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ann_file</strong> – path to the .ann file</p></li>
+<li><p><strong>txt_file</strong> – path to the corresponding .txt file, if None: defaults to replacing .ann by .txt</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Document</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pymedextcore.brat_parser.Document" title="pymedextcore.brat_parser.Document">Document</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -974,7 +984,7 @@ It will create (or overwrite) 3 files:</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
