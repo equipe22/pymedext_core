@@ -7,3 +7,4 @@ intervaltree
 pandas
 psycopg2-binary
 requests
+Deprecated==1.2.11
