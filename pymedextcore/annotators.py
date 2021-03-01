@@ -13,11 +13,11 @@ logger = logging.getLogger(__name__)
 
 class Annotation:
     """
-    Based object which contains Annotation liveannotation
+    Based object which contains Annotation. Each annotators must return a list of Annotations.
     """
-    
-    def __init__(self, type:str, value:str, source:str, source_ID:str, 
-                 span:Optional[Tuple[int,int]] = None, attributes:Optional[List] = None, 
+
+    def __init__(self, type:str, value:str, source:str, source_ID:str,
+                 span:Optional[Tuple[int,int]] = None, attributes:Optional[List] = None,
                  isEntity:bool=False, ID:Optional[str] = None, ngram:Optional[str] = None):
         """Intialize an Annotation object
 
@@ -58,7 +58,7 @@ class Annotation:
 
         """
         return json.dump(self.to_dict())
-    
+
     def to_dict(self):
         """Transform Annotation to a dict object
         :returns: dict
@@ -75,16 +75,16 @@ class Annotation:
                 'attributes': self.attributes,
                 'ID':self.ID}
 
-    def getAttributes(self):
+    def get_attributes(self):
         """get Attributes from current and parents Node
 
         :returns: attributes
         :rtype: a dict
 
         """
-        return(self.attributes+self.parent.getAttributes())
+        return(self.attributes+self.parent.get_attributes())
 
-    def getNgram(self):
+    def get_ngram(self):
         """get nGram from root
 
         :returns: raw ngram
@@ -93,7 +93,7 @@ class Annotation:
         """
         return(self.ngram)
 
-    def setNgram(self):
+    def set_ngram(self):
         """set nGram from root
 
         :returns: None
@@ -287,7 +287,7 @@ class Annotator:
         self.key_input = key_input # list
         self.key_output = key_output # str
         self.ID = ID
-        
+
     def get_first_key_input(self,_input):
         """get_first_key_input
 	    return the annotation type [0],
@@ -298,7 +298,7 @@ class Annotator:
         """
         logger.debug("returns annotation")
         return  self.get_key_input(_input, 0)
-    
+
     def get_all_key_input(self,_input):
         """returns all key input for the Annotors
         TODO: rename selectAll
@@ -309,7 +309,7 @@ class Annotator:
         """
         logger.debug("returns all annotations")
         return [x for x in _input.annotations if x.type in self.key_input]
-    
+
     def get_key_input(self, _input, i):
         """return a specific annotations type from key_input
         :param _input: key_input list
@@ -336,8 +336,8 @@ class Relation:
     """
     Based object which contains Relation
     """
-    
-    def __init__(self, type: str, head: str, target:str, source:str, 
+
+    def __init__(self, type: str, head: str, target:str, source:str,
                  source_ID:str, attributes:Optional[List] = None, ID:Optional[str] = None):
         """Intialize an Annotation object
         :param type: annotation type define by the user (linked to the Annotator)
@@ -360,7 +360,7 @@ class Relation:
             self.ID = str(uuid.uuid1())
         else:
             self.ID = ID
-            
+
 #         TODO: add graph properties
 #         self.ngram = ngram # should be called raw_value?
 #         self.parent = None
@@ -373,7 +373,7 @@ class Relation:
         :rtype: json
         """
         return json.dump(self.to_dict())
-    
+
     def to_dict(self):
         """Transform Relation to a dict object
         :returns: dict

@@ -292,13 +292,13 @@ class omop(DataTransform):
             dict_nlp={"type":thisChild.type ,
                       "value":thisChild.value,
                       "span":thisChild.span,
-                      "ngram":thisChild.getNgram(),
+                      "ngram":thisChild.get_ngram(),
                       "hypothesis":"Null",
                       "drwh_negation":"Null",
                       "drwh_family":"Null",
                       "drwh_sentences":"Null",
                       "temporality":"document_date"}
-           
+
             if childProperties:
                 for element in childProperties[0]["attributes"] ["properties"]:
                     dict_nlp[element["type"]]=element["value"]
