@@ -1,0 +1,417 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>pymedextcore.brattransform &mdash; pymedextcore 0.2 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/msmb.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/versions.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pymedextcore
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">PyMedExt - a library to process clinical text</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html#tutorials">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../otherInformations.html">Automatic PyMedExt Documentation from sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../otherInformations.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../otherInformations.html#how-to-use">How to use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../otherInformations.html#roadmap">ROADMAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../otherInformations.html#references">REFERENCES</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pymedextcore</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>pymedextcore.brattransform</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for pymedextcore.brattransform</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created 2020/04/14</span>
+
+<span class="sd">@author: David BAUDOIN</span>
+
+<span class="sd">fonction : creation ou update  d&#39;un fichier BRAT a partir d&#39;un dic pymedext</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">.datatransform</span> <span class="kn">import</span> <span class="n">DataTransform</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">uuid</span>
+<span class="kn">from</span> <span class="nn">.brat_parser</span> <span class="kn">import</span> <span class="n">read_file_annotations</span>
+<span class="kn">from</span> <span class="nn">.annotators</span> <span class="kn">import</span> <span class="n">Annotation</span><span class="p">,</span> <span class="n">Relation</span>
+<span class="kn">from</span> <span class="nn">.document</span> <span class="kn">import</span> <span class="n">Document</span>
+
+
+<div class="viewcode-block" id="brat"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.brattransform.brat">[docs]</a><span class="k">class</span> <span class="nc">brat</span><span class="p">(</span><span class="n">DataTransform</span><span class="p">):</span>
+<div class="viewcode-block" id="brat.savetobrat"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.brattransform.brat.savetobrat">[docs]</a>    <span class="k">def</span> <span class="nf">savetobrat</span><span class="p">(</span><span class="n">dic_pymedext</span><span class="p">:</span> <span class="n">Document</span><span class="p">,</span> <span class="n">folder_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                   <span class="n">exclusion</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;raw_text&quot;</span><span class="p">,</span> <span class="s2">&quot;sentence&quot;</span><span class="p">,</span> <span class="s2">&quot;endlines&quot;</span><span class="p">],</span>
+                   <span class="n">export_attributes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function will write all Annotations in Brat files at file_path.</span>
+<span class="sd">        It will create (or overwrite) 3 files:</span>
+<span class="sd">            - annotation.conf:</span>
+<span class="sd">            - ID.ann: Brat annotation file (with ID = dic_pymedext.id)</span>
+<span class="sd">            - ID.txt: Raw text of the document (with ID = dic_pymedext.id)</span>
+<span class="sd">        :param dic_pymedext: Document input, should containes annotations</span>
+<span class="sd">        :param folder_path: path in string format. It will store files at this location. Folder needs to be created.</span>
+<span class="sd">        :param exclusion: list of &quot;type&quot; to exclude from saving = [&quot;raw_text&quot;, &quot;sentence&quot;, &quot;endlines&quot;] by default</span>
+<span class="sd">        :param export_attributes: if True, it will export attributes as Brat attributes.</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">all_annotation_types</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">all_attribute_types</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">doc_id</span> <span class="o">=</span> <span class="n">dic_pymedext</span><span class="o">.</span><span class="n">ID</span>
+        <span class="c1"># ----- Annotation file -----</span>
+        <span class="n">brat_annotations</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">instance_annotation</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">instance_attributes</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">annotation</span> <span class="ow">in</span> <span class="n">dic_pymedext</span><span class="o">.</span><span class="n">annotations</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">annotation</span><span class="o">.</span><span class="n">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">exclusion</span><span class="p">:</span>
+                <span class="c1"># -- adding type to unique list of annotation type (for conf file) --</span>
+                <span class="k">if</span> <span class="n">annotation</span><span class="o">.</span><span class="n">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">all_annotation_types</span><span class="p">:</span>
+                    <span class="n">all_annotation_types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">annotation</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+
+                <span class="c1"># -- Writing annotations --</span>
+                <span class="n">bratline</span> <span class="o">=</span> <span class="s1">&#39;T&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">instance_annotation</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">annotation</span><span class="o">.</span><span class="n">type</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">annotation</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> \
+                           <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">annotation</span><span class="o">.</span><span class="n">span</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">annotation</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+                <span class="n">brat_annotations</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">bratline</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+                <span class="c1"># Dealing with attributes</span>
+                <span class="n">attributes</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">annotation</span><span class="o">.</span><span class="n">attributes</span>
+                <span class="k">if</span> <span class="n">export_attributes</span> <span class="ow">and</span> <span class="n">attributes</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">attribute_key</span> <span class="ow">in</span> <span class="n">attributes</span><span class="p">:</span>
+                        <span class="c1"># adding entry for attribute key (like Negation or Family)</span>
+                        <span class="k">if</span> <span class="n">attribute_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">all_attribute_types</span><span class="p">:</span>
+                            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                            all_attribute_types is like:</span>
+<span class="sd">                            {&quot;Family&quot;: (</span>
+<span class="sd">                                    &quot;syntagme&quot;,</span>
+<span class="sd">                                    [&quot;patient&quot;, &quot;family&quot;])</span>
+<span class="sd">                            }</span>
+<span class="sd">                            &quot;&quot;&quot;</span>
+                            <span class="n">all_attribute_types</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+                                <span class="p">{</span><span class="n">attribute_key</span><span class="p">:</span> <span class="p">(</span><span class="n">annotation</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="p">[</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">attribute_key</span><span class="p">)])})</span>
+                        <span class="c1"># adding entry for attribute values like &quot;neg&quot; or &quot;aff&quot; for Negation key to the list (2nd in tuple)</span>
+                        <span class="k">elif</span> <span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">attribute_key</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">all_attribute_types</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">attribute_key</span><span class="p">)[</span><span class="mi">1</span><span class="p">]:</span>
+                            <span class="n">all_attribute_types</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">attribute_key</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">attribute_key</span><span class="p">))</span>
+
+                        <span class="c1"># -- writing attributes --</span>
+                        <span class="n">bratline</span> <span class="o">=</span> <span class="s1">&#39;A&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">instance_attributes</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">attribute_key</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> \
+                                   <span class="sa">f</span><span class="s2">&quot;T</span><span class="si">{</span><span class="n">instance_annotation</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">attribute_key</span><span class="p">)</span>
+                        <span class="n">brat_annotations</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">bratline</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+                        <span class="n">instance_attributes</span> <span class="o">+=</span> <span class="mi">1</span>
+
+                <span class="n">instance_annotation</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">f_brat</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">folder_path</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">doc_id</span><span class="si">}</span><span class="s2">.ann&quot;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+        <span class="n">f_brat</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">brat_annotations</span><span class="p">)</span>
+        <span class="n">f_brat</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="c1"># ----- raw text -----</span>
+        <span class="n">raw_text</span> <span class="o">=</span> <span class="n">dic_pymedext</span><span class="o">.</span><span class="n">raw_text</span><span class="p">()</span>
+        <span class="n">f_brat</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">folder_path</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">doc_id</span><span class="si">}</span><span class="s2">.txt&quot;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+        <span class="n">f_brat</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">raw_text</span><span class="p">)</span>
+        <span class="n">f_brat</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="c1"># ----- conf file -----</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Attributes section is like:</span>
+
+<span class="sd">        [attributes]</span>
+<span class="sd">        hypothesis	Arg:Syntagme, Value:certain|hypothesis</span>
+<span class="sd">        context Arg:Syntagme, Value:family|patient</span>
+<span class="sd">        negation Arg:Syntagme, Value:neg|aff</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">entities</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;[entities]</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+        <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">all_annotation_types</span><span class="p">:</span>
+            <span class="n">entities</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">entity</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+        <span class="n">relations</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[relations]</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+        <span class="n">events</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[events]</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">attributes</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[attributes]</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+        <span class="k">if</span> <span class="n">export_attributes</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">attribute</span> <span class="ow">in</span> <span class="n">all_attribute_types</span><span class="p">:</span>
+                <span class="n">list_value</span> <span class="o">=</span> <span class="n">all_attribute_types</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">attribute</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">annotation_type</span> <span class="o">=</span> <span class="n">all_attribute_types</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">attribute</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="c1"># add default value in order to make the attribute multi valuated.</span>
+                <span class="c1"># If not, it will mark the attribute as true</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">list_value</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">list_value</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">)</span>
+                <span class="n">attributes</span> <span class="o">+=</span> <span class="n">attribute</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;Arg:&quot;</span> <span class="o">+</span> <span class="n">annotation_type</span> <span class="o">+</span> <span class="s2">&quot;, Value:&quot;</span> <span class="o">+</span> <span class="s2">&quot;|&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">list_value</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">conf_file</span> <span class="o">=</span> <span class="n">entities</span> <span class="o">+</span> <span class="n">relations</span> <span class="o">+</span> <span class="n">events</span> <span class="o">+</span> <span class="n">attributes</span>
+        <span class="n">f_brat</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">folder_path</span><span class="si">}</span><span class="s2">/annotation.conf&quot;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+        <span class="n">f_brat</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">conf_file</span><span class="p">)</span>
+        <span class="n">f_brat</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="brat.load_from_brat"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.brattransform.brat.load_from_brat">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">load_from_brat</span><span class="p">(</span><span class="n">ann_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                       <span class="n">txt_file</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Document</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Load annotations from a .ann file in the Brat format</span>
+<span class="sd">        :param ann_file: path to the .ann file</span>
+<span class="sd">        :param txt_file: path to the corresponding .txt file, if None: defaults to replacing .ann by .txt</span>
+<span class="sd">        :returns: Document</span>
+<span class="sd">        :rtype: Document</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">entities</span><span class="p">,</span> <span class="n">relations</span><span class="p">,</span> <span class="n">attributes</span> <span class="o">=</span><span class="n">read_file_annotations</span><span class="p">(</span><span class="n">ann_file</span><span class="p">)</span>
+        <span class="n">annotations_list</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">relations_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="n">txt_file</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">txt_file</span> <span class="o">=</span> <span class="n">ann_file</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.ann&quot;</span><span class="p">,</span><span class="s2">&quot;.txt&quot;</span><span class="p">)</span>
+
+        <span class="n">raw_text</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">txt_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">raw_text_ID</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">ann_file</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.ann&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+
+        <span class="n">doc</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="n">raw_text</span> <span class="o">=</span><span class="n">raw_text</span><span class="p">,</span><span class="n">ID</span> <span class="o">=</span><span class="n">raw_text_ID</span><span class="p">,</span> <span class="n">source</span> <span class="o">=</span> <span class="n">ann_file</span><span class="p">)</span>
+
+        <span class="n">raw_id</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">get_annotations</span><span class="p">(</span><span class="s1">&#39;raw_text&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ID</span>
+
+        <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">entities</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">span</span> <span class="ow">in</span> <span class="n">entity</span><span class="o">.</span><span class="n">span</span><span class="p">:</span>
+                <span class="n">ID</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="n">id</span>
+                <span class="n">annotations_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                            <span class="n">Annotation</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">entity</span><span class="o">.</span><span class="n">type</span><span class="p">,</span>
+                                    <span class="n">value</span><span class="o">=</span><span class="n">entity</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+                                    <span class="n">ngram</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+                                    <span class="n">source_ID</span><span class="o">=</span><span class="n">raw_id</span><span class="p">,</span>
+                                    <span class="n">ID</span><span class="o">=</span><span class="n">ID</span><span class="p">,</span>
+                                    <span class="n">source</span><span class="o">=</span><span class="s2">&quot;BratFile&quot;</span><span class="p">,</span>
+                                    <span class="n">span</span><span class="o">=</span><span class="p">(</span><span class="n">span</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">span</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                                    <span class="n">isEntity</span><span class="o">=</span><span class="kc">True</span>
+                            <span class="p">)</span>
+                    <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">relation</span> <span class="ow">in</span> <span class="n">relations</span><span class="p">:</span>
+            <span class="n">relations_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">Relation</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span> <span class="n">relation</span><span class="o">.</span><span class="n">type</span><span class="p">,</span>
+                        <span class="n">head</span> <span class="o">=</span> <span class="n">relation</span><span class="o">.</span><span class="n">subj</span><span class="p">,</span>
+                        <span class="n">target</span> <span class="o">=</span> <span class="n">relation</span><span class="o">.</span><span class="n">obj</span><span class="p">,</span>
+                        <span class="n">ID</span> <span class="o">=</span> <span class="n">relation</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                        <span class="n">source_ID</span> <span class="o">=</span> <span class="n">raw_id</span><span class="p">,</span>
+                        <span class="n">source</span> <span class="o">=</span> <span class="s2">&quot;BratFile&quot;</span><span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="n">doc</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">annotations_list</span><span class="p">)</span>
+        <span class="n">doc</span><span class="o">.</span><span class="n">relations</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">relations_list</span><span class="p">)</span>
+
+        <span class="k">return</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span></div></div>
+
+
+
+
+    <span class="c1"># def update(dic_pymedext, bratFilePath_ann):</span>
+    <span class="c1">#     f_brat = open(bratFilePath_ann, &#39;r&#39;)</span>
+    <span class="c1">#     lastline = &#39;&#39;</span>
+    <span class="c1">#     for line in f_brat:</span>
+    <span class="c1">#         lastline = line</span>
+    <span class="c1">#     f_brat.close()</span>
+    <span class="c1">#     try:</span>
+    <span class="c1">#         instance_brat = int(lastline.split(&#39;   &#39;)[0][1:])</span>
+    <span class="c1">#         f_brat = open(bratFilePath_ann, &#39;a&#39;)</span>
+    <span class="c1">#         for element in dic_pymedext[&#39;annotations&#39;]:</span>
+    <span class="c1">#             bratline = &#39;T&#39; + str(instance_brat) + &#39;	&#39; + dic_pymedext[&#39;annotations&#39;][&#39;type&#39;] + &#39; &#39; + str(dic_pymedext[&#39;annotations&#39;][&#39;span&#39;][0]) \</span>
+    <span class="c1">#                        + &#39; &#39; + str(dic_pymedext[&#39;annotations&#39;][&#39;span&#39;][0]) + &#39;	&#39; + str(dic_pymedext[&#39;annotations&#39;][&#39;value&#39;])</span>
+    <span class="c1">#             instance_brat += 1</span>
+    <span class="c1">#             f_brat.write(bratline)</span>
+    <span class="c1">#             f_brat.write(&#39;\n&#39;)</span>
+    <span class="c1">#         f_brat.close()</span>
+    <span class="c1">#     except:</span>
+    <span class="c1">#         logger.info(&#39;cannot turn into int the value : &#39; + str(lastline.split(&#39;   &#39;)[0]))</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Antoine Neuraz, William Digan, Ivan Lerner, Alice Rogier, David Baudoin, Anita Burgun, Nicolas Garcelon, Bastien Rance.
+
+    </p>
+  </div> 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <script>
+    var versions_json_url = ''
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        0.2
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

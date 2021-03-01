@@ -168,11 +168,395 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="pymedextcore-annotators-module">
-<h2>pymedextcore.annotators module<a class="headerlink" href="#pymedextcore-annotators-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pymedextcore.annotators">
+<span id="pymedextcore-annotators-module"></span><h2>pymedextcore.annotators module<a class="headerlink" href="#module-pymedextcore.annotators" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pymedextcore.annotators.Annotation">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymedextcore.annotators.</span></code><code class="sig-name descname"><span class="pre">Annotation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_ID</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">span</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isEntity</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ID</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ngram</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Based object which contains Annotation. Each annotators must return a list of Annotations.</p>
+<dl class="py method">
+<dt id="pymedextcore.annotators.Annotation.add_child">
+<code class="sig-name descname"><span class="pre">add_child</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">child</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.add_child"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.add_child" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a child to current Annotation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>child</strong> – An annotation to set as child of current node</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.annotators.Annotation.add_property">
+<code class="sig-name descname"><span class="pre">add_property</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">neighbor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.add_property"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.add_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>add property of a neighbor to current annnotation, if both have the
+same span</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>neighbor</strong> – the Annotation neighbor to add the same property</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.annotators.Annotation.get_attributes">
+<code class="sig-name descname"><span class="pre">get_attributes</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.get_attributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.get_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>get Attributes from current and parents Node</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>attributes</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>a dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.annotators.Annotation.get_children_span">
+<code class="sig-name descname"><span class="pre">get_children_span</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.get_children_span"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.get_children_span" title="Permalink to this definition">¶</a></dt>
+<dd><p>from current node, will return all children span</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>tuple of span</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list of tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.annotators.Annotation.get_entities_children">
+<code class="sig-name descname"><span class="pre">get_entities_children</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.get_entities_children"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.get_entities_children" title="Permalink to this definition">¶</a></dt>
+<dd><p>From current Node, return all children which are
+Annotation where isEntity =True
+entities</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>children list</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.annotators.Annotation.get_ngram">
+<code class="sig-name descname"><span class="pre">get_ngram</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.get_ngram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.get_ngram" title="Permalink to this definition">¶</a></dt>
+<dd><p>get nGram of the current Annotation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>raw ngram</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.annotators.Annotation.get_parent">
+<code class="sig-name descname"><span class="pre">get_parent</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fromType</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.get_parent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.get_parent" title="Permalink to this definition">¶</a></dt>
+<dd><p>return  closest parent of the current Annotation
+of a specific type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fromType</strong> – specific type to found</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Annotation of a specific type</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pymedextcore.annotators.Annotation" title="pymedextcore.annotators.Annotation">Annotation</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.annotators.Annotation.get_parents_properties">
+<code class="sig-name descname"><span class="pre">get_parents_properties</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filterType</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.get_parents_properties"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.get_parents_properties" title="Permalink to this definition">¶</a></dt>
+<dd><p>return parent properties of current annotations if
+it’s belong to a specific type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filterType</strong> – list of Annotations types</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list  of current and parents Annotation properties</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list of dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.annotators.Annotation.get_properties">
+<code class="sig-name descname"><span class="pre">get_properties</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filterType</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.get_properties"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.get_properties" title="Permalink to this definition">¶</a></dt>
+<dd><p>return current node Properties if the Annotation is from a specific type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filterType</strong> – list of Annotations type</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>properties</p>
+</dd>
+</dl>
+<p>:rtype:list of dictionnary</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.annotators.Annotation.get_span">
+<code class="sig-name descname"><span class="pre">get_span</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.get_span"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.get_span" title="Permalink to this definition">¶</a></dt>
+<dd><p>return current Annotation span</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>span(start,end)</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.annotators.Annotation.set_ngram">
+<code class="sig-name descname"><span class="pre">set_ngram</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.set_ngram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.set_ngram" title="Permalink to this definition">¶</a></dt>
+<dd><p>set nGram of the current Annotation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>1</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.annotators.Annotation.set_parent">
+<code class="sig-name descname"><span class="pre">set_parent</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.set_parent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.set_parent" title="Permalink to this definition">¶</a></dt>
+<dd><p>set Parent to current Annotation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>parent</strong> – Annotation</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>1</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.annotators.Annotation.set_root">
+<code class="sig-name descname"><span class="pre">set_root</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.set_root"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.set_root" title="Permalink to this definition">¶</a></dt>
+<dd><p>set Root to current Annotation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>root</strong> – Annotation</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>1</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.annotators.Annotation.to_dict">
+<code class="sig-name descname"><span class="pre">to_dict</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform Annotation to a dict object
+:returns: dict
+:rtype: dict</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.annotators.Annotation.to_json">
+<code class="sig-name descname"><span class="pre">to_json</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.to_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tranform Annotation to json</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>json</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>json</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="pymedextcore.annotators.Annotator">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymedextcore.annotators.</span></code><code class="sig-name descname"><span class="pre">Annotator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key_input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ID</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Abstract class of each Annotator. Furthermore each Annotator must returns a list of Annotation
+TODO: get_all_key_input     return the annotations oF Documents.annotations which have the same type of key_input list (rename as selectall)
+TODO: get_key_input return the annotations oF Documents.annotations which have the same type of the i th key_input element  (rename as select)
+TODO: annotate_function     each annotator should implement this functionand return a list of annotations object</p>
+<dl class="py method">
+<dt id="pymedextcore.annotators.Annotator.annotate_function">
+<code class="sig-name descname"><span class="pre">annotate_function</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotator.annotate_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotator.annotate_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>main annotation function
+each ANnotator must implement this function
+:param _input: a list of Annotation typet
+:returns: a list of annotations. they will be added to Document.annotations
+:rtype:a list of annotations</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.annotators.Annotator.get_all_key_input">
+<code class="sig-name descname"><span class="pre">get_all_key_input</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotator.get_all_key_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotator.get_all_key_input" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>returns all key input for the Annotors</dt><dd><p>TODO: rename selectAll
+:param _input: return all annotations of a specific types from the Documents
+:returns: a list of annotations
+:rtype: a list of annotation</p>
+</dd>
+</dl>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.3: </span>This function will be removed soon use instead select_all_inputs</p>
 </div>
-<div class="section" id="pymedextcore-bioctransform-module">
-<h2>pymedextcore.bioctransform module<a class="headerlink" href="#pymedextcore-bioctransform-module" title="Permalink to this headline">¶</a></h2>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.annotators.Annotator.get_first_key_input">
+<code class="sig-name descname"><span class="pre">get_first_key_input</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotator.get_first_key_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotator.get_first_key_input" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>return the annotation type [0],</dt><dd><dl class="field-list simple">
+<dt class="field-odd">param _input</dt>
+<dd class="field-odd"><p>list of annotations input for the Annotor</p>
+</dd>
+<dt class="field-even">returns</dt>
+<dd class="field-even"><p>a list of annotations</p>
+</dd>
+<dt class="field-odd">rtype</dt>
+<dd class="field-odd"><p>a list of annotations</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.3: </span>This function will be removed soon use instead
+select_first_input</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.annotators.Annotator.get_key_input">
+<code class="sig-name descname"><span class="pre">get_key_input</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotator.get_key_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotator.get_key_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>return a specific annotations type from key_input
+:param _input: key_input list
+:param i: the indice of the list to selecy
+:returns:a list of annotations
+:rtype:a list of annotation</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="pymedextcore.annotators.Relation">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymedextcore.annotators.</span></code><code class="sig-name descname"><span class="pre">Relation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_ID</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ID</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Relation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Relation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Based object which contains Relation</p>
+<dl class="py method">
+<dt id="pymedextcore.annotators.Relation.to_dict">
+<code class="sig-name descname"><span class="pre">to_dict</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Relation.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Relation.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform Relation to a dict object
+:returns: dict
+:rtype: dict</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.annotators.Relation.to_json">
+<code class="sig-name descname"><span class="pre">to_json</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Relation.to_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Relation.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tranform Relation to json
+:returns: json
+:rtype: json</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pymedextcore.bioctransform">
+<span id="pymedextcore-bioctransform-module"></span><h2>pymedextcore.bioctransform module<a class="headerlink" href="#module-pymedextcore.bioctransform" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pymedextcore.bioctransform.BioC">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymedextcore.bioctransform.</span></code><code class="sig-name descname"><span class="pre">BioC</span></code><a class="reference internal" href="_modules/pymedextcore/bioctransform.html#BioC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.bioctransform.BioC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pymedextcore.datatransform.DataTransform" title="pymedextcore.datatransform.DataTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">pymedextcore.datatransform.DataTransform</span></code></a></p>
+<dl class="py method">
+<dt id="pymedextcore.bioctransform.BioC.load_collection">
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">load_collection</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bioc_input</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/bioctransform.html#BioC.load_collection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.bioctransform.BioC.load_collection" title="Permalink to this definition">¶</a></dt>
+<dd><p>load a bioc collection xml or json.
+It will return a list of Document object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bioc_input</strong> – a str path to a bioc file or a bioc input string</p></li>
+<li><p><strong>format</strong> – xml or to_json type of the bioc file</p></li>
+<li><p><strong>is_file</strong> – if True bioc_input is path else it is a string</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of Document</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.bioctransform.BioC.save_as_collection">
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">save_as_collection</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_of_pymedext_documents</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pymedextcore.document.Document" title="pymedextcore.document.Document"><span class="pre">pymedextcore.document.Document</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/bioctransform.html#BioC.save_as_collection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.bioctransform.BioC.save_as_collection" title="Permalink to this definition">¶</a></dt>
+<dd><p>save a list of pymedext document as a bioc collection .
+It will return a bioc collection object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>list_of_pymedext_documents</strong> – a list of Document</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a bioc collection object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.bioctransform.BioC.write_bioc_collection">
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">write_bioc_collection</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collection</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bioc.bioc.BioCCollection</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/bioctransform.html#BioC.write_bioc_collection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.bioctransform.BioC.write_bioc_collection" title="Permalink to this definition">¶</a></dt>
+<dd><p>write a BiocCollection as an xml document
+It will return 1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> – a str filename of the collection</p></li>
+<li><p><strong>collection</strong> – a bioc collection</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>1</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="module-pymedextcore.brat_parser">
 <span id="pymedextcore-brat-parser-module"></span><h2>pymedextcore.brat_parser module<a class="headerlink" href="#module-pymedextcore.brat_parser" title="Permalink to this headline">¶</a></h2>
@@ -477,8 +861,54 @@ An iterable of strings that possibly contains empty strings.</p></li>
 <dd></dd></dl>
 
 </div>
-<div class="section" id="pymedextcore-brattransform-module">
-<h2>pymedextcore.brattransform module<a class="headerlink" href="#pymedextcore-brattransform-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pymedextcore.brattransform">
+<span id="pymedextcore-brattransform-module"></span><h2>pymedextcore.brattransform module<a class="headerlink" href="#module-pymedextcore.brattransform" title="Permalink to this headline">¶</a></h2>
+<p>Created 2020/04/14</p>
+<p>&#64;author: David BAUDOIN</p>
+<p>fonction : creation ou update  d’un fichier BRAT a partir d’un dic pymedext</p>
+<dl class="py class">
+<dt id="pymedextcore.brattransform.brat">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymedextcore.brattransform.</span></code><code class="sig-name descname"><span class="pre">brat</span></code><a class="reference internal" href="_modules/pymedextcore/brattransform.html#brat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.brattransform.brat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pymedextcore.datatransform.DataTransform" title="pymedextcore.datatransform.DataTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">pymedextcore.datatransform.DataTransform</span></code></a></p>
+<dl class="py method">
+<dt id="pymedextcore.brattransform.brat.load_from_brat">
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">load_from_brat</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ann_file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txt_file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#pymedextcore.document.Document" title="pymedextcore.document.Document"><span class="pre">pymedextcore.document.Document</span></a><a class="reference internal" href="_modules/pymedextcore/brattransform.html#brat.load_from_brat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.brattransform.brat.load_from_brat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load annotations from a .ann file in the Brat format
+:param ann_file: path to the .ann file
+:param txt_file: path to the corresponding .txt file, if None: defaults to replacing .ann by .txt
+:returns: Document
+:rtype: Document</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.brattransform.brat.savetobrat">
+<code class="sig-name descname"><span class="pre">savetobrat</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclusion</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">['raw_text',</span> <span class="pre">'sentence',</span> <span class="pre">'endlines']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_attributes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/brattransform.html#brat.savetobrat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.brattransform.brat.savetobrat" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function will write all Annotations in Brat files at file_path.
+It will create (or overwrite) 3 files:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>annotation.conf:</p></li>
+<li><p>ID.ann: Brat annotation file (with ID = dic_pymedext.id)</p></li>
+<li><p>ID.txt: Raw text of the document (with ID = dic_pymedext.id)</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dic_pymedext</strong> – Document input, should containes annotations</p></li>
+<li><p><strong>folder_path</strong> – path in string format. It will store files at this location. Folder needs to be created.</p></li>
+<li><p><strong>exclusion</strong> – list of “type” to exclude from saving = [“raw_text”, “sentence”, “endlines”] by default</p></li>
+<li><p><strong>export_attributes</strong> – if True, it will export attributes as Brat attributes.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="module-pymedextcore.connector">
 <span id="pymedextcore-connector-module"></span><h2>pymedextcore.connector module<a class="headerlink" href="#module-pymedextcore.connector" title="Permalink to this headline">¶</a></h2>
@@ -966,20 +1396,451 @@ file_path (str): The parent path of the file. Defaults to <cite>./</cite>.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="pymedextcore-doccanotransform-module">
-<h2>pymedextcore.doccanotransform module<a class="headerlink" href="#pymedextcore-doccanotransform-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pymedextcore.doccanotransform">
+<span id="pymedextcore-doccanotransform-module"></span><h2>pymedextcore.doccanotransform module<a class="headerlink" href="#module-pymedextcore.doccanotransform" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pymedextcore.doccanotransform.Doccano">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymedextcore.doccanotransform.</span></code><code class="sig-name descname"><span class="pre">Doccano</span></code><a class="reference internal" href="_modules/pymedextcore/doccanotransform.html#Doccano"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.doccanotransform.Doccano" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pymedextcore.datatransform.DataTransform" title="pymedextcore.datatransform.DataTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">pymedextcore.datatransform.DataTransform</span></code></a></p>
+<p>This class defines a set of transformation methods to build a DoccanoDocument with several pymedext Document objects.
+A doccanoDocument contains N doccanoAnnotations, that the user want to evaluate in Doccano interface.</p>
+<p>Here the transoformation methods are specific to scanner report extractions, and DrWH negation, hypothesis and family context detections.
+Other transformation methods could be defined according to what the user want to evaluate.</p>
+<dl class="py method">
+<dt id="pymedextcore.doccanotransform.Doccano.DoccanoEvalClass">
+<code class="sig-name descname"><span class="pre">DoccanoEvalClass</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_doccano</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dictClasses</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_eval</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_to_doc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/doccanotransform.html#Doccano.DoccanoEvalClass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.doccanotransform.Doccano.DoccanoEvalClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds doccano annotations to DoccanoDocument object until a specified number of evaluations for both classes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dict_doccano</strong> – A doccano dict that will be filled until the two classes reach the desired number of annotations</p></li>
+<li><p><strong>dictClasses</strong> – A dict of doccano classes (ex : negatif vs non negatif) with their current occurences.</p></li>
+<li><p><strong>number_eval</strong> – the number of evaluations desired</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list with the modified Doccano Object, and a dict of annotations classes, with their number</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.doccanotransform.Doccano.DoccanoEvalN">
+<code class="sig-name descname"><span class="pre">DoccanoEvalN</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_doccano</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_annoted</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_eval</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_to_doc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/doccanotransform.html#Doccano.DoccanoEvalN"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.doccanotransform.Doccano.DoccanoEvalN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds DoccanoAnnotation objects to DoccaDocument until a specified number of evaluations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dict_doccano</strong> – A doccano dict that will be filled until it reachs the desired number of annotations.</p></li>
+<li><p><strong>number_annoted</strong> – the number of evaluations desired.</p></li>
+<li><p><strong>number_eval</strong> – the current number of annotation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list with the modified DoccanoDocument object, and the number of annotations</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.doccanotransform.Doccano.DoccanoEvalRappel">
+<code class="sig-name descname"><span class="pre">DoccanoEvalRappel</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_doccano</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_to_doc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/doccanotransform.html#Doccano.DoccanoEvalRappel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.doccanotransform.Doccano.DoccanoEvalRappel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds DoccanoAnnotation objects to a DoccanoDocument object, with a dict created with toDoccanoImaRappel</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dict_doccano</strong> – a dict created with toDoccanoImaRappel method</p></li>
+<li><p><strong>path_to_doc</strong> – the path of the pymedext doc that was used to create dict_doccano</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>DoccanoDocument object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pymedextcore.doccanodocument.DoccanoDocument" title="pymedextcore.doccanodocument.DoccanoDocument">DoccanoDocument</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.doccanotransform.Doccano.docForDoccano">
+<code class="sig-name descname"><span class="pre">docForDoccano</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/doccanotransform.html#Doccano.docForDoccano"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.doccanotransform.Doccano.docForDoccano" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creats a DoccanoDoc object with dict in input</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>DoccanoDocument object</p>
+</dd>
+</dl>
+<p>:rtype : DoccanoDocument</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.doccanotransform.Doccano.toDoccanoDrWH">
+<code class="sig-name descname"><span class="pre">toDoccanoDrWH</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/doccanotransform.html#Doccano.toDoccanoDrWH"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.doccanotransform.Doccano.toDoccanoDrWH" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specific method for DrWH evaluation
+Selects the drwh annotation and their value and creat a dict with syntagm/sentence as key and class value of the syntagm/sentence as value.</p>
+<p>Ex : Extract of a pymedextDocument</p>
+<dl>
+<dt>{</dt><dd><p>“type”: “drwh_syntagms”,
+“value”: ” Le patient présente un diabète de type II”,
+“span”: [</p>
+<blockquote>
+<div><p>47,
+91</p>
+</div></blockquote>
+<p>],
+“source”: “DRWH_syntagms.v1”,
+“source_ID”: “74633e84-80a3-11ea-a7f6-180f76073bf2”,
+“isEntity”: false,
+“attributes”: null,
+“id”: “74633e89-80a3-11ea-a7f6-180f76073bf2”</p>
+</dd>
+</dl>
+<dl>
+<dt>{</dt><dd><p>“type”: “drwh_negation”,
+“value”: “non negatif”,
+“span”: [</p>
+<blockquote>
+<div><p>47,
+91</p>
+</div></blockquote>
+<p>],
+“source”: “DRWH_negation.v1”,
+“source_ID”: “74633e89-80a3-11ea-a7f6-180f76073bf2”,
+“isEntity”: false,
+“attributes”: null,
+“id”: “74633e95-80a3-11ea-a7f6-180f76073bf2”</p>
+</dd>
+</dl>
+<p>An extract of pymedextDocument.toDoccanoDrWH(type=dwh_negation, segment=dwh_syntagm) return will be:</p>
+<p>{…,”Le patient présente un diabète de type II”=”non negatif”…,}</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type</strong> – dwh type of class (“dwh_negation” or “dwh_hypothesis” or “dwh_family”)</p></li>
+<li><p><strong>segment</strong> – syntagm or sentence (“dwh_sentence” or “dwh_syntagm”)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a dict with syntagm or sentence as key and class as value</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.doccanotransform.Doccano.toDoccanoImaPrecision">
+<code class="sig-name descname"><span class="pre">toDoccanoImaPrecision</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/doccanotransform.html#Doccano.toDoccanoImaPrecision"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.doccanotransform.Doccano.toDoccanoImaPrecision" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specific method for scanner extractor evaluation
+Selects the value extracted of the desired item in the pymedext Document.
+Returns a dict with the context as key, and the value extracted as value.</p>
+<p>Ex : Extract of a pymedextDocument  :
+”
+…</p>
+<dl>
+<dt>{</dt><dd><p>“type”: “motif”,
+“value”: “non évocateur”,
+“span”: [</p>
+<blockquote>
+<div><p>2026,
+2039</p>
+</div></blockquote>
+<p>],
+“source”: “annotator_section_img”,
+“source_ID”: “eae2fd1e-8096-11ea-9260-e470b8d2ff7c”,
+“isEntity”: false,
+“attributes”: “ISCOVID”,
+“id”: “eae2fd1c-8096-11ea-b180-e470b8d2ff7c”</p>
+</dd>
+</dl>
+<p>“</p>
+<p>An extract of pymedextDocument.toDoccanoImaPrecision(type=”motif”, attribute=”ISCOVID”) return will be :</p>
+<p>{…,&lt;raw_text[2026,2039]&gt; : “non évocateur”,…}</p>
+<p>where raw_text[2026,2039] is the context of the extraction, a short extract of the report text around the extraction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type</strong> – the type of the item (“rubrique” or “motif”)</p></li>
+<li><p><strong>attribute</strong> – item of interest (ex : “ISCOVID”)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a dict with litteral context as key and value extracted as value</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.doccanotransform.Doccano.toDoccanoImaRappel">
+<code class="sig-name descname"><span class="pre">toDoccanoImaRappel</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_regexp_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">span</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/doccanotransform.html#Doccano.toDoccanoImaRappel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.doccanotransform.Doccano.toDoccanoImaRappel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specific method for scanner extractor evaluation
+Founds the absent item in a pymedext Document.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dict_regexp_type</strong> – a dict of with the item as key (ex: “ISCOVID”) and their type as value (“motif” or “rubrique”)</p></li>
+<li><p><strong>value</strong> – “Null”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dict with the report text as key and a list of absent item as value</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.doccanotransform.Doccano.toDoccanoPb">
+<code class="sig-name descname"><span class="pre">toDoccanoPb</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_to_doc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regexp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/doccanotransform.html#Doccano.toDoccanoPb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.doccanotransform.Doccano.toDoccanoPb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specific method for scanner extractor evaluation
+A specific format to display documents that were annoted with label “problem” in Doccano</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path_to_doc</strong> – the path to the doc that was annoted with problem label in Doccano</p></li>
+<li><p><strong>regexp</strong> – the item of interest</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a dict with the text report as key and the regex as value</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="pymedextcore-document-module">
-<h2>pymedextcore.document module<a class="headerlink" href="#pymedextcore-document-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pymedextcore.document">
+<span id="pymedextcore-document-module"></span><h2>pymedextcore.document module<a class="headerlink" href="#module-pymedextcore.document" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pymedextcore.document.Document">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymedextcore.document.</span></code><code class="sig-name descname"><span class="pre">Document</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ID</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pathToconfig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">documentDate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/document.html#Document"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.document.Document" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Document is the main class of pymedext. It is use to load file and annotate them with annotators</p>
+<dl class="py method">
+<dt id="pymedextcore.document.Document.annotate">
+<code class="sig-name descname"><span class="pre">annotate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">annotator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/document.html#Document.annotate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.document.Document.annotate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main function to annotate Document</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>annotator</strong> – annotators list</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>run _annotate which add annotations to Document</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pymedextcore.document.Document" title="pymedextcore.document.Document">Document</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.document.Document.from_dict">
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">from_dict</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/document.html#Document.from_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.document.Document.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Document from a dict of document (as created using to_dict)
+:param d: Dict
+:returns: Document
+:rtype: Document</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.document.Document.getGraph">
+<code class="sig-name descname"><span class="pre">getGraph</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/document.html#Document.getGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.document.Document.getGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the graph associated with the raw_text
+:returns:
+:rtype:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.document.Document.get_annotation_by_id">
+<code class="sig-name descname"><span class="pre">get_annotation_by_id</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/document.html#Document.get_annotation_by_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.document.Document.get_annotation_by_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.document.Document.get_annotations">
+<code class="sig-name descname"><span class="pre">get_annotations</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">span</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/document.html#Document.get_annotations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.document.Document.get_annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns an annotations of a specific type from source. Can  filter from
+type, source_id or target_id, span, source_id, attributes and value.
+:param _type: annotation type
+:param source_id: annotation source id
+:param target_id: annotation target id
+:param attributes:
+:param value:
+:param span:
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.document.Document.get_relation_by_id">
+<code class="sig-name descname"><span class="pre">get_relation_by_id</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/document.html#Document.get_relation_by_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.document.Document.get_relation_by_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.document.Document.get_relations">
+<code class="sig-name descname"><span class="pre">get_relations</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/document.html#Document.get_relations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.document.Document.get_relations" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns relations of a specific type from source. Can  filter from
+type, head_id or target_id.
+:param _type: annotation type
+:param head_id: annotation source id
+:param target_id: annotation target id
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.document.Document.loadFromData">
+<code class="sig-name descname"><span class="pre">loadFromData</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pathToconfig</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/document.html#Document.loadFromData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.document.Document.loadFromData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform json Pymedext to Document</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pathToconfig</strong> – list of path to json files,</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>add annotations to Document</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pymedextcore.document.Document" title="pymedextcore.document.Document">Document</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.document.Document.raw_text">
+<code class="sig-name descname"><span class="pre">raw_text</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/document.html#Document.raw_text"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.document.Document.raw_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the Document raw_text</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>raw_text</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.document.Document.to_dict">
+<code class="sig-name descname"><span class="pre">to_dict</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/document.html#Document.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.document.Document.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>transform Document to dict PyMedExt
+TODO: Need to add the Document Date if available,
+the processing date, the annotators used</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>json PyMedExt</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.document.Document.to_json">
+<code class="sig-name descname"><span class="pre">to_json</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/document.html#Document.to_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.document.Document.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>transform annotations to a json</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>transform annotation to json</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>json</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymedextcore.document.Document.writeJson">
+<code class="sig-name descname"><span class="pre">writeJson</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pathToOutput</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/document.html#Document.writeJson"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.document.Document.writeJson" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform Document to json PyMedExt</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pathToOutput</strong> – path to result file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>none</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>none</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="pymedextcore-fhirtransform-module">
-<h2>pymedextcore.fhirtransform module<a class="headerlink" href="#pymedextcore-fhirtransform-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pymedextcore.fhirtransform">
+<span id="pymedextcore-fhirtransform-module"></span><h2>pymedextcore.fhirtransform module<a class="headerlink" href="#module-pymedextcore.fhirtransform" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pymedextcore.fhirtransform.FHIR">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymedextcore.fhirtransform.</span></code><code class="sig-name descname"><span class="pre">FHIR</span></code><a class="reference internal" href="_modules/pymedextcore/fhirtransform.html#FHIR"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.fhirtransform.FHIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pymedextcore.datatransform.DataTransform" title="pymedextcore.datatransform.DataTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">pymedextcore.datatransform.DataTransform</span></code></a></p>
+<dl class="py method">
+<dt id="pymedextcore.fhirtransform.FHIR.load_xml">
+<code class="sig-name descname"><span class="pre">load_xml</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/fhirtransform.html#FHIR.load_xml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.fhirtransform.FHIR.load_xml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="pymedextcore-ncbisource-module">
-<h2>pymedextcore.ncbisource module<a class="headerlink" href="#pymedextcore-ncbisource-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pymedextcore.ncbisource">
+<span id="pymedextcore-ncbisource-module"></span><h2>pymedextcore.ncbisource module<a class="headerlink" href="#module-pymedextcore.ncbisource" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pymedextcore.ncbisource.PubTatorSource">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymedextcore.ncbisource.</span></code><code class="sig-name descname"><span class="pre">PubTatorSource</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'https://www.ncbi.nlm.nih.gov/research/pubtator-api/publications/export/'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/ncbisource.html#PubTatorSource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.ncbisource.PubTatorSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pymedextcore.source.Source" title="pymedextcore.source.Source"><code class="xref py py-class docutils literal notranslate"><span class="pre">pymedextcore.source.Source</span></code></a>, <a class="reference internal" href="#pymedextcore.connector.SimpleAPIConnector" title="pymedextcore.connector.SimpleAPIConnector"><code class="xref py py-class docutils literal notranslate"><span class="pre">pymedextcore.connector.SimpleAPIConnector</span></code></a></p>
+<p>Connection to a POstgres Ommop source</p>
+<dl class="py method">
+<dt id="pymedextcore.ncbisource.PubTatorSource.getPubTatorAnnotations">
+<code class="sig-name descname"><span class="pre">getPubTatorAnnotations</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pmid_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Bioconcept</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">returnFormat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/ncbisource.html#PubTatorSource.getPubTatorAnnotations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.ncbisource.PubTatorSource.getPubTatorAnnotations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="pymedextcore-normalize-module">
-<h2>pymedextcore.normalize module<a class="headerlink" href="#pymedextcore-normalize-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pymedextcore.normalize">
+<span id="pymedextcore-normalize-module"></span><h2>pymedextcore.normalize module<a class="headerlink" href="#module-pymedextcore.normalize" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pymedextcore.normalize.normalize">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymedextcore.normalize.</span></code><code class="sig-name descname"><span class="pre">normalize</span></code><a class="reference internal" href="_modules/pymedextcore/normalize.html#normalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.normalize.normalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="pymedextcore.normalize.normalize.uri">
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">uri</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Document</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">otherSegments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['drwh_family',</span> <span class="pre">'hypothesis']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rootNode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'drwh_sentences'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filterEntities</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['drugs_fast',</span> <span class="pre">'cui']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/normalize.html#normalize.uri"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.normalize.normalize.uri" title="Permalink to this definition">¶</a></dt>
+<dd><p>uri Normalization</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Document</strong> – </p></li>
+<li><p><strong>otherSegments</strong> – </p></li>
+<li><p><strong>&quot;hypothesis&quot;</strong><strong>]</strong> – </p></li>
+<li><p><strong>rootNode</strong> – </p></li>
+<li><p><strong>filterEntities</strong> – </p></li>
+<li><p><strong>'cui'</strong><strong>]</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="module-pymedextcore.omopsource">
 <span id="pymedextcore-omopsource-module"></span><h2>pymedextcore.omopsource module<a class="headerlink" href="#module-pymedextcore.omopsource" title="Permalink to this headline">¶</a></h2>
@@ -1064,11 +1925,27 @@ If n is negative or omitted, read until EOF.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="pymedextcore-pymedext-module">
-<h2>pymedextcore.pymedext module<a class="headerlink" href="#pymedextcore-pymedext-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pymedextcore.pymedext">
+<span id="pymedextcore-pymedext-module"></span><h2>pymedextcore.pymedext module<a class="headerlink" href="#module-pymedextcore.pymedext" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="pymedextcore-pymedext-cmdline-module">
-<h2>pymedextcore.pymedext_cmdline module<a class="headerlink" href="#pymedextcore-pymedext-cmdline-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pymedextcore.pymedext_cmdline">
+<span id="pymedextcore-pymedext-cmdline-module"></span><h2>pymedextcore.pymedext_cmdline module<a class="headerlink" href="#module-pymedextcore.pymedext_cmdline" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="pymedextcore.pymedext_cmdline.export">
+<code class="sig-prename descclassname"><span class="pre">pymedextcore.pymedext_cmdline.</span></code><code class="sig-name descname"><span class="pre">export</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thisDoc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">otype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rawFileName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bexclude</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/pymedext_cmdline.html#export"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.pymedext_cmdline.export" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="pymedextcore.pymedext_cmdline.loadFile">
+<code class="sig-prename descclassname"><span class="pre">pymedextcore.pymedext_cmdline.</span></code><code class="sig-name descname"><span class="pre">loadFile</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rawFileName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">itype</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/pymedext_cmdline.html#loadFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.pymedext_cmdline.loadFile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="pymedextcore.pymedext_cmdline.main">
+<code class="sig-prename descclassname"><span class="pre">pymedextcore.pymedext_cmdline.</span></code><code class="sig-name descname"><span class="pre">main</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/pymedext_cmdline.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.pymedext_cmdline.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple program that greets NAME for a total of COUNT times.</p>
+</dd></dl>
+
 </div>
 <div class="section" id="module-pymedextcore.source">
 <span id="pymedextcore-source-module"></span><h2>pymedextcore.source module<a class="headerlink" href="#module-pymedextcore.source" title="Permalink to this headline">¶</a></h2>

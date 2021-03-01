@@ -1,0 +1,318 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>pymedextcore.fhirtransform &mdash; pymedextcore 0.2 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/msmb.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/versions.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pymedextcore
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">PyMedExt - a library to process clinical text</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html#tutorials">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../otherInformations.html">Automatic PyMedExt Documentation from sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../otherInformations.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../otherInformations.html#how-to-use">How to use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../otherInformations.html#roadmap">ROADMAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../otherInformations.html#references">REFERENCES</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pymedextcore</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>pymedextcore.fhirtransform</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for pymedextcore.fhirtransform</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+
+<span class="kn">import</span> <span class="nn">base64</span>
+<span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
+<span class="kn">from</span> <span class="nn">.datatransform</span> <span class="kn">import</span> <span class="n">DataTransform</span>
+<span class="kn">from</span> <span class="nn">.document</span> <span class="kn">import</span> <span class="n">Document</span>
+<span class="kn">from</span> <span class="nn">.annotators</span> <span class="kn">import</span> <span class="n">Annotation</span>
+<span class="kn">import</span> <span class="nn">uuid</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<div class="viewcode-block" id="FHIR"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.fhirtransform.FHIR">[docs]</a><span class="k">class</span> <span class="nc">FHIR</span><span class="p">(</span><span class="n">DataTransform</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__parse_xml__</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">getResources</span><span class="o">=</span> <span class="p">[</span><span class="s2">&quot;{http://hl7.org/fhir}DocumentReference&quot;</span><span class="p">,</span><span class="s2">&quot;{http://hl7.org/fhir}Binary&quot;</span> <span class="p">]):</span>
+        <span class="n">fhir_list</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">root</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">resources</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">resource</span> <span class="ow">in</span> <span class="n">resources</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">resource</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span> <span class="ow">in</span> <span class="n">getResources</span><span class="p">:</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">resource</span><span class="o">.</span><span class="n">tag</span><span class="p">,</span> <span class="n">resource</span><span class="o">.</span><span class="n">attrib</span><span class="p">,</span> <span class="n">resource</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;###########&quot;</span><span class="p">)</span>
+                        <span class="n">resourceDict</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
+                        <span class="k">for</span> <span class="n">attributes</span> <span class="ow">in</span> <span class="n">resource</span><span class="p">:</span>
+                            <span class="c1"># logger.debug(&quot;##&quot;,attributes.attrib)</span>
+                            <span class="c1"># logger.debug(&quot;##tag&quot;,attributes.tag)</span>
+                            <span class="c1"># logger.debug(attributes.tag, attributes.attrib, attributes.text)</span>
+                            <span class="n">attrDict</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
+                            <span class="k">for</span> <span class="n">attribute</span> <span class="ow">in</span> <span class="n">attributes</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="n">attribute</span><span class="o">.</span><span class="n">attrib</span><span class="p">:</span>
+                                    <span class="c1"># logger.debug(attribute.attrib[&quot;value&quot;])</span>
+                                    <span class="n">attrDict</span><span class="p">[</span><span class="n">attribute</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;{http://hl7.org/fhir}&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)]</span><span class="o">=</span><span class="n">attribute</span><span class="o">.</span><span class="n">attrib</span>
+                                <span class="k">else</span><span class="p">:</span>
+                                    <span class="n">attrDict</span><span class="p">[</span><span class="n">attribute</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;{http://hl7.org/fhir}&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)]</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">}</span>
+                                <span class="k">if</span> <span class="n">attribute</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
+                                    <span class="n">attrDict</span><span class="p">[</span><span class="n">attribute</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;{http://hl7.org/fhir}&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;text&quot;</span><span class="p">:</span><span class="n">attribute</span><span class="o">.</span><span class="n">text</span><span class="p">}</span> <span class="p">)</span>
+                                <span class="k">else</span><span class="p">:</span>
+                                    <span class="n">attrDict</span><span class="p">[</span><span class="n">attribute</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;{http://hl7.org/fhir}&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;text&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">}</span> <span class="p">)</span>
+                                <span class="c1"># logger.debug(&quot;####TAG&quot;,attribute.tag.replace(&quot;{http://hl7.org/fhir}&quot;, &quot;&quot;))</span>
+                                <span class="c1"># logger.debug(&quot;####A&quot;, attribute.attrib)</span>
+                                <span class="c1"># logger.debug(&quot;####Y&quot;, attribute.text)</span>
+                                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">attribute</span><span class="p">)</span><span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                                    <span class="c1"># logger.debug(&quot;baby&quot;)</span>
+                                    <span class="n">elementDict</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
+                                    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">attribute</span><span class="p">:</span>
+                                        <span class="k">if</span> <span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">:</span>
+                                            <span class="c1"># logger.debug(element.attrib[&quot;value&quot;])</span>
+                                            <span class="n">elementDict</span><span class="p">[</span><span class="n">element</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;{http://hl7.org/fhir}&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)]</span><span class="o">=</span><span class="n">element</span><span class="o">.</span><span class="n">attrib</span>
+                                        <span class="k">else</span><span class="p">:</span>
+                                            <span class="n">elementDict</span><span class="p">[</span><span class="n">element</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;{http://hl7.org/fhir}&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)]</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">}</span>
+                                        <span class="k">if</span> <span class="n">element</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
+                                            <span class="n">elementDict</span><span class="p">[</span><span class="n">element</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;{http://hl7.org/fhir}&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">element</span><span class="o">.</span><span class="n">text</span><span class="p">})</span>
+                                        <span class="k">else</span><span class="p">:</span>
+                                            <span class="n">elementDict</span><span class="p">[</span><span class="n">element</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;{http://hl7.org/fhir}&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span> <span class="p">})</span>
+                                        <span class="n">attrDict</span><span class="p">[</span><span class="n">attribute</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;{http://hl7.org/fhir}&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;element&quot;</span><span class="p">:</span><span class="n">elementDict</span><span class="p">}</span> <span class="p">)</span>
+                            <span class="n">resourceKey</span><span class="o">=</span><span class="n">attributes</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;{http://hl7.org/fhir}&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="n">attributes</span><span class="o">.</span><span class="n">attrib</span><span class="p">:</span>
+                                <span class="c1"># logger.debug(attributes.attrib[&quot;value&quot;])</span>
+                                <span class="n">resourceDict</span><span class="p">[</span><span class="n">resourceKey</span><span class="p">]</span><span class="o">=</span><span class="n">attributes</span><span class="o">.</span><span class="n">attrib</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">resourceDict</span><span class="p">[</span><span class="n">resourceKey</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">}</span>
+                            <span class="k">if</span> <span class="n">attributes</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
+                                <span class="n">resourceDict</span><span class="p">[</span><span class="n">resourceKey</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;text&quot;</span><span class="p">:</span><span class="n">attributes</span><span class="o">.</span><span class="n">text</span><span class="p">}</span> <span class="p">)</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">resourceDict</span><span class="p">[</span><span class="n">resourceKey</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;text&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">}</span> <span class="p">)</span>
+                            <span class="n">resourceDict</span><span class="p">[</span><span class="n">resourceKey</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;attributes&quot;</span><span class="p">:</span><span class="n">attrDict</span><span class="p">}</span> <span class="p">)</span>
+                        <span class="n">fhir_list</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="n">resource</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;{http://hl7.org/fhir}&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">):</span><span class="n">resourceDict</span> <span class="p">})</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">fhir_list</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__orderDocument__</span><span class="p">(</span><span class="n">fhir_list</span><span class="p">):</span>
+        <span class="n">fhir_dict</span><span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">fhir_list</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;Binary&quot;</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Binary&quot;</span><span class="p">][</span><span class="s2">&quot;contentType&quot;</span><span class="p">])</span>
+                <span class="n">tmpKey</span><span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Binary&quot;</span><span class="p">][</span><span class="s2">&quot;id&quot;</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Binary&quot;</span><span class="p">][</span><span class="s2">&quot;contentType&quot;</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;text/plain&quot;</span><span class="p">]</span> <span class="p">:</span> <span class="c1">#&#39;image/jpeg&#39;; &#39;application/pdf&#39;;&#39;application/dicom&#39;</span>
+                    <span class="k">if</span> <span class="n">tmpKey</span> <span class="ow">in</span> <span class="n">fhir_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                        <span class="n">fhir_dict</span><span class="p">[</span><span class="n">tmpKey</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;raw_text&quot;</span><span class="p">:</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Binary&quot;</span><span class="p">][</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)})</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">fhir_dict</span><span class="p">[</span><span class="n">tmpKey</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;raw_text&quot;</span><span class="p">:</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Binary&quot;</span><span class="p">][</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)}</span>
+            <span class="k">if</span> <span class="s2">&quot;DocumentReference&quot;</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">subject</span><span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;DocumentReference&quot;</span><span class="p">][</span><span class="s2">&quot;subject&quot;</span><span class="p">][</span><span class="s2">&quot;attributes&quot;</span><span class="p">][</span><span class="s2">&quot;reference&quot;</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+                <span class="n">thisDate</span><span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;DocumentReference&quot;</span><span class="p">][</span><span class="s2">&quot;created&quot;</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+                <span class="n">tmpKey</span><span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;DocumentReference&quot;</span><span class="p">][</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;attributes&quot;</span><span class="p">][</span><span class="s2">&quot;attachment&quot;</span><span class="p">][</span><span class="s2">&quot;element&quot;</span><span class="p">][</span><span class="s2">&quot;url&quot;</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/Binary/&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">tmpKey</span> <span class="ow">in</span> <span class="n">fhir_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">fhir_dict</span><span class="p">[</span><span class="n">tmpKey</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;subject&quot;</span><span class="p">:</span><span class="n">subject</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">:</span><span class="n">thisDate</span><span class="p">})</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">fhir_dict</span><span class="p">[</span><span class="n">tmpKey</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;subject&quot;</span><span class="p">:</span><span class="n">subject</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">:</span><span class="n">thisDate</span><span class="p">}</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">fhir_dict</span><span class="p">)</span>
+
+<div class="viewcode-block" id="FHIR.load_xml"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.fhirtransform.FHIR.load_xml">[docs]</a>    <span class="k">def</span> <span class="nf">load_xml</span><span class="p">(</span><span class="n">fhir_input</span><span class="p">):</span>
+        <span class="n">tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">fhir_input</span><span class="p">)</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
+        <span class="n">fhir_dict</span><span class="o">=</span><span class="n">FHIR</span><span class="o">.</span><span class="n">__orderDocument__</span><span class="p">(</span><span class="n">FHIR</span><span class="o">.</span><span class="n">__parse_xml__</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+        <span class="n">documents_collection</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">fhir_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">raw_text_ID</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid1</span><span class="p">())</span>
+            <span class="n">thisDocument</span><span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="n">raw_text</span> <span class="o">=</span><span class="n">fhir_dict</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s2">&quot;raw_text&quot;</span><span class="p">],</span><span class="n">ID</span> <span class="o">=</span><span class="n">raw_text_ID</span><span class="p">,</span> <span class="n">source</span> <span class="o">=</span> <span class="s2">&quot;FHIR/&quot;</span><span class="o">+</span><span class="n">fhir_dict</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s2">&quot;subject&quot;</span><span class="p">]</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="n">key</span><span class="p">,</span> <span class="n">documentDate</span> <span class="o">=</span><span class="n">fhir_dict</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s2">&quot;date&quot;</span><span class="p">])</span>
+            <span class="n">documents_collection</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thisDocument</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">documents_collection</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Antoine Neuraz, William Digan, Ivan Lerner, Alice Rogier, David Baudoin, Anita Burgun, Nicolas Garcelon, Bastien Rance.
+
+    </p>
+  </div> 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <script>
+    var versions_json_url = ''
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        0.2
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
