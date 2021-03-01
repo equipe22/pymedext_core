@@ -15,6 +15,7 @@ PyMedExt also includes an easy way to define Annotator.
 
 .. mdinclude ::./README.md
 .. mdinclude ::./otherInformations.md
+.. mdinclude ::./LICENCE
 
 
 .. toctree::
@@ -22,7 +23,8 @@ PyMedExt also includes an easy way to define Annotator.
    :caption: Contents:
 
    Readme <README.md>
-   Other Infor <otherInformations.md>
+   Other Infos <otherInformations.md>
+   LICENCE <LICENCE>
 
 
 
