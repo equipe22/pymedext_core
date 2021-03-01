@@ -20,7 +20,7 @@ from .document import Document
 
 
 class brat(DataTransform):
-    def savetobrat(dic_pymedext: Document, folder_path: str,
+    def save_to_brat(dic_pymedext: Document, folder_path: str,
                    exclusion: List[str] = ["raw_text", "sentence", "endlines"],
                    export_attributes: bool = False):
         """
@@ -34,7 +34,7 @@ class brat(DataTransform):
         :param folder_path: path in string format. It will store files at this location. Folder needs to be created.
         :param exclusion: list of "type" to exclude from saving = ["raw_text", "sentence", "endlines"] by default
         :param export_attributes: if True, it will export attributes as Brat attributes.
-        :return: None
+        :return: 1
         """
         all_annotation_types: List[str] = []
         all_attribute_types: dict = {}

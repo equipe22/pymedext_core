@@ -54,7 +54,7 @@ except OSError:
 else:
     print ("Successfully created the directory %s " % path)
 
-pymedext.brat.savetobrat(LetterPyMedExt,path)
+pymedext.brat.save_to_brat(LetterPyMedExt,path)
 
 
 #this will output three files on the outputfolder:
