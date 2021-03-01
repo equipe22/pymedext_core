@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 class Annotation:
     """
-    Based object which contains Annotation. Each annotators must return a list of Annotations.
+    Based object which contains Annotation. Each Annotator must return a list of Annotations.
     """
 
     def __init__(self, type:str, value:str, source:str, source_ID:str,
@@ -282,7 +282,7 @@ class Annotator:
     TODO: get_key_input	return the annotations oF Documents.annotations which have the same type of the i th key_input element  (rename as select)
     TODO: annotate_function	each annotator should implement this functionand return a list of annotations object
     """
-    def __init__(self, key_input, key_output, ID):
+    def __init__(self, key_input:[str], key_output:str, ID:str):
         """Initialied an Annotator
 
         :param key_input: a list of input annotation type (because annotators could use more than one type of annotation)
@@ -300,7 +300,19 @@ class Annotator:
     def get_first_key_input(self,_input):
         """get_first_key_input
 	    return the annotation type [0],
-        :param _input: list of annotations input for the Annotor
+        :param _input: list of annotations input for the Annotator
+        :returns: a list of annotations
+        :rtype: a list of annotations
+
+        """
+        logger.debug("returns annotation")
+        return  self.get_key_input(_input, 0)
+
+    @versionadded(version='0.3', reason="This function will replace get_first_key_input")
+    def select_first_input(self,_input):
+        """select_first_input
+	    return the first annotation from _input key list,
+        :param _input: list of annotations input for the Annotator
         :returns: a list of annotations
         :rtype: a list of annotations
 
@@ -310,9 +322,21 @@ class Annotator:
 
     @deprecated(version='0.3', reason="This function will be removed soon use instead select_all_inputs")
     def get_all_key_input(self,_input):
-        """returns all key input for the Annotors
+        """returns all key input for the Annotator
         TODO: rename selectAll
-        :param _input: return all annotations of a specific types from the Documents
+        :param _input: return all annotations of a specific types from the Document
+        :returns: a list of annotations
+        :rtype: a list of annotation
+
+        """
+        logger.debug("returns all annotations")
+        return [x for x in _input.annotations if x.type in self.key_input]
+
+    @versionadded(version='0.3', reason="This function replaced get_all_key_input")
+    def select_all_inputs(self,_input):
+        """returns all key input for the Annotator
+
+        :param _input: return all annotations of a specific types from the Document
         :returns: a list of annotations
         :rtype: a list of annotation
 
@@ -333,7 +357,7 @@ class Annotator:
 
     def annotate_function(self, _input):
         """ main annotation function
-        each ANnotator must implement this function
+        each Annotator must implement this function
         :param _input: a list of Annotation typet
         :returns: a list of annotations. they will be added to Document.annotations
         :rtype:a list of annotations
