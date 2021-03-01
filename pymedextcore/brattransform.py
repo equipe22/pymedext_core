@@ -29,11 +29,12 @@ class brat(DataTransform):
             - annotation.conf:
             - ID.ann: Brat annotation file (with ID = dic_pymedext.id)
             - ID.txt: Raw text of the document (with ID = dic_pymedext.id)
+
         :param dic_pymedext: Document input, should containes annotations
         :param folder_path: path in string format. It will store files at this location. Folder needs to be created.
         :param exclusion: list of "type" to exclude from saving = ["raw_text", "sentence", "endlines"] by default
         :param export_attributes: if True, it will export attributes as Brat attributes.
-        :return:
+        :return: None
         """
         all_annotation_types: List[str] = []
         all_attribute_types: dict = {}
@@ -120,11 +121,13 @@ class brat(DataTransform):
         f_brat = open(f"{folder_path}/annotation.conf", 'w')
         f_brat.write(conf_file)
         f_brat.close()
+        return(1)
 
     @staticmethod
     def load_from_brat(ann_file: str,
                        txt_file: Optional[str] = None) -> Document:
         """Load annotations from a .ann file in the Brat format
+
         :param ann_file: path to the .ann file
         :param txt_file: path to the corresponding .txt file, if None: defaults to replacing .ann by .txt
         :returns: Document
