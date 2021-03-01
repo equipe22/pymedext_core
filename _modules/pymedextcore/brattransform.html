@@ -184,7 +184,7 @@
 
 
 <div class="viewcode-block" id="brat"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.brattransform.brat">[docs]</a><span class="k">class</span> <span class="nc">brat</span><span class="p">(</span><span class="n">DataTransform</span><span class="p">):</span>
-<div class="viewcode-block" id="brat.savetobrat"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.brattransform.brat.savetobrat">[docs]</a>    <span class="k">def</span> <span class="nf">savetobrat</span><span class="p">(</span><span class="n">dic_pymedext</span><span class="p">:</span> <span class="n">Document</span><span class="p">,</span> <span class="n">folder_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<div class="viewcode-block" id="brat.save_to_brat"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.brattransform.brat.save_to_brat">[docs]</a>    <span class="k">def</span> <span class="nf">save_to_brat</span><span class="p">(</span><span class="n">dic_pymedext</span><span class="p">:</span> <span class="n">Document</span><span class="p">,</span> <span class="n">folder_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                    <span class="n">exclusion</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;raw_text&quot;</span><span class="p">,</span> <span class="s2">&quot;sentence&quot;</span><span class="p">,</span> <span class="s2">&quot;endlines&quot;</span><span class="p">],</span>
                    <span class="n">export_attributes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -198,7 +198,7 @@
 <span class="sd">        :param folder_path: path in string format. It will store files at this location. Folder needs to be created.</span>
 <span class="sd">        :param exclusion: list of &quot;type&quot; to exclude from saving = [&quot;raw_text&quot;, &quot;sentence&quot;, &quot;endlines&quot;] by default</span>
 <span class="sd">        :param export_attributes: if True, it will export attributes as Brat attributes.</span>
-<span class="sd">        :return: None</span>
+<span class="sd">        :return: 1</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">all_annotation_types</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">all_attribute_types</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
