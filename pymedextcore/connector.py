@@ -2,7 +2,6 @@
 
 import logging
 import psycopg2
-
 ###
 import os
 import requests
@@ -51,7 +50,7 @@ class DatabaseConnector:
         self.DB_user = DB_user
         self.DB_password = DB_password
         logger.info("Initialize Database Connection")
-    def startConnection(self):
+    def start_connection(self):
         """
         Abstract function where each DatabaseConnector should implement the
         Database connection
@@ -197,8 +196,8 @@ class PostGresConnector(DatabaseConnector):
         logger.info("Initialize Database Connection")
         self.cur = None
         self.conn = None
-        self.startConnection()
-    def startConnection(self):
+        self.start_connection()
+    def start_connection(self):
         """Initialize the connection to the POstGresConnector
         :returns: 0
         :rtype: 0
@@ -225,10 +224,10 @@ class SimpleAPIConnector:
 
         self.host = host
         self.session = None
-        self.startConnection()
+        self.start_connection()
 
 
-    def startConnection(self):
+    def start_connection(self):
         """Initialize  a requests object
         :returns: 0
         :rtype: 0
@@ -241,7 +240,7 @@ class SimpleAPIConnector:
 class SSHConnector:
     """
     TODO: implement a connection to a server with
-    paramiko, should also extend Connector @David?
+    paramiko, should also extend Connector
     """
 
     def __init__(self, scp_host, scp_user, scp_password):
@@ -249,15 +248,16 @@ class SSHConnector:
         self.scp_host = scp_host
         self.scp_user = scp_user
         self.scp_password = scp_password
-        self.sshConnection = paramiko.SSHClient()
-        self.sshConnection.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        self.ssh_connection = paramiko.SSHClient()
+        self.ssh_connection.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-    def transfert_brat_file(self, brat_file, scp_repertory):
-        self.sshConnection.connect(self.scp_host, username=self.scp_user,
+    def __transfert_brat_file(self, brat_file, scp_repertory):
+        """
+        TODO : this function must be moved to BratSource
+        """
+        self.ssh_connection.connect(self.scp_host, username=self.scp_user,
                               password=self.scp_password)
-        scp_cursor = SCPClient(self.sshConnection.get_transport())
+        scp_cursor = SCPClient(self.ssh_connection.get_transport())
         if scp_repertory[-1] != '/':
             scp_repertory = scp_repertory +'/'
         scp_cursor.put(brat_file, scp_repertory + brat_file)
-
-
