@@ -150,24 +150,24 @@ class Annotation:
                 listChildren.append(self)
         return(listChildren)
 
-    def get_properties(self, filterType):
+    def get_properties(self, filter_type:[str]):
         """return current node Properties if the Annotation is from a specific type
 
-        :param filterType: list of Annotations type
+        :param filter_type: list of Annotations type
         :returns:  properties
         :rtype: list of dictionnary
 
         """
         properties=[]
-        if self.type in filterType:
+        if self.type in filter_type:
             properties.append(self.to_dict())
         return(properties)
 
-    def get_parents_properties(self, filterType):
+    def get_parents_properties(self, filter_type:[str]):
         """ return parent properties of current annotations if
         it's belong to a specific type
 
-        :param filterType: list of Annotations types
+        :param filter_type: list of Annotations types
         :returns: list  of current and parents Annotation properties
         :rtype: list of dict
 
@@ -176,14 +176,14 @@ class Annotation:
         if self.parent != None:
             # print( " go see parents" )
             # print(properties)
-            properties.extend(self.parent.get_parents_properties(filterType))
-            properties.extend(self.get_properties(filterType))
+            properties.extend(self.parent.get_parents_properties(filter_type))
+            properties.extend(self.get_properties(filter_type))
         else:
             # print(self.type)
             # print(self.attributes)
             # print(self.span)
             # print(properties)
-            properties.extend(self.get_properties(filterType))
+            properties.extend(self.get_properties(filter_type))
         return(properties)
 
     def set_parent(self, parent):
@@ -251,20 +251,20 @@ class Annotation:
 
 
 
-    def get_parent(self, fromType):
+    def get_parent(self, from_type):
         """return  closest parent of the current Annotation
         of a specific type
 
-        :param fromType: specific type to found
+        :param from_type: specific type to found
         :returns: Annotation of a specific type
         :rtype: Annotation
 
         """
         if self.parent != None:
-            if self.parent.type == fromType :
+            if self.parent.type == from_type :
                 return(self.parent)
             else:
-                self.parent.get_parent(fromType)
+                self.parent.get_parent(from_type)
         else:
             return(None)
 
@@ -299,7 +299,7 @@ class Annotator:
     @deprecated(version='0.3', reason="This function will be removed soon use instead select_first_input")
     def get_first_key_input(self,_input):
         """get_first_key_input, return the annotation type [0].
-        
+
         :param _input: list of annotations input for the Annotator
         :returns: a list of annotations
         :rtype: a list of annotations
