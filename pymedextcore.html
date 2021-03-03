@@ -1024,8 +1024,8 @@ password (str): The respective username’s password.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Abstract class specialize in database connection</p>
 <dl class="py method">
-<dt id="pymedextcore.connector.DatabaseConnector.startConnection">
-<code class="sig-name descname"><span class="pre">startConnection</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/connector.html#DatabaseConnector.startConnection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.connector.DatabaseConnector.startConnection" title="Permalink to this definition">¶</a></dt>
+<dt id="pymedextcore.connector.DatabaseConnector.start_connection">
+<code class="sig-name descname"><span class="pre">start_connection</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/connector.html#DatabaseConnector.start_connection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.connector.DatabaseConnector.start_connection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Abstract function where each DatabaseConnector should implement the
 Database connection</p>
 </dd></dl>
@@ -1038,8 +1038,8 @@ Database connection</p>
 <dd><p>Bases: <a class="reference internal" href="#pymedextcore.connector.DatabaseConnector" title="pymedextcore.connector.DatabaseConnector"><code class="xref py py-class docutils literal notranslate"><span class="pre">pymedextcore.connector.DatabaseConnector</span></code></a></p>
 <p>Abstract Connector to a Postgres Database</p>
 <dl class="py method">
-<dt id="pymedextcore.connector.PostGresConnector.startConnection">
-<code class="sig-name descname"><span class="pre">startConnection</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/connector.html#PostGresConnector.startConnection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.connector.PostGresConnector.startConnection" title="Permalink to this definition">¶</a></dt>
+<dt id="pymedextcore.connector.PostGresConnector.start_connection">
+<code class="sig-name descname"><span class="pre">start_connection</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/connector.html#PostGresConnector.start_connection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.connector.PostGresConnector.start_connection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize the connection to the POstGresConnector
 :returns: 0
 :rtype: 0</p>
@@ -1052,12 +1052,7 @@ Database connection</p>
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymedextcore.connector.</span></code><code class="sig-name descname"><span class="pre">SSHConnector</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scp_host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scp_user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scp_password</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/connector.html#SSHConnector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.connector.SSHConnector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>TODO: implement a connection to a server with
-paramiko, should also extend Connector &#64;David?</p>
-<dl class="py method">
-<dt id="pymedextcore.connector.SSHConnector.transfert_brat_file">
-<code class="sig-name descname"><span class="pre">transfert_brat_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">brat_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scp_repertory</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/connector.html#SSHConnector.transfert_brat_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.connector.SSHConnector.transfert_brat_file" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+paramiko, should also extend Connector</p>
 </dd></dl>
 
 <dl class="py class">
@@ -1067,8 +1062,8 @@ paramiko, should also extend Connector &#64;David?</p>
 <p>TODO: implement a connection to a server with
 paramiko, should also extend Connector &#64;David?</p>
 <dl class="py method">
-<dt id="pymedextcore.connector.SimpleAPIConnector.startConnection">
-<code class="sig-name descname"><span class="pre">startConnection</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/connector.html#SimpleAPIConnector.startConnection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.connector.SimpleAPIConnector.startConnection" title="Permalink to this definition">¶</a></dt>
+<dt id="pymedextcore.connector.SimpleAPIConnector.start_connection">
+<code class="sig-name descname"><span class="pre">start_connection</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/connector.html#SimpleAPIConnector.start_connection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.connector.SimpleAPIConnector.start_connection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize  a requests object
 :returns: 0
 :rtype: 0</p>

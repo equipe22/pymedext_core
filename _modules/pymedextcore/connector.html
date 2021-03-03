@@ -166,7 +166,6 @@
 
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">psycopg2</span>
-
 <span class="c1">###</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">requests</span>
@@ -215,7 +214,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">DB_user</span> <span class="o">=</span> <span class="n">DB_user</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">DB_password</span> <span class="o">=</span> <span class="n">DB_password</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Initialize Database Connection&quot;</span><span class="p">)</span>
-<div class="viewcode-block" id="DatabaseConnector.startConnection"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.connector.DatabaseConnector.startConnection">[docs]</a>    <span class="k">def</span> <span class="nf">startConnection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DatabaseConnector.start_connection"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.connector.DatabaseConnector.start_connection">[docs]</a>    <span class="k">def</span> <span class="nf">start_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Abstract function where each DatabaseConnector should implement the</span>
 <span class="sd">        Database connection</span>
@@ -361,8 +360,8 @@
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Initialize Database Connection&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cur</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">conn</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">startConnection</span><span class="p">()</span>
-<div class="viewcode-block" id="PostGresConnector.startConnection"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.connector.PostGresConnector.startConnection">[docs]</a>    <span class="k">def</span> <span class="nf">startConnection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start_connection</span><span class="p">()</span>
+<div class="viewcode-block" id="PostGresConnector.start_connection"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.connector.PostGresConnector.start_connection">[docs]</a>    <span class="k">def</span> <span class="nf">start_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialize the connection to the POstGresConnector</span>
 <span class="sd">        :returns: 0</span>
 <span class="sd">        :rtype: 0</span>
@@ -389,10 +388,10 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">host</span> <span class="o">=</span> <span class="n">host</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">startConnection</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start_connection</span><span class="p">()</span>
 
 
-<div class="viewcode-block" id="SimpleAPIConnector.startConnection"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.connector.SimpleAPIConnector.startConnection">[docs]</a>    <span class="k">def</span> <span class="nf">startConnection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="SimpleAPIConnector.start_connection"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.connector.SimpleAPIConnector.start_connection">[docs]</a>    <span class="k">def</span> <span class="nf">start_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialize  a requests object</span>
 <span class="sd">        :returns: 0</span>
 <span class="sd">        :rtype: 0</span>
@@ -405,7 +404,7 @@
 <div class="viewcode-block" id="SSHConnector"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.connector.SSHConnector">[docs]</a><span class="k">class</span> <span class="nc">SSHConnector</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    TODO: implement a connection to a server with</span>
-<span class="sd">    paramiko, should also extend Connector @David?</span>
+<span class="sd">    paramiko, should also extend Connector</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scp_host</span><span class="p">,</span> <span class="n">scp_user</span><span class="p">,</span> <span class="n">scp_password</span><span class="p">):</span>
@@ -413,18 +412,19 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">scp_host</span> <span class="o">=</span> <span class="n">scp_host</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scp_user</span> <span class="o">=</span> <span class="n">scp_user</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scp_password</span> <span class="o">=</span> <span class="n">scp_password</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sshConnection</span> <span class="o">=</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">SSHClient</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sshConnection</span><span class="o">.</span><span class="n">set_missing_host_key_policy</span><span class="p">(</span><span class="n">paramiko</span><span class="o">.</span><span class="n">AutoAddPolicy</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ssh_connection</span> <span class="o">=</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">SSHClient</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ssh_connection</span><span class="o">.</span><span class="n">set_missing_host_key_policy</span><span class="p">(</span><span class="n">paramiko</span><span class="o">.</span><span class="n">AutoAddPolicy</span><span class="p">())</span>
 
-<div class="viewcode-block" id="SSHConnector.transfert_brat_file"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.connector.SSHConnector.transfert_brat_file">[docs]</a>    <span class="k">def</span> <span class="nf">transfert_brat_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brat_file</span><span class="p">,</span> <span class="n">scp_repertory</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sshConnection</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scp_host</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">scp_user</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__transfert_brat_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brat_file</span><span class="p">,</span> <span class="n">scp_repertory</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        TODO : this function must be moved to BratSource</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ssh_connection</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scp_host</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">scp_user</span><span class="p">,</span>
                               <span class="n">password</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">scp_password</span><span class="p">)</span>
-        <span class="n">scp_cursor</span> <span class="o">=</span> <span class="n">SCPClient</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sshConnection</span><span class="o">.</span><span class="n">get_transport</span><span class="p">())</span>
+        <span class="n">scp_cursor</span> <span class="o">=</span> <span class="n">SCPClient</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ssh_connection</span><span class="o">.</span><span class="n">get_transport</span><span class="p">())</span>
         <span class="k">if</span> <span class="n">scp_repertory</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;/&#39;</span><span class="p">:</span>
             <span class="n">scp_repertory</span> <span class="o">=</span> <span class="n">scp_repertory</span> <span class="o">+</span><span class="s1">&#39;/&#39;</span>
-        <span class="n">scp_cursor</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">brat_file</span><span class="p">,</span> <span class="n">scp_repertory</span> <span class="o">+</span> <span class="n">brat_file</span><span class="p">)</span></div></div>
-
-
+        <span class="n">scp_cursor</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">brat_file</span><span class="p">,</span> <span class="n">scp_repertory</span> <span class="o">+</span> <span class="n">brat_file</span><span class="p">)</span></div>
 </pre></div>
 
            </div>
