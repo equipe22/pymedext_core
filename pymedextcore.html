@@ -270,12 +270,12 @@ entities</p>
 
 <dl class="py method">
 <dt id="pymedextcore.annotators.Annotation.get_parent">
-<code class="sig-name descname"><span class="pre">get_parent</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fromType</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.get_parent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.get_parent" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_parent</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">from_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.get_parent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.get_parent" title="Permalink to this definition">¶</a></dt>
 <dd><p>return  closest parent of the current Annotation
 of a specific type</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>fromType</strong> – specific type to found</p>
+<dd class="field-odd"><p><strong>from_type</strong> – specific type to found</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Annotation of a specific type</p>
@@ -288,12 +288,12 @@ of a specific type</p>
 
 <dl class="py method">
 <dt id="pymedextcore.annotators.Annotation.get_parents_properties">
-<code class="sig-name descname"><span class="pre">get_parents_properties</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filterType</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.get_parents_properties"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.get_parents_properties" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_parents_properties</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">filter_type:</span> <span class="pre">[&lt;class</span> <span class="pre">'str'&gt;]</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.get_parents_properties"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.get_parents_properties" title="Permalink to this definition">¶</a></dt>
 <dd><p>return parent properties of current annotations if
 it’s belong to a specific type</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>filterType</strong> – list of Annotations types</p>
+<dd class="field-odd"><p><strong>filter_type</strong> – list of Annotations types</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>list  of current and parents Annotation properties</p>
@@ -306,11 +306,11 @@ it’s belong to a specific type</p>
 
 <dl class="py method">
 <dt id="pymedextcore.annotators.Annotation.get_properties">
-<code class="sig-name descname"><span class="pre">get_properties</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filterType</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.get_properties"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.get_properties" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_properties</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">filter_type:</span> <span class="pre">[&lt;class</span> <span class="pre">'str'&gt;]</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/annotators.html#Annotation.get_properties"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.annotators.Annotation.get_properties" title="Permalink to this definition">¶</a></dt>
 <dd><p>return current node Properties if the Annotation is from a specific type</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>filterType</strong> – list of Annotations type</p>
+<dd class="field-odd"><p><strong>filter_type</strong> – list of Annotations type</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>properties</p>
