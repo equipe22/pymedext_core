@@ -1081,6 +1081,10 @@ paramiko, should also extend Connector &#64;David?</p>
 </div>
 <div class="section" id="module-pymedextcore.datatransform">
 <span id="pymedextcore-datatransform-module"></span><h2>pymedextcore.datatransform module<a class="headerlink" href="#module-pymedextcore.datatransform" title="Permalink to this headline">¶</a></h2>
+<p>Each class which transform pymedext Document to another format
+must herit from the DataTransform</p>
+<p>TODO: put some function such as save and load as mandatory to
+ease the use of DataTransform object</p>
 <dl class="py class">
 <dt id="pymedextcore.datatransform.DataTransform">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymedextcore.datatransform.</span></code><code class="sig-name descname"><span class="pre">DataTransform</span></code><a class="reference internal" href="_modules/pymedextcore/datatransform.html#DataTransform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.datatransform.DataTransform" title="Permalink to this definition">¶</a></dt>
@@ -1088,12 +1092,24 @@ paramiko, should also extend Connector &#64;David?</p>
 <dl class="py method">
 <dt id="pymedextcore.datatransform.DataTransform.load">
 <em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">load</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/datatransform.html#DataTransform.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.datatransform.DataTransform.load" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Generic method to save another format into a PyMedExt Document</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>PyMedext Document</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="pymedextcore.datatransform.DataTransform.save">
 <em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">save</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/datatransform.html#DataTransform.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.datatransform.DataTransform.save" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Generic method to transform a PyMedExt Document save as another format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>not a PyMedExt doc</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -1997,7 +2013,13 @@ If n is negative or omitted, read until EOF.</p>
 <dl class="py method">
 <dt id="pymedextcore.omoptransform.omop.load">
 <code class="sig-name descname"><span class="pre">load</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/omoptransform.html#omop.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.omoptransform.omop.load" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Generic method to save another format into a PyMedExt Document</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>PyMedext Document</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 

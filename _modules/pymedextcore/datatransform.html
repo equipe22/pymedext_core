@@ -164,18 +164,34 @@
   <h1>Source code for pymedextcore.datatransform</h1><div class="highlight"><pre>
 <span></span><span class="ch">#!/usr/bin/env python3</span>
 
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Each class which transform pymedext Document to another format</span>
+<span class="sd">must herit from the DataTransform</span>
+
+<span class="sd">TODO: put some function such as save and load as mandatory to</span>
+<span class="sd">ease the use of DataTransform object</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
 <div class="viewcode-block" id="DataTransform"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.datatransform.DataTransform">[docs]</a><span class="k">class</span> <span class="nc">DataTransform</span><span class="p">:</span>
     <span class="c1"># def __new__(self,Document):</span>
     <span class="c1">#     self.Document=Document</span>
     <span class="c1">#</span>
-    <span class="c1"># Document save as</span>
+    <span class="c1">#</span>
 <div class="viewcode-block" id="DataTransform.save"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.datatransform.DataTransform.save">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">save</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Generic method to transform a PyMedExt Document save as another format</span>
+
+<span class="sd">        :returns: not a PyMedExt doc</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
     <span class="c1">#Document load from and return a Document</span>
 <div class="viewcode-block" id="DataTransform.load"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.datatransform.DataTransform.load">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">load</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Generic method to save another format into a PyMedExt Document</span>
+
+<span class="sd">        :returns: PyMedext Document</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div></div>
 </pre></div>
 
