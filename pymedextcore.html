@@ -1904,11 +1904,24 @@ the processing date, the annotators used</p>
 <dt id="pymedextcore.ncbisource.PubTatorSource">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymedextcore.ncbisource.</span></code><code class="sig-name descname"><span class="pre">PubTatorSource</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'https://www.ncbi.nlm.nih.gov/research/pubtator-api/publications/export/'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/ncbisource.html#PubTatorSource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.ncbisource.PubTatorSource" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#pymedextcore.source.Source" title="pymedextcore.source.Source"><code class="xref py py-class docutils literal notranslate"><span class="pre">pymedextcore.source.Source</span></code></a>, <a class="reference internal" href="#pymedextcore.connector.SimpleAPIConnector" title="pymedextcore.connector.SimpleAPIConnector"><code class="xref py py-class docutils literal notranslate"><span class="pre">pymedextcore.connector.SimpleAPIConnector</span></code></a></p>
-<p>Connection to a POstgres Ommop source</p>
+<p>Connection to PubTator api  currently <a class="reference external" href="https://www.ncbi.nlm.nih.gov/research/pubtator-api/publications/export/">https://www.ncbi.nlm.nih.gov/research/pubtator-api/publications/export/</a></p>
 <dl class="py method">
-<dt id="pymedextcore.ncbisource.PubTatorSource.getPubTatorAnnotations">
-<code class="sig-name descname"><span class="pre">getPubTatorAnnotations</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pmid_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Bioconcept</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">returnFormat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/ncbisource.html#PubTatorSource.getPubTatorAnnotations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.ncbisource.PubTatorSource.getPubTatorAnnotations" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt id="pymedextcore.ncbisource.PubTatorSource.get_pmids_annotations">
+<code class="sig-name descname"><span class="pre">get_pmids_annotations</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pmid_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Bioconcept</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">returnFormat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/ncbisource.html#PubTatorSource.get_pmids_annotations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.ncbisource.PubTatorSource.get_pmids_annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a set of pmid articles from PubTator</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pmid_list</strong> – a list of articles pmid</p></li>
+<li><p><strong>Bioconcept</strong> – Default (leave it blank) includes all bioconcepts. Otherwise, user can choose</p></li>
+</ul>
+</dd>
+</dl>
+<p>gene, disease, chemical, species, proteinmutation, dnamutation, snp, and cellline.
+:param returnFormat: 0 return a PyMedExt Document, 1 Return a Bioc Document
+:returns: PyMedext Document or Bioc Document
+:rtype:</p>
+</dd></dl>
 
 </dd></dl>
 
