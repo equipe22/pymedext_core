@@ -86,7 +86,13 @@ class FHIR(DataTransform):
                     fhir_dict[tmpKey]={"subject":subject, "date":thisDate}
         return(fhir_dict)
 
-    def load_xml(fhir_input):
+    def load_xml(fhir_input : str):
+        """
+        :param fhir_input: file name of a fhir file
+        :returns: Document
+        :rtype: PyMedExt Document
+
+        """
         tree = ET.parse(fhir_input)
         root = tree.getroot()
         fhir_dict=FHIR.__orderDocument__(FHIR.__parse_xml__(root))
