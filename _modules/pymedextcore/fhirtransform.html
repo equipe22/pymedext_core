@@ -250,7 +250,13 @@
                     <span class="n">fhir_dict</span><span class="p">[</span><span class="n">tmpKey</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;subject&quot;</span><span class="p">:</span><span class="n">subject</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">:</span><span class="n">thisDate</span><span class="p">}</span>
         <span class="k">return</span><span class="p">(</span><span class="n">fhir_dict</span><span class="p">)</span>
 
-<div class="viewcode-block" id="FHIR.load_xml"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.fhirtransform.FHIR.load_xml">[docs]</a>    <span class="k">def</span> <span class="nf">load_xml</span><span class="p">(</span><span class="n">fhir_input</span><span class="p">):</span>
+<div class="viewcode-block" id="FHIR.load_xml"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.fhirtransform.FHIR.load_xml">[docs]</a>    <span class="k">def</span> <span class="nf">load_xml</span><span class="p">(</span><span class="n">fhir_input</span> <span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param fhir_input: file name of a fhir file</span>
+<span class="sd">        :returns: Document</span>
+<span class="sd">        :rtype: PyMedExt Document</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">fhir_input</span><span class="p">)</span>
         <span class="n">root</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
         <span class="n">fhir_dict</span><span class="o">=</span><span class="n">FHIR</span><span class="o">.</span><span class="n">__orderDocument__</span><span class="p">(</span><span class="n">FHIR</span><span class="o">.</span><span class="n">__parse_xml__</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
