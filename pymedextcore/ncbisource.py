@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 class PubTatorSource(Source, SimpleAPIConnector):
     """
-    Connection to a POstgres Ommop source
+    Connection to PubTator api  currently https://www.ncbi.nlm.nih.gov/research/pubtator-api/publications/export/ 
     """
     def __init__(self, host="https://www.ncbi.nlm.nih.gov/research/pubtator-api/publications/export/" ):
         """Initialize a connection to a SimpleAPiCOnnector for PubTator
@@ -24,7 +24,17 @@ class PubTatorSource(Source, SimpleAPIConnector):
         super().__init__( host)
         logger.info("Initialize APi connection")
 
-    def getPubTatorAnnotations(self, pmid_list, Bioconcept="",returnFormat=0):
+    def get_pmids_annotations(self, pmid_list, Bioconcept="",returnFormat=0):
+        """Return a set of pmid articles from PubTator
+
+        :param pmid_list: a list of articles pmid
+        :param Bioconcept: Default (leave it blank) includes all bioconcepts. Otherwise, user can choose
+    	gene, disease, chemical, species, proteinmutation, dnamutation, snp, and cellline.
+        :param returnFormat: 0 return a PyMedExt Document, 1 Return a Bioc Document
+        :returns: PyMedext Document or Bioc Document
+        :rtype:
+
+        """
         # load pmids
         json_pmid = {"pmids": [pmid.strip() for pmid in pmid_list]}
 
