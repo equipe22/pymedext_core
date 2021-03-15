@@ -332,7 +332,7 @@
             <span class="k">elif</span> <span class="n">k</span> <span class="o">==</span> <span class="s1">&#39;relations&#39;</span><span class="p">:</span>
                 <span class="n">doc</span><span class="o">.</span><span class="n">relations</span> <span class="o">=</span> <span class="p">[]</span>
                 <span class="k">for</span> <span class="n">relation</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span> 
-                    <span class="n">doc</span><span class="o">.</span><span class="n">relations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Relations</span><span class="p">(</span><span class="o">**</span><span class="n">relation</span><span class="p">))</span>
+                    <span class="n">doc</span><span class="o">.</span><span class="n">relations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Relation</span><span class="p">(</span><span class="o">**</span><span class="n">relation</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">doc</span></div>
 
 
@@ -422,7 +422,7 @@
         <span class="n">annot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_annotations</span><span class="p">(</span><span class="s1">&#39;raw_text&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">annot</span><span class="o">.</span><span class="n">value</span></div>
 
-<div class="viewcode-block" id="Document.getGraph"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.document.Document.getGraph">[docs]</a>    <span class="k">def</span> <span class="nf">getGraph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Document.get_graph"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.document.Document.get_graph">[docs]</a>    <span class="k">def</span> <span class="nf">get_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;return the graph associated with the raw_text</span>
 <span class="sd">        :returns:</span>
 <span class="sd">        :rtype:</span>
