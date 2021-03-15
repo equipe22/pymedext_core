@@ -203,9 +203,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span><span class="o">=</span><span class="p">[]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">source_ID</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">for</span> <span class="n">thisPath</span> <span class="ow">in</span> <span class="n">pathToconfig</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">loadFromData</span><span class="p">(</span><span class="n">thisPath</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">load_annotations_files</span><span class="p">(</span><span class="n">thisPath</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Document.loadFromData"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.document.Document.loadFromData">[docs]</a>    <span class="k">def</span> <span class="nf">loadFromData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathToconfig</span><span class="p">):</span>
+<div class="viewcode-block" id="Document.load_annotations_files"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.document.Document.load_annotations_files">[docs]</a>    <span class="k">def</span> <span class="nf">load_annotations_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathToconfig</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Transform json Pymedext to Document</span>
 
 <span class="sd">        :param pathToconfig: list of path to json files,</span>
