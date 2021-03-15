@@ -39,7 +39,7 @@ annotators =[getRegex]
 LetterPyMedExt.annotate(annotators)
 LetterPyMedExt.to_dict()
 #write your annotation in PymedExt json
-LetterPyMedExt.writeJson("outputfile.json")
+LetterPyMedExt.write_json("outputfile.json")
 
 
 

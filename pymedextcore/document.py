@@ -173,7 +173,7 @@ class Document:
 
 
 
-    def writeJson(self, pathToOutput):
+    def write_json(self, pathToOutput):
         """Transform Document to json PyMedExt
 
         :param pathToOutput: path to result file
