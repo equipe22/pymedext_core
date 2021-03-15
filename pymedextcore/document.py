@@ -258,7 +258,7 @@ class Document:
         annot = self.get_annotations('raw_text')[0]
         return annot.value
 
-    def getGraph(self):
+    def get_graph(self):
         """return the graph associated with the raw_text
         :returns:
         :rtype:
