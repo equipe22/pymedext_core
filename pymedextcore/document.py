@@ -39,9 +39,9 @@ class Document:
             self.annotations=[]
             self.source_ID = None
             for thisPath in pathToconfig:
-                self.loadFromData(thisPath)
+                self.load_annotations_files(thisPath)
 
-    def loadFromData(self, pathToconfig):
+    def load_annotations_files(self, pathToconfig):
         """Transform json Pymedext to Document
 
         :param pathToconfig: list of path to json files,
