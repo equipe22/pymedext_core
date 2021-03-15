@@ -169,6 +169,7 @@ class Document:
                 doc.relations = []
                 for relation in v: 
                     doc.relations.append(Relations(**relation))
+                    doc.relations.append(Relation(**relation))
         return doc
 
 
