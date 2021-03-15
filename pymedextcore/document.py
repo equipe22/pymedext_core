@@ -168,7 +168,6 @@ class Document:
             elif k == 'relations':
                 doc.relations = []
                 for relation in v: 
-                    doc.relations.append(Relations(**relation))
                     doc.relations.append(Relation(**relation))
         return doc
 
