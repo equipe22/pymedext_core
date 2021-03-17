@@ -16,8 +16,8 @@ ENV treatFolder="True"
 ENV sources="{'romedi':'','rxnorm':'-s'}"
 
 WORKDIR /home
-RUN mkdir src data
-COPY src src/
+RUN mkdir data
+#COPY src src/
 RUN apt-get update
 RUN apt-get -y install g++ gcc git build-essential
 RUN pip3 install --upgrade pip
