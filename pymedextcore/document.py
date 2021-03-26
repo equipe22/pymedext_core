@@ -119,7 +119,7 @@ class Document:
                 if isinstance(annot, Annotation): 
                     self.annotations.append(annot)
                 elif isinstance(annot, Relation):
-                    self.annotations.append(annot)
+                    self.relations.append(annot)
                 else: 
                     raise TypeError("New annotations must be of type Annotation or Relation")
         #setattr(self, annotator.key_output ,annotator.annotate_function(self))
