@@ -4,14 +4,12 @@ import json
 import unidecode
 from subprocess import Popen, PIPE
 from os import path
-from typing import List, Optional, Tuple
+from typing import List, Optional, Tuple, Dict
 from deprecated.sphinx import deprecated
 from deprecated.sphinx import versionadded
 from deprecated.sphinx import versionchanged
 import logging
 logger = logging.getLogger(__name__)
-
-
 
 
 class Annotation:
@@ -20,7 +18,7 @@ class Annotation:
     """
 
     def __init__(self, type:str, value:str, source:str, source_ID:str,
-                 span:Optional[Tuple[int,int]] = None, attributes:Optional[List] = None,
+                 span:Optional[Tuple[int,int]] = None, attributes:Optional[Dict] = None,
                  isEntity:bool=False, ID:Optional[str] = None, ngram:Optional[str] = None):
         """Intialize an Annotation object
 
@@ -60,7 +58,7 @@ class Annotation:
         :rtype: json
 
         """
-        return json.dump(self.to_dict())
+        return json.dumps(self.to_dict())
 
     def to_dict(self):
         """Transform Annotation to a dict object
