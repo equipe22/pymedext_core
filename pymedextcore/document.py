@@ -120,8 +120,14 @@ class Document:
                     self.annotations.append(annot)
                 elif isinstance(annot, Relation):
                     self.relations.append(annot)
+                elif isinstance(annot, tuple) and (any(isinstance(el, Relation) for el in annot) or any(isinstance(el, Annotation) for el in annot)) :
+                    for obj in annot :
+                        if isinstance(obj, Relation) :
+                            self.relations.append(obj)
+                        if isinstance(obj, Annotation) :
+                            self.annotations.append(obj)
                 else: 
-                    raise TypeError("New annotations must be of type Annotation or Relation")
+                    raise TypeError("New annotations must be of type Annotation or Relation, or a tuple of Annotation - Relation")
         #setattr(self, annotator.key_output ,annotator.annotate_function(self))
         
     def to_json(self):
