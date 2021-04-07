@@ -964,27 +964,102 @@ An iterable of strings that possibly contains empty strings.</p></li>
 
 <dl class="py method">
 <dt id="pymedextcore.brattransform.brat.save_to_brat">
-<code class="sig-name descname"><span class="pre">save_to_brat</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclusion</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">['raw_text',</span> <span class="pre">'sentence',</span> <span class="pre">'endlines']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_attributes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/brattransform.html#brat.save_to_brat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.brattransform.brat.save_to_brat" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function will write all Annotations in Brat files at file_path.
-It will create (or overwrite) 3 files:</p>
+<code class="sig-name descname"><span class="pre">save_to_brat</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pym_ann_types</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">brat_entities_in_pym_types</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">brat_entities_in_pym_types_value</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">brat_entities_in_pym_att_values</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">brat_entities_in_pym_att_keys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">brat_attributes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pym_rel_types</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">brat_ents_of_rel_in_pym_rel_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">brat_ents_of_rel_in_pym_ent_value</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">brat_ents_of_rel_in_pym_att_values</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">brat_type_of_rel_in_pym_rel_types</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">brat_type_of_rel_in_pym_rel_att_values</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level_annot</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymedextcore/brattransform.html#brat.save_to_brat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedextcore.brattransform.brat.save_to_brat" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>This function will write all Annotations in Brat files at file_path.
+It will create (or overwrite) 2 files for each pymedext Documents in documents list input:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>annotation.conf:</p></li>
 <li><p>ID.ann: Brat annotation file (with ID = dic_pymedext.id)</p></li>
 <li><p>ID.txt: Raw text of the document (with ID = dic_pymedext.id)</p></li>
 </ul>
 </div></blockquote>
+<p>It will create (or overwrite) an annotation.conf file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dic_pymedext</strong> – Document input, should containes annotations</p></li>
-<li><p><strong>folder_path</strong> – path in string format. It will store files at this location. Folder needs to be created.</p></li>
-<li><p><strong>exclusion</strong> – list of “type” to exclude from saving = [“raw_text”, “sentence”, “endlines”] by default</p></li>
-<li><p><strong>export_attributes</strong> – if True, it will export attributes as Brat attributes.</p></li>
-</ul>
+<dt class="field-odd">param list_of_documents</dt>
+<dd class="field-odd"><p>List of Documents input. Documents should contain same type of annotations</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>1</p>
+<dt class="field-even">param folder_path</dt>
+<dd class="field-even"><p>path in string format. It will store files at this location. Folder needs to be created.</p>
+</dd>
+</dl>
+<p>For the other paramters, the extract of this pymedext document will be used in the examples, for a better understanding.</p>
+<p>‘’’</p>
+<dl>
+<dt>{‘type’: ‘QuickUMLS’,</dt><dd><p>‘value’: ‘oesophagite’,
+‘ngram’: None,
+‘span’: (188, 199),
+‘source’: ‘QuickUMLS:v1’,
+‘source_ID’: ‘6814e9fa-96f7-11eb-a8c8-0242ac110002’,
+‘isEntity’: False,
+‘attributes’: {‘hypothesis’: ‘certain’,</p>
+<blockquote>
+<div><p>‘context’: ‘patient’,
+‘negation’: ‘aff’,
+‘cui’: ‘C0014868’,
+‘label’: ‘oesophagite’,
+‘semtypes’: [‘T047’],
+‘score’: 1.0,
+‘snippet’: ‘ La fibroscopie oeso-gastro-duodénale avait révélé  une oesophagite peptique de grade II et a permis l’exérèse d’un petit papillome du tiers supérieur de l’œsophage’,
+‘snippet_span’: (132, 296)},</p>
+</div></blockquote>
+</dd>
+</dl>
+</div></blockquote>
+<dl>
+<dt>‘ID’: ‘681c2d82-96f7-11eb-a8c8-0242ac110002’},</dt><dd><dl>
+<dt>{‘type’: ‘regex’,</dt><dd><p>‘value’: ‘grade II’,
+‘ngram’: None,
+‘span’: (212, 220),
+‘source’: ‘RegexMatcher:v1’,
+‘source_ID’: ‘68155570-96f7-11eb-a8c8-0242ac110002’,
+‘isEntity’: True,
+‘attributes’: {‘version’: ‘v1’,</p>
+<blockquote>
+<div><p>‘label’: ‘Grade’,
+‘id_regexp’: ‘id_grade’,
+‘snippet’: ‘-gastro-duodénale avait révélé  une oesophagite peptique de grade II et a permis l’exérèse d’un petit papillome du tiers supérie’,
+‘hypothesis’: ‘certain’,
+‘context’: ‘patient’,
+‘negation’: ‘aff’},</p>
+</div></blockquote>
+<p>‘ID’: ‘682ca3ec-96f7-11eb-a8c8-0242ac110002’},</p>
+</dd>
+</dl>
+<p>‘’’</p>
+<p>annotations :
+:param pym_ann_types: Pymedext types of annotation selected.
+exemple : [‘QuickUMLS’, ‘regex’] -&gt; annotations in Brat will be about this two types of annotations. Depending on the different opitons filled (explained below), different labels will be displayed in brat.</p>
+<p>:param brat_entities_in_pym_types : (optional) if brat entities correpond to annotation types in pymedext, this list should be filled. 
+exemple :  [‘regex’] -&gt; in brat, for each regex found, ‘regex’ will be displayed. 
+With the extract given ‘grade II’ will be highlighted in the text with the label ‘regex’.</p>
+<p>:param brat_entities_in_pym_types_value : if brat entities correpond to the value of annotation types in pymedext, this list should be filled. 
+exemple :  [‘QuickUMLS’] -&gt; in brat, for each QuickUMLS found, the quickumls annotation value will be displayed.
+With the extract given ‘oesophagite’ will be highlighted in the text with the label ‘QuickUMLS’.</p>
+<p>:param brat_entities_in_pym_att_values : (optional) if brat entities correspond to annotation attributes values in pymexdext, this dict should be filled. Keys correponds to pymedext annotation type, values correspond to pymedext attributes keys. 
+exemple : {‘regex’: ‘label’}  -&gt; in brat for each regex found, the regex label in attributes  will be displayed.
+With the extract given ‘grade II’ will be highlighted in the text with the label ‘Grade’.</p>
+<p>:param brat_entities_in_pym_att_keys : (optional) if brat entities correspond to annotation attributes keys in pymedext, this dict should be filled. Keys correponds to pymedext annotation type, values correspond to pymedext attributes keys. 
+exemple : {‘regex’: ‘label’} -&gt; in brat, for each regex found, the string “label” will be diplayed.
+With the extract given ‘grade II’ will be highlighted in the text with the label ‘label’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">param brat_attributes</dt>
+<dd class="field-odd"><p>(optional) Dict with pymedext annotation type as keys, and the correspondant attributes list that should be exported as Brat attributes.</p>
+</dd>
+</dl>
+<p>exemple : {“QuickUMLS”: [‘hypothesis’, ‘negation’, ‘context’] -&gt; for each quickumls found, hypothesis, negation and context attribute values will be displayed. 
+Put “all” as value if you want all the attributes for this annotation type 
+exemple :{“QuickUMLS”: “all”} for each QuickUMLS found, all attributes (semType, CUI code, hypothesis,… will be displayed.)</p>
+<p>relations :
+:param pym_rel_types: Pymedext types of relation selected.
+exemple : [‘Stanza’] -&gt; relations in Brat will be about this two types of relations. Depending on the different opitons filled (explained below), different labels will be displayed in brat.</p>
+<p>:param brat_ents_of_rel_in_pym_rel_type : (optional) if brat entities of relations correpond to relations types in pymedext, this list should be filled.</p>
+<p>:param brat_ents_of_rel_in_pym_ent_value : (optional) if brat entities of relations correpond to relations types in pymedext, this list should be filled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">return</dt>
+<dd class="field-odd"><p>1</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
