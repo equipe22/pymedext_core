@@ -1,18 +1,20 @@
 import uuid
 import json
 from .annotators import Annotator, Annotation, Relation
-        
+
+
 class Document:
     """
     Document is the main class of pymedext. It is use to load file and annotate them with annotators
     """
-    def __init__(self, raw_text, ID=None, attributes=None, source=None, pathToconfig=None, documentDate = None):
+
+    def __init__(self, raw_text, ID=None, attributes=None, source=None, pathToconfig=None, documentDate=None):
         """create a Document object
 
         :param raw_text: raw_text of the doc. if raw_text = load
         will load a json PyMedExt and transform it back to a Document object
         :param ID: The document name
-        :param attributes: Dict of attributes related to the document (e.g., person_id). 
+        :param attributes: Dict of attributes related to the document (e.g., person_id).
         :param source: not use yet but could be the source name I2B2, OMOP HEGP...
         :param pathToconfig: in case of (raw_text = load), it is a list which contains path to each PyMedExt file
         (could be use directly to filter)
@@ -24,7 +26,7 @@ class Document:
         self.attributes = attributes
         self.source = source
         self.relations = []
-        
+
         if raw_text != "load":
             self.annotations = [Annotation(type="raw_text",
                                            value=raw_text,
@@ -35,8 +37,8 @@ class Document:
             self.source_ID = ID
 
         else:
-            self.ID= None
-            self.annotations=[]
+            self.ID = None
+            self.annotations = []
             self.source_ID = None
             for thisPath in pathToconfig:
                 self.load_annotations_files(thisPath)
@@ -50,48 +52,47 @@ class Document:
 
         """
         with open(pathToconfig) as f:
-             mesannotations=json.load(f)
+            mesannotations = json.load(f)
         for annot in mesannotations["annotations"]:
-            #print("annot[value]", annot["value"])
-            #print("type(annot[value])", type(annot["value"]))
+            # print("annot[value]", annot["value"])
+            # print("type(annot[value])", type(annot["value"]))
             if "empty" not in annot["value"]:
-                #print("empty not in annot[value]")
+                # print("empty not in annot[value]")
 
                 if "raw_text" in annot["type"]:
                     if self.ID == None:
-                        self.ID=annot["id"]
+                        self.ID = annot["id"]
                     if self.source_ID == None:
-                        self.source_ID=annot["source_ID"]
+                        self.source_ID = annot["source_ID"]
                     if self.source == None:
-                        self.source=annot["source"]
+                        self.source = annot["source"]
 
-                    self.annotations.insert(0,Annotation(type=annot["type"],
-                                                         value=annot["value"],
-                                                         source_ID=annot["source_ID"],
-                                                         ID=annot["id"],
-                                                         source=annot["source"],
-                                                         span=annot["span"]))
+                    self.annotations.insert(0, Annotation(type=annot["type"],
+                                                          value=annot["value"],
+                                                          source_ID=annot["source_ID"],
+                                                          ID=annot["id"],
+                                                          source=annot["source"],
+                                                          span=annot["span"]))
                 else:
-                     self.annotations.append(Annotation(type=annot["type"],
-                                                        value=annot["value"],
-                                                        source_ID=annot["source_ID"],
-                                                        ID=annot["id"],
-                                                        source=annot["source"],
-                                                        span=annot["span"],
-                                                        attributes=annot["attributes"],
-                                                        isEntity=annot["isEntity"],
-                                                        ngram=annot["ngram"]))
+                    self.annotations.append(Annotation(type=annot["type"],
+                                                       value=annot["value"],
+                                                       source_ID=annot["source_ID"],
+                                                       ID=annot["id"],
+                                                       source=annot["source"],
+                                                       span=annot["span"],
+                                                       attributes=annot["attributes"],
+                                                       isEntity=annot["isEntity"],
+                                                       ngram=annot["ngram"]))
 
         for relation in mesannotations['relations']:
-            self.relations.append(Relation( type= relation['type'], 
-                                            head = relation['head'],
-                                            target = relation['target'],
-                                            ID = relation['id'], 
-                                            source_ID = relation['source_ID'], 
-                                            source = relation['source']))
+            self.relations.append(Relation(type=relation['type'],
+                                           head=relation['head'],
+                                           target=relation['target'],
+                                           ID=relation['id'],
+                                           source_ID=relation['source_ID'],
+                                           source=relation['source']))
 
-
-    def annotate(self, annotator): 
+    def annotate(self, annotator):
         """Main function to annotate Document
 
         :param annotator: annotators list
@@ -101,10 +102,10 @@ class Document:
         """
         if type(annotator) == Annotator:
             annotator = [annotator]
-            
+
         for ann in annotator:
             self._annotate(ann)
-        
+
     def _annotate(self, annotator):
         """ Hidden function to annotate document
         :param annotator: an annotator
@@ -113,23 +114,25 @@ class Document:
 
         """
         new_annotations = annotator.annotate_function(self)
-        #print(new_annotations)
+        # print(new_annotations)
         if new_annotations is not None:
-            for annot in new_annotations: 
-                if isinstance(annot, Annotation): 
+            for annot in new_annotations:
+                if isinstance(annot, Annotation):
                     self.annotations.append(annot)
                 elif isinstance(annot, Relation):
                     self.relations.append(annot)
-                elif isinstance(annot, tuple) and (any(isinstance(el, Relation) for el in annot) or any(isinstance(el, Annotation) for el in annot)) :
-                    for obj in annot :
-                        if isinstance(obj, Relation) :
+                elif isinstance(annot, tuple) and (any(isinstance(el, Relation) for el in annot) or any(
+                        isinstance(el, Annotation) for el in annot)):
+                    for obj in annot:
+                        if isinstance(obj, Relation):
                             self.relations.append(obj)
-                        if isinstance(obj, Annotation) :
+                        if isinstance(obj, Annotation):
                             self.annotations.append(obj)
-                else: 
-                    raise TypeError("New annotations must be of type Annotation or Relation, or a tuple of Annotation - Relation")
-        #setattr(self, annotator.key_output ,annotator.annotate_function(self))
-        
+                else:
+                    raise TypeError(
+                        "New annotations must be of type Annotation or Relation, or a tuple of Annotation - Relation")
+        # setattr(self, annotator.key_output ,annotator.annotate_function(self))
+
     def to_json(self):
         """ transform annotations to a json
 
@@ -138,7 +141,7 @@ class Document:
 
         """
         return json.dump(self.to_dict())
-    
+
     def to_dict(self):
         """transform Document to dict PyMedExt
         TODO: Need to add the Document Date if available,
@@ -148,14 +151,14 @@ class Document:
         :rtype: dict
 
         """
-        return {'annotations' : [x.to_dict() for x in self.annotations],
-                'relations' : [x.to_dict() for x in self.relations],
-                'ID':self.ID,
+        return {'annotations': [x.to_dict() for x in self.annotations],
+                'relations': [x.to_dict() for x in self.relations],
+                'ID': self.ID,
                 'source_ID': self.source_ID,
-                'attributes': self.attributes, 
-                'documentDate':self.documentDate
-               }
-    
+                'attributes': self.attributes,
+                'documentDate': self.documentDate
+                }
+
     @staticmethod
     def from_dict(d):
         """Create a Document from a dict of document (as created using to_dict)
@@ -164,20 +167,18 @@ class Document:
         :rtype: Document
         """
         doc = Document(raw_text='')
-        for k,v in d.items(): 
-            if k != 'annotations': 
-                setattr(doc, k ,v)
+        for k, v in d.items():
+            if k != 'annotations' and k != 'relations':
+                setattr(doc, k, v)
             elif k == 'annotations':
                 doc.annotations = []
                 for ann in v:
                     doc.annotations.append(Annotation(**ann))
             elif k == 'relations':
                 doc.relations = []
-                for relation in v: 
+                for relation in v:
                     doc.relations.append(Relation(**relation))
         return doc
-
-
 
     def write_json(self, pathToOutput):
         """Transform Document to json PyMedExt
@@ -234,12 +235,12 @@ class Document:
         :return:
         """
 
-        if self.relations == []: 
+        if self.relations == []:
             return []
 
         res = []
         for relation in self.relations:
-            if _type is not None: 
+            if _type is not None:
                 if relation.type != _type:
                     continue
             if head_id is not None:
@@ -253,7 +254,6 @@ class Document:
 
         return res
 
-           
     def raw_text(self):
         """return the Document raw_text
 
@@ -273,18 +273,16 @@ class Document:
         annot = self.get_annotations('raw_text')[0]
         return annot
 
-    
     def get_annotation_by_id(self, _id):
-        
+
         res = [x for x in self.annotations if x.ID == _id]
         if res == []:
             return None
         else:
             return res[0]
 
-
     def get_relation_by_id(self, _id):
-        
+
         res = [x for x in self.relations if x.ID == _id]
         if res == []:
             return None
