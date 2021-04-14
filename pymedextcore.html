@@ -1030,16 +1030,16 @@ It will create (or overwrite) 2 files for each pymedext Documents in documents l
 <p>annotations :
 :param pym_ann_types: Pymedext types of annotation selected.
 exemple : [‘QuickUMLS’, ‘regex’] -&gt; annotations in Brat will be about this two types of annotations. Depending on the different opitons filled (explained below), different labels will be displayed in brat.</p>
-<p>:param brat_entities_in_pym_types : (optional) if brat entities correpond to annotation types in pymedext, this list should be filled. 
-exemple :  [‘regex’] -&gt; in brat, for each regex found, ‘regex’ will be displayed. 
+<p>:param brat_entities_in_pym_types : (optional) if brat entities correpond to annotation types in pymedext, this list should be filled.
+exemple :  [‘regex’] -&gt; in brat, for each regex found, ‘regex’ will be displayed.
 With the extract given ‘grade II’ will be highlighted in the text with the label ‘regex’.</p>
-<p>:param brat_entities_in_pym_types_value : if brat entities correpond to the value of annotation types in pymedext, this list should be filled. 
+<p>:param brat_entities_in_pym_types_value : if brat entities correpond to the value of annotation types in pymedext, this list should be filled.
 exemple :  [‘QuickUMLS’] -&gt; in brat, for each QuickUMLS found, the quickumls annotation value will be displayed.
 With the extract given ‘oesophagite’ will be highlighted in the text with the label ‘QuickUMLS’.</p>
-<p>:param brat_entities_in_pym_att_values : (optional) if brat entities correspond to annotation attributes values in pymexdext, this dict should be filled. Keys correponds to pymedext annotation type, values correspond to pymedext attributes keys. 
+<p>:param brat_entities_in_pym_att_values : (optional) if brat entities correspond to annotation attributes values in pymexdext, this dict should be filled. Keys correponds to pymedext annotation type, values correspond to pymedext attributes keys.
 exemple : {‘regex’: ‘label’}  -&gt; in brat for each regex found, the regex label in attributes  will be displayed.
 With the extract given ‘grade II’ will be highlighted in the text with the label ‘Grade’.</p>
-<p>:param brat_entities_in_pym_att_keys : (optional) if brat entities correspond to annotation attributes keys in pymedext, this dict should be filled. Keys correponds to pymedext annotation type, values correspond to pymedext attributes keys. 
+<p>:param brat_entities_in_pym_att_keys : (optional) if brat entities correspond to annotation attributes keys in pymedext, this dict should be filled. Keys correponds to pymedext annotation type, values correspond to pymedext attributes keys.
 exemple : {‘regex’: ‘label’} -&gt; in brat, for each regex found, the string “label” will be diplayed.
 With the extract given ‘grade II’ will be highlighted in the text with the label ‘label’.</p>
 <dl class="field-list simple">
@@ -1047,8 +1047,8 @@ With the extract given ‘grade II’ will be highlighted in the text with the l
 <dd class="field-odd"><p>(optional) Dict with pymedext annotation type as keys, and the correspondant attributes list that should be exported as Brat attributes.</p>
 </dd>
 </dl>
-<p>exemple : {“QuickUMLS”: [‘hypothesis’, ‘negation’, ‘context’] -&gt; for each quickumls found, hypothesis, negation and context attribute values will be displayed. 
-Put “all” as value if you want all the attributes for this annotation type 
+<p>exemple : {“QuickUMLS”: [‘hypothesis’, ‘negation’, ‘context’] -&gt; for each quickumls found, hypothesis, negation and context attribute values will be displayed.
+Put “all” as value if you want all the attributes for this annotation type
 exemple :{“QuickUMLS”: “all”} for each QuickUMLS found, all attributes (semType, CUI code, hypothesis,… will be displayed.)</p>
 <p>relations :
 :param pym_rel_types: Pymedext types of relation selected.
