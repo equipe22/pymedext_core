@@ -165,18 +165,20 @@
 <span></span><span class="kn">import</span> <span class="nn">uuid</span>
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">from</span> <span class="nn">.annotators</span> <span class="kn">import</span> <span class="n">Annotator</span><span class="p">,</span> <span class="n">Annotation</span><span class="p">,</span> <span class="n">Relation</span>
-        
+
+
 <div class="viewcode-block" id="Document"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.document.Document">[docs]</a><span class="k">class</span> <span class="nc">Document</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Document is the main class of pymedext. It is use to load file and annotate them with annotators</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw_text</span><span class="p">,</span> <span class="n">ID</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">attributes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pathToconfig</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">documentDate</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw_text</span><span class="p">,</span> <span class="n">ID</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">attributes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pathToconfig</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">documentDate</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;create a Document object</span>
 
 <span class="sd">        :param raw_text: raw_text of the doc. if raw_text = load</span>
 <span class="sd">        will load a json PyMedExt and transform it back to a Document object</span>
 <span class="sd">        :param ID: The document name</span>
-<span class="sd">        :param attributes: Dict of attributes related to the document (e.g., person_id). </span>
+<span class="sd">        :param attributes: Dict of attributes related to the document (e.g., person_id).</span>
 <span class="sd">        :param source: not use yet but could be the source name I2B2, OMOP HEGP...</span>
 <span class="sd">        :param pathToconfig: in case of (raw_text = load), it is a list which contains path to each PyMedExt file</span>
 <span class="sd">        (could be use directly to filter)</span>
@@ -188,7 +190,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span> <span class="o">=</span> <span class="n">attributes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="n">source</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">relations</span> <span class="o">=</span> <span class="p">[]</span>
-        
+
         <span class="k">if</span> <span class="n">raw_text</span> <span class="o">!=</span> <span class="s2">&quot;load&quot;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span> <span class="o">=</span> <span class="p">[</span><span class="n">Annotation</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;raw_text&quot;</span><span class="p">,</span>
                                            <span class="n">value</span><span class="o">=</span><span class="n">raw_text</span><span class="p">,</span>
@@ -199,8 +201,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">source_ID</span> <span class="o">=</span> <span class="n">ID</span>
 
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">ID</span><span class="o">=</span> <span class="kc">None</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span><span class="o">=</span><span class="p">[]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ID</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">source_ID</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">for</span> <span class="n">thisPath</span> <span class="ow">in</span> <span class="n">pathToconfig</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">load_annotations_files</span><span class="p">(</span><span class="n">thisPath</span><span class="p">)</span>
@@ -214,48 +216,47 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">pathToconfig</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-             <span class="n">mesannotations</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="n">mesannotations</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">annot</span> <span class="ow">in</span> <span class="n">mesannotations</span><span class="p">[</span><span class="s2">&quot;annotations&quot;</span><span class="p">]:</span>
-            <span class="c1">#print(&quot;annot[value]&quot;, annot[&quot;value&quot;])</span>
-            <span class="c1">#print(&quot;type(annot[value])&quot;, type(annot[&quot;value&quot;]))</span>
+            <span class="c1"># print(&quot;annot[value]&quot;, annot[&quot;value&quot;])</span>
+            <span class="c1"># print(&quot;type(annot[value])&quot;, type(annot[&quot;value&quot;]))</span>
             <span class="k">if</span> <span class="s2">&quot;empty&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">annot</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]:</span>
-                <span class="c1">#print(&quot;empty not in annot[value]&quot;)</span>
+                <span class="c1"># print(&quot;empty not in annot[value]&quot;)</span>
 
                 <span class="k">if</span> <span class="s2">&quot;raw_text&quot;</span> <span class="ow">in</span> <span class="n">annot</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]:</span>
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ID</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">ID</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">ID</span> <span class="o">=</span> <span class="n">annot</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_ID</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">source_ID</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;source_ID&quot;</span><span class="p">]</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">source_ID</span> <span class="o">=</span> <span class="n">annot</span><span class="p">[</span><span class="s2">&quot;source_ID&quot;</span><span class="p">]</span>
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="n">annot</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span>
 
-                    <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">Annotation</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">],</span>
-                                                         <span class="n">value</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">],</span>
-                                                         <span class="n">source_ID</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;source_ID&quot;</span><span class="p">],</span>
-                                                         <span class="n">ID</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span>
-                                                         <span class="n">source</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">],</span>
-                                                         <span class="n">span</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;span&quot;</span><span class="p">]))</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Annotation</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">],</span>
+                                                          <span class="n">value</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">],</span>
+                                                          <span class="n">source_ID</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;source_ID&quot;</span><span class="p">],</span>
+                                                          <span class="n">ID</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span>
+                                                          <span class="n">source</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">],</span>
+                                                          <span class="n">span</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;span&quot;</span><span class="p">]))</span>
                 <span class="k">else</span><span class="p">:</span>
-                     <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Annotation</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">],</span>
-                                                        <span class="n">value</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">],</span>
-                                                        <span class="n">source_ID</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;source_ID&quot;</span><span class="p">],</span>
-                                                        <span class="n">ID</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span>
-                                                        <span class="n">source</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">],</span>
-                                                        <span class="n">span</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;span&quot;</span><span class="p">],</span>
-                                                        <span class="n">attributes</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;attributes&quot;</span><span class="p">],</span>
-                                                        <span class="n">isEntity</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;isEntity&quot;</span><span class="p">],</span>
-                                                        <span class="n">ngram</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;ngram&quot;</span><span class="p">]))</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Annotation</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">],</span>
+                                                       <span class="n">value</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">],</span>
+                                                       <span class="n">source_ID</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;source_ID&quot;</span><span class="p">],</span>
+                                                       <span class="n">ID</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span>
+                                                       <span class="n">source</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">],</span>
+                                                       <span class="n">span</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;span&quot;</span><span class="p">],</span>
+                                                       <span class="n">attributes</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;attributes&quot;</span><span class="p">],</span>
+                                                       <span class="n">isEntity</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;isEntity&quot;</span><span class="p">],</span>
+                                                       <span class="n">ngram</span><span class="o">=</span><span class="n">annot</span><span class="p">[</span><span class="s2">&quot;ngram&quot;</span><span class="p">]))</span>
 
         <span class="k">for</span> <span class="n">relation</span> <span class="ow">in</span> <span class="n">mesannotations</span><span class="p">[</span><span class="s1">&#39;relations&#39;</span><span class="p">]:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">relations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Relation</span><span class="p">(</span> <span class="nb">type</span><span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">],</span> 
-                                            <span class="n">head</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="s1">&#39;head&#39;</span><span class="p">],</span>
-                                            <span class="n">target</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">],</span>
-                                            <span class="n">ID</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> 
-                                            <span class="n">source_ID</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="s1">&#39;source_ID&#39;</span><span class="p">],</span> 
-                                            <span class="n">source</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">]))</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">relations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Relation</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">relation</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">],</span>
+                                           <span class="n">head</span><span class="o">=</span><span class="n">relation</span><span class="p">[</span><span class="s1">&#39;head&#39;</span><span class="p">],</span>
+                                           <span class="n">target</span><span class="o">=</span><span class="n">relation</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">],</span>
+                                           <span class="n">ID</span><span class="o">=</span><span class="n">relation</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+                                           <span class="n">source_ID</span><span class="o">=</span><span class="n">relation</span><span class="p">[</span><span class="s1">&#39;source_ID&#39;</span><span class="p">],</span>
+                                           <span class="n">source</span><span class="o">=</span><span class="n">relation</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">]))</span></div>
 
-
-<div class="viewcode-block" id="Document.annotate"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.document.Document.annotate">[docs]</a>    <span class="k">def</span> <span class="nf">annotate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">annotator</span><span class="p">):</span> 
+<div class="viewcode-block" id="Document.annotate"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.document.Document.annotate">[docs]</a>    <span class="k">def</span> <span class="nf">annotate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">annotator</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Main function to annotate Document</span>
 
 <span class="sd">        :param annotator: annotators list</span>
@@ -265,10 +266,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">annotator</span><span class="p">)</span> <span class="o">==</span> <span class="n">Annotator</span><span class="p">:</span>
             <span class="n">annotator</span> <span class="o">=</span> <span class="p">[</span><span class="n">annotator</span><span class="p">]</span>
-            
+
         <span class="k">for</span> <span class="n">ann</span> <span class="ow">in</span> <span class="n">annotator</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_annotate</span><span class="p">(</span><span class="n">ann</span><span class="p">)</span></div>
-        
+
     <span class="k">def</span> <span class="nf">_annotate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">annotator</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Hidden function to annotate document</span>
 <span class="sd">        :param annotator: an annotator</span>
@@ -277,23 +278,25 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">new_annotations</span> <span class="o">=</span> <span class="n">annotator</span><span class="o">.</span><span class="n">annotate_function</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="c1">#print(new_annotations)</span>
+        <span class="c1"># print(new_annotations)</span>
         <span class="k">if</span> <span class="n">new_annotations</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">annot</span> <span class="ow">in</span> <span class="n">new_annotations</span><span class="p">:</span> 
-                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">annot</span><span class="p">,</span> <span class="n">Annotation</span><span class="p">):</span> 
+            <span class="k">for</span> <span class="n">annot</span> <span class="ow">in</span> <span class="n">new_annotations</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">annot</span><span class="p">,</span> <span class="n">Annotation</span><span class="p">):</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">annot</span><span class="p">)</span>
                 <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">annot</span><span class="p">,</span> <span class="n">Relation</span><span class="p">):</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">relations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">annot</span><span class="p">)</span>
-                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">annot</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">any</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="n">Relation</span><span class="p">)</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">annot</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">any</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="n">Annotation</span><span class="p">)</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">annot</span><span class="p">))</span> <span class="p">:</span>
-                    <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">annot</span> <span class="p">:</span>
-                        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">Relation</span><span class="p">)</span> <span class="p">:</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">annot</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">any</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="n">Relation</span><span class="p">)</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">annot</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">any</span><span class="p">(</span>
+                        <span class="nb">isinstance</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="n">Annotation</span><span class="p">)</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">annot</span><span class="p">)):</span>
+                    <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">annot</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">Relation</span><span class="p">):</span>
                             <span class="bp">self</span><span class="o">.</span><span class="n">relations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
-                        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">Annotation</span><span class="p">)</span> <span class="p">:</span>
+                        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">Annotation</span><span class="p">):</span>
                             <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span> 
-                    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;New annotations must be of type Annotation or Relation, or a tuple of Annotation - Relation&quot;</span><span class="p">)</span>
-        <span class="c1">#setattr(self, annotator.key_output ,annotator.annotate_function(self))</span>
-        
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                        <span class="s2">&quot;New annotations must be of type Annotation or Relation, or a tuple of Annotation - Relation&quot;</span><span class="p">)</span>
+        <span class="c1"># setattr(self, annotator.key_output ,annotator.annotate_function(self))</span>
+
 <div class="viewcode-block" id="Document.to_json"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.document.Document.to_json">[docs]</a>    <span class="k">def</span> <span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; transform annotations to a json</span>
 
@@ -302,7 +305,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span></div>
-    
+
 <div class="viewcode-block" id="Document.to_dict"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.document.Document.to_dict">[docs]</a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;transform Document to dict PyMedExt</span>
 <span class="sd">        TODO: Need to add the Document Date if available,</span>
@@ -312,14 +315,14 @@
 <span class="sd">        :rtype: dict</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;annotations&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span><span class="p">],</span>
-                <span class="s1">&#39;relations&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">relations</span><span class="p">],</span>
-                <span class="s1">&#39;ID&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;annotations&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span><span class="p">],</span>
+                <span class="s1">&#39;relations&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">relations</span><span class="p">],</span>
+                <span class="s1">&#39;ID&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span>
                 <span class="s1">&#39;source_ID&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_ID</span><span class="p">,</span>
-                <span class="s1">&#39;attributes&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">,</span> 
-                <span class="s1">&#39;documentDate&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">documentDate</span>
-               <span class="p">}</span></div>
-    
+                <span class="s1">&#39;attributes&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">,</span>
+                <span class="s1">&#39;documentDate&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">documentDate</span>
+                <span class="p">}</span></div>
+
 <div class="viewcode-block" id="Document.from_dict"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.document.Document.from_dict">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a Document from a dict of document (as created using to_dict)</span>
@@ -328,20 +331,18 @@
 <span class="sd">        :rtype: Document</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">doc</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="n">raw_text</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> 
-            <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s1">&#39;annotations&#39;</span><span class="p">:</span> 
-                <span class="nb">setattr</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">k</span> <span class="p">,</span><span class="n">v</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s1">&#39;annotations&#39;</span> <span class="ow">and</span> <span class="n">k</span> <span class="o">!=</span> <span class="s1">&#39;relations&#39;</span><span class="p">:</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">k</span> <span class="o">==</span> <span class="s1">&#39;annotations&#39;</span><span class="p">:</span>
                 <span class="n">doc</span><span class="o">.</span><span class="n">annotations</span> <span class="o">=</span> <span class="p">[]</span>
                 <span class="k">for</span> <span class="n">ann</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
                     <span class="n">doc</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Annotation</span><span class="p">(</span><span class="o">**</span><span class="n">ann</span><span class="p">))</span>
             <span class="k">elif</span> <span class="n">k</span> <span class="o">==</span> <span class="s1">&#39;relations&#39;</span><span class="p">:</span>
                 <span class="n">doc</span><span class="o">.</span><span class="n">relations</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="k">for</span> <span class="n">relation</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span> 
+                <span class="k">for</span> <span class="n">relation</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
                     <span class="n">doc</span><span class="o">.</span><span class="n">relations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Relation</span><span class="p">(</span><span class="o">**</span><span class="n">relation</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">doc</span></div>
-
-
 
 <div class="viewcode-block" id="Document.write_json"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.document.Document.write_json">[docs]</a>    <span class="k">def</span> <span class="nf">write_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathToOutput</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Transform Document to json PyMedExt</span>
@@ -398,12 +399,12 @@
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">relations</span> <span class="o">==</span> <span class="p">[]:</span> 
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">relations</span> <span class="o">==</span> <span class="p">[]:</span>
             <span class="k">return</span> <span class="p">[]</span>
 
         <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">relation</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">relations</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> 
+            <span class="k">if</span> <span class="n">_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">relation</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="n">_type</span><span class="p">:</span>
                     <span class="k">continue</span>
             <span class="k">if</span> <span class="n">head_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -417,7 +418,6 @@
 
         <span class="k">return</span> <span class="n">res</span></div>
 
-           
 <div class="viewcode-block" id="Document.raw_text"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.document.Document.raw_text">[docs]</a>    <span class="k">def</span> <span class="nf">raw_text</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;return the Document raw_text</span>
 
@@ -437,18 +437,16 @@
         <span class="n">annot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_annotations</span><span class="p">(</span><span class="s1">&#39;raw_text&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">annot</span></div>
 
-    
 <div class="viewcode-block" id="Document.get_annotation_by_id"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.document.Document.get_annotation_by_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_annotation_by_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_id</span><span class="p">):</span>
-        
+
         <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">ID</span> <span class="o">==</span> <span class="n">_id</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">res</span> <span class="o">==</span> <span class="p">[]:</span>
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
 
-
 <div class="viewcode-block" id="Document.get_relation_by_id"><a class="viewcode-back" href="../../pymedextcore.html#pymedextcore.document.Document.get_relation_by_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_relation_by_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_id</span><span class="p">):</span>
-        
+
         <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">relations</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">ID</span> <span class="o">==</span> <span class="n">_id</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">res</span> <span class="o">==</span> <span class="p">[]:</span>
             <span class="k">return</span> <span class="kc">None</span>
